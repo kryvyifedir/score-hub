@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UI_Description__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Achievement description that is going to be shown in the UI elements</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Supports plain text, as well as reference to the Custom Labels API Name</inlineHelpText>
+    <label>UI Description</label>
+    <length>255</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

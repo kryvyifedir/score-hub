@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Stores data about current progress of the user</description>
+    <description>The list of achievement that users can get</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -153,15 +153,14 @@
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ControlledByParent</externalSharingModel>
-    <label>User Stat</label>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Achievement</label>
     <nameField>
-        <displayFormat>{000000000}</displayFormat>
         <label>Name</label>
-        <type>AutoNumber</type>
+        <type>Text</type>
     </nameField>
-    <pluralLabel>User Stats</pluralLabel>
+    <pluralLabel>Achievements</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

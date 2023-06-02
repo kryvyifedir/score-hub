@@ -1,24 +1,12 @@
 @IsTest(isParallel=true)
 private class AchievementSelectorTest {
-	
-	private static Achievement__c generateAchievement(String uniqueIdentifier) {
-		Achievement__c achievement = new Achievement__c();
-		achievement.Name = 'Name ' + uniqueIdentifier;
-		achievement.Description__c = 'Generic description ' + uniqueIdentifier;
-		achievement.Enabled__c = true;
-		achievement.Goal__c = Math.round(1000 * Math.random());
-		achievement.Score__c = Math.round(1000 * Math.random());
-		achievement.UITitle__c = 'UI Title ' + uniqueIdentifier;
-		achievement.UIDescription__c = 'UI Description ' + uniqueIdentifier;
-		return  achievement;
-	}
 
 	@IsTest
 	private static void getByIds_idMatches_recordReturned(){
 		// Given
-		Achievement__c achievement1 = generateAchievement('OK1');
-		Achievement__c achievement2 = generateAchievement('OK2');
-		Achievement__c achievement3 = generateAchievement('NOTOK1');
+		Achievement__c achievement1 = TestDataFactory.initAchievement('OK1');
+		Achievement__c achievement2 = TestDataFactory.initAchievement('OK2');
+		Achievement__c achievement3 = TestDataFactory.initAchievement('NOTOK1');
 		insert new List<Achievement__c> { achievement1, achievement2, achievement3 };
 		Set<Id> ids = new Set<Id>{achievement1.id, achievement2.Id};
 
@@ -49,9 +37,9 @@ private class AchievementSelectorTest {
 	@IsTest
 	private static void getByIds_noRecordsFound_emptyListReturned(){
 		// Given
-		Achievement__c achievement1 = generateAchievement('EXISTS1');
-		Achievement__c achievement2 = generateAchievement('EXISTS2');
-		Achievement__c achievement3 = generateAchievement('REMOVED');
+		Achievement__c achievement1 = TestDataFactory.initAchievement('EXISTS1');
+		Achievement__c achievement2 = TestDataFactory.initAchievement('EXISTS2');
+		Achievement__c achievement3 = TestDataFactory.initAchievement('REMOVED');
 		insert new List<Achievement__c> { achievement1, achievement2, achievement3 };
 		Set<Id> ids = new Set<Id>{ achievement3.id };
 		delete new List<Achievement__c> { achievement3 };

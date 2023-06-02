@@ -14,7 +14,7 @@ public with sharing class UserStatsTriggerHandler {
 
 			if (statNew.CurrentProgress__c > statOld.CurrentProgress__c) {
 				changedStats.add(statNew);
-				achievementIds.add(changedStats.Achievement__c);
+				achievementIds.add(statNew.Achievement__c);
 			}
 		}
 
@@ -29,32 +29,41 @@ public with sharing class UserStatsTriggerHandler {
 
 		Map<Id, Achievement__c> achievementsMap = new Map<Id, Achievement__c> (achievements);
 
+		AchievementReachedPayloadBulkifier eventsBulkifier = new AchievementReachedPayloadBulkifier();
 		for (UserStat__c stat : changedStats) {
 			Achievement__c achievement = achievementsMap.get(stat.Achievement__c);
 			if (stat.CurrentProgress__c >= achievement.Goal__c && !stat.Reached__c) {
 				stat.Reached__c = true;
-
-				// System to format Payload split it into valid JSONs of 131072 length and pack them in 
-				// AchievementReached__e event
+				eventsBulkifier.addUserAchievement(stat.UserId__c, stat.Achievement__c);
 			}
 		}
 
-		if (!achievementsReached.isEmpty()) {
-			// Call method to publish events
-			List<Database.SaveResult> results = EventBus.publish(inkEvents);
+		List<String> payloads = eventsBulkifier.getPayloads();
+		if (!payloads.isEmpty()) {
+			List<AchievementReached__e> achievementReachedEvents = new List<AchievementReached__e>();
+			for (String payload : payloads) {
+				AchievementReached__e event = new AchievementReached__e();
+				event.Payload__c = payload;
+				achievementReachedEvents.add(event);
+			}
 
-			// Inspect publishing result for each event
-			for (Database.SaveResult sr : results) {
-				if (sr.isSuccess()) {
-					System.debug('Successfully published event.');
-				} else {
-					for(Database.Error err : sr.getErrors()) {
-						System.debug('Error returned: ' +
-									err.getStatusCode() +
-									' - ' +
-									err.getMessage());
-					}
-				}  
+			if (!achievementReachedEvents.isEmpty()){
+				// Call method to publish events
+				// List<Database.SaveResult> results = EventBus.publish(achievementReachedEvents);
+
+				// // Inspect publishing result for each event
+				// for (Database.SaveResult sr : results) {
+				// 	if (sr.isSuccess()) {
+				// 		System.debug('Successfully published event.');
+				// 	} else {
+				// 		for(Database.Error err : sr.getErrors()) {
+				// 			System.debug('Error returned: ' +
+				// 						err.getStatusCode() +
+				// 						' - ' +
+				// 						err.getMessage());
+				// 		}
+				// 	}  
+				// }
 			}
 		}
 	}

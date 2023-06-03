@@ -3,11 +3,10 @@
     <fullName>Description__c</fullName>
     <description>Short description for the achievement</description>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
     <inlineHelpText>Short description used by admin users to better identify list of achievements</inlineHelpText>
     <label>Description</label>
-    <length>255</length>
-    <required>false</required>
-    <type>Text</type>
-    <unique>false</unique>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
 </CustomField>

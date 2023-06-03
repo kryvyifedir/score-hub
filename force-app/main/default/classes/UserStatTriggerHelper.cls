@@ -1,6 +1,17 @@
 public with sharing class UserStatTriggerHelper {
 
-	public static Map<Id, UserStat__c> getStatsWithUpdatedProgress(Map<Id, sObject> newMap, Map<id, sObject> oldMap) {
+	public static void onAfterInsert(Map<Id, UserStat__c> newMap) {
+		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(newMap);
+		eventsManager.fireEvents();
+	}
+
+	public static void onAfterUpdate(Map<Id, UserStat__c> newMap, Map<Id, UserStat__c> oldMap) {
+		Map<Id, UserStat__c> changedStats = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(changedStats);
+		eventsManager.fireEvents();
+	}
+
+	public static Map<Id, UserStat__c> getStatsWithUpdatedProgress(Map<Id, UserStat__c> newMap, Map<id, UserStat__c> oldMap) {
 		if (newMap == null || newMap.isEmpty()) {
 			return new Map<Id, UserStat__c>();
 		}

@@ -2,14 +2,11 @@
 private class UserStatTriggerHelperTest {
 
 	@IsTest
-	private static void getStatsWithUpdatedProgressTest() {
+	private static void getStatsWithUpdatedProgress_currentProgressIsChanged_recordsReturned() {
 		// Given
-		Achievement__c achievement = TestDataFactory.initAchievement('01');
-		insert achievement;
-
-		UserStat__c statNew1 = TestDataFactory.initUserStat(UserInfo.getUserId(), achievement.Id);
-		UserStat__c statNew2 = TestDataFactory.initUserStat(UserInfo.getUserId(), achievement.Id);
-		insert new List<UserStat__c> { statNew1, statNew2 };
+		Achievement__c achievement = TestDataFactory.createAchievement('Test');
+		UserStat__c statNew1 = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id);
+		UserStat__c statNew2 = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id);
 
 		UserStat__c oldStat1 = new UserStat__c(Id = statNew1.Id);
 		oldStat1.CurrentProgress__c = statNew1.CurrentProgress__c + 1;
@@ -30,14 +27,12 @@ private class UserStatTriggerHelperTest {
 	}
 
 	@IsTest
-	private static void getStatsWithUpdatedEmptyOldMapTest() {
+	private static void getStatsWithUpdatedProgress_oldMapIsEmpty_newMapIsReturned() {
 		// Given
-		Achievement__c achievement = TestDataFactory.initAchievement('01');
-		insert achievement;
+		Achievement__c achievement = TestDataFactory.createAchievement('Test');
 
-		UserStat__c statNew1 = TestDataFactory.initUserStat(UserInfo.getUserId(), achievement.Id);
-		UserStat__c statNew2 = TestDataFactory.initUserStat(UserInfo.getUserId(), achievement.Id);
-		insert new List<UserStat__c> { statNew1, statNew2 };
+		UserStat__c statNew1 = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id);
+		UserStat__c statNew2 = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id);
 
 		Map<Id, UserStat__c> newMap = new Map<Id, UserStat__c> { statNew1.Id => statNew1, statNew2.Id => statNew2 };
 		Map<Id, UserStat__c> oldMap = new Map<Id, UserStat__c> ();
@@ -52,7 +47,7 @@ private class UserStatTriggerHelperTest {
 	}
 
 	@IsTest
-	private static void getStatsWithUpdatedEmptyNewMapTest() {
+	private static void getStatsWithUpdatedProgress_newMapIsEmpty_emptyMapIsReturned() {
 		// Given
 		Map<Id, UserStat__c> newMap = new Map<Id, UserStat__c> ();
 		Map<Id, UserStat__c> oldMap = new Map<Id, UserStat__c> ();

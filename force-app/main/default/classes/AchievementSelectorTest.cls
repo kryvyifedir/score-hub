@@ -2,7 +2,7 @@
 private class AchievementSelectorTest {
 
 	@IsTest
-	private static void getByIds_idMatches_recordReturned(){
+	private static void getByIdsReturnsRecordsWhenFoundTest(){
 		// Given
 		Achievement__c achievement1 = TestDataFactory.initAchievement('OK1');
 		Achievement__c achievement2 = TestDataFactory.initAchievement('OK2');
@@ -14,15 +14,15 @@ private class AchievementSelectorTest {
 		List<Achievement__c> result = AchievementSelector.getByIds(ids);
 
 		// Then
-		system.assertEquals(2, result.size(), '2 records are expected to be found');
+		System.assertEquals(2, result.size(), '2 records are expected to be found');
 		Map<Id, Achievement__c> resultMap = new Map<Id, Achievement__c>(result);
-		system.assert(resultMap.containsKey(achievement1.Id), 'First achievement is expected to be found');
-		system.assert(resultMap.containsKey(achievement2.Id), 'Second achievement is expected to be found');
-		system.assert(!resultMap.containsKey(achievement3.Id), 'Third achievement is expected not to be found');
+		System.assert(resultMap.containsKey(achievement1.Id), 'First achievement is expected to be found');
+		System.assert(resultMap.containsKey(achievement2.Id), 'Second achievement is expected to be found');
+		System.assert(!resultMap.containsKey(achievement3.Id), 'Third achievement is expected not to be found');
 	}
 
 	@IsTest
-	private static void getByIds_emptyListOfIds_emptyListReturned(){
+	private static void getByIdsEmptyNonNullListTest(){
 		// Given
 		Set<Id> ids = new Set<Id>();
 
@@ -30,8 +30,8 @@ private class AchievementSelectorTest {
 		List<Achievement__c> result = AchievementSelector.getByIds(ids);
 
 		// Then
-		system.assertNotEquals(null, result, 'Empty list is expected instead of null');
-		system.assertEquals(0, result.size(), 'Empty list is expected');
+		System.assertNotEquals(null, result, 'Empty list is expected instead of null');
+		System.assertEquals(0, result.size(), 'Empty list is expected');
 	}
 
 	@IsTest
@@ -48,7 +48,7 @@ private class AchievementSelectorTest {
 		List<Achievement__c> result = AchievementSelector.getByIds(ids);
 
 		// Then
-		system.assertNotEquals(null, result, 'Empty list is expected instead of null');
-		system.assertEquals(0, result.size(), 'Empty list is expected');
+		System.assertNotEquals(null, result, 'Empty list is expected instead of null');
+		System.assertEquals(0, result.size(), 'Empty list is expected');
 	}
 }

@@ -49,4 +49,10 @@ public class TestDataFactory {
 
 		return user;
 	}
+
+	public static User createUser(Id profileId, String lastName) {
+		User user = initUser(profileId, lastName);
+		insert user;
+		return user;
+	}
 }

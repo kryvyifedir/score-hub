@@ -28,8 +28,23 @@ public class TestDataFactory {
 		return stat;
 	}
 
+	public static UserStat__c initUserStat(Id userId, Id achievementId, Decimal progress) {
+		UserStat__c stat = new UserStat__c();
+		stat.UserId__c = userId;
+		stat.Achievement__c = achievementId;
+		stat.CurrentProgress__c = progress;
+		stat.Reached__c = false;
+		return stat;
+	}
+
 	public static UserStat__c createUserStat(Id userId, Id achievementId) {
 		UserStat__c stat = TestDataFactory.initUserStat(userId, achievementId);
+		insert stat;
+		return stat;
+	}
+
+	public static UserStat__c createUserStat(Id userId, Id achievementId, Decimal progress) {
+		UserStat__c stat = TestDataFactory.initUserStat(userId, achievementId, progress);
 		insert stat;
 		return stat;
 	}

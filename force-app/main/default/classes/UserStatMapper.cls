@@ -16,7 +16,7 @@ public with sharing class UserStatMapper {
 		}
 	}
 
-	public UserStat__c findByUserIdAndachievementId(Id userId, Id achievementId) {
+	public UserStat__c findByUserIdAndAchievementId(Id userId, Id achievementId) {
 		return userStatByAchievementIdAndUserIdMap.get(userId)?.get(achievementId);
 	}
 }

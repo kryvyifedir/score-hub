@@ -1,33 +1,47 @@
 public with sharing class AchievementIncrementHandler {
+	List<AchievementIncrement__e> eventsToProcess = new List<AchievementIncrement__e>();
+	Map<Id, User> existingUsersMap = new Map<Id, User>();
+	Map<Id, Achievement__c> existingAchievementsMap = new Map<Id, Achievement__c>();
+	Map<Id, UserStat__c> existingUserStatMap = new Map<Id, UserStat__c>();
+	UserStatMapper userStatsMapper;
 
-	public static void onAfterInsert(List<AchievementIncrement__e> events) {
-		// SPLIT THIS SPAGHETTI
-		List<UserStat__c> statsToInsert = new List<UserStat__c>();
-		Map<Id, UserStat__c> statsToUpdate = new Map<Id, UserStat__c>();
-		
-		Set<Id> userIds = new Set<Id>();
-		Set<Id> achievementIds = new Set<Id>();
+	List<UserStat__c> statsToInsert = new List<UserStat__c>();
+	Map<Id, UserStat__c> statsToUpdate = new Map<Id, UserStat__c>();
+
+	public AchievementIncrementHandler(List<AchievementIncrement__e> events) {
+		eventsToProcess = events;
+		initExistingSObjectMaps(events);
+		initUserStatMapper();
+	}
+
+	private void initExistingSObjectMaps(List<AchievementIncrement__e> events) {
+		Set<Id> userIdsFromEvents = new Set<Id>();
+		Set<Id> achievementIdsFromEvents = new Set<Id>();
 		for (AchievementIncrement__e event : events) {
-			userIds.add(event.UserId__c);
-			achievementIds.add(event.Achievement__c);
+			userIdsFromEvents.add(event.UserId__c);
+			achievementIdsFromEvents.add(event.Achievement__c);
 		}
 
-		// CHANGE TO USER SELECTOR
-		Map<Id, User> usersMap = new Map<Id, User> ([SELECT ID FROM User WHERE Id IN :userIds]);
-		Map<Id, Achievement__c> achievementsMap = new Map<Id, Achievement__c> (AchievementSelector.getByIds(achievementIds));
+		existingUsersMap = new Map<Id, User> (UserSelector.getByIds(userIdsFromEvents));
+		existingUserStatMap = new Map<Id, UserStat__c> (UserStatSelector.getByUserIds(userIdsFromEvents));
+		existingAchievementsMap = new Map<Id, Achievement__c> (AchievementSelector.getByIds(achievementIdsFromEvents));
+	}
 
-		List<UserStat__c> existingStats = UserStatSelector.getByUserIds(userIds);
-		UserStatMapper existingStatsMapper = new UserStatMapper(existingStats);
+	private void initUserStatMapper() {
+		userStatsMapper = new UserStatMapper(existingUserStatMap.values());
+	}
 
-		for (AchievementIncrement__e event : events) {
-			User user = usersMap.get(event.UserId__c);
-			Achievement__c achievement = achievementsMap.get(event.Achievement__c);
+	public void processEvents() {
+		for (AchievementIncrement__e event : eventsToProcess) {
+			User user = existingUsersMap.get(event.UserId__c);
+			Achievement__c achievement = existingAchievementsMap.get(event.Achievement__c);
 
 			if (user == null || achievement == null) {
+				// Add new platform event here
 				continue;
 			}
 
-			UserStat__c existingStat = existingStatsMapper.findByUserIdAndachievementId(event.UserId__c, event.Achievement__c);
+			UserStat__c existingStat = userStatsMapper.findByUserIdAndAchievementId(event.UserId__c, event.Achievement__c);
 			if (existingStat != null) {
 				if (!statsToUpdate.containsKey(existingStat.Id)) {
 					statsToUpdate.put(existingStat.Id, existingStat);
@@ -39,10 +53,21 @@ public with sharing class AchievementIncrementHandler {
 			}
 		}
 
+		this.commitChanges();
+	}
+
+	private void commitChanges() {
 		statsToInsert.addAll(statsToUpdate.values());
 		if (!statsToInsert.isEmpty()) {
-			// Use proper Database class operations
-			upsert statsToInsert;
+			return;
 		}
+
+		// Use proper Database class operations and throw events 
+		upsert statsToInsert;
+	}
+
+	public static void onAfterInsert(List<AchievementIncrement__e> events) {
+		AchievementIncrementHandler handler = new AchievementIncrementHandler(events);
+		handler.processEvents();
 	}
 }

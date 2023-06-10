@@ -1,17 +1,11 @@
 @IsTest(isParallel=true)
 private class AchievementReachedEventsManagerTest {
-
-	private static UserStat__c createUserStat(Id userId, Id achievementId, Decimal progress) {
-		UserStat__c stat = TestDataFactory.createUserStat(userId, achievementId);
-		stat.CurrentProgress__c = progress;
-		return stat;
-	}
-
+	
 	@IsTest
 	private static void fireEvent_achievementIdAndUserId_eventFired() {
 		// Given
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement');
-		UserStat__c stat = createUserStat(UserInfo.getUserId(), achievement.Id, achievement.Goal__c + 10);
+		UserStat__c stat = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id, achievement.Goal__c + 10);
 		Map<Id, UserStat__c> userStatByIdMap = new Map<Id, UserStat__c> {stat.Id => stat};
 
 		// When
@@ -32,7 +26,7 @@ private class AchievementReachedEventsManagerTest {
 	private static void fireEvent_statsProgressIsLessThenGoal_eventNotFired() {
 		// Given
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement');
-		UserStat__c stat = createUserStat(UserInfo.getUserId(), achievement.Id, achievement.Goal__c - 10);
+		UserStat__c stat = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id, achievement.Goal__c - 10);
 		Map<Id, UserStat__c> userStatByIdMap = new Map<Id, UserStat__c> {stat.Id => stat};
 
 		// When

@@ -39,6 +39,7 @@ GameForce provides a set of standard achievements that can be used right a way, 
 `UserStat__c` sObject is used to track progress towards reaching an achievement for each user
 | Field  | Type | Purpose |
 | ------------- | ------------- | ------------- |
+| Key__c  | Formula (TEXT) | Unique combination of UserId and AchievementId |
 | UserId__c  | Lookup | Reference to a User |
 | Achievement__c  | MasterDetail | Reference to an Achievement |
 | CurrentProgress__c  | Decimal (18:0) | Numeric value representing the progress for a specific user towards an Achievement. Once value is equal or greater then value of Achievement__c.Goal__c - Achievement is considered to be "reached"|
@@ -61,16 +62,25 @@ Event that is fired once user has reached an Achievement.
 | Achievement__c  | Id | Id of an Achievement |
 
 ## Apex Classes
-### [AchievementReachedEventsManager](force-app/main/default/classes/AchievementReachedEventsManager/)
+### [AchievementIncrementHandler](force-app/main/default/classes/AchievementIncrementHandler.cls)
 Class that hosts the logic related to firing `AchievementReached__e` events once `UserStat__c.CurrentProgress__c` reaches the value saved in `Achievement__c.Goal__c` field
 
-### [AchievementSelector](force-app/main/default/classes/AchievementSelector/)
+### [AchievementReachedEventsManager](force-app/main/default/classes/AchievementReachedEventsManager.cls)
+Class that hosts the logic related to firing `AchievementReached__e` events once `UserStat__c.CurrentProgress__c` reaches the value saved in `Achievement__c.Goal__c` field
+
+### [AchievementSelector](force-app/main/default/classes/AchievementSelector.cls)
 Class that hosts methods with SOQL queries related to `Achievement__c` sObject
 
-### [TestDataFactory](force-app/main/default/classes/TestDataFactory/)
+### [TestDataFactory](force-app/main/default/classes/TestDataFactory.cls)
 Data generation methods for unit tests
 
-### [UserStatTriggerHelper](force-app/main/default/classes/TestDataFactory/)
+### [UserSelector](force-app/main/default/classes/UserSelector.cls)
+SOQL Selectors for `User` sObject
+
+### [UserSelector](force-app/main/default/classes/UserStatSelector.cls)
+SOQL Selectors for `UserStat__c` sObject
+
+### [UserStatTriggerHelper](force-app/main/default/classes/UserStatTriggerHandler.cls)
 Class that hosts the logic related to the execution of `UserStat__c` sObject trigger
 
 ## Permission Sets

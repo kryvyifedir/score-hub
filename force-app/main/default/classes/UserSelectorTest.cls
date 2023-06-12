@@ -9,8 +9,10 @@ public with sharing class UserSelectorTest {
 		User user2 = TestDataFactory.createUser(profileId, 'user2');
 
 		// When 
+		Test.startTest();
 		List<User> result = UserSelector.getByIds(new Set<Id>{ user1.Id });
 		Map<Id, User> resultMap = new Map<Id, User>(result);
+		Test.stopTest();
 
 		// Then
 		System.assertEquals(1, result.size(), 'Record is expected to be found');
@@ -24,7 +26,9 @@ public with sharing class UserSelectorTest {
 		Set<Id> ids = new Set<Id>();
 
 		// When 
+		Test.startTest();
 		List<User> result = UserSelector.getByIds(ids);
+		Test.stopTest();
 
 		// Then
 		System.assertNotEquals(null, result, 'Empty list is expected');

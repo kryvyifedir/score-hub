@@ -2,33 +2,28 @@ public with sharing class AchievementIncrementHandler {
 	List<AchievementIncrement__e> eventsToProcess = new List<AchievementIncrement__e>();
 	Map<Id, User> existingUsersMap = new Map<Id, User>();
 	Map<Id, Achievement__c> existingAchievementsMap = new Map<Id, Achievement__c>();
-	Map<Id, UserStat__c> existingUserStatMap = new Map<Id, UserStat__c>();
-	UserStatMapper userStatsMapper;
+	Map<String, UserStat__c> existingUserStatMap = new Map<String, UserStat__c>();
 
-	List<UserStat__c> statsToInsert = new List<UserStat__c>();
-	Map<Id, UserStat__c> statsToUpdate = new Map<Id, UserStat__c>();
+	Map<String, UserStat__c> statsToUpsert = new Map<String, UserStat__c>();
 
 	public AchievementIncrementHandler(List<AchievementIncrement__e> events) {
 		eventsToProcess = events;
 		initExistingSObjectMaps(events);
-		initUserStatMapper();
 	}
 
 	private void initExistingSObjectMaps(List<AchievementIncrement__e> events) {
 		Set<Id> userIdsFromEvents = new Set<Id>();
 		Set<Id> achievementIdsFromEvents = new Set<Id>();
+		Map<Id, Id> achievementIdByUserIdsMap = new Map<Id, Id>();
 		for (AchievementIncrement__e event : events) {
 			userIdsFromEvents.add(event.UserId__c);
 			achievementIdsFromEvents.add(event.Achievement__c);
+			achievementIdByUserIdsMap.put(event.UserId__c, event.Achievement__c);
 		}
 
 		existingUsersMap = new Map<Id, User> (UserSelector.getByIds(userIdsFromEvents));
-		existingUserStatMap = new Map<Id, UserStat__c> (UserStatSelector.getByUserIds(userIdsFromEvents));
 		existingAchievementsMap = new Map<Id, Achievement__c> (AchievementSelector.getByIds(achievementIdsFromEvents));
-	}
-
-	private void initUserStatMapper() {
-		userStatsMapper = new UserStatMapper(existingUserStatMap.values());
+		existingUserStatMap = UserStatSelector.getByKeys(achievementIdByUserIdsMap);
 	}
 
 	public void processEvents() {
@@ -36,20 +31,19 @@ public with sharing class AchievementIncrementHandler {
 			User user = existingUsersMap.get(event.UserId__c);
 			Achievement__c achievement = existingAchievementsMap.get(event.Achievement__c);
 
-			if (user == null || achievement == null) {
-				// Add new platform event here
+			if (user == null || achievement == null || event.Increment__c == null || event.Increment__c == 0) {
+				// handle issue loging here in Issue #26
 				continue;
 			}
 
-			UserStat__c existingStat = userStatsMapper.findByUserIdAndAchievementId(event.UserId__c, event.Achievement__c);
-			if (existingStat != null) {
-				if (!statsToUpdate.containsKey(existingStat.Id)) {
-					statsToUpdate.put(existingStat.Id, existingStat);
-				}
-
-				statsToUpdate.get(existingStat.Id).CurrentProgress__c += event.Increment__c;
+			String upsertMapKey = event.UserId__c + '-' + event.Achievement__c;
+			if (statsToUpsert.containsKey(upsertMapKey)) {
+				statsToUpsert.get(upsertMapKey).CurrentProgress__c += event.Increment__c;
+			} else if (existingUserStatMap.containsKey(upsertMapKey)) {
+				statsToUpsert.put(upsertMapKey, existingUserStatMap.get(upsertMapKey));
+				statsToUpsert.get(upsertMapKey).CurrentProgress__c += event.Increment__c;
 			} else {
-				statsToInsert.add(new UserStat__c(Achievement__c = event.Achievement__c, UserId__c = event.UserId__c, CurrentProgress__c = event.Increment__c));
+				statsToUpsert.put(upsertMapKey, new UserStat__c(Achievement__c = event.Achievement__c, UserId__c = event.UserId__c, CurrentProgress__c = event.Increment__c));
 			}
 		}
 
@@ -57,13 +51,16 @@ public with sharing class AchievementIncrementHandler {
 	}
 
 	private void commitChanges() {
-		statsToInsert.addAll(statsToUpdate.values());
-		if (!statsToInsert.isEmpty()) {
+		if (statsToUpsert.isEmpty()) {
 			return;
 		}
 
 		// Use proper Database class operations and throw events 
-		upsert statsToInsert;
+		List<Database.UpsertResult> upsertResults = Database.upsert(statsToUpsert.values(), false);
+		// Create an error log for each faild upsert record in Issue #26
+		/*for (Database.UpsertResult upsertResults : upsertResults) {
+
+		}*/
 	}
 
 	public static void onAfterInsert(List<AchievementIncrement__e> events) {

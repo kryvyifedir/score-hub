@@ -8,8 +8,10 @@ private class AchievementSelectorTest {
 		Achievement__c achievement2 = TestDataFactory.createAchievement('Not found');
 
 		// When 
+		Test.startTest();
 		List<Achievement__c> result = AchievementSelector.getByIds(new Set<Id>{ achievement1.Id });
 		Map<Id,Achievement__c> resultMap = new Map<Id,Achievement__c>(result);
+		Test.stopTest();
 
 		// Then
 		System.assertEquals(1, result.size(), 'Record is expected to be found');
@@ -23,7 +25,9 @@ private class AchievementSelectorTest {
 		Set<Id> ids = new Set<Id>();
 
 		// When 
+		Test.startTest();
 		List<Achievement__c> result = AchievementSelector.getByIds(ids);
+		Test.stopTest();
 
 		// Then
 		System.assertNotEquals(null, result, 'Empty list is expected');
@@ -38,7 +42,9 @@ private class AchievementSelectorTest {
 		delete new List<Achievement__c> { achievement };
 
 		// When 
+		Test.startTest();
 		List<Achievement__c> result = AchievementSelector.getByIds(new Set<Id> { achievementId });
+		Test.stopTest();
 
 		// Then
 		System.assertNotEquals(null, result, 'Empty list is expected');

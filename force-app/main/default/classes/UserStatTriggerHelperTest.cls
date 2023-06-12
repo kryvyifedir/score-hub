@@ -17,7 +17,9 @@ private class UserStatTriggerHelperTest {
 		Map<Id, UserStat__c> oldMap = new Map<Id, UserStat__c> { oldStat1.Id => oldStat1, oldStat2.Id => oldStat2 };
 
 		// When
+		Test.startTest();
 		Map<Id, UserStat__c> result = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		Test.stopTest();
 
 		// Then
 		System.assertEquals(1, result.size(), 'Only one UserStat__c record is expected to be returned');
@@ -38,7 +40,9 @@ private class UserStatTriggerHelperTest {
 		Map<Id, UserStat__c> oldMap = new Map<Id, UserStat__c> ();
 
 		// When
+		Test.startTest();
 		Map<Id, UserStat__c> result = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		Test.stopTest();
 
 		// Then
 		System.assertEquals(2, result.size(), 'Only one UserStat__c record is expected to be returned');
@@ -53,7 +57,9 @@ private class UserStatTriggerHelperTest {
 		Map<Id, UserStat__c> oldMap = new Map<Id, UserStat__c> ();
 
 		// When
+		Test.startTest();
 		Map<Id, UserStat__c> result = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		Test.stopTest();
 
 		// Then
 		System.assertNotEquals(null, result, 'Empty map is expected but not null');

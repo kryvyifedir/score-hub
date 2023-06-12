@@ -63,7 +63,7 @@ Event that is fired once user has reached an Achievement.
 
 ## Apex Classes
 ### [AchievementIncrementHandler](force-app/main/default/classes/AchievementIncrementHandler.cls)
-Class that hosts the logic related to firing `AchievementReached__e` events once `UserStat__c.CurrentProgress__c` reaches the value saved in `Achievement__c.Goal__c` field
+Class that hosts the logic related to firing `AchievementIncrement__e` events once adn updates/creates `UserStat__c` record accordingly
 
 ### [AchievementReachedEventsManager](force-app/main/default/classes/AchievementReachedEventsManager.cls)
 Class that hosts the logic related to firing `AchievementReached__e` events once `UserStat__c.CurrentProgress__c` reaches the value saved in `Achievement__c.Goal__c` field

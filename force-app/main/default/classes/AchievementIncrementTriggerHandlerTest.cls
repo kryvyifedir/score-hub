@@ -1,5 +1,5 @@
 @IsTest(isParallel=true)
-private class AchievementIncrementHandlerTest {
+private class AchievementIncrementTriggerHandlerTest {
 	
 	@IsTest
 	private static void processEvents_singleEventStatsDoesntExist_userStatCreated() {
@@ -10,7 +10,7 @@ private class AchievementIncrementHandlerTest {
 
 		// When
 		Test.startTest();
-		AchievementIncrementHandler handler = new AchievementIncrementHandler(new List<AchievementIncrement__e> { event });
+		AchievementIncrementTriggerHandler handler = new AchievementIncrementTriggerHandler(new List<AchievementIncrement__e> { event });
 		handler.processEvents();
 		Test.stopTest();
 
@@ -30,7 +30,7 @@ private class AchievementIncrementHandlerTest {
 
 		// When
 		Test.startTest();
-		AchievementIncrementHandler handler = new AchievementIncrementHandler(new List<AchievementIncrement__e> { event1, event2 });
+		AchievementIncrementTriggerHandler handler = new AchievementIncrementTriggerHandler(new List<AchievementIncrement__e> { event1, event2 });
 		handler.processEvents();
 		Test.stopTest();
 
@@ -51,7 +51,7 @@ private class AchievementIncrementHandlerTest {
 
 		// When
 		Test.startTest();
-		AchievementIncrementHandler handler = new AchievementIncrementHandler(new List<AchievementIncrement__e> { event });
+		AchievementIncrementTriggerHandler handler = new AchievementIncrementTriggerHandler(new List<AchievementIncrement__e> { event });
 		handler.processEvents();
 		Test.stopTest();
 

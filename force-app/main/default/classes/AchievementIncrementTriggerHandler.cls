@@ -1,4 +1,4 @@
-public with sharing class AchievementIncrementHandler {
+public with sharing class AchievementIncrementTriggerHandler {
 	List<AchievementIncrement__e> eventsToProcess = new List<AchievementIncrement__e>();
 	Map<Id, User> existingUsersMap = new Map<Id, User>();
 	Map<Id, Achievement__c> existingAchievementsMap = new Map<Id, Achievement__c>();
@@ -6,7 +6,7 @@ public with sharing class AchievementIncrementHandler {
 
 	Map<String, UserStat__c> statsToUpsert = new Map<String, UserStat__c>();
 
-	public AchievementIncrementHandler(List<AchievementIncrement__e> events) {
+	public AchievementIncrementTriggerHandler(List<AchievementIncrement__e> events) {
 		eventsToProcess = events;
 		initExistingSObjectMaps(events);
 	}
@@ -64,7 +64,7 @@ public with sharing class AchievementIncrementHandler {
 	}
 
 	public static void onAfterInsert(List<AchievementIncrement__e> events) {
-		AchievementIncrementHandler handler = new AchievementIncrementHandler(events);
+		AchievementIncrementTriggerHandler handler = new AchievementIncrementTriggerHandler(events);
 		handler.processEvents();
 	}
 }

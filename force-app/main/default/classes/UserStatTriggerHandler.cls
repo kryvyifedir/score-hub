@@ -1,4 +1,4 @@
-public with sharing class UserStatTriggerHelper {
+public with sharing class UserStatTriggerHandler {
 
 	public static void onAfterInsert(Map<Id, UserStat__c> newMap) {
 		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(newMap);
@@ -6,7 +6,7 @@ public with sharing class UserStatTriggerHelper {
 	}
 
 	public static void onAfterUpdate(Map<Id, UserStat__c> newMap, Map<Id, UserStat__c> oldMap) {
-		Map<Id, UserStat__c> changedStats = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		Map<Id, UserStat__c> changedStats = UserStatTriggerHandler.getStatsWithUpdatedProgress(newMap, oldMap);
 		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(changedStats);
 		eventsManager.fireEvents();
 	}

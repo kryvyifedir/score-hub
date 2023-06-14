@@ -1,5 +1,5 @@
 @IsTest(isParallel=true)
-private class UserStatTriggerHelperTest {
+private class UserStatTriggerHandlerTest {
 
 	@IsTest
 	private static void getStatsWithUpdatedProgress_currentProgressIsChanged_recordsReturned() {
@@ -18,7 +18,7 @@ private class UserStatTriggerHelperTest {
 
 		// When
 		Test.startTest();
-		Map<Id, UserStat__c> result = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		Map<Id, UserStat__c> result = UserStatTriggerHandler.getStatsWithUpdatedProgress(newMap, oldMap);
 		Test.stopTest();
 
 		// Then
@@ -41,7 +41,7 @@ private class UserStatTriggerHelperTest {
 
 		// When
 		Test.startTest();
-		Map<Id, UserStat__c> result = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		Map<Id, UserStat__c> result = UserStatTriggerHandler.getStatsWithUpdatedProgress(newMap, oldMap);
 		Test.stopTest();
 
 		// Then
@@ -58,7 +58,7 @@ private class UserStatTriggerHelperTest {
 
 		// When
 		Test.startTest();
-		Map<Id, UserStat__c> result = UserStatTriggerHelper.getStatsWithUpdatedProgress(newMap, oldMap);
+		Map<Id, UserStat__c> result = UserStatTriggerHandler.getStatsWithUpdatedProgress(newMap, oldMap);
 		Test.stopTest();
 
 		// Then

@@ -1,14 +1,22 @@
 public with sharing class UserStatTriggerHandler {
 
 	public static void onAfterInsert(Map<Id, UserStat__c> newMap) {
-		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(newMap);
-		eventsManager.fireEvents();
+		try {
+			AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(newMap);
+			eventsManager.fireEvents();
+		} catch (Exception e) {
+			GameForceLogger.saveSingleLog('UserStat__c onAfterInsert trigger issue: ' + e.getMessage(), null, null);
+		}
 	}
 
 	public static void onAfterUpdate(Map<Id, UserStat__c> newMap, Map<Id, UserStat__c> oldMap) {
-		Map<Id, UserStat__c> changedStats = UserStatTriggerHandler.getStatsWithUpdatedProgress(newMap, oldMap);
-		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(changedStats);
-		eventsManager.fireEvents();
+		try {
+			Map<Id, UserStat__c> changedStats = UserStatTriggerHandler.getStatsWithUpdatedProgress(newMap, oldMap);
+			AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(changedStats);
+			eventsManager.fireEvents();
+		} catch (Exception e) {
+			GameForceLogger.saveSingleLog('UserStat__c onAfterUpdate trigger issue: ' + e.getMessage(), null, null);
+		}
 	}
 
 	public static Map<Id, UserStat__c> getStatsWithUpdatedProgress(Map<Id, UserStat__c> newMap, Map<id, UserStat__c> oldMap) {

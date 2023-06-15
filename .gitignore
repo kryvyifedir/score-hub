@@ -38,3 +38,6 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+
+# Profiles
+force-app/main/default/profiles

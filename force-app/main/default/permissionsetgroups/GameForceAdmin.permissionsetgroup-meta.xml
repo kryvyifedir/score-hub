@@ -3,6 +3,7 @@
     <description>Permission set group that hosts all the necessary permission to modify the functionality of GameForce</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce Admin</label>
+    <permissionSets>GameForceAccessLogs</permissionSets>
     <permissionSets>GameForceApexClasses</permissionSets>
     <permissionSets>GameForceModifyAllSObjects</permissionSets>
     <permissionSets>GameForcePlatformEvents</permissionSets>

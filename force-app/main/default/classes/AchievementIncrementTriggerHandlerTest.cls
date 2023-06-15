@@ -63,6 +63,48 @@ private class AchievementIncrementTriggerHandlerTest {
 	}
 
 	@IsTest
+	private static void processEvents_nonExistingAchievementId_logCreated() {
+		// Given
+		Id userId = UserInfo.getUserId();
+		Achievement__c achievement = TestDataFactory.createAchievement('achievement');
+		String achievementId = achievement.Id;
+		delete achievement;
+		AchievementIncrement__e event = new AchievementIncrement__e(UserId__c = userId, Achievement__c = achievementId, Increment__c = 1);
+
+		// When
+		Test.startTest();
+		AchievementIncrementTriggerHandler handler = new AchievementIncrementTriggerHandler(new List<AchievementIncrement__e> { event });
+		handler.processEvents();
+		Test.stopTest();
+
+		// Then
+		List<GameForceLog__c> logs = [SELECT Id, Log__c, UserId__c, AchievementId__c FROM GameForceLog__c];
+		System.assertEquals(1, logs.size(), 'Error Log is expected to be created');
+		System.assertEquals(userId, logs[0].UserId__c, 'User Id value is expected to be saved in UserId__c field');
+		System.assertEquals(achievementId, logs[0].AchievementId__c, 'Achievement Id value is expected to be saved in AchievementId__c field');
+	}
+
+	@IsTest
+	private static void processEvents_incrementIsNull_logCreated() {
+		// Given
+		Id userId = UserInfo.getUserId();
+		Achievement__c achievement = TestDataFactory.createAchievement('achievement');
+		AchievementIncrement__e event = new AchievementIncrement__e(UserId__c = userId, Achievement__c = achievement.Id, Increment__c = 0);
+
+		// When
+		Test.startTest();
+		AchievementIncrementTriggerHandler handler = new AchievementIncrementTriggerHandler(new List<AchievementIncrement__e> { event });
+		handler.processEvents();
+		Test.stopTest();
+
+		// Then
+		List<GameForceLog__c> logs = [SELECT Id, Log__c, UserId__c, AchievementId__c FROM GameForceLog__c];
+		System.assertEquals(1, logs.size(), 'Error Log is expected to be created');
+		System.assertEquals(userId, logs[0].UserId__c, 'User Id value is expected to be saved in UserId__c field');
+		System.assertEquals(achievement.Id, logs[0].AchievementId__c, 'Achievement Id value is expected to be saved in AchievementId__c field');
+	}
+
+	@IsTest
 	private static void onAfterInsert_eventGetsPublished_userStatCreated() {
 		// Given
 		Id userId = UserInfo.getUserId();

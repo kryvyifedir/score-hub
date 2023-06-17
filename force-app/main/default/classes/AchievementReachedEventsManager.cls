@@ -1,26 +1,29 @@
 public with sharing class AchievementReachedEventsManager {
 
-	Map<Id, UserStat__c> userStatsByIdMap = new Map<Id, UserStat__c>();
-	Map<Id, Achievement__c> achievementByIdMap = new Map<Id, Achievement__c>();
+	Map<Id, UserMeasurement__c> userMeasurementsByIdMap = new Map<Id, UserMeasurement__c>();
+	Map<Id, List<Achievement__c>> achievementByMeasurementIdMap = new Map<Id, List<Achievement__c>>();
+	Map<Id, Map<String, ReachedAchievement__c>> reachedAchievementsByAchievementIdMap = new Map<Id, Map<String, ReachedAchievement__c>>();
 
-	public AchievementReachedEventsManager(Map<Id, UserStat__c> userStatsByIdMap) {
-		this.userStatsByIdMap = userStatsByIdMap;
-		this.populateAchievementsMap();
+	public AchievementReachedEventsManager(Map<Id, UserMeasurement__c> userMeasurementsByIdMap) {
+		this.userMeasurementsByIdMap = userMeasurementsByIdMap;
+		this.populateAchievementsByMeasurementIdMap();
+		this.populateReachedAchievementsByAchievementIdMap();
 	}
 
 	public List<Database.SaveResult> fireEvents() {
 		List<Database.SaveResult> results;
 		if (validate()) {
 			List<AchievementReached__e> achievementReachedEvents = new List<AchievementReached__e>();
-			for (UserStat__c stat : userStatsByIdMap.values()) {
-				Achievement__c achievement = achievementByIdMap.get(stat.Achievement__c);
-				if (achievement != null && 
-					stat.CurrentProgress__c >= achievement.Goal__c && 
-					!stat.Reached__c) {
-					AchievementReached__e event = new AchievementReached__e();
-					event.UserId__c = stat.UserId__c;
-					event.AchievementId__c = stat.Achievement__c;
-					achievementReachedEvents.add(event);
+			for (UserMeasurement__c userMeasurement : userMeasurementsByIdMap.values()) {
+				List<Achievement__c> relatedAchievements = achievementByMeasurementIdMap.get(userMeasurement.Measurement__c);
+				for (Achievement__c achievement : relatedAchievements) {
+					if (achievement.Goal__c <= userMeasurement.Value__c &&
+						!achievementReachedExists(userMeasurement.User__c, achievement.Id)) {
+						AchievementReached__e event = new AchievementReached__e();
+						event.UserId__c = userMeasurement.User__c;
+						event.AchievementId__c = achievement.Id;
+						achievementReachedEvents.add(event);
+					}
 				}
 			}
 
@@ -31,19 +34,49 @@ public with sharing class AchievementReachedEventsManager {
 		return results;
 	}
 
-	private void populateAchievementsMap() {
-		Set<Id> achievementIds = new Set<Id>();
-		for (UserStat__c userStat : userStatsByIdMap.values()) {
-			achievementIds.add(userStat.Achievement__c);
+	private void populateAchievementsByMeasurementIdMap() {
+		Set<Id> measurementIds = new Set<Id>();
+		for(UserMeasurement__c userMeasurement : userMeasurementsByIdMap.values()) {
+			measurementIds.add(userMeasurement.Measurement__c);
 		}
-		achievementByIdMap = new Map<Id, Achievement__c>(AchievementSelector.getByIds(achievementIds));
+
+		List<Measurement__c> measurements = MeasurementSelector.getByIds(measurementIds);
+		for (Measurement__c measurement : measurements) {
+			List<Achievement__c> achievements = measurement.Achievements__r;
+			if (achievements != null && !achievements.isEmpty()) {
+				achievementByMeasurementIdMap.put(measurement.Id, achievements);
+			}
+		}
+	}
+
+	private void populateReachedAchievementsByAchievementIdMap() {
+		Set<Id> achievementIds = new Set<Id>();
+		for (Id key : achievementByMeasurementIdMap.keySet()) {
+			List<Achievement__c> achievements = achievementByMeasurementIdMap.get(key);
+			for (Achievement__c achievement : achievements) {
+				achievementIds.add(achievement.Id);
+			}
+		}
+
+		reachedAchievementsByAchievementIdMap = AchievementSelector.getReachedAchievementsByAchievementId(achievementIds);
 	}
 	
 	private Boolean validate() {
 		Boolean result = true;
 
-		if (userStatsByIdMap.isEmpty() || achievementByIdMap.isEmpty()) {
+		if (userMeasurementsByIdMap.isEmpty() || achievementByMeasurementIdMap.isEmpty()) {
 			result = false;
+		}
+
+		return result;
+	}
+
+	private Boolean achievementReachedExists(Id userId, Id achievementId) {
+		Boolean result = false;
+		String key = userId + '-' + achievementId;
+
+		if (reachedAchievementsByAchievementIdMap.get(achievementId)?.get(key) != null) {
+			result = true;
 		}
 
 		return result;

@@ -1,24 +1,6 @@
 @IsTest 
 public class TestDataFactory {	
 	
-	public static Achievement__c initAchievement(String uniqueIdentifier) {
-		Achievement__c achievement = new Achievement__c();
-		achievement.Name = 'Name ' + uniqueIdentifier;
-		achievement.Description__c = 'Generic description ' + uniqueIdentifier;
-		achievement.Enabled__c = true;
-		achievement.Goal__c = 100 + Math.round(1000 * Math.random());
-		achievement.Score__c = 100 + Math.round(1000 * Math.random());
-		achievement.UITitle__c = 'UI Title ' + uniqueIdentifier;
-		achievement.UIDescription__c = 'UI Description ' + uniqueIdentifier;
-		return  achievement;
-	}
-
-	public static Achievement__c createAchievement(String uniqueIdentifier) {
-		Achievement__c achievement = TestDataFactory.initAchievement(uniqueIdentifier);
-		insert achievement;
-		return achievement;
-	}
-
 	public static Measurement__c initMeasurement(String uniqueIdentifier) {
 		Measurement__c measurement = new Measurement__c();
 		measurement.UniqueIdentifier__c = uniqueIdentifier;
@@ -29,6 +11,25 @@ public class TestDataFactory {
 		Measurement__c measurement = initMeasurement(uniqueIdentifier);
 		insert measurement;
 		return measurement;
+	}
+
+	public static Achievement__c initAchievement(String uniqueIdentifier, Id measurementId) {
+		Achievement__c achievement = new Achievement__c();
+		achievement.Name = 'Name ' + uniqueIdentifier;
+		achievement.Description__c = 'Generic description ' + uniqueIdentifier;
+		achievement.Enabled__c = true;
+		achievement.Goal__c = 100 + Math.round(1000 * Math.random());
+		achievement.Score__c = 100 + Math.round(1000 * Math.random());
+		achievement.UITitle__c = 'UI Title ' + uniqueIdentifier;
+		achievement.UIDescription__c = 'UI Description ' + uniqueIdentifier;
+		achievement.Measurement__c = measurementId;
+		return  achievement;
+	}
+
+	public static Achievement__c createAchievement(String uniqueIdentifier, Id measurementId) {
+		Achievement__c achievement = TestDataFactory.initAchievement(uniqueIdentifier, measurementId);
+		insert achievement;
+		return achievement;
 	}
 
 	public static UserMeasurement__c initUserMeasurement(Id userId, Id measurementId, Decimal value) {
@@ -43,6 +44,19 @@ public class TestDataFactory {
 		UserMeasurement__c userMeasurement = initUserMeasurement(userId, measurementId, value);
 		insert userMeasurement;
 		return userMeasurement;
+	}
+
+	public static ReachedAchievement__c initReachedAchievement(Id userId, Id achievementId) {
+		ReachedAchievement__c reachedAchievement = new ReachedAchievement__c();
+		reachedAchievement.User__c = userId;
+		reachedAchievement.Achievement__c = achievementId;
+		return reachedAchievement;
+	}
+
+	public static ReachedAchievement__c createReachedAchievement(Id userId, Id achievementId) {
+		ReachedAchievement__c reachedAchievement = initReachedAchievement(userId, achievementId);
+		insert reachedAchievement;
+		return reachedAchievement;
 	}
 
 	public static User initUser(Id profileId, String lastName) {

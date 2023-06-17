@@ -154,13 +154,13 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>GameForce Log</label>
+    <label>Log</label>
     <nameField>
         <displayFormat>L-{000000}</displayFormat>
         <label>Log Number</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>GameForce Logs</pluralLabel>
+    <pluralLabel>Logs</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

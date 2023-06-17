@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Permission set group that hosts all the necessary permission to modify the functionality of GameForce</description>
+    <description>Grants access to modify GameForce measurements, achievements and implement custom achievement logic. Intended for use by Salesforce Admin users</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce Admin</label>
-    <permissionSets>GameForceAccessLogs</permissionSets>
     <permissionSets>GameForceApexClasses</permissionSets>
-    <permissionSets>GameForceModifyAllSObjects</permissionSets>
+    <permissionSets>GameForceModifyAchievements</permissionSets>
+    <permissionSets>GameForceModifyMeasurements</permissionSets>
     <permissionSets>GameForcePlatformEvents</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

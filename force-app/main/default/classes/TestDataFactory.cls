@@ -1,7 +1,19 @@
 @IsTest 
 public class TestDataFactory {	
 	
-	public static Achievement__c initAchievement(String uniqueIdentifier) {
+	public static Measurement__c initMeasurement(String uniqueIdentifier) {
+		Measurement__c measurement = new Measurement__c();
+		measurement.UniqueIdentifier__c = uniqueIdentifier;
+		return measurement;
+	}
+
+	public static Measurement__c createMeasurement(String uniqueIdentifier) {
+		Measurement__c measurement = initMeasurement(uniqueIdentifier);
+		insert measurement;
+		return measurement;
+	}
+
+	public static Achievement__c initAchievement(String uniqueIdentifier, Id measurementId) {
 		Achievement__c achievement = new Achievement__c();
 		achievement.Name = 'Name ' + uniqueIdentifier;
 		achievement.Description__c = 'Generic description ' + uniqueIdentifier;
@@ -10,43 +22,41 @@ public class TestDataFactory {
 		achievement.Score__c = 100 + Math.round(1000 * Math.random());
 		achievement.UITitle__c = 'UI Title ' + uniqueIdentifier;
 		achievement.UIDescription__c = 'UI Description ' + uniqueIdentifier;
+		achievement.Measurement__c = measurementId;
 		return  achievement;
 	}
 
-	public static Achievement__c createAchievement(String uniqueIdentifier) {
-		Achievement__c achievement = TestDataFactory.initAchievement(uniqueIdentifier);
+	public static Achievement__c createAchievement(String uniqueIdentifier, Id measurementId) {
+		Achievement__c achievement = TestDataFactory.initAchievement(uniqueIdentifier, measurementId);
 		insert achievement;
 		return achievement;
 	}
 
-	public static UserStat__c initUserStat(Id userId, Id achievementId) {
-		UserStat__c stat = new UserStat__c();
-		stat.UserId__c = userId;
-		stat.Achievement__c = achievementId;
-		stat.CurrentProgress__c = 0;
-		stat.Reached__c = false;
-		return stat;
+	public static UserMeasurement__c initUserMeasurement(Id userId, Id measurementId, Decimal value) {
+		UserMeasurement__c userMeasurement = new UserMeasurement__c();
+		userMeasurement.User__c = userId;
+		userMeasurement.Measurement__c = measurementId;
+		userMeasurement.Value__c = value;
+		return userMeasurement;
 	}
 
-	public static UserStat__c initUserStat(Id userId, Id achievementId, Decimal progress) {
-		UserStat__c stat = new UserStat__c();
-		stat.UserId__c = userId;
-		stat.Achievement__c = achievementId;
-		stat.CurrentProgress__c = progress;
-		stat.Reached__c = false;
-		return stat;
+	public static UserMeasurement__c createUserMeasurement(Id userId, Id measurementId, Decimal value) {
+		UserMeasurement__c userMeasurement = initUserMeasurement(userId, measurementId, value);
+		insert userMeasurement;
+		return userMeasurement;
 	}
 
-	public static UserStat__c createUserStat(Id userId, Id achievementId) {
-		UserStat__c stat = TestDataFactory.initUserStat(userId, achievementId);
-		insert stat;
-		return stat;
+	public static ReachedAchievement__c initReachedAchievement(Id userId, Id achievementId) {
+		ReachedAchievement__c reachedAchievement = new ReachedAchievement__c();
+		reachedAchievement.User__c = userId;
+		reachedAchievement.Achievement__c = achievementId;
+		return reachedAchievement;
 	}
 
-	public static UserStat__c createUserStat(Id userId, Id achievementId, Decimal progress) {
-		UserStat__c stat = TestDataFactory.initUserStat(userId, achievementId, progress);
-		insert stat;
-		return stat;
+	public static ReachedAchievement__c createReachedAchievement(Id userId, Id achievementId) {
+		ReachedAchievement__c reachedAchievement = initReachedAchievement(userId, achievementId);
+		insert reachedAchievement;
+		return reachedAchievement;
 	}
 
 	public static User initUser(Id profileId, String lastName) {

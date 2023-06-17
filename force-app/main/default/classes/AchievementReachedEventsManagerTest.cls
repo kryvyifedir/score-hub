@@ -2,15 +2,18 @@
 private class AchievementReachedEventsManagerTest {
 	
 	@IsTest
-	private static void fireEvent_achievementIdAndUserId_eventFired() {
+	private static void fireEvent_noDataExists_platformEventFired() {
 		// Given
-		Achievement__c achievement = TestDataFactory.createAchievement('Achievement');
-		UserStat__c stat = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id, achievement.Goal__c + 10);
-		Map<Id, UserStat__c> userStatByIdMap = new Map<Id, UserStat__c> {stat.Id => stat};
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
+		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement.Id, achievement.Goal__c + 10);
+		Map<Id, UserMeasurement__c> userMeasurementByIdMap = new Map<Id, UserMeasurement__c> {userMeasurement.Id => userMeasurement};
+
+		delete [SELECT Id FROM ReachedAchievement__c];
 
 		// When
 		Test.startTest();
-		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(userStatByIdMap);
+		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(userMeasurementByIdMap);
 		List<Database.SaveResult> results = eventsManager.fireEvents();
 		Test.stopTest();
 
@@ -23,15 +26,37 @@ private class AchievementReachedEventsManagerTest {
 	}
 
 	@IsTest
-	private static void fireEvent_statsProgressIsLessThenGoal_eventNotFired() {
+	private static void fireEvent_achievementReachedAlready_noPlatformEventFired() {
 		// Given
-		Achievement__c achievement = TestDataFactory.createAchievement('Achievement');
-		UserStat__c stat = TestDataFactory.createUserStat(UserInfo.getUserId(), achievement.Id, achievement.Goal__c - 10);
-		Map<Id, UserStat__c> userStatByIdMap = new Map<Id, UserStat__c> {stat.Id => stat};
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
+		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement.Id, achievement.Goal__c + 10);
+		ReachedAchievement__c reachedAchievement = TestDataFactory.createReachedAchievement(UserInfo.getUserId(), achievement.Id);
+		Map<Id, UserMeasurement__c> userMeasurementByIdMap = new Map<Id, UserMeasurement__c> {userMeasurement.Id => userMeasurement};
 
 		// When
 		Test.startTest();
-		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(userStatByIdMap);
+		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(userMeasurementByIdMap);
+		List<Database.SaveResult> results = eventsManager.fireEvents();
+		Test.stopTest();
+
+		// Then
+		System.assertEquals(null, results, 'Since achievement was already reached no Events are expected to be fired');
+	}
+
+	@IsTest
+	private static void fireEvent_statsProgressIsLessThenGoal_eventNotFired() {
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
+		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement.Id, achievement.Goal__c - 10);
+		Map<Id, UserMeasurement__c> userMeasurementByIdMap = new Map<Id, UserMeasurement__c> {userMeasurement.Id => userMeasurement};
+
+		delete [SELECT Id FROM ReachedAchievement__c];
+
+		// When
+		Test.startTest();
+		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(userMeasurementByIdMap);
 		List<Database.SaveResult> results = eventsManager.fireEvents();
 		Test.stopTest();
 
@@ -42,11 +67,11 @@ private class AchievementReachedEventsManagerTest {
 	@IsTest
 	private static void fireEvent_emptyStatsMap_eventNotFired() {
 		// Given
-		Map<Id, UserStat__c> userStatByIdMap = new Map<Id, UserStat__c>();
+		Map<Id, UserMeasurement__c> userMeasurementByIdMap = new Map<Id, UserMeasurement__c>();
 
 		// When
 		Test.startTest();
-		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(userStatByIdMap);
+		AchievementReachedEventsManager eventsManager = new AchievementReachedEventsManager(userMeasurementByIdMap);
 		List<Database.SaveResult> results = eventsManager.fireEvents();
 		Test.stopTest();
 

@@ -143,24 +143,25 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>The list of achievement that users can get</description>
+    <description>Logs saved by GameForce</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>false</enableReports>
+    <enableReports>true</enableReports>
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ControlledByParent</externalSharingModel>
-    <label>Achievement</label>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Log</label>
     <nameField>
-        <label>Name</label>
-        <type>Text</type>
+        <displayFormat>L-{000000}</displayFormat>
+        <label>Log Number</label>
+        <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Achievements</pluralLabel>
+    <pluralLabel>Logs</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

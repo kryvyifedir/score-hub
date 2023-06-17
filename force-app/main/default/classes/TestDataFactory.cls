@@ -19,34 +19,30 @@ public class TestDataFactory {
 		return achievement;
 	}
 
-	public static UserStat__c initUserStat(Id userId, Id achievementId) {
-		UserStat__c stat = new UserStat__c();
-		stat.UserId__c = userId;
-		stat.Achievement__c = achievementId;
-		stat.CurrentProgress__c = 0;
-		stat.Reached__c = false;
-		return stat;
+	public static Measurement__c initMeasurement(String uniqueIdentifier) {
+		Measurement__c measurement = new Measurement__c();
+		measurement.UniqueIdentifier__c = uniqueIdentifier;
+		return measurement;
 	}
 
-	public static UserStat__c initUserStat(Id userId, Id achievementId, Decimal progress) {
-		UserStat__c stat = new UserStat__c();
-		stat.UserId__c = userId;
-		stat.Achievement__c = achievementId;
-		stat.CurrentProgress__c = progress;
-		stat.Reached__c = false;
-		return stat;
+	public static Measurement__c createMeasurement(String uniqueIdentifier) {
+		Measurement__c measurement = initMeasurement(uniqueIdentifier);
+		insert measurement;
+		return measurement;
 	}
 
-	public static UserStat__c createUserStat(Id userId, Id achievementId) {
-		UserStat__c stat = TestDataFactory.initUserStat(userId, achievementId);
-		insert stat;
-		return stat;
+	public static UserMeasurement__c initUserMeasurement(Id userId, Id measurementId, Decimal value) {
+		UserMeasurement__c userMeasurement = new UserMeasurement__c();
+		userMeasurement.User__c = userId;
+		userMeasurement.Measurement__c = measurementId;
+		userMeasurement.Value__c = value;
+		return userMeasurement;
 	}
 
-	public static UserStat__c createUserStat(Id userId, Id achievementId, Decimal progress) {
-		UserStat__c stat = TestDataFactory.initUserStat(userId, achievementId, progress);
-		insert stat;
-		return stat;
+	public static UserMeasurement__c createUserMeasurement(Id userId, Id measurementId, Decimal value) {
+		UserMeasurement__c userMeasurement = initUserMeasurement(userId, measurementId, value);
+		insert userMeasurement;
+		return userMeasurement;
 	}
 
 	public static User initUser(Id profileId, String lastName) {

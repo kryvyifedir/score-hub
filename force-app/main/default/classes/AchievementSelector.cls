@@ -36,9 +36,7 @@ public with sharing class AchievementSelector {
 				reachedAchievementsByIdMap.put(reachedAchievement.Key__c, reachedAchievement);
 			}
 
-			if (!reachedAchievementsByIdMap.isEmpty()) {
-				reachedAchievementByAchievementIdsMap.put(achievement.Id, reachedAchievementsByIdMap);
-			}
+			reachedAchievementByAchievementIdsMap.put(achievement.Id, reachedAchievementsByIdMap);
 		}
 
 		return reachedAchievementByAchievementIdsMap;

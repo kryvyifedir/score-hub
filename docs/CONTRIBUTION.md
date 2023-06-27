@@ -18,8 +18,9 @@ To start contributing, follow these steps:
 4. Create a new branch for your contributions.
 5. Deploy the code to your own Scratch org
 6. Assign `GameForce Admin` or `GameForce User` permission set group to your user
-7. Configure necessary Measurements and Achievements
-8. Do necessary changes and test them on your Scratch Org 
-9. Commit your changes with a clear and descriptive commit message.
-10. Push your changes to your forked repository.
-11. Submit a pull request (PR) to the main repository. Use Closes keywoard to mark the issue that you've created in the step 1
+7. Run GameForceConfig.config() static method to generate basic Measurements and Achievements
+8. Configure necessary Measurements and Achievements
+9. Do necessary changes and test them on your Scratch Org 
+10. Commit your changes with a clear and descriptive commit message.
+11. Push your changes to your forked repository.
+12. Submit a pull request (PR) to the main repository. Use Closes keywoard to mark the issue that you've created in the step 1

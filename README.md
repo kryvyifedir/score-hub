@@ -35,7 +35,7 @@ GameForce provides a set of standard achievements that can be used right a way, 
 | 08 | Closer        | Complete 10 Tasks  | 10 |
 | 09 | Taskmaster    | Complete 50 Tasks  | 20 |
 | 10 | Completionist | Complete 100 Tasks | 20 |
-| 11 | Executor      | Complete 200 Tasks | 50 |
+| 11 | Executor      | Complete 200 Tasks | 100 |
 | 12 | Enthusiast   | Post 10 Chatter Posts  | 10 |
 | 13 | Messenger    | Post 50 Chatter Posts  | 10 |
 | 14 | Collaborator | Post 100 Chatter Posts | 20 |

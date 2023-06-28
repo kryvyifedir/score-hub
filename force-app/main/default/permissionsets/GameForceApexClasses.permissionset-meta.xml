@@ -68,6 +68,7 @@
         <apexClass>UserSelectorTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <description>Grants access to all GameForce APEX classes</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce Apex Classes</label>
 </PermissionSet>

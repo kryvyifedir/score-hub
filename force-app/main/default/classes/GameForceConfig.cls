@@ -4,22 +4,22 @@ public with sharing class GameForceConfig {
 		List<Achievement__c> achievementsToInsert = new List<Achievement__c>();
 
 		Measurement__c createLeadMeasurement = new Measurement__c();
-		createLeadMeasurement.UniqueIdentifier__c = 'CreatedLeadsCounter';
+		createLeadMeasurement.UniqueIdentifier__c = Constants.CREATED_LEADS_COUNTER_ID;
 		createLeadMeasurement.Description__c = 'Number of Leads that were created by user';
 		measurementsToInsert.add(createLeadMeasurement);
 
 		Measurement__c convertedLeadMeasurement = new Measurement__c(
-			UniqueIdentifier__c = 'ConvertedLeadsCounter', 
+			UniqueIdentifier__c = Constants.CONVERTED_LEADS_COUNTER_ID, 
 			Description__c = 'Number of Leads that were converted by user');
 		measurementsToInsert.add(convertedLeadMeasurement);
 
 		Measurement__c completedTasksMeasurement = new Measurement__c(
-			UniqueIdentifier__c = 'CompletedTasksCounter',
+			UniqueIdentifier__c = Constants.COMPLETED_TASKS_COUNTER_ID, 
 			Description__c = 'Number of Tasks that were completed by user');
 		measurementsToInsert.add(completedTasksMeasurement);
 
 		Measurement__c chatterPostsMeasurement = new Measurement__c(
-			UniqueIdentifier__c = 'ChatterPostsCounter',
+			UniqueIdentifier__c = Constants.CHATTER_POSTS_COUNTER_ID,
 			Description__c = 'Number of Tasks that were completed by user');
 		measurementsToInsert.add(chatterPostsMeasurement);
 

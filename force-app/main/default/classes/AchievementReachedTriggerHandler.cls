@@ -88,7 +88,11 @@ public with sharing class AchievementReachedTriggerHandler {
 	}
 
 	public static void onAfterInsert(List<AchievementReached__e> events) {
-		AchievementReachedTriggerHandler handler = new AchievementReachedTriggerHandler(events);
-		handler.processEvents();
+		try {
+			AchievementReachedTriggerHandler handler = new AchievementReachedTriggerHandler(events);
+			handler.processEvents();
+		} catch (Exception e) {
+			Logger.saveSingleLog('Unexpected exception caught in AchievementReachedTrigger. ' + e.getMessage() + '. ' + e.getStackTraceString());
+		}
 	}
 }

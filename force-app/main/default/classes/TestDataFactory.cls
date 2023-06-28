@@ -80,4 +80,11 @@ public class TestDataFactory {
 		insert user;
 		return user;
 	}
+
+	public static Lead initLead(String name) {
+		Lead newLead = new Lead();
+		newLead.LastName = name;
+		newLead.Company = name + ' COMPANY';
+		return newLead;
+	}
 }

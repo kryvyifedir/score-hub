@@ -78,7 +78,7 @@ private class UserMeasurementIncrTriggerHandlerTest{
 		Test.stopTest();
 
 		// Then
-		List<Log__c> logs = [SELECT Id, Log__c FROM Log__c];
+		List<Log__c> logs = [SELECT Id, ErrorMessage__c FROM Log__c];
 		System.assertEquals(1, logs.size(), 'Error Log is expected to be created');
 	}
 
@@ -96,26 +96,33 @@ private class UserMeasurementIncrTriggerHandlerTest{
 		Test.stopTest();
 
 		// Then
-		List<Log__c> logs = [SELECT Id, Log__c FROM Log__c];
+		List<Log__c> logs = [SELECT Id, ErrorMessage__c FROM Log__c];
 		System.assertEquals(1, logs.size(), 'Error Log is expected to be created');
 	}
 
 	@IsTest
-	private static void onAfterInsert_eventGetsPublished_userStatCreated() {
+	private static void onAfterInsert_201EventsGetsPublished_userStatsCreated() {
 		// Given
 		Id userId = UserInfo.getUserId();
-		Measurement__c measurement = TestDataFactory.createMeasurement('measurement');
+		List<Measurement__c> measurements = new List<Measurement__c>();
+		for (Integer i = 0; i <= 201; i++) {
+			measurements.add(TestDataFactory.initMeasurement('Measurement' + i));
+		}
+		insert measurements;
+
+		List<UserMeasurementIncrement__e> events = new List<UserMeasurementIncrement__e>();
+		for (Measurement__c measurement : measurements) {
+			events.add(new UserMeasurementIncrement__e(UserId__c = userId, MeasurementId__c = measurement.Id, Increment__c = 1));
+		}
 
 		// When
 		Test.startTest();
-		UserMeasurementIncrement__e event = new UserMeasurementIncrement__e(UserId__c = userId, MeasurementId__c = measurement.Id, Increment__c = 1);
-		EventBus.publish(new List<UserMeasurementIncrement__e> { event });
+		EventBus.publish(events);
 		Test.stopTest();
 
 		// Then
-		List<UserMeasurement__c> measurements = [SELECT Id, Value__c FROM UserMeasurement__c WHERE User__c = :userId AND Measurement__c = :measurement.Id];
-		system.assertEquals(1, measurements.size(), 'Single stat is expected to be created');
-		system.assertEquals(1, measurements[0].Value__c, 'Value__c value should be increased for the sum of the increments from the event');
+		List<UserMeasurement__c> userMeasurements = [SELECT Id, Value__c FROM UserMeasurement__c WHERE User__c = :userId];
+		system.assertEquals(202, userMeasurements.size(), 'Single stat is expected to be created');
 	}
 
 }

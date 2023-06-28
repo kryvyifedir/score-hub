@@ -26,7 +26,6 @@ private class UserMeasurementTriggerHandlerTest {
 		System.assertEquals(1, result.size(), 'Only one UserMeasurement__c record is expected to be returned');
 		System.assert(result.containsKey(userMeasurementNew1.Id), 'Changed UserMeasurement__c is expected to be included');
 		System.assert(!result.containsKey(userMeasurementNew2.Id), 'Not changed UserMeasurement__c is not expected to be included');
-
 	}
 
 	@IsTest
@@ -66,5 +65,66 @@ private class UserMeasurementTriggerHandlerTest {
 		// Then
 		System.assertNotEquals(null, result, 'Empty map is expected but not null');
 		System.assertEquals(0, result.size(), 'Empty map is expected but not null');
+	}
+
+	@IsTest
+	private static void onAfterInsert_201RecordsInserted_eventsFired() {
+		// Given
+		Id userId = UserInfo.getUserId();
+		List<Measurement__c> measurements = new List<Measurement__c>();
+		for (Integer i = 0; i <= 201; i++) {
+			measurements.add(TestDataFactory.initMeasurement('Measurement' + i));
+		}
+		insert measurements;
+		
+		List<UserMeasurement__c> userMeasurements = new List<UserMeasurement__c>();
+		for (Measurement__c measurement : measurements) {
+			userMeasurements.add(new UserMeasurement__c(User__c = userId, Measurement__c = measurement.Id, Value__c = 1));
+		}
+
+		// When
+		try {
+			Test.startTest();
+			insert userMeasurements;
+			Test.stopTest();
+
+			// Then
+			system.assert(true, 'No exception is expected once events are fired');
+		} catch (Exception e) {
+			system.assert(false, 'No exception is expected once events are fired');
+		}
+	}
+
+	@IsTest
+	private static void onAfterUpdate_201RecordsInserted_eventsFired() {
+		// Given
+		Id userId = UserInfo.getUserId();
+		List<Measurement__c> measurements = new List<Measurement__c>();
+		for (Integer i = 0; i <= 201; i++) {
+			measurements.add(TestDataFactory.initMeasurement('Measurement' + i));
+		}
+		insert measurements;
+		
+		List<UserMeasurement__c> userMeasurements = new List<UserMeasurement__c>();
+		for (Measurement__c measurement : measurements) {
+			userMeasurements.add(new UserMeasurement__c(User__c = userId, Measurement__c = measurement.Id, Value__c = 1));
+		}
+		insert userMeasurements;
+
+		for (UserMeasurement__c userMeasurement : userMeasurements) {
+			userMeasurement.Value__c = 10;
+		}
+
+		// When
+		try {
+			Test.startTest();
+			update userMeasurements;
+			Test.stopTest();
+
+			// Then
+			system.assert(true, 'No exception is expected once events are fired');
+		} catch (Exception e) {
+			system.assert(false, 'No exception is expected once events are fired');
+		}
 	}
 }

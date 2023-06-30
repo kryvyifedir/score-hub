@@ -1,4 +1,4 @@
-@IsTest
+@IsTest(isParallel=true)
 private class LeadTriggerHandlerTest {
 	@IsTest
 	private static void onAfterInsert_201RecordsInserted_userMeasurementsCreated(){

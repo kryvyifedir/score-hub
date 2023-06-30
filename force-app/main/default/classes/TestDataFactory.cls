@@ -87,4 +87,11 @@ public class TestDataFactory {
 		newLead.Company = name + ' COMPANY';
 		return newLead;
 	}
+
+	public static Task initTask(String subject, String status) {
+		Task task = new Task();
+		task.Subject = subject;
+		task.Status = status;
+		return task;
+	}
 }

@@ -22,7 +22,7 @@ public with sharing class LeadTriggerHandler {
 		}
 	}
 
-	public void fireEventsForNewLeads(List<Lead> leads, String measurementUniqueId) {
+	public void fireEvents(List<Lead> leads, String measurementUniqueId) {
 		List<UserMeasurementIncrement__e> events = new List<UserMeasurementIncrement__e>();
 		Id measurementId = measurementIdsByUniqueIds.get(measurementUniqueId);
 		if (measurementId == null) {
@@ -60,7 +60,7 @@ public with sharing class LeadTriggerHandler {
 	public static void onAfterInsert(List<Lead> leads) {
 		try { 
 			LeadTriggerHandler handler = new LeadTriggerHandler();
-			handler.fireEventsForNewLeads(leads, Constants.CREATED_LEADS_COUNTER_ID);
+			handler.fireEvents(leads, Constants.CREATED_LEADS_COUNTER_ID);
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in LeadTriggerHandler. ' + e.getMessage() + '. ' + e.getStackTraceString());
 		}
@@ -77,7 +77,7 @@ public with sharing class LeadTriggerHandler {
 
 			if (!convertedLeads.isEmpty()) {
 				LeadTriggerHandler handler = new LeadTriggerHandler();
-				handler.fireEventsForNewLeads(convertedLeads, Constants.CONVERTED_LEADS_COUNTER_ID);
+				handler.fireEvents(convertedLeads, Constants.CONVERTED_LEADS_COUNTER_ID);
 			}
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in LeadTriggerHandler. ' + e.getMessage() + '. ' + e.getStackTraceString());

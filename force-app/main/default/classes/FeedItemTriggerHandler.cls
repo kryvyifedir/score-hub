@@ -1,15 +1,15 @@
-public with sharing class FeedItemHandler extends BaseGameForceTriggerHandler{
+public with sharing class FeedItemTriggerHandler extends BaseGameForceTriggerHandler{
 	
 	public static void onAfterInsert(Map<Id, FeedItem> newPosts) {
 		try {
 			List<FeedItem> postsToProcess = getFeedItemsToProcess(newPosts, null);
 
 			if (!postsToProcess.isEmpty()) {
-				FeedItemHandler handler = new FeedItemHandler();
+				FeedItemTriggerHandler handler = new FeedItemTriggerHandler();
 				handler.fireEvents(postsToProcess, 'CreatedById', Constants.CHATTER_POSTS_COUNTER_ID);
 			}
 		} catch (Exception e) {
-			Logger.saveSingleLog('Unexpected exception caught in FeedItemHandler. ' + e.getMessage() + '. ' + e.getStackTraceString());
+			Logger.saveSingleLog('Unexpected exception caught in FeedItemTriggerHandler. ' + e.getMessage() + '. ' + e.getStackTraceString());
 		}
 	}
 
@@ -18,11 +18,11 @@ public with sharing class FeedItemHandler extends BaseGameForceTriggerHandler{
 			List<FeedItem> postsToProcess = getFeedItemsToProcess(newPosts, oldPosts);
 
 			if (!postsToProcess.isEmpty()) {
-				FeedItemHandler handler = new FeedItemHandler();
+				FeedItemTriggerHandler handler = new FeedItemTriggerHandler();
 				handler.fireEvents(postsToProcess, 'CreatedById', Constants.CHATTER_POSTS_COUNTER_ID);
 			}
 		} catch (Exception e) {
-			Logger.saveSingleLog('Unexpected exception caught in FeedItemHandler. ' + e.getMessage() + '. ' + e.getStackTraceString());
+			Logger.saveSingleLog('Unexpected exception caught in FeedItemTriggerHandler. ' + e.getMessage() + '. ' + e.getStackTraceString());
 		}
 	}
 

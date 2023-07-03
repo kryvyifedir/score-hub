@@ -22,7 +22,7 @@ private class LeadTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterUpdate_201RecordsConverteed_userMeasurementsCreated(){
+	private static void onAfterUpdate_201RecordsConverted_userMeasurementsCreated(){
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement(Constants.CONVERTED_LEADS_COUNTER_ID);
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -69,5 +69,18 @@ private class LeadTriggerHandlerTest {
 		// Then
 		List<UserMeasurement__c> result = [SELECT Id, User__c, Measurement__c, Value__c FROM UserMeasurement__c];
 		System.assertEquals(0, result.size(), 'Zero UserMeasurement__c is expected to be created');
+	}
+
+	@IsTest
+	private static void onAfterUpdate_newMapIsNull_ExceptionIsExpected(){
+		// Given
+		// When
+		Test.startTest();
+		LeadTriggerHandler.onAfterUpdate(null, null);
+		Test.stopTest();
+
+		// Then
+		List<Log__c> result = [SELECT Id FROM Log__c];
+		System.assertEquals(1, result.size(), 'Error Log is expected to be created');
 	}
 }

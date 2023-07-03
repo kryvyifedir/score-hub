@@ -1,5 +1,5 @@
 @IsTest(isParallel=true)
-private class FeedItemHandlerTest {
+private class FeedItemTriggerHandlerTest {
 	@IsTest
 	private static void onAfterInsert_201RecordsInserted_userMeasurementsCreated(){
 		// Given
@@ -63,5 +63,18 @@ private class FeedItemHandlerTest {
 		// Then
 		List<UserMeasurement__c> result = [SELECT Id, User__c, Measurement__c, Value__c FROM UserMeasurement__c];
 		System.assertEquals(0, result.size(), 'Zero UserMeasurement__c is expected to be created');
+	}
+
+	@IsTest
+	private static void onAfterUpdate_newMapIsNull_exceptionIsCreated(){
+		// Given
+		// When
+		Test.startTest();
+		FeedItemTriggerHandler.onAfterUpdate(null, null);
+		Test.stopTest();
+
+		// Then
+		List<Log__c> result = [SELECT Id FROM Log__c];
+		System.assertEquals(1, result.size(), 'Error Log is expected to be created');
 	}
 }

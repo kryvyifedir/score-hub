@@ -80,4 +80,26 @@ public class TestDataFactory {
 		insert user;
 		return user;
 	}
+
+	public static Lead initLead(String name) {
+		Lead newLead = new Lead();
+		newLead.LastName = name;
+		newLead.Company = name + ' COMPANY';
+		return newLead;
+	}
+
+	public static Task initTask(String subject, String status) {
+		Task task = new Task();
+		task.Subject = subject;
+		task.Status = status;
+		return task;
+	}
+
+	public static FeedItem initFeedItem(String status) {
+		FeedItem post = new FeedItem();
+		post.ParentId = UserInfo.getUserId();
+		post.Status = status;
+		post.Body = 'Post body';
+		return post;
+	}
 }

@@ -36,7 +36,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Log__c</field>
+                <field>ErrorMessage__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>

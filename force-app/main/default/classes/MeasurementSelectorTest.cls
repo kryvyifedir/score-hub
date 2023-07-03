@@ -49,4 +49,51 @@ private class MeasurementSelectorTest {
 		System.assertNotEquals(null, result, 'Empty list is expected');
 		System.assertEquals(0, result.size(), 'Empty list is expected');
 	}
+
+	@IsTest
+	private static void getByUniqueIds_recordWithUniqueIdExists_recordsReturned(){
+		// Given
+		Measurement__c measurement1 = TestDataFactory.createMeasurement('Found');
+		Measurement__c measurement2 = TestDataFactory.createMeasurement('Not found');
+
+		// When 
+		Test.startTest();
+		Map<String, Measurement__c> result = MeasurementSelector.getByUniqueIds(new Set<String>{ 'Found' });
+		Test.stopTest();
+
+		// Then
+		System.assertEquals(1, result.size(), 'Record is expected to be found');
+		System.assert(result.containsKey('Found'), 'Map is expected to have a specific measurement');
+		System.assert(!result.containsKey('Not found'), 'Map is not expected to have a specific measurement');
+	}
+
+	@IsTest
+	private static void getByUniqueIds_emptyIdsSet_emptyListReturned(){
+		// Given
+		Set<String> uniqueIds = new Set<String>();
+
+		// When 
+		Test.startTest();
+		Map<String, Measurement__c> result = MeasurementSelector.getByUniqueIds(uniqueIds);
+		Test.stopTest();
+
+		// Then
+		System.assertNotEquals(null, result, 'Empty map is expected');
+		System.assertEquals(0, result.size(), 'Empty map is expected');
+	}
+
+	@IsTest
+	private static void getByUniqueIds_noRecordsFound_emptyListReturned(){
+		// Given
+		Set<String> uniqueIds = new Set<String>{'Non existing id'};
+
+		// When 
+		Test.startTest();
+		Map<String, Measurement__c> result = MeasurementSelector.getByUniqueIds(uniqueIds);
+		Test.stopTest();
+
+		// Then
+		System.assertNotEquals(null, result, 'Empty list is expected');
+		System.assertEquals(0, result.size(), 'Empty list is expected');
+	}
 }

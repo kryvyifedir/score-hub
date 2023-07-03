@@ -5,6 +5,7 @@
     <label>GameForce Admin</label>
     <permissionSets>GameForceApexClasses</permissionSets>
     <permissionSets>GameForceModifyAchievements</permissionSets>
+    <permissionSets>GameForceModifyLogs</permissionSets>
     <permissionSets>GameForceModifyMeasurements</permissionSets>
     <permissionSets>GameForcePlatformEvents</permissionSets>
     <status>Updated</status>

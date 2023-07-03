@@ -10,7 +10,7 @@ public with sharing class Logger {
 			return;
 		}
 
-		gameForceLog.Log__c = log;
+		gameForceLog.ErrorMessage__c = log;
 		logs.add(gameForceLog);
 	}
 

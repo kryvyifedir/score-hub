@@ -94,4 +94,12 @@ public class TestDataFactory {
 		task.Status = status;
 		return task;
 	}
+
+	public static FeedItem initFeedItem(String status) {
+		FeedItem post = new FeedItem();
+		post.ParentId = UserInfo.getUserId();
+		post.Status = status;
+		post.Body = 'Post body';
+		return post;
+	}
 }

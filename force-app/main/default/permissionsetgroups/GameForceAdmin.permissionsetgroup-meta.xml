@@ -4,6 +4,9 @@
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce Admin</label>
     <permissionSets>GameForceApexClasses</permissionSets>
+    <permissionSets>GameForceAppAdminTabs</permissionSets>
+    <permissionSets>GameForceAppLeaderboardsTab</permissionSets>
+    <permissionSets>GameForceAppPermisssion</permissionSets>
     <permissionSets>GameForceModifyAchievements</permissionSets>
     <permissionSets>GameForceModifyLogs</permissionSets>
     <permissionSets>GameForceModifyMeasurements</permissionSets>

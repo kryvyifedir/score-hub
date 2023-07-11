@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants access to admin tabs in GameForce App</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>GameForce App Admin Tabs</label>
+    <tabSettings>
+        <tab>Achievement__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Measurement__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>

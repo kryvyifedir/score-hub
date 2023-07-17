@@ -32,9 +32,9 @@ jobs:
       - name: Push source to Scratch Org
         run: sf project deploy start
       - name: Run unit tests
-        run: sf apex run test -wait 30
-      # - name: Delete Scratch Org
-      #   run: sf org delete scratch --target-org DevHub
+        run: sf apex run test --wait 30 --test-level RunAllTestsInOrg
+      - name: Delete Scratch Org
+        run: sf org delete scratch --target-org DevHub
 
       
 

@@ -5,15 +5,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get CICD secrets
-        env:
-          SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}
-          SF_CICD_USERNAME: ${{ secrets.SF_CICD_USERNAME }}
-          SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+      # - name: Get CICD secrets
+      #   env:
+      #     SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}
+      #     SF_CICD_USERNAME: ${{ secrets.SF_CICD_USERNAME }}
+      #     SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
           
       - name: CHECK STUFF
         run: | 
-          echo {{SF_CICD_SERVERKEY}}
+          echo ${{ secrets.SF_CICD_SERVERKEY }}
           
 
       # Checkout the Source code from the latest commit

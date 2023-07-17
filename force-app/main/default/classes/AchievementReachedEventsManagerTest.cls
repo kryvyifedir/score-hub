@@ -45,6 +45,11 @@ private class AchievementReachedEventsManagerTest {
 	}
 
 	@IsTest
+	private static void test_failedTest() {
+		System.assertEquals(false, true, 'failed');
+	}
+
+	@IsTest
 	private static void fireEvent_statsProgressIsLessThenGoal_eventNotFired() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');

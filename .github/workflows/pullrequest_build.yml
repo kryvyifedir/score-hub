@@ -20,9 +20,8 @@ jobs:
           npm install
       - name: Install the SFDX CLI
         run: |
-          npm install sfdx-cli --global
-          sfdx force --help
-          sf --help
+          npm install @salesforce/cli --global
+          sf version
       - name: Create server key file
         run: |
           touch server.key

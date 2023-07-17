@@ -25,10 +25,6 @@ jobs:
       - name: Create server key file
         run: |
           echo ${{ secrets.SF_CICD_SERVERKEY }} > server.key
-          dir
-          echo "$PATH"
-          pwd
-          echo $pwd
       - name: Authorize DevHub
         run: sf org login jwt --json --alias devhub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
       

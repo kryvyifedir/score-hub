@@ -22,6 +22,7 @@ jobs:
         run: |
           npm install sfdx-cli --global
           sfdx force --help
+          sf --help
       - name: Create server key file
         run: |
           touch server.key

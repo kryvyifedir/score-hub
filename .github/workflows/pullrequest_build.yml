@@ -21,14 +21,20 @@ jobs:
       - name: Install the SFDX CLI
         run: |
           npm install @salesforce/cli --global
-          sf version
       - name: Create server key file
         run: |
           touch server.key
           echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
-          cat server.key
-          dir
       - name: Authorize DevHub
-        run: sf org login jwt --json --alias devhub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
+      - name: Create a Scratch Org
+        run: sf org create scratch --target-dev-hub DevHub --definition-file config/project-scratch-def.json --set-default --duration-days 1
+      - name: Push source to Scratch Org
+        run: sf project deploy start
+      - name: Run unit tests
+        run: sf apex run test
+      # - name: Delete Scratch Org
+      #   run: sf org delete scratch --target-org DevHub
+
       
 

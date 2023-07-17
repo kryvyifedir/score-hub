@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: CHECK STUFF
         run: | 
-          echo "$SF_CICD_USERNAME"
-          echo "$SF_CLIENT_SECRET"
+          echo "${{ secrets.SF_CICD_USERNAME }}" > test.txt
+          echo test.txt 
           
 
       # Checkout the Source code from the latest commit

@@ -13,7 +13,6 @@ jobs:
     steps:
       - name: CHECK STUFF
         run: | 
-          echo "$SF_CICD_SERVERKEY"
           echo "$SF_CICD_USERNAME"
           echo "$SF_CLIENT_SECRET"
           

@@ -14,7 +14,7 @@ jobs:
       - name: CHECK STUFF
         run: | 
           echo "${{ secrets.SF_CICD_USERNAME }}" > test.txt
-          echo test.txt 
+          cat test.txt 
           
 
       # Checkout the Source code from the latest commit

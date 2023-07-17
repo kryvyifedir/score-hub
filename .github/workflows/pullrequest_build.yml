@@ -1,0 +1,35 @@
+name: GitHub Actions Demo
+run-name: Pull Request checks
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get CICD secrets
+        env:
+          SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}
+          SF_CICD_USERNAME: ${{ secrets.SF_CICD_USERNAME }}
+          SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+          
+      - name: CHECK STUFF
+        run: | 
+          echo {{SF_CICD_SERVERKEY}}
+          
+
+      # Checkout the Source code from the latest commit
+     # - uses: actions/checkout@v3
+     #   with:
+     #     fetch-depth: 0
+      # Install NPM
+     # - name: Install NPM
+     #   run: |
+     #     npm install
+      # Install the SFDX CLI using NPM command
+     # - name: Install the SFDX CLI
+     #   run: |
+     #     npm install sfdx-cli --global
+     #     sfdx force --help
+     # - name: Create server key file
+     #   run: |
+     #     echo {{ SF_CICD_SERVERKEY }} > your/file.txt
+

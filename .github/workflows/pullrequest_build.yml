@@ -11,26 +11,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: CHECK STUFF
-        run: | 
-          echo "${{ secrets.SF_CICD_USERNAME }}" > test.txt
-          cat test.txt 
-          
-
       # Checkout the Source code from the latest commit
-     # - uses: actions/checkout@v3
-     #   with:
-     #     fetch-depth: 0
-      # Install NPM
-     # - name: Install NPM
-     #   run: |
-     #     npm install
-      # Install the SFDX CLI using NPM command
-     # - name: Install the SFDX CLI
-     #   run: |
-     #     npm install sfdx-cli --global
-     #     sfdx force --help
-     # - name: Create server key file
-     #   run: |
-     #     echo {{ SF_CICD_SERVERKEY }} > your/file.txt
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install NPM
+        run: |
+          npm install
+      - name: Install the SFDX CLI
+        run: |
+          npm install sfdx-cli --global
+          sfdx force --help
+      - name: Create server key file
+        run: |
+          echo ${{ secrets.SF_CICD_SERVERKEY }} > /server.key
+          dir
+          echo "$PATH"
+          pwd
+          echo $pwd
+      - name: Authorize DevHub
+        run: sf org login jwt --json --alias devhub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
+      
 

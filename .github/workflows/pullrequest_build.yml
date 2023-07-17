@@ -1,19 +1,21 @@
 name: GitHub Actions Demo
 run-name: Pull Request checks
 on: [push, pull_request]
+
+env:
+  SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}
+  SF_CICD_USERNAME: ${{ secrets.SF_CICD_USERNAME }}
+  SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Get CICD secrets
-      #   env:
-      #     SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}
-      #     SF_CICD_USERNAME: ${{ secrets.SF_CICD_USERNAME }}
-      #     SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
-          
       - name: CHECK STUFF
         run: | 
-          echo ${{ secrets.SF_CICD_SERVERKEY }}
+          echo "$SF_CICD_SERVERKEY"
+          echo "$SF_CICD_USERNAME"
+          echo "$SF_CLIENT_SECRET"
           
 
       # Checkout the Source code from the latest commit

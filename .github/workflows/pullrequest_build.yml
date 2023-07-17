@@ -1,6 +1,6 @@
-name: GitHub Actions Demo
-run-name: Pull Request checks
-on: [push, pull_request]
+name: PR Checks
+run-name: Checks running whenever new PR is created
+on: [pull_request]
 
 env:
   SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}

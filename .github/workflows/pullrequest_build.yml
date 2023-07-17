@@ -24,7 +24,7 @@ jobs:
           sfdx force --help
       - name: Create server key file
         run: |
-          echo ${{ secrets.SF_CICD_SERVERKEY }} > /server.key
+          echo ${{ secrets.SF_CICD_SERVERKEY }} > server.key
           dir
           echo "$PATH"
           pwd

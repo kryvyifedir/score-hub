@@ -31,7 +31,7 @@ jobs:
       #   run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
       - name: List all orgs
         run: |
-          sf org list --json --all --skip-connection-status | jq . > sfOrgList.json
+          sfds force:org:list --json --all --skipconnectionstatus | jq . > sfOrgList.json
           cat sfOrgList.json
           jq ".result.scratchOrgs | .[] | select(.alias == "build_${{ github.event.pull_request.number }}")'" sfOrgList.json > scratch.json
           cat scratch.json

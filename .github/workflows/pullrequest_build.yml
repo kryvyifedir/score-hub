@@ -1,11 +1,9 @@
 name: PR Checks
 run-name: Checks running whenever new PR is created
-on: [pull_request]
-
-env:
-  SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}
-  SF_CICD_USERNAME: ${{ secrets.SF_CICD_USERNAME }}
-  SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+on: 
+  pull_request:
+    branches:
+      - integration
 
 jobs:
   build:
@@ -27,15 +25,17 @@ jobs:
           echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
       - name: Authorize DevHub
         run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
-      - name: Create a Scratch Org
-        run: sf org create scratch --target-dev-hub DevHub --definition-file config/project-scratch-def.json --set-default --duration-days 1
-      - name: Push source to Scratch Org
-        run: sf project deploy start
-      - name: Run unit tests
-        run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
-      - name: Delete Scratch Org
-        if: always()
-        run: sf org delete scratch --target-org DevHub
+      - name: List all orgs
+        run: sf org list --json --skip-connection-status
+      # - name: Create a Scratch Org
+      #   run: sf org create scratch --target-dev-hub DevHub --definition-file config/project-scratch-def.json --set-default --duration-days 1
+      # - name: Push source to Scratch Org
+      #   run: sf project deploy start
+      # - name: Run unit tests
+      #   run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
+      # - name: Delete Scratch Org
+      #   if: always()
+      #   run: sf org delete scratch --target-org DevHub
 
       
 

@@ -40,9 +40,9 @@ jobs:
         run: sf project deploy start
       - name: Run unit tests
         run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
-      - name: Delete Scratch Org
-        if: always()
-        run: sf org delete scratch --target-org build_${{ github.event.pull_request.number }} --no-prompt
+      # - name: Delete Scratch Org
+      #   if: always()
+      #   run: sf org delete scratch --target-org build_${{ github.event.pull_request.number }} --no-prompt
 
       
 

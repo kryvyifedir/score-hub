@@ -32,7 +32,7 @@ jobs:
       - name: List all orgs
         run: |
           sf org list --json --skip-connection-status | jq '.result.scratchOrgs[] | select(.orgName == "${{ github.event.pull_request.number }}")' > scratch.json
-          jd . scratch.json
+          jq . scratch.json
         # - name: Push source to Scratch Org
       #   run: sf project deploy start
       # - name: Run unit tests

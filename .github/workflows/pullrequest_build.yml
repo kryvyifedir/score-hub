@@ -27,21 +27,22 @@ jobs:
           echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
       - name: Authorize DevHub
         run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
-      # - name: Create a Scratch Org
-      #   run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
-      - name: List all orgs
-        run: |
-          sfdx force:org:list --json --all --skipconnectionstatus | jq . > sfOrgList.json
-          cat sfOrgList.json
-          jq ".result.scratchOrgs | .[] | select(.alias == "build_${{ github.event.pull_request.number }}")'" sfOrgList.json > scratch.json
-          cat scratch.json
-        # - name: Push source to Scratch Org
-      #   run: sf project deploy start
-      # - name: Run unit tests
-      #   run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
-      # - name: Delete Scratch Org
-      #   if: always()
-      #   run: sf org delete scratch --target-org DevHub
+      - name: Create a Scratch Org
+        run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
+      # ONLY CREATE SCRATCH ORGS WHEN THEY DONT EXIST
+      # - name: List all orgs
+      #   run: |
+      #     sf org list --json --all --skip-connection-status | jq . > sfOrgList.json
+      #     cat sfOrgList.json
+      #     jq ".result.scratchOrgs | .[] | select(.alias == "build_${{ github.event.pull_request.number }}")'" sfOrgList.json > scratch.json
+      #     cat scratch.json
+      - name: Push source to Scratch Org
+        run: sf project deploy start
+      - name: Run unit tests
+        run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
+      - name: Delete Scratch Org
+        if: always()
+        run: sf org delete scratch --target-org DevHub
 
       
 

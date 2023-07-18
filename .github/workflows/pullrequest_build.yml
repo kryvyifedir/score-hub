@@ -31,7 +31,7 @@ jobs:
       #   run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
       - name: List all orgs
         run: |
-          sf org list --json --skip-connection-status | jq '.result.scratchOrgs[]' > scratch.json
+          sf org list --json --skip-connection-status | jq . > scratch.json
           cat scratch.json
         # - name: Push source to Scratch Org
       #   run: sf project deploy start

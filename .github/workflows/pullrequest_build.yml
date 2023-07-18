@@ -17,7 +17,7 @@ jobs:
         run: |
           npm install
       - name: Install JQ
-        run: apt-get install jq
+        run: sudo apt-get install jq
       - name: Install the SFDX CLI
         run: |
           npm install @salesforce/cli --global
@@ -31,7 +31,9 @@ jobs:
       #   run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
       - name: List all orgs
         run: |
-          accessToken=$(sf org list --json --skip-connection-status | jq '.result.scratchOrgs[] | select(.orgName == "51")')
+          scratch=$(sf org list --json --skip-connection-status | jq '.result.scratchOrgs[] | select(.orgName == "${{ github.event.pull_request.number }}")')
+          echo scratch
+          echo scratch.orgName
         # - name: Push source to Scratch Org
       #   run: sf project deploy start
       # - name: Run unit tests

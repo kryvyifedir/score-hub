@@ -3,7 +3,7 @@ run-name: Checks running whenever new PR is created
 on: 
   pull_request:
     branches:
-      - integration
+      - dev
 
 jobs:
   build:

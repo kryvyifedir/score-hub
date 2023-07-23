@@ -1,35 +1,51 @@
-name: GitHub Actions Demo
-run-name: Pull Request checks
-on: [push, pull_request]
+name: PR Checks
+run-name: Checks running whenever new PR is created
+on: 
+  pull_request:
+    branches:
+      - dev
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get CICD secrets
-        env:
-          SF_CICD_SERVERKEY: ${{ secrets.SF_CICD_SERVERKEY }}
-          SF_CICD_USERNAME: ${{ secrets.SF_CICD_USERNAME }}
-          SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
-          
-      - name: CHECK STUFF
-        run: | 
-          echo {{SF_CICD_SERVERKEY}}
-          
-
       # Checkout the Source code from the latest commit
-     # - uses: actions/checkout@v3
-     #   with:
-     #     fetch-depth: 0
-      # Install NPM
-     # - name: Install NPM
-     #   run: |
-     #     npm install
-      # Install the SFDX CLI using NPM command
-     # - name: Install the SFDX CLI
-     #   run: |
-     #     npm install sfdx-cli --global
-     #     sfdx force --help
-     # - name: Create server key file
-     #   run: |
-     #     echo {{ SF_CICD_SERVERKEY }} > your/file.txt
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Installing NPM so that SFDX can be installed
+      - name: Installing NPM
+        run: |
+          npm install
+      
+      # Installing SFDX CLI
+      - name: Installing SFDX CLI
+        run: |
+          npm install @salesforce/cli --global
+
+      # Creating new .key for .crt file stored in the Connected App
+      - name: Creating .key file
+        run: |
+          touch server.key
+          echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
+      
+      # Authorizing to DevHub
+      - name: Authorizing the DevHub
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
+      
+      # Creating a Scratch Org using the pull request number
+      - name: Creating a Scratch Org
+        run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
+      
+      # Pushing source to the Scratch Org
+      - name: Pushing source and metadata to the Scratch Org
+        run: sf project deploy start
+
+      # Executing all unit tests
+      - name: Run unit tests
+        run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
+
+      
 

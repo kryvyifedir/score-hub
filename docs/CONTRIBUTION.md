@@ -15,7 +15,7 @@ To start contributing, follow these steps:
 1. Create an issue explaining your idea
 2. Fork the repository to your GitHub account.
 3. Clone the forked repository to your local machine.
-4. Create a new branch for your contributions.
+4. Create a new branch for your contributions (use dev branch as origin).
 5. Deploy the code to your own Scratch org
 6. Assign `GameForce Admin` or `GameForce User` permission set group to your user
 7. Run GameForceConfig.config() static method to generate basic Measurements and Achievements
@@ -23,4 +23,4 @@ To start contributing, follow these steps:
 9. Do necessary changes and test them on your Scratch Org 
 10. Commit your changes with a clear and descriptive commit message.
 11. Push your changes to your forked repository.
-12. Submit a pull request (PR) to the main repository. Use Closes keywoard to mark the issue that you've created in the step 1
+12. Submit a pull request (PR) to the dev repository. Use Closes keywoard to mark the issue that you've created in the step 1

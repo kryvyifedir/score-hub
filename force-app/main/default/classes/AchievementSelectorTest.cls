@@ -99,4 +99,21 @@ private class AchievementSelectorTest {
 		System.assert(result.isEmpty(), 'result is expected to be empty');
 		
 	}
+
+	@IsTest
+	private static void getTotalCount_recordsExists_countReturned(){
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement1 = TestDataFactory.createAchievement('Ach1', measurement.Id);
+		Achievement__c achievement2 = TestDataFactory.createAchievement('Ach2', measurement.Id);
+		Achievement__c achievement3 = TestDataFactory.createAchievement('Ach3', measurement.Id);
+
+		// When 
+		Test.startTest();
+		Integer result = AchievementSelector.getTotalCount();
+		Test.stopTest();
+
+		// Then
+		System.assertEquals(3, result, ' 3 records are expected to be returned');
+	}
 }

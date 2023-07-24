@@ -1,5 +1,5 @@
 public with sharing class UserSelector {
-	private static final String FIELDS_LIST = 'Id';
+	private static final String FIELDS_LIST = 'Id, FullPhotoUrl, Name';
 
 	public static List<User> getByIds(Set<Id> ids) {
 		if (ids.isEmpty()) {

@@ -1,0 +1,19 @@
+<template>
+  <div class="slds-page-header">
+    <header class="slds-media slds-media_center slds-has-flexi-truncate slds-var-m-bottom_small">
+      <div class="slds-media__figure">
+        <span class="slds-icon_container slds-icon-standard-account" title="account">
+          <lightning-icon class="slds-col slds-grow-none" icon-name="standard:avatar"></lightning-icon>
+        </span>
+      </div>
+      <div class="slds-media__body">
+        <h2 class="slds-card__header-title">
+          <a class="slds-card__header-link slds-truncate" title={labels.YourAchievements}>
+            <span>{labels.YourAchievements}</span>
+          </a>
+        </h2>
+      </div>
+    </header>
+    <c-user-card user-info={userInfo} total-achievements-count={totalAchievementsCount}></c-user-card>
+  </div>
+</template>

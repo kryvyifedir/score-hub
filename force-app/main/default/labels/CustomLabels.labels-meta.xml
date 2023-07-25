@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Loading</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Loading</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>NumberOfAchievements</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Number of Achievements</shortDescription>
+        <value>Number of Achievements:</value>
+    </labels>
+    <labels>
+        <fullName>PersonalScore</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Personal Score</shortDescription>
+        <value>Personal Score:</value>
+    </labels>
+    <labels>
+        <fullName>YourAchievements</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Your Achievements</shortDescription>
+        <value>Your Achievements</value>
+    </labels>
+    <labels>
+        <fullName>OutOf</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Out of</shortDescription>
+        <value>out of</value>
+    </labels>
+    <labels>
+        <fullName>AvatarAltText</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Avatar Alt Text</shortDescription>
+        <value>User picture</value>
+    </labels>
+</CustomLabels>

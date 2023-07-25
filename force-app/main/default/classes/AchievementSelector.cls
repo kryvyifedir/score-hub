@@ -41,4 +41,8 @@ public with sharing class AchievementSelector {
 
 		return reachedAchievementByAchievementIdsMap;
 	}
+
+	public static Integer getTotalCount() {
+		return Database.countQuery('SELECT COUNT() FROM Achievement__c', System.AccessLevel.SYSTEM_MODE);
+	}
 }

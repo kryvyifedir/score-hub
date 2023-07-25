@@ -1,0 +1,31 @@
+<template>
+  <div class="slds-card slds-box">
+    <div class="slds-grid slds-grid_vertical-align-center">
+      <template lwc:if={userInfo}>
+        <div class="slds-col slds-grow-none">
+          <lightning-avatar variant="circle" fallback-icon-name="standard:person_account" size="large"
+            src={userInfo.fullPhotoUrl} alternative-text={labels.AvatarAltTextLabel}></lightning-avatar>
+        </div>
+        <div class="slds-col slds-var-p-horizontal_small slds-truncate">
+          <!-- Name -->
+          <lightning-formatted-text class="slds-text-heading_medium" value={userInfo.name} title={userInfo.name}></lightning-formatted-text>
+          <!-- Score -->
+          <c-card-line icon="utility:favorite" label={labels.PersonalScoreLabel} value={getScore}></c-card-line>
+          <!-- Progress -->
+          <template lwc:if={getNumberOfAchievementsPercentage}>
+            <c-card-line icon="utility:setup_assistant_guide" label={labels.NumberOfAchievementsLabel} value={getNumberOfAchievements}></c-card-line>
+            <lightning-progress-bar value={getNumberOfAchievementsPercentage} size="x-small"></lightning-progress-bar>
+          </template>
+          <template lwc:else>
+            <c-card-line icon="utility:setup_assistant_guide" label={labels.NumberOfAchievementsLabel} value={getNumberOfAchievements}></c-card-line>
+          </template>
+        </div>
+      </template>
+      <template lwc:else>
+        <div class="slds-col slds-spinner_container" style="height:6rem;position:relative;">
+          <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

@@ -10,6 +10,7 @@
     <permissionSets>GameForceModifyAchievements</permissionSets>
     <permissionSets>GameForceModifyLogs</permissionSets>
     <permissionSets>GameForceModifyMeasurements</permissionSets>
+    <permissionSets>GameForceModifyReachedAchievements</permissionSets>
     <permissionSets>GameForcePlatformEvents</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

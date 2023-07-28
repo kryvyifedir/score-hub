@@ -2,13 +2,8 @@ import { LightningElement, wire, track } from 'lwc';
 // APEX Controller methods
 import getTotalNumberOfAchievements from '@salesforce/apex/LeaderboardController.getTotalNumberOfAchievements';
 import getCurrentUserInfo from '@salesforce/apex/LeaderboardController.getCurrentUserInfo';
-//Custom Labels
-import YourAchievementsLabel from '@salesforce/label/c.YourAchievements';
 
 export default class UserView extends LightningElement {
-    labels = {
-        YourAchievementsLabel
-    };
 
     // Getting total number of achievements
     @wire(getTotalNumberOfAchievements)

@@ -1,18 +1,14 @@
-public with sharing class ReachedAchievementSelector {
-	private static final String FIELDS_LIST = 'Id';
-
-	public static Map<Id, AggregateResult> getGroupedScoreAndCountByUser(Set<Id> ids) {
-		Map<Id, AggregateResult> result = new Map<Id, AggregateResult>();
-		if (ids.isEmpty()) {
-			return result;
-		}
-
-		Map<String, Object> binds = new Map<String, Object> { 'ids' => ids };
-		List<AggregateResult> aggregateResults = Database.queryWithBinds('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c WHERE User__c IN :ids GROUP BY User__c ', binds, System.AccessLevel.SYSTEM_MODE);
-		for (AggregateResult aggregateResult : aggregateResults) {
-			result.put((Id) aggregateResult.get('User__c'), aggregateResult);
-		}
+public with sharing class ReachedAchievementSelector extends BaseSelector {
 	
-		return result;
+	public static ReachedAchievementSelector getInstance() {
+		return new ReachedAchievementSelector();
+	}
+
+	public override String sObjectApiName() {
+		return 'ReachedAchievement__c';
+	}
+
+	public override Set<String> fieldApiNames() {
+		return new Set<String> {'Id', 'Key__c', 'User__c', 'Achievement__c', 'Score__c'};
 	}
 }

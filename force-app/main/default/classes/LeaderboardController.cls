@@ -1,10 +1,9 @@
 public with sharing class LeaderboardController {
-	
 	@AuraEnabled(cacheable=true)
 	public static Map<String, Object> getTotalNumberOfAchievements() {
 		Integer result;
 		try {
-			result = AchievementSelector.getTotalCount();
+			result = AchievementSelector.getInstance().getAll().size();
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in UserAchievementsController. ' + e.getMessage() + '. ' + e.getStackTraceString());
 			return ControllerResponse.error('Unable to get total achievements count');
@@ -30,8 +29,8 @@ public with sharing class LeaderboardController {
 	private static Map<Id, UserInfoWrapper> getUserInfoById(Set<Id> userIds) {
 		Map<Id, UserInfoWrapper> result = new Map<Id, UserInfoWrapper>();
 
-		List<User> users = UserSelector.getByIds(userIds);
-		Map<Id, AggregateResult> reachedAchievementsData = ReachedAchievementSelector.getGroupedScoreAndCountByUser(userIds);
+		List<User> users = UserSelector.getInstance().getByIds(userIds);
+		Map<Id, AggregateResult> reachedAchievementsData = UserRatingsHelper.getTotalScoreAndCountByUser(userIds);
 		for (User user : users) {
 			AggregateResult userAchievementsData = reachedAchievementsData.get(user.Id);
 			UserInfoWrapper userInfoWrapper = new UserInfoWrapper();

@@ -22,7 +22,7 @@ private class FeedItemTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterUpdate_201RecordsConverteed_userMeasurementsCreated(){
+	private static void onAfterUpdate_201RecordsConverted_userMeasurementsCreated(){
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement(Constants.CHATTER_POSTS_COUNTER_ID);
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);

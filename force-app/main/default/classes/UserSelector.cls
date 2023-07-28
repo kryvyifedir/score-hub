@@ -1,12 +1,14 @@
-public with sharing class UserSelector {
-	private static final String FIELDS_LIST = 'Id, FullPhotoUrl, Name';
+public with sharing class UserSelector extends BaseSelector {
+	
+	public static UserSelector getInstance() {
+		return new UserSelector();
+	}
 
-	public static List<User> getByIds(Set<Id> ids) {
-		if (ids.isEmpty()) {
-			return new List<User>();
-		}
+	public override String sObjectApiName() {
+		return 'User';
+	}
 
-		Map<String, Object> binds = new Map<String, Object> { 'ids' => ids };
-		return Database.queryWithBinds('SELECT ' + FIELDS_LIST + ' FROM User WHERE Id IN :ids', binds, System.AccessLevel.SYSTEM_MODE);
+	public override Set<String> fieldApiNames() {
+		return new Set<String> {'Id', 'FullPhotoUrl', 'Name'};
 	}
 }

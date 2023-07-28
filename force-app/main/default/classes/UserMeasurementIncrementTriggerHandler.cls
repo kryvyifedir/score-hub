@@ -14,16 +14,20 @@ public with sharing class UserMeasurementIncrementTriggerHandler {
 	private void initExistingSObjectMaps(List<UserMeasurementIncrement__e> events) {
 		Set<Id> userIdsFromEvents = new Set<Id>();
 		Set<Id> measurementIdsFromEvents = new Set<Id>();
-		Map<Id, Id> measurementIdsByUserIdsMap = new Map<Id, Id>();
+		Set<String> userMeasurementKeys = new Set<String>();
 		for (UserMeasurementIncrement__e event : events) {
 			userIdsFromEvents.add(event.UserId__c);
 			measurementIdsFromEvents.add(event.MeasurementId__c);
-			measurementIdsByUserIdsMap.put(event.UserId__c, event.MeasurementId__c);
+			userMeasurementKeys.add(UniqueKeyFormatter.generateUniqueKey(event.UserId__c, event.MeasurementId__c));
 		}
 
-		existingUsersMap = new Map<Id, User> (UserSelector.getByIds(userIdsFromEvents));
-		existingMeasurementsMap = new Map<Id, Measurement__c> (MeasurementSelector.getByIds(measurementIdsFromEvents));
-		existingUserMeasurementsMap = UserMeasurementSelector.getByKeys(measurementIdsByUserIdsMap);
+		existingUsersMap = new Map<Id, User> ((List<User>) UserSelector.getInstance().getByIds(userIdsFromEvents));
+		existingMeasurementsMap = new Map<Id, Measurement__c> ((List<Measurement__c>) MeasurementSelector.getInstance().getByIds(measurementIdsFromEvents));
+		
+		List<UserMeasurement__c> userMeasurements = (List<UserMeasurement__c>) UserMeasurementSelector.getInstance().getByFieldValue('Key__c', 'IN', userMeasurementKeys);
+		for (UserMeasurement__c userMeasurement : userMeasurements) {
+			existingUserMeasurementsMap.put(userMeasurement.Key__c, userMeasurement);
+		}
 	}
 
 	public void processEvents() {
@@ -33,7 +37,7 @@ public with sharing class UserMeasurementIncrementTriggerHandler {
 					continue;
 				}
 
-				String upsertMapKey = event.UserId__c + '-' + event.MeasurementId__c;
+				String upsertMapKey = UniqueKeyFormatter.generateUniqueKey(event.UserId__c, event.MeasurementId__c);
 				if (measurementsToUpsert.containsKey(upsertMapKey)) {
 					measurementsToUpsert.get(upsertMapKey).Value__c += event.Increment__c;
 				} else if (existingUserMeasurementsMap.containsKey(upsertMapKey)) {

@@ -44,10 +44,38 @@ public with sharing class LeaderboardController {
 		}
 		return result;
 	}
+
+	// private static Map<Id, List<AchievementWrapper>> getAchievementsPerUser(Set<Id> userIds) {
+	// 	Map<Id, List<AchievementWrapper>> result = new Map<Id, List<AchievementsWrapper>>();
+	// 	List<Achievement__c> allAchievements = AchievementSelector.getAll();
+	// 	Map<Id, Set<Id>> reachedAchievementIdsByUserId = ReachedAchievementSelector.getReachedAchievementIdsIdByUserIds(userIds);
+
+	// 	for (Id userId : userIds) {
+	// 		if (!result.containsKey(userId)) {
+	// 			result.put(userId, new List<AchievementsWrapper>());
+	// 		}
+	// 		List<AchievementsWrapper> userAchievements = result.get(userId);
+
+	// 		for (Achievement__c achievement : allAchievements) {
+	// 			AchievementWrapper achievementWrapper = new AchievementWrapper();
+	// 			achievementWrapper.id = achievement.Id;
+	// 			achievementWrapper.uiTitle = achievement.UITitle__c;
+	// 			achievementWrapper.uiDescription = achievement.UIDescription__c;
+	// 			if (reachedAchievementIdsByUserId.containsKey(userId) && reachedAchievementIdsByUserId.get(userId).contains(achievement.Id)) {
+	// 				achievementWrapper.achieved = true;
+	// 			} else {
+	// 				achievementWrapper.false = true;
+	// 			}
+	// 			userAchievements.add(achievementWrapper);
+	// 		}
+	// 	}
+
+	// 	return result;
+	// }
 	
 	public class UserInfoWrapper {
 		@AuraEnabled
-		public Id Id { get; set; }
+		public Id id { get; set; }
 		@AuraEnabled
 		public String name { get; set; }
 		@AuraEnabled
@@ -56,5 +84,16 @@ public with sharing class LeaderboardController {
 		public Decimal numberOfAchievements { get; set; }
 		@AuraEnabled
 		public Decimal totalScore { get; set; }
+	}
+
+	public class AchievementWrapper {
+		@AuraEnabled
+		public Id id { get; set; }
+		@AuraEnabled
+		public String uiTitle { get; set; }
+		@AuraEnabled
+		public String uiDescription { get; set; }
+		@AuraEnabled
+		public Boolean achieved { get; set; }
 	}
 }

@@ -2,12 +2,12 @@ public with sharing class AchievementReachedEventsManager {
 
 	Map<Id, UserMeasurement__c> userMeasurementsByIdMap = new Map<Id, UserMeasurement__c>();
 	Map<Id, List<Achievement__c>> achievementByMeasurementIdMap = new Map<Id, List<Achievement__c>>();
-	Map<Id, Map<String, ReachedAchievement__c>> reachedAchievementsByAchievementIdMap = new Map<Id, Map<String, ReachedAchievement__c>>();
+	Map<String, ReachedAchievement__c> existingReachedAchievementsByKey = new Map<String, ReachedAchievement__c>();
 
 	public AchievementReachedEventsManager(Map<Id, UserMeasurement__c> userMeasurementsByIdMap) {
 		this.userMeasurementsByIdMap = userMeasurementsByIdMap;
 		this.populateAchievementsByMeasurementIdMap();
-		this.populateReachedAchievementsByAchievementIdMap();
+		this.populateExistingReachedAchievementsByKey();
 	}
 
 	public List<Database.SaveResult> fireEvents() {
@@ -40,25 +40,25 @@ public with sharing class AchievementReachedEventsManager {
 			measurementIds.add(userMeasurement.Measurement__c);
 		}
 
-		List<Measurement__c> measurements = MeasurementSelector.getByIds(measurementIds);
-		for (Measurement__c measurement : measurements) {
-			List<Achievement__c> achievements = measurement.Achievements__r;
-			if (achievements != null && !achievements.isEmpty()) {
-				achievementByMeasurementIdMap.put(measurement.Id, achievements);
+		List<Achievement__c> achievements = AchievementSelector.getInstance().getByFieldValue('Measurement__c', 'IN', measurementIds);
+		for (Achievement__c achievement : achievements) {
+			if (!achievementByMeasurementIdMap.containsKey(achievement.Measurement__c)) {
+				achievementByMeasurementIdMap.put(achievement.Measurement__c, new List<Achievement__c>());
 			}
+			achievementByMeasurementIdMap.get(achievement.Measurement__c).add(achievement);
 		}
 	}
 
-	private void populateReachedAchievementsByAchievementIdMap() {
-		Set<Id> achievementIds = new Set<Id>();
-		for (Id key : achievementByMeasurementIdMap.keySet()) {
-			List<Achievement__c> achievements = achievementByMeasurementIdMap.get(key);
-			for (Achievement__c achievement : achievements) {
-				achievementIds.add(achievement.Id);
-			}
+	private void populateExistingReachedAchievementsByKey() {
+		Set<Id> userIds = new Set<Id>();
+		for(UserMeasurement__c userMeasurement : userMeasurementsByIdMap.values()) {
+			userIds.add(userMeasurement.User__c);
 		}
-
-		reachedAchievementsByAchievementIdMap = AchievementSelector.getReachedAchievementsByAchievementId(achievementIds);
+		
+		List<ReachedAchievement__c> reachedAchievements = ReachedAchievementSelector.getInstance().getByFieldValue('User__c', 'IN', userIds);
+		for (ReachedAchievement__c reachedAchievement : reachedAchievements) {
+			existingReachedAchievementsByKey.put(reachedAchievement.Key__c, reachedAchievement);
+		}
 	}
 	
 	private Boolean validate() {
@@ -73,9 +73,9 @@ public with sharing class AchievementReachedEventsManager {
 
 	private Boolean achievementReachedExists(Id userId, Id achievementId) {
 		Boolean result = false;
-		String key = userId + '-' + achievementId;
+		String key = UniqueKeyFormatter.generateUniqueKey(userId, achievementId);
 
-		if (reachedAchievementsByAchievementIdMap.get(achievementId)?.get(key) != null) {
+		if (existingReachedAchievementsByKey.containsKey(key)) {
 			result = true;
 		}
 

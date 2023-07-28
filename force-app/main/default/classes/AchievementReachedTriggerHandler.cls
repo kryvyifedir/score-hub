@@ -2,7 +2,8 @@ public with sharing class AchievementReachedTriggerHandler {
 	Logger logger = new Logger();
 	List<AchievementReached__e> eventsToProcess = new List<AchievementReached__e>();
 	Map<Id, User> existingUsersMap = new Map<Id, User>();
-	Map<Id, Map<String, ReachedAchievement__c>> existingReachedAchievementsMap = new Map<Id, Map<String, ReachedAchievement__c>>();
+	Map<Id, Achievement__c> existingAchievementsMap = new Map<Id, Achievement__c>();
+	Map<String, ReachedAchievement__c> existingReachedAchievementsByKeyMap = new Map<String, ReachedAchievement__c>();
 	Map<String, ReachedAchievement__c> reachedAchievementsToInsert = new Map<String, ReachedAchievement__c>();
 
 	public AchievementReachedTriggerHandler(List<AchievementReached__e> events) {
@@ -13,14 +14,21 @@ public with sharing class AchievementReachedTriggerHandler {
 	private void init(List<AchievementReached__e> events) {
 		Set<Id> achievementIds = new Set<Id>();
 		Set<Id> userIds = new Set<Id>();
+		Set<String> achievementReachedKeys = new Set<String>();
 
 		for (AchievementReached__e event : events) {
 			achievementIds.add(event.AchievementId__c);
 			userIds.add(event.userId__c);
+			achievementReachedKeys.add(UniqueKeyFormatter.generateUniqueKey(event.userId__c, event.AchievementId__c));
 		}
 
-		existingUsersMap = new Map<Id, User> (UserSelector.getByIds(userIds));
-		existingReachedAchievementsMap = AchievementSelector.getReachedAchievementsByAchievementId(achievementIds);
+		existingUsersMap = new Map<Id, User> ((List<User>) UserSelector.getInstance().getByIds(userIds));
+		existingAchievementsMap = new Map<Id, Achievement__c> ((List<Achievement__c>) AchievementSelector.getInstance().getByIds(achievementIds));
+		
+		List<ReachedAchievement__c> existingReachedAchievements = (List<ReachedAchievement__c>) ReachedAchievementSelector.getInstance().getByFieldValue('Key__c', 'IN', achievementReachedKeys);
+		for (ReachedAchievement__c existingReachedAchievement : existingReachedAchievements) {
+			existingReachedAchievementsByKeyMap.put(existingReachedAchievement.Key__c, existingReachedAchievement);
+		}
 	}
 
 	public void processEvents() {
@@ -30,9 +38,8 @@ public with sharing class AchievementReachedTriggerHandler {
 					continue;
 				}
 
-				String userAchievementKey = event.UserId__c + '-' + event.AchievementId__c;
-				Map<String, ReachedAchievement__c> reachedAchievements = existingReachedAchievementsMap.get(event.AchievementId__c);
-				if (reachedAchievements.isEmpty() || !reachedAchievements.containsKey(userAchievementKey)) {
+				String userAchievementKey = UniqueKeyFormatter.generateUniqueKey(event.userId__c, event.AchievementId__c);
+				if (!existingReachedAchievementsByKeyMap.containsKey(userAchievementKey)) {
 					ReachedAchievement__c reachedAchievement = new ReachedAchievement__c();
 					reachedAchievement.User__c = event.UserId__c;
 					reachedAchievement.Achievement__c = event.AchievementId__c;
@@ -84,7 +91,7 @@ public with sharing class AchievementReachedTriggerHandler {
 	}
 
 	private Boolean isValidAchievementId(Id achievementId) {
-		return existingReachedAchievementsMap.containsKey(achievementId);
+		return existingAchievementsMap.containsKey(achievementId);
 	}
 
 	public static void onAfterInsert(List<AchievementReached__e> events) {

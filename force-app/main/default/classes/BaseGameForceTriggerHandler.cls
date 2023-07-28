@@ -10,10 +10,9 @@ public virtual class BaseGameForceTriggerHandler {
 			measurementIdsByUniqueIds.put(measurementUniqueId, null);
 		}
 
-		Map<String, Measurement__c> measurementsByUniqueIdMap = MeasurementSelector.getByUniqueIds(Constants.MEASUREMENT_UNIQUE_IDS);
-		
-		for (String uniqueId : measurementsByUniqueIdMap.keySet()) {
-			measurementIdsByUniqueIds.put(uniqueId, measurementsByUniqueIdMap.get(uniqueId).Id);
+		List<Measurement__c> measurements = (List<Measurement__c>) MeasurementSelector.getInstance().getByFieldValue('UniqueIdentifier__c', 'IN', Constants.MEASUREMENT_UNIQUE_IDS);
+		for (Measurement__c measurement : measurements) {
+			measurementIdsByUniqueIds.put(measurement.UniqueIdentifier__c, measurement.Id);
 		}
 	}
 

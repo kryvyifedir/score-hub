@@ -65,11 +65,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeaderboardController</apexClass>
+        <apexClass>UserInfoController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeaderboardControllerTest</apexClass>
+        <apexClass>UserInfoControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

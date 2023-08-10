@@ -1,24 +1,8 @@
 import { LightningElement, wire, track } from 'lwc';
 // APEX Controller methods
-import getTotalNumberOfAchievements from '@salesforce/apex/LeaderboardController.getTotalNumberOfAchievements';
-import getCurrentUserInfo from '@salesforce/apex/LeaderboardController.getCurrentUserInfo';
+import getCurrentUserInfo from '@salesforce/apex/UserInfoController.getCurrentUserInfo';
 
 export default class UserView extends LightningElement {
-
-    // Getting total number of achievements
-    @wire(getTotalNumberOfAchievements)
-    wiredTotalNumberOfAchievements({ error, data }) {
-        if (data) {
-            if (data.Success) {
-                console.log(JSON.stringify(data.Success))
-                this.totalAchievementsCount = data.Success
-            } else if (data.Error) {
-                console.log(JSON.stringify(data.Error))
-            }
-        } else if (error) {
-            console.log(JSON.stringify(error))
-        }
-    }
 
     // Getting current user info
     @wire(getCurrentUserInfo)

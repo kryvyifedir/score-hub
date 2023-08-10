@@ -2,7 +2,7 @@
     <template lwc:if={achievements}>
         <div class="slds-card achievements-list_container">
             <template for:each={achievements} for:item="achievement">
-                <c-achievement-card key={achievement.Id} title={achievement.UITitle} description={achievement.UIDescription} achieved={achievement.achieved}></c-achievement-card>
+                <c-achievement-card key={achievement.id} title={achievement.uiTitle} description={achievement.uiDescription} is-reached={achievement.isReached}></c-achievement-card>
             </template>
         </div>
     </template>

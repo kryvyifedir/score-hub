@@ -12,23 +12,22 @@ export default class UserCard extends LightningElement {
     };
 
     @api userInfo
-    @api totalAchievementsCount
 
     @api 
     get getShowProgressBar() {
-        return this.totalAchievementsCount ? true : false
+        return this.userInfo.totalAchievementsCount ? true : false
     }
 
     @api
     get getNumberOfAchievementsPercentage() {
-        return this.totalAchievementsCount ? 100 * this.userInfo.numberOfAchievements / this.totalAchievementsCount : 0
+        return this.userInfo.totalAchievementsCount ? 100 * this.userInfo.reachedAchievementsCount / this.userInfo.totalAchievementsCount : 0
     }
 
     @api
     get getNumberOfAchievements() {
-        let numberOfAchievements = this.userInfo.numberOfAchievements ? this.userInfo.numberOfAchievements : 0
-        return this.totalAchievementsCount ? 
-            numberOfAchievements + " " + this.labels.OutOfLabel + " " + this.totalAchievementsCount : numberOfAchievements
+        let reachedAchievementsCount = this.userInfo.reachedAchievementsCount ? this.userInfo.reachedAchievementsCount : 0
+        return this.userInfo.totalAchievementsCount ? 
+            reachedAchievementsCount + " " + this.labels.OutOfLabel + " " + this.userInfo.totalAchievementsCount : reachedAchievementsCount
     }
 
     @api

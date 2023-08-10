@@ -10,14 +10,14 @@
           <!-- Name -->
           <lightning-formatted-text class="slds-text-heading_medium" value={userInfo.name} title={userInfo.name}></lightning-formatted-text>
           <!-- Score -->
-          <c-card-line icon="utility:favorite" label={labels.PersonalScoreLabel} value={getScore}></c-card-line>
+          <c-user-card-details icon="utility:favorite" label={labels.PersonalScoreLabel} value={getScore}></c-user-card-details>
           <!-- Progress -->
           <template lwc:if={getShowProgressBar}>
-            <c-card-line icon="utility:setup_assistant_guide" label={labels.NumberOfAchievementsLabel} value={getNumberOfAchievements}></c-card-line>
+            <c-user-card-details icon="utility:setup_assistant_guide" label={labels.NumberOfAchievementsLabel} value={getNumberOfAchievements}></c-user-card-details>
             <lightning-progress-bar value={getNumberOfAchievementsPercentage} size="small"></lightning-progress-bar>
           </template>
           <template lwc:else>
-            <c-card-line icon="utility:setup_assistant_guide" label={labels.NumberOfAchievementsLabel} value={getNumberOfAchievements}></c-card-line>
+            <c-user-card-details icon="utility:setup_assistant_guide" label={labels.NumberOfAchievementsLabel} value={getNumberOfAchievements}></c-user-card-details>
           </template>
         </div>
       </template>

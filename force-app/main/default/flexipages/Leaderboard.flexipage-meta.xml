@@ -3,8 +3,14 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>userView</componentName>
-                <identifier>c_userView</identifier>
+                <componentName>currentUserCard</componentName>
+                <identifier>c_currentUserCard</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>currentUserAchievements</componentName>
+                <identifier>c_currentUserAchievements</identifier>
             </componentInstance>
         </itemInstances>
         <name>region1</name>

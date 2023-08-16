@@ -1,0 +1,17 @@
+<template>
+  <div class="slds-grid slds-grid_vertical-align-center slds-var-m-around_small">
+    <div class="slds-col slds-grow-none slds-var-m-right_x-small slds-var-m-around_small">
+      <lightning-avatar variant="circle" fallback-icon-name={getAchievementFallbackIcon} size="medium"
+        alternative-text=""></lightning-avatar>
+    </div>
+    <div class="slds-col slds-var-p-horizontal_small slds-truncate">
+      <div>
+        <lightning-formatted-text class="slds-text-title_caps slds-var-m-bottom_xxx-small"
+          value={title}></lightning-formatted-text>
+      </div>
+      <div>
+        <lightning-formatted-text value={description}></lightning-formatted-text>
+      </div>
+    </div>
+  </div>
+</template>

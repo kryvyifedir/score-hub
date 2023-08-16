@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
-export default class CardLine extends LightningElement {
+export default class UserCardDetails extends LightningElement {
     @api icon
     @api iconAlt
     @api label

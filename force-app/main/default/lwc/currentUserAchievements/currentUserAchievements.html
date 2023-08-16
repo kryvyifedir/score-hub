@@ -1,0 +1,13 @@
+<template>
+  <lightning-card variant="Narrow" title={labels.YourAchievementsLabel} icon-name="standard:entity_milestone">
+    <p class="slds-p-horizontal_small">
+      <template for:each={threeMostRecentAchievements} for:item="achievement">
+        <c-achievement-card key={achievement.id} title={achievement.uiTitle} description={achievement.uiDescription}
+          is-reached={achievement.isReached}></c-achievement-card>
+      </template>
+    </p>
+    <p slot="footer">
+      <lightning-button variant="base" label="View All" title="View All"></lightning-button>
+    </p>
+  </lightning-card>
+</template>

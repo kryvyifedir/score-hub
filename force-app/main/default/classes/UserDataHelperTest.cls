@@ -27,7 +27,7 @@ private class UserDataHelperTest {
 		System.assertEquals(usr1.Id, usr1DataCard.id);
 		System.assertEquals(2, usr1DataCard.totalAchievementsCount);
 		System.assertEquals(2, usr1DataCard.reachedAchievementsCount, 'Two reached achievement is expected to be counted');
-		System.assertEquals(achievement1.Score__c + reachedAchievement2.Score__c, usr1DataCard.totalScore, 'Total score of all reached achievements is expected');
+		System.assertEquals(achievement1.Score__c + achievement2.Score__c, usr1DataCard.totalScore, 'Total score of all reached achievements is expected');
 
 		System.assert(result.containsKey(usr2.Id));
 		DataWrappers.UserCardData usr2DataCard = result.get(usr2.Id);

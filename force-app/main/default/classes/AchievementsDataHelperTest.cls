@@ -42,14 +42,16 @@ private class AchievementsDataHelperTest {
 	}
 
 	@IsTest
-	private static void initAchievementCardData_AchievementSObjectPassed_AchievementCardDataReturned() {
+	private static void initAchievementCardData_reachedAchievementExists_AchievementCardDataReturned() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement1 = TestDataFactory.createAchievement('Ach1', measurement.Id);
+		ReachedAchievement__c reachedAchievement = TestDataFactory.createReachedAchievement(UserInfo.getUserId(), achievement1.Id);
+		reachedAchievement = [SELECT Id, CreatedDate FROM ReachedAchievement__c LIMIT 1];
 
 		// When 
 		Test.startTest();
-		DataWrappers.AchievementCardData cardData = AchievementsDataHelper.initAchievementCardData(achievement1, true);
+		DataWrappers.AchievementCardData cardData = AchievementsDataHelper.initAchievementCardData(achievement1, reachedAchievement);
 		Test.stopTest();
 
 		// Then
@@ -57,5 +59,25 @@ private class AchievementsDataHelperTest {
 		System.assertEquals(achievement1.UITitle__c, cardData.uiTitle);
 		System.assertEquals(achievement1.UIDescription__c, cardData.uiDescription);
 		System.assertEquals(true, cardData.isReached);
+		System.assertEquals(reachedAchievement.CreatedDate.getTime(), cardData.ReachedDate);
+	}
+
+	@IsTest
+	private static void initAchievementCardData_reachedAchievementDoesntExist_AchievementCardDataReturned() {
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement1 = TestDataFactory.createAchievement('Ach1', measurement.Id);
+
+		// When 
+		Test.startTest();
+		DataWrappers.AchievementCardData cardData = AchievementsDataHelper.initAchievementCardData(achievement1, null);
+		Test.stopTest();
+
+		// Then
+		System.assertEquals(achievement1.Id, cardData.Id);
+		System.assertEquals(achievement1.UITitle__c, cardData.uiTitle);
+		System.assertEquals(achievement1.UIDescription__c, cardData.uiDescription);
+		System.assertEquals(false, cardData.isReached);
+		System.assertEquals(0, cardData.ReachedDate);
 	}
 }

@@ -1,14 +1,15 @@
 <template>
-    <template lwc:if={achievements}>
-        <div class="slds-card achievements-list_container">
-            <template for:each={achievements} for:item="achievement">
-                <c-achievement-card key={achievement.id} title={achievement.uiTitle} description={achievement.uiDescription} is-reached={achievement.isReached}></c-achievement-card>
-            </template>
-        </div>
-    </template>
-    <template lwc:else>
-        <div class="slds-card achievements-list_container slds-spinner_container" style="position:relative;">
-            <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
-        </div>
-    </template>
+  <template lwc:if={achievements}>
+    <div class="slds-card achievements-list_container">
+      <template for:each={achievements} for:item="achievement">
+        <c-achievement-card key={achievement.id} title={achievement.uiTitle} description={achievement.uiDescription}
+          is-reached={achievement.isReached}></c-achievement-card>
+      </template>
+    </div>
+  </template>
+  <template lwc:else>
+    <div class="slds-card achievements-list_container slds-spinner_container" style="position:relative;">
+      <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
+    </div>
+  </template>
 </template>

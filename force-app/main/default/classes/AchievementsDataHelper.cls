@@ -2,13 +2,10 @@ public with sharing class AchievementsDataHelper {
 	public static Map<Id, List<DataWrappers.AchievementCardData>> getAchievementsDataPerUserId(Set<Id> userIds) {
 		Map<Id, List<DataWrappers.AchievementCardData>> result = new Map<Id, List<DataWrappers.AchievementCardData>>();
 		List<Achievement__c> allAchievements = AchievementSelector.getInstance().getAll();
-		Map<Id, Set<Id>> reachedAchievementIdsByUserId = new Map<Id, Set<Id>>();
+		Map<String, ReachedAchievement__c> reachedAchievementByKeyMap = new Map<String, ReachedAchievement__c>();
 		List<ReachedAchievement__c> reachedAchievements = ReachedAchievementSelector.getInstance().getByFieldValue('User__c', 'IN', userIds);
 		for (ReachedAchievement__c reachedAchievement : reachedAchievements) {
-			if (!reachedAchievementIdsByUserId.containsKey(reachedAchievement.User__c)) {
-				reachedAchievementIdsByUserId.put(reachedAchievement.User__c, new Set<Id>());
-			} 
-			reachedAchievementIdsByUserId.get(reachedAchievement.User__c).add(reachedAchievement.Achievement__c);
+			reachedAchievementByKeyMap.put(reachedAchievement.Key__c, reachedAchievement);
 		}
 
 		for (Id userId : userIds) {
@@ -18,8 +15,9 @@ public with sharing class AchievementsDataHelper {
 			List<DataWrappers.AchievementCardData> userAchievements = result.get(userId);
 
 			for (Achievement__c achievement : allAchievements) {
-				Boolean isReached = reachedAchievementIdsByUserId.containsKey(userId) && reachedAchievementIdsByUserId.get(userId).contains(achievement.Id);
-				DataWrappers.AchievementCardData achievementCardData = initAchievementCardData(achievement, isReached);
+				String key = UniqueKeyFormatter.generateUniqueKey(userId, achievement.Id);
+				ReachedAchievement__c reachedAchievement = reachedAchievementByKeyMap.get(key);
+				DataWrappers.AchievementCardData achievementCardData = initAchievementCardData(achievement, reachedAchievement);
 				userAchievements.add(achievementCardData);
 			}
 		}
@@ -27,12 +25,18 @@ public with sharing class AchievementsDataHelper {
 		return result;
 	}
 
-	public static DataWrappers.AchievementCardData initAchievementCardData(Achievement__c achievement, Boolean isReached) {
+	public static DataWrappers.AchievementCardData initAchievementCardData(Achievement__c achievement, ReachedAchievement__c reachedAchievement) {
 		DataWrappers.AchievementCardData achievementWrapper = new DataWrappers.AchievementCardData();
 		achievementWrapper.id = achievement.Id;
 		achievementWrapper.uiTitle = achievement.UITitle__c;
 		achievementWrapper.uiDescription = achievement.UIDescription__c;
-		achievementWrapper.isReached = isReached;
+		if (reachedAchievement != null) {
+			achievementWrapper.isReached = true;
+			achievementWrapper.ReachedDate = reachedAchievement.CreatedDate.getTime();
+		} else {
+			achievementWrapper.isReached = false;
+			achievementWrapper.ReachedDate = 0;
+		}
 		return achievementWrapper;
 	}
 }

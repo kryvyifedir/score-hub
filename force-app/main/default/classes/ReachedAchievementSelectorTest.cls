@@ -25,7 +25,7 @@ private class ReachedAchievementSelectorTest {
 		Test.stopTest();
 
 		// Then 
-		Set<String> expectedSet = new Set<String> {'Id', 'Key__c', 'User__c', 'Achievement__c', 'Score__c'};
+		Set<String> expectedSet = new Set<String> {'Id', 'Key__c', 'User__c', 'Achievement__c', 'Score__c', 'CreatedDate'};
 		system.assertEquals(expectedSet, result, 'A specific field set is expected');
 	}
 }

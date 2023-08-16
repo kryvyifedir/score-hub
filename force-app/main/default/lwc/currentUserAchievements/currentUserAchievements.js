@@ -9,26 +9,29 @@ export default class CurrentUserAchievements extends LightningElement {
         YourAchievementsLabel
     };
 
-    achievementsListUnsorted
-
-    get achievementsList() {
-        // a.sort(function(x, y) {
-        //     return (x === y)? 0 : x? -1 : 1;
-        // });
-        return this.achievementsListUnsorted
-    }
+    achievements
 
     // Getting current user info
     @wire(getCurrentUserAchievementsList)
     wiredAchievementsList({ error, data }) {
         if (data) {
             if (data.Success) {
-                this.achievementsListUnsorted = data.Success
+                this.achievements = data.Success
             } else if (data.Error) {
                 console.log(JSON.stringify(data.Error))
             }
         } else if (error) {
             console.log(JSON.stringify(error))
         }
+    }
+
+    get threeMostRecentAchievements() {
+        let returnValue = [];
+        if (this.achievements) {
+            returnValue = [...this.achievements].sort((a, b) => { return b.reachedDate - a.reachedDate}).slice(0, 4);
+            console.log(JSON.stringify(returnValue))
+        }
+        
+       return returnValue;
     }
 }

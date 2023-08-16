@@ -24,5 +24,7 @@ public with sharing class DataWrappers {
 		public String uiDescription { get; set; }
 		@AuraEnabled
 		public Boolean isReached { get; set; }
+		@AuraEnabled
+		public Long reachedDate { get; set; }
 	}
 }

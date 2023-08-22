@@ -28,10 +28,9 @@ export default class CurrentUserAchievements extends LightningElement {
     get threeMostRecentAchievements() {
         let returnValue = [];
         if (this.achievements) {
-            returnValue = [...this.achievements].sort((a, b) => { return b.reachedDate - a.reachedDate}).slice(0, 4);
-            console.log(JSON.stringify(returnValue))
+            returnValue = [...this.achievements].sort((a, b) => { return b.reachedDate - a.reachedDate }).slice(0, 4);
         }
-        
-       return returnValue;
+
+        return returnValue;
     }
 }

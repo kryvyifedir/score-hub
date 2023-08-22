@@ -48,4 +48,76 @@
         <shortDescription>Avatar Alt Text</shortDescription>
         <value>User picture</value>
     </labels>
+    <labels>
+        <fullName>OrderByCount</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order By Count</shortDescription>
+        <value>Number of Achievements</value>
+    </labels>
+    <labels>
+        <fullName>OrderByScore</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order By Score</shortDescription>
+        <value>Total Score</value>
+    </labels>
+    <labels>
+        <fullName>TopUsers</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Top users</shortDescription>
+        <value>Top users</value>
+    </labels>
+    <labels>
+        <fullName>UnableToRetrieveUsers</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unable to retrieve the list of users</shortDescription>
+        <value>Unable to retrieve the list of Users and their achievements. Please contact your system administrator</value>
+    </labels>
+    <labels>
+        <fullName>NoUsersHaverReachedAchievement</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No users have reached any achievement</shortDescription>
+        <value>No one has unlocked any achievement yet. Be the first one!</value>
+    </labels>
+    <labels>
+        <fullName>BeTheFirstOne</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Be the first one</shortDescription>
+        <value>Be the first one!</value>
+    </labels>
+    <labels>
+        <fullName>Error</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>NoOneHasUnlockedAchievement</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No one has unlocked any achievement</shortDescription>
+        <value>No one has unlocked any achievement yet!</value>
+    </labels>
+    <labels>
+        <fullName>UnableToLoadLeadeboard</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unable to load leadeboard</shortDescription>
+        <value>Unable to load the list of users, please contact your system administrator</value>
+    </labels>
 </CustomLabels>

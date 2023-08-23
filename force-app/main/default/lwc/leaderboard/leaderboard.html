@@ -1,15 +1,32 @@
 <template>
-    <lightning-card variant="Narrow" title={labels.TopUsersLabel} icon-name="standard:groups">
-        <lightning-tabset>
-            <lightning-tab label={labels.OrderByScoreLabel}>
-                <c-leaderboard-tab users={getTopUsersByScoreOrdered} is-ready={topUsersByScoreReady} is-error={topUsersByScoreError}></c-leaderboard-tab>
-            </lightning-tab>
-            <lightning-tab label={labels.OrderByCountLabel}>
-                <c-leaderboard-tab users={getTopUsersByAchievementsCountOrdered} is-ready={topUsersByAchievementsCountReady} is-error={topUsersByAchievementsCountError}></c-leaderboard-tab>
-            </lightning-tab>
-        </lightning-tabset>
-        <p slot="footer">
-          <lightning-button variant="base" label="View All" title="View All"></lightning-button>
-        </p>
-      </lightning-card>
+  <article class="slds-card" style="height: 100%;">
+    <div class="slds-card__header slds-grid">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+          <span class="slds-icon_container slds-icon-standard-account" title="account">
+            <lightning-icon alternative-text={labels.TopUsersLabel} icon-name="standard:groups">
+            </lightning-icon>
+            <span class="slds-assistive-text">{labels.TopUsersLabel}</span>
+          </span>
+        </div>
+        <div class="slds-media__body">
+          <h2 class="slds-card__header-title">
+            <span>{labels.TopUsersLabel}</span>
+          </h2>
+        </div>
+      </header>
+    </div>
+    <div class="slds-card__body" style="height: 88%; overflow: scroll;">
+      <lightning-tabset>
+        <lightning-tab label={labels.OrderByScoreLabel}>
+          <c-leaderboard-tab users={getTopUsersByScoreOrdered} is-ready={topUsersByScoreReady}
+            is-error={topUsersByScoreError}></c-leaderboard-tab>
+        </lightning-tab>
+        <lightning-tab label={labels.OrderByCountLabel}>
+          <c-leaderboard-tab users={getTopUsersByAchievementsCountOrdered} is-ready={topUsersByAchievementsCountReady}
+            is-error={topUsersByAchievementsCountError}></c-leaderboard-tab>
+        </lightning-tab>
+      </lightning-tabset>
+    </div>
+  </article>
 </template>

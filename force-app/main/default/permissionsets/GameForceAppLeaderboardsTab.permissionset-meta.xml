@@ -4,7 +4,7 @@
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce App Leaderboards Tab</label>
     <tabSettings>
-        <tab>Leaderboard</tab>
+        <tab>GameForceHome</tab>
         <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>

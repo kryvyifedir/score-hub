@@ -1,5 +1,7 @@
 @IsTest 
 public class TestDataFactory {	
+
+	public class TestException extends Exception {}
 	
 	public static Measurement__c initMeasurement(String uniqueIdentifier) {
 		Measurement__c measurement = new Measurement__c();

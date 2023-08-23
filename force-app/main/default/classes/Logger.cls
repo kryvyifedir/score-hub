@@ -22,6 +22,7 @@ public with sharing class Logger {
 		Database.insert(logs);
 	}
 
+	@future
 	public static void saveSingleLog(String log) {
 		Logger logger = new Logger();
 		logger.addLog(log);

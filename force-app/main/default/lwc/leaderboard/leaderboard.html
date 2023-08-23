@@ -1,0 +1,15 @@
+<template>
+    <lightning-card variant="Narrow" title={labels.TopUsersLabel} icon-name="standard:groups">
+        <lightning-tabset>
+            <lightning-tab label={labels.OrderByScoreLabel}>
+                <c-leaderboard-tab users={getTopUsersByScoreOrdered} is-ready={topUsersByScoreReady} is-error={topUsersByScoreError}></c-leaderboard-tab>
+            </lightning-tab>
+            <lightning-tab label={labels.OrderByCountLabel}>
+                <c-leaderboard-tab users={getTopUsersByAchievementsCountOrdered} is-ready={topUsersByAchievementsCountReady} is-error={topUsersByAchievementsCountError}></c-leaderboard-tab>
+            </lightning-tab>
+        </lightning-tabset>
+        <p slot="footer">
+          <lightning-button variant="base" label="View All" title="View All"></lightning-button>
+        </p>
+      </lightning-card>
+</template>

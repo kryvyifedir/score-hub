@@ -57,4 +57,64 @@ private class UserRatingsHelperTest {
 		// Then
 		System.assert(result.isEmpty(), 'Map is expected to be empty');
 	}
+
+	@IsTest
+	private static void getTopUsersByScore_usersHaveAchievements_topTenUsersReturned(){
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
+
+		Id userProfileId = UserInfo.getProfileId();
+		List<User> users = new List<User>();
+		for (Integer i = 0; i < 11; i++) {
+			users.add(TestDataFactory.initUser(userProfileId, 'user' + String.valueOf(i)));
+		}
+		insert users;
+		users = [SELECT ID FROM User];
+
+		List<ReachedAchievement__c> reachedAchievements = new List<ReachedAchievement__c>();
+		for (Integer i = 0; i < 10; i++) {
+			reachedAchievements.add(TestDataFactory.initReachedAchievement(users[i].Id, achievement.Id));
+		} 
+		insert reachedAchievements;
+
+		// When 
+		Test.startTest();
+		List<Id> result = UserRatingsHelper.getTopUsersByScore();
+		Test.stopTest();
+
+		// Then
+		System.assertEquals(10, result.size(), '10 users are expected to be returned');
+		System.assert(!result.contains(users[11].Id), 'Only users with top 10 score are expected to be returned');
+	}
+
+	@IsTest
+	private static void getTopUsersByAchievementsCount_usersHaveAchievements_topTenUsersReturned(){
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
+
+		Id userProfileId = UserInfo.getProfileId();
+		List<User> users = new List<User>();
+		for (Integer i = 0; i < 11; i++) {
+			users.add(TestDataFactory.initUser(userProfileId, 'user' + String.valueOf(i)));
+		}
+		insert users;
+		users = [SELECT ID FROM User];
+
+		List<ReachedAchievement__c> reachedAchievements = new List<ReachedAchievement__c>();
+		for (Integer i = 0; i < 10; i++) {
+			reachedAchievements.add(TestDataFactory.initReachedAchievement(users[i].Id, achievement.Id));
+		} 
+		insert reachedAchievements;
+
+		// When 
+		Test.startTest();
+		List<Id> result = UserRatingsHelper.getTopUsersByAchievementsCount();
+		Test.stopTest();
+
+		// Then
+		System.assertEquals(10, result.size(), '10 users are expected to be returned');
+		System.assert(!result.contains(users[11].Id), 'Only users with top top 10 number of achievements are expected to be returned');
+	}
 }

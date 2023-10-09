@@ -120,4 +120,20 @@
         <shortDescription>Unable to load leadeboard</shortDescription>
         <value>Unable to load the list of users, please contact your system administrator</value>
     </labels>
+    <labels>
+        <fullName>KeepItUp</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Keep it up</shortDescription>
+        <value>Keep it up!</value>
+    </labels>
+    <labels>
+        <fullName>NoAchievementsUnlockedYet</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No achievements unlocked yet</shortDescription>
+        <value>You haven&apos;t unlocked any achievements yet</value>
+    </labels>
 </CustomLabels>

@@ -1,0 +1,29 @@
+<template>
+    <div class="slds-var-p-top_medium">
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative" style="height: 12rem;">
+                <lightning-spinner title="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:elseif={achievementEventHandled}>
+            <div>
+                <div class="slds-text-align_center slds-text-title_caps">Achievement unlocked</div>
+                <div class="slds-text-align_center slds-text-heading_large slds-text-color_success">25 points</div>
+                <div class="slds-text-align_center">img</div>
+                <div class="slds-text-align_center">Achievement Name</div>
+                <div class="slds-text-align_center">Achievement Desc</div>
+            </div>
+
+        </template>
+        <template lwc:elseif={closesAchievement}>
+
+        </template>
+        <template lwc:else>
+            <c-svg-mountain class="slds-var-p-top_medium" header={labels.KeepItUpLabel}
+                subheader={labels.NoAchievementsUnlockedYetLabel}></c-svg-mountain>
+        </template>
+    </div>
+
+    <c-confetti></c-confetti>
+
+</template>

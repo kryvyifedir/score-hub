@@ -1,29 +1,35 @@
 <template>
-    <div class="slds-var-p-top_medium">
+    <div>
         <template lwc:if={isLoading}>
-            <div class="slds-is-relative" style="height: 12rem;">
+            <div class="slds-is-relative slds-var-p-top_medium" style="height: 12rem;">
                 <lightning-spinner title="Loading" size="medium"></lightning-spinner>
             </div>
         </template>
-        <template lwc:elseif={achievementEventHandled}>
-            <div>
-                <div class="slds-text-align_center slds-text-title_caps">Achievement unlocked</div>
-                <div class="slds-text-align_center slds-text-heading_large slds-text-color_success">25 points</div>
-                <div class="slds-text-align_center">img</div>
-                <div class="slds-text-align_center">Achievement Name</div>
-                <div class="slds-text-align_center">Achievement Desc</div>
+        <template lwc:elseif={achievementReachedEventReceived}>
+
+            <!-- <div class="slds-var-p-around_large slds-text-align_center">
+                <lightning-avatar variant="circle" fallback-icon-name="standard:task2" size="large"
+                    alternative-text=""></lightning-avatar>
+            </div> -->
+
+            <!-- <div class="slds-var-p-vertical_large">
+            <div class="slds-text-align_center slds-text-heading_medium">ACHIEVEMENT UNLOCKED</div>
+        </div>
+        <div class="slds-var-p-bottom_medium slds-text-align_center ">
+            <div class="slds-var-p-bottom_x-small">
+                <lightning-avatar variant="circle" fallback-icon-name="standard:task2" size="large" alternative-text=""></lightning-avatar>
             </div>
-
-        </template>
-        <template lwc:elseif={closesAchievement}>
-
+            <div class="slds-text-heading_large slds-text-color_success slds-var-p-bottom_x-small">+25 points</div>
+        </div>
+        <div class="slds-text-align_center">
+            <div class="slds-text-heading_medium">SOURCER</div>
+            <div class="slds-text-heading_small">Created 10 Leads</div>
+        </div> -->
+            <c-confetti></c-confetti>
         </template>
         <template lwc:else>
-            <c-svg-mountain class="slds-var-p-top_medium" header={labels.KeepItUpLabel}
-                subheader={labels.NoAchievementsUnlockedYetLabel}></c-svg-mountain>
+
         </template>
     </div>
-
-    <c-confetti></c-confetti>
 
 </template>

@@ -9,7 +9,6 @@ export default class GameForceNotification extends LightningElement {
     };
 
     isLoading
-    achievementEventHandled = true
-    closesAchievement
+    achievementReachedEventReceived = true
 
 }

@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>GameForce Achievement Utility</aura:description>
+	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
+		Utility bar component that is automatically opened whenever user has unlocked new achievement
+	</aura:example>
+</aura:documentation>

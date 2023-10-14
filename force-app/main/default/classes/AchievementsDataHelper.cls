@@ -52,16 +52,26 @@ public with sharing class AchievementsDataHelper {
 			}
 		}
 
-		// REFACTOR THIS SHIT
-		ReachedAchievement__c nullReachedAchievement;
-		return AchievementsDataHelper.initAchievementCardData(searchResult, nullReachedAchievement);
+		DataWrappers.AchievementCardData closestAchievement;
+		if (searchResult != null) {
+			closestAchievement = AchievementsDataHelper.initAchievementCardData(searchResult);
+		}
+
+		return closestAchievement;
 	}
 
-	public static DataWrappers.AchievementCardData initAchievementCardData(Achievement__c achievement, ReachedAchievement__c reachedAchievement) {
+	public static DataWrappers.AchievementCardData initAchievementCardData(Achievement__c achievement) {
 		DataWrappers.AchievementCardData achievementWrapper = new DataWrappers.AchievementCardData();
 		achievementWrapper.id = achievement.Id;
 		achievementWrapper.uiTitle = achievement.UITitle__c;
 		achievementWrapper.uiDescription = achievement.UIDescription__c;
+		achievementWrapper.isReached = false;
+		achievementWrapper.ReachedDate = 0;
+		return achievementWrapper;
+	}
+
+	public static DataWrappers.AchievementCardData initAchievementCardData(Achievement__c achievement, ReachedAchievement__c reachedAchievement) {
+		DataWrappers.AchievementCardData achievementWrapper = AchievementsDataHelper.initAchievementCardData(achievement);
 		if (reachedAchievement != null) {
 			achievementWrapper.isReached = true;
 			achievementWrapper.ReachedDate = reachedAchievement.CreatedDate.getTime();

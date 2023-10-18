@@ -1,0 +1,16 @@
+.confetti-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    }
+    
+    .confetti {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border-radius: 25px;
+        z-index: 999;
+        animation: confetti-fall 1s linear infinite;
+    }

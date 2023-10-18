@@ -1,0 +1,12 @@
+<aura:component implements="lightning:utilityItem" access="global" >
+    <aura:attribute name="supportsPopOut" type="Boolean" default="false" />
+    <lightning:utilityBarAPI aura:id="utilitybar" />
+    <lightning:empApi aura:id="empApi" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <!-- Holds the streaming event subscription -->
+    <aura:attribute name="subscription" type="Map" />
+    <aura:attribute name="achievementId" type="String" />
+    <c:gameForceNotification achievementId="{! v.achievementId }"></c:gameForceNotification>
+</aura:component>

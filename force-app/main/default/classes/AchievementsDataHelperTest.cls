@@ -41,6 +41,84 @@ private class AchievementsDataHelperTest {
 		}
 	}
 
+	@IsTest 
+	private static void getClosestAchievementForUser_NoReachedAchievement_FirstAchievementByGoalReturned() {
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement1 = TestDataFactory.initAchievement('Ach1', measurement.Id);
+		achievement1.Goal__c = 100;
+		Achievement__c achievement2 = TestDataFactory.initAchievement('Ach2', measurement.Id);
+		achievement2.Goal__c = 200;
+		insert new List<Achievement__c> {achievement1, achievement2};
+
+		// When
+		Test.startTest();
+		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
+		Test.stopTest();
+
+		System.assertEquals(achievement1.Id, result.id, 'Information about achievement 1 is expected to be returned');
+	}
+
+	@IsTest 
+	private static void getClosestAchievementForUser_FirstAchievementReached_SecondAchievementReturned() {
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement1 = TestDataFactory.initAchievement('Ach1', measurement.Id);
+		achievement1.Goal__c = 100;
+		Achievement__c achievement2 = TestDataFactory.initAchievement('Ach2', measurement.Id);
+		achievement2.Goal__c = 200;
+		insert new List<Achievement__c> {achievement1, achievement2};
+		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement.Id, 120);
+
+		// When
+		Test.startTest();
+		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
+		Test.stopTest();
+
+		System.assertEquals(achievement2.Id, result.id, 'Information about achievement 2 is expected to be returned');
+	}
+
+	@IsTest 
+	private static void getClosestAchievementForUser_AllReached_NullReturned() {
+		// Given
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement1 = TestDataFactory.initAchievement('Ach1', measurement.Id);
+		achievement1.Goal__c = 100;
+		Achievement__c achievement2 = TestDataFactory.initAchievement('Ach2', measurement.Id);
+		achievement2.Goal__c = 200;
+		insert new List<Achievement__c> {achievement1, achievement2};
+		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement.Id, 220);
+
+		// When
+		Test.startTest();
+		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
+		Test.stopTest();
+
+		System.assertEquals(null, result.id, 'Null is expected since all achievements were reached');
+	}
+
+	@IsTest 
+	private static void getClosestAchievementForUser_FirstAchievementReachedButThirdIsSmaller_ThirdAchievementReturned() {
+		// Given
+		Measurement__c measurement1 = TestDataFactory.createMeasurement('Measurement1');
+		Measurement__c measurement2 = TestDataFactory.createMeasurement('Measurement2');
+		Achievement__c achievement1 = TestDataFactory.initAchievement('Ach1', measurement1.Id);
+		achievement1.Goal__c = 100;
+		Achievement__c achievement2 = TestDataFactory.initAchievement('Ach2', measurement1.Id);
+		achievement2.Goal__c = 200;
+		Achievement__c achievement3 = TestDataFactory.initAchievement('Ach3', measurement2.Id);
+		achievement3.Goal__c = 10;
+		insert new List<Achievement__c> {achievement1, achievement2, achievement3};
+		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement1.Id, 120);
+
+		// When
+		Test.startTest();
+		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
+		Test.stopTest();
+
+		System.assertEquals(achievement3.Id, result.id, 'Information about achievement 3 is expected to be returned');
+	}
+
 	@IsTest
 	private static void initAchievementCardData_reachedAchievementExists_AchievementCardDataReturned() {
 		// Given
@@ -80,4 +158,6 @@ private class AchievementsDataHelperTest {
 		System.assertEquals(false, cardData.isReached);
 		System.assertEquals(0, cardData.ReachedDate);
 	}
+
+	
 }

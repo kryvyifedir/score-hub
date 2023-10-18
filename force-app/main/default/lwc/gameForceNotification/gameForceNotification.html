@@ -1,0 +1,17 @@
+<template>
+    <div>
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-var-p-top_medium" style="height: 12rem;">
+                <lightning-spinner title="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:elseif={achievementReachedEventReceived}>
+            <c-achievement-card achievement={achievement}></c-achievement-card>
+            <c-confetti></c-confetti>
+        </template>
+        <template lwc:else>
+            <c-achievement-card achievement={achievement}></c-achievement-card>
+        </template>
+    </div>
+
+</template>

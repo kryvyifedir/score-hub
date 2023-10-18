@@ -1,0 +1,7 @@
+<template>
+    <div class={containerClass} onmousemove={handleMouseMove}>
+        <template for:each={confettiArray} for:item="confetti">
+            <div key={confetti.id} class="confetti" style={confetti.style}></div>
+        </template>
+    </div>
+</template>

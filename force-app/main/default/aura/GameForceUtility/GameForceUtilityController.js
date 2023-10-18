@@ -10,6 +10,7 @@
             if (eventReceived.data && eventReceived.data.payload && eventReceived.data.payload.UserId__c) {
                 var userId = $A.get("$SObjectType.CurrentUser.Id");
                 if (userId === eventReceived.data.payload.UserId__c) {
+                    component.set("v.achievementId", eventReceived.data.payload.AchievementId__c);
                     var utilityAPI = component.find("utilitybar");
                     utilityAPI.openUtility();
                 }

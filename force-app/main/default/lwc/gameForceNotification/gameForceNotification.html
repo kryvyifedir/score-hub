@@ -6,29 +6,11 @@
             </div>
         </template>
         <template lwc:elseif={achievementReachedEventReceived}>
-
-            <!-- <div class="slds-var-p-around_large slds-text-align_center">
-                <lightning-avatar variant="circle" fallback-icon-name="standard:task2" size="large"
-                    alternative-text=""></lightning-avatar>
-            </div> -->
-
-            <!-- <div class="slds-var-p-vertical_large">
-            <div class="slds-text-align_center slds-text-heading_medium">ACHIEVEMENT UNLOCKED</div>
-        </div>
-        <div class="slds-var-p-bottom_medium slds-text-align_center ">
-            <div class="slds-var-p-bottom_x-small">
-                <lightning-avatar variant="circle" fallback-icon-name="standard:task2" size="large" alternative-text=""></lightning-avatar>
-            </div>
-            <div class="slds-text-heading_large slds-text-color_success slds-var-p-bottom_x-small">+25 points</div>
-        </div>
-        <div class="slds-text-align_center">
-            <div class="slds-text-heading_medium">SOURCER</div>
-            <div class="slds-text-heading_small">Created 10 Leads</div>
-        </div> -->
+            <c-achievement-card achievement={achievement}></c-achievement-card>
             <c-confetti></c-confetti>
         </template>
         <template lwc:else>
-
+            <c-achievement-card achievement={achievement}></c-achievement-card>
         </template>
     </div>
 

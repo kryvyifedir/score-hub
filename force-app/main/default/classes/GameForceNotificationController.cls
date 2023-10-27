@@ -10,8 +10,12 @@ public with sharing class GameForceNotificationController {
 				throw new TestDataFactory.TestException();
 			}
 
-			List<Achievement__c> achievement = AchievementSelector.getInstance().getByIds(new Set<Id> { achievementId });
-			result = ControllerResponse.success(AchievementsDataHelper.initAchievementCardData(achievement[0]));
+			List<Achievement__c> achievements = AchievementSelector.getInstance().getByIds(new Set<Id> { achievementId });
+			if (achievements == null || achievements.isEmpty()) {
+				result = ControllerResponse.success(null);
+			} else {
+				result = ControllerResponse.success(AchievementsDataHelper.initAchievementCardData(achievements[0]));
+			}
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in GameForceNotificationController. ' + e.getMessage() + '. ' + e.getStackTraceString());
 			result = ControllerResponse.error('Unable to get Achievement by Id');
@@ -20,7 +24,7 @@ public with sharing class GameForceNotificationController {
 	}
 
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getClosesReachableAchievement(String userId){
+	public static Map<String, Object> getClosestReachableAchievement(String userId){
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {

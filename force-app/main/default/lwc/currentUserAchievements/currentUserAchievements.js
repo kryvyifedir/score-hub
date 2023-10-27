@@ -18,7 +18,8 @@ export default class CurrentUserAchievements extends LightningElement {
     };
 
     achievements
-    showError
+    isError = false
+    isLoading = true
 
     // Getting current user info
     @wire(getCurrentUserAchievementsList)
@@ -26,13 +27,16 @@ export default class CurrentUserAchievements extends LightningElement {
         if (data) {
             if (data.Success) {
                 this.achievements = data.Success
+                this.isLoading = false;
             } else if (data.Error) {
                 console.log(JSON.stringify(data.Error))
-                this.showError = true
+                this.isError = true
+                this.isLoading = false;
             }
         } else if (error) {
             console.log(JSON.stringify(error))
-            this.showError = true
+            this.isError = true
+            this.isLoading = false;
         }
     }
 
@@ -47,5 +51,9 @@ export default class CurrentUserAchievements extends LightningElement {
 
     get showAchievements() {
         return this.achievements && this.achievements.length > 0
+    }
+
+    get showEmpty() {
+        return !this.isLoading && !(this.achievements && this.achievements.length > 0)
     }
 }

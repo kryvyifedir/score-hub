@@ -136,4 +136,28 @@
         <shortDescription>No achievements unlocked yet</shortDescription>
         <value>You haven&apos;t unlocked any achievements yet</value>
     </labels>
+    <labels>
+        <fullName>ContactAdministrator</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Contact Administrator</shortDescription>
+        <value>Please contact your system administrator</value>
+    </labels>
+    <labels>
+        <fullName>ErrorLoadingAchievements</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error Loading Achievements</shortDescription>
+        <value>Error occurred while loading the list of achievements</value>
+    </labels>
+    <labels>
+        <fullName>NoAchievementsFound</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No Achievements Found</shortDescription>
+        <value>No achievements found</value>
+    </labels>
 </CustomLabels>

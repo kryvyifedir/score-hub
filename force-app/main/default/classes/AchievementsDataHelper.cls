@@ -52,12 +52,7 @@ public with sharing class AchievementsDataHelper {
 			}
 		}
 
-		DataWrappers.AchievementCardData closestAchievement;
-		if (searchResult != null) {
-			closestAchievement = AchievementsDataHelper.initAchievementCardData(searchResult);
-		}
-
-		return closestAchievement;
+		return AchievementsDataHelper.initAchievementCardData(searchResult);
 	}
 
 	public static DataWrappers.AchievementCardData initAchievementCardData(Achievement__c achievement) {
@@ -72,6 +67,10 @@ public with sharing class AchievementsDataHelper {
 
 	public static DataWrappers.AchievementCardData initAchievementCardData(Achievement__c achievement, ReachedAchievement__c reachedAchievement) {
 		DataWrappers.AchievementCardData achievementWrapper = AchievementsDataHelper.initAchievementCardData(achievement);
+		if (achievement == null) {
+			return null;
+		}
+		
 		if (reachedAchievement != null) {
 			achievementWrapper.isReached = true;
 			achievementWrapper.ReachedDate = reachedAchievement.CreatedDate.getTime();

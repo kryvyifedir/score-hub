@@ -16,9 +16,27 @@
         </div>
       </header>
     </div>
-    <div class="slds-card__body slds-card__body_inner slds-box slds-var-m-around_small"
-      style="height: 83%; overflow: scroll;">
-      <c-achievements-list achievements={threeMostRecentAchievements}></c-achievements-list>
-    </div>
+    <template lwc:if={isLoading}>
+      <div class="slds-card slds-spinner_container">
+        <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
+      </div>
+    </template>
+    <template lwc:if={isError}>
+      <div class="slds-var-m-around_small">
+        <c-svg-error header={labels.ErrorLabel} subheader={labels.ErrorLoadingAchievementsLabel}></c-svg-error>
+      </div>
+    </template>
+    <template lwc:elseif={showAchievements}>
+      <div class="slds-card__body slds-card__body_inner slds-box slds-var-m-around_small"
+        style="height: 83%; overflow: scroll;">
+        <c-achievements-list achievements={achievementsByDate} is-loading={isLoadingAchievements}></c-achievements-list>
+      </div>
+    </template>
+    <template lwc:elseif={showEmpty}>
+      <div class="slds-var-m-around_small">
+        <c-svg-no-data header={labels.NoAchievementsFoundLabel}
+          subheader={labels.ContactAdministratorLabel}></c-svg-no-data>
+      </div>
+    </template>
   </article>
 </template>

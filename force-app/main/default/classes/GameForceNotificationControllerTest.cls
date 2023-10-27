@@ -41,7 +41,7 @@ private class GameForceNotificationControllerTest {
 	}
 
 	@IsTest
-	private static void getClosesReachableAchievement_UserIdPassed_ClosesAchievementReturned() {
+	private static void getClosestReachableAchievement_UserIdPassed_ClosesAchievementReturned() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement1 = TestDataFactory.initAchievement('Ach1', measurement.Id);
@@ -53,7 +53,7 @@ private class GameForceNotificationControllerTest {
 
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getClosesReachableAchievement(UserInfo.getUserId());
+		Map<String, Object> result = GameForceNotificationController.getClosestReachableAchievement(UserInfo.getUserId());
 		Test.stopTest();
 
 		// Then
@@ -65,13 +65,13 @@ private class GameForceNotificationControllerTest {
 	}
 
 	@IsTest
-	private static void getClosesReachableAchievement_UnexpectedException_ExceptionHandled() {
+	private static void getClosestReachableAchievement_UnexpectedException_ExceptionHandled() {
 		// Given
 		GameForceNotificationController.throwException = true;
 		
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getClosesReachableAchievement(UserInfo.getUserId());
+		Map<String, Object> result = GameForceNotificationController.getClosestReachableAchievement(UserInfo.getUserId());
 		Test.stopTest();
 
 		// Then

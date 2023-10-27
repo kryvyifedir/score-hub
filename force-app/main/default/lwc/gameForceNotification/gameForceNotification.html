@@ -5,13 +5,19 @@
                 <lightning-spinner title="Loading" size="medium"></lightning-spinner>
             </div>
         </template>
-        <template lwc:elseif={achievementReachedEventReceived}>
-            <c-achievement-card achievement={achievement}></c-achievement-card>
-            <c-confetti></c-confetti>
+        <template lwc:elseif={isError}>
+            <div class="slds-var-m-around_small">
+                <c-svg-error header={labels.ErrorLabel} subheader="Unable to retrieve information about achievements"></c-svg-error>
+            </div>
         </template>
         <template lwc:else>
-            <c-achievement-card achievement={achievement}></c-achievement-card>
+            <template lwc:if={achievementReachedEventReceived}>
+                <c-achievement-card achievement={achievement}></c-achievement-card>
+                <c-confetti></c-confetti>
+            </template>
+            <template lwc:else>
+                <c-achievement-card achievement={achievement}></c-achievement-card>
+            </template>
         </template>
     </div>
-
 </template>

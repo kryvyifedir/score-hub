@@ -12,3 +12,13 @@ Check our [Contribution Guidelines](docs/CONTRIBUTION.md) for more information o
 Production version of GameForce is distributed through Salesforce AppExhange. It can be found under the link:
 Please see [Configuration Guide](docs/CONFIGURATION.md)
 
+## Project documentation
+Project documentation contains information about GameForce technical details and approaches. We strongly recommend to check-it out before contributing to a project, since it might save you some time. 
+
+Project documentation includes:
+- [Aura LWC wrappers](/docs/AURA.md)
+- [Apex guidelines](/docs/CLASSES.md)
+- [GameForce data schema](/docs/OBJECTS.md)
+- LWC Components **WIP**
+- [Permission sets and groups](/docs/PERMISSIONSETSANDGROUPS.md)
+- [Communicating with Platform events](/docs/PLATFORMEVENTS.md)

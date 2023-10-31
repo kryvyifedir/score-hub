@@ -3,7 +3,7 @@ public with sharing class GameForceNotificationController {
 	private static Boolean throwException = false;
 
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getAchievementById(String achievementId){
+	public static Map<String, Object> getAchievementById(String achievementId, String userId){
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {
@@ -11,10 +11,16 @@ public with sharing class GameForceNotificationController {
 			}
 
 			List<Achievement__c> achievements = AchievementSelector.getInstance().getByIds(new Set<Id> { achievementId });
+			List<ReachedAchievement__c> reachedInformation = ReachedAchievementSelector.getInstance().getByFieldValue('Key__c', '=', UniqueKeyFormatter.generateUniqueKey(userId, achievementId));
+			
 			if (achievements == null || achievements.isEmpty()) {
-				result = ControllerResponse.success(null);
+				return ControllerResponse.success(null);
 			} else {
-				result = ControllerResponse.success(AchievementsDataHelper.initAchievementCardData(achievements[0]));
+				if (reachedInformation == null || reachedInformation.isEmpty()) {
+					result = ControllerResponse.success(AchievementsDataHelper.initAchievementCardData(achievements[0]));
+				} else {
+					result = ControllerResponse.success(AchievementsDataHelper.initAchievementCardData(achievements[0], reachedInformation[0]));
+				}
 			}
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in GameForceNotificationController. ' + e.getMessage() + '. ' + e.getStackTraceString());

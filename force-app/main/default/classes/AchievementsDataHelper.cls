@@ -60,6 +60,7 @@ public with sharing class AchievementsDataHelper {
 		achievementWrapper.id = achievement.Id;
 		achievementWrapper.uiTitle = achievement.UITitle__c;
 		achievementWrapper.uiDescription = achievement.UIDescription__c;
+		achievementWrapper.score = achievement.Score__c;
 		achievementWrapper.isReached = false;
 		achievementWrapper.ReachedDate = 0;
 		return achievementWrapper;

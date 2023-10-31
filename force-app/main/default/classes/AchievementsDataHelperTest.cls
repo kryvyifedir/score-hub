@@ -136,6 +136,7 @@ private class AchievementsDataHelperTest {
 		System.assertEquals(achievement1.Id, cardData.Id);
 		System.assertEquals(achievement1.UITitle__c, cardData.uiTitle);
 		System.assertEquals(achievement1.UIDescription__c, cardData.uiDescription);
+		System.assertEquals(achievement1.Score__c, cardData.score);
 		System.assertEquals(true, cardData.isReached);
 		System.assertEquals(reachedAchievement.CreatedDate.getTime(), cardData.ReachedDate);
 	}
@@ -155,6 +156,7 @@ private class AchievementsDataHelperTest {
 		System.assertEquals(achievement1.Id, cardData.Id);
 		System.assertEquals(achievement1.UITitle__c, cardData.uiTitle);
 		System.assertEquals(achievement1.UIDescription__c, cardData.uiDescription);
+		System.assertEquals(achievement1.Score__c, cardData.score);
 		System.assertEquals(false, cardData.isReached);
 		System.assertEquals(0, cardData.ReachedDate);
 	}

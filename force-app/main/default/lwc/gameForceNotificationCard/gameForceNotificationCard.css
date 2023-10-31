@@ -1,0 +1,16 @@
+.achievement-header {
+    font-size: .875rem;
+    line-height: 1.7;
+    color: #585858;
+}
+
+.achievement-title {
+    font-size: 1.125rem;
+    line-height: 1.3;
+}
+
+.achievement-subtitle {
+    font-size: .875rem;
+    line-height: 1.7;
+    text-overflow: ellipsis;
+}

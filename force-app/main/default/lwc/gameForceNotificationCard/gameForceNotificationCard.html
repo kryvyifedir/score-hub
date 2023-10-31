@@ -1,0 +1,21 @@
+<template>
+    <div class="slds-grid slds-wrap slds-var-p-around_large">
+        <div class="slds-col slds-shrink-none slds-size_1-of-1">
+            <div style="float: right;"> 
+                <lightning-badge label={numberOfPoints} class={scoreClass}></lightning-badge>
+            </div>
+        </div>
+        <div class="slds-col slds-shrink-none slds-size_1-of-1 slds-var-m-bottom_small">
+            <c-achievement-icon achievement={achievement} size="large"></c-achievement-icon>
+        </div>
+        <div class="slds-col slds-shrink-none slds-size_1-of-1 achievement-header slds-var-m-bottom_xx-small">
+            {headerText}
+        </div>
+        <div class="slds-col slds-shrink-none slds-size_1-of-1 achievement-title slds-var-m-bottom_xx-small">
+            {achievement.uiTitle}
+        </div>
+        <div class="slds-col slds-shrink-none slds-size_1-of-1 achievement-subtitle slds-var-m-bottom_xx-small">
+            {achievement.uiDescription}
+        </div>
+    </div>
+</template>

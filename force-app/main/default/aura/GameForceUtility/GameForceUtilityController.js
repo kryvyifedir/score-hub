@@ -20,11 +20,7 @@
             // Subscription response received.
             // We haven't received an event yet.
             console.log('Subscription request sent to: ', subscription.channel);
-            // Save subscription to unsubscribe later
-            component.set('v.subscription', subscription);
-
         });
-
 
         empApi.onError($A.getCallback(error => {
             // console.error for deubgging purposes

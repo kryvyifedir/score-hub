@@ -10,14 +10,12 @@
                 <c-svg-error header={labels.ErrorLabel} subheader="Unable to retrieve information about achievements"></c-svg-error>
             </div>
         </template>
-        <template lwc:else>
-            <template lwc:if={achievementReachedEventReceived}>
-                <c-achievement-card achievement={achievement}></c-achievement-card>
-                <c-confetti></c-confetti>
-            </template>
-            <template lwc:else>
-                <c-achievement-card achievement={achievement}></c-achievement-card>
-            </template>
+        <template lwc:elseif={showReached}>
+            <c-game-force-notification-card achievement={reachedAchievement}></c-game-force-notification-card>
+            <c-confetti></c-confetti>
+        </template>
+        <template lwc:elseif={showClosest}>
+            <c-game-force-notification-card achievement={closestAchievement}></c-game-force-notification-card>
         </template>
     </div>
 </template>

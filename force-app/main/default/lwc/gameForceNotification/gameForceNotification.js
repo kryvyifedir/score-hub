@@ -14,43 +14,51 @@ export default class GameForceNotification extends LightningElement {
 
     @api achievementId
     userId = Id;
-    achievement
+    reachedAchievement;
+    closestAchievement;
 
     isLoading = false;
-    isError = true;
-    achievementReachedEventReceived
+    isError;
 
-    // @wire(getAchievementById, { achievementId: "$achievementId" })
-    // wiredAchievementData({ error, data }) {
-    //     if (data) {
-    //         if (data.Success) {
-    //             this.achievement = data.Success
-    //             this.achievementReachedEventReceived = true;
-    //             this.isLoading = false;
-    //         } else if (data.Error) {
-    //             console.log(JSON.stringify(data.Error))
-    //             isError = true;
-    //         }
-    //     } else if (error) {
-    //         console.log(JSON.stringify(error))
-    //         isError = true;
-    //     }
-    // }
+    @wire(getAchievementById, { achievementId: "$achievementId", userId: "$userId" })
+    wiredAchievementData({ error, data }) {
+        if (data) {
+            if (data.Success) {
+                this.reachedAchievement = data.Success
+                this.isLoading = false;
+            } else if (data.Error) {
+                console.log(JSON.stringify(data.Error))
+                isError = true;
+            }
+        } else if (error) {
+            console.log(JSON.stringify(error))
+            isError = true;
+        }
+    }
 
-    // @wire(getClosestReachableAchievement, { userId: "$userId" })
-    // wiredGetClosesReachableAchievement({ error, data }) {
-    //     if (data) {
-    //         if (data.Success) {
-    //             this.achievement = data.Success
-    //             this.achievementReachedEventReceived = false
-    //         } else if (data.Error) {
-    //             console.log(JSON.stringify(data.Error))
-    //             this.isError = true
-    //         }
-    //     } else if (error) {
-    //         console.log(JSON.stringify(error))
-    //         this.isError = true
-    //     }
-    //     this.isLoading = false;
-    // }
+    @wire(getClosestReachableAchievement, { userId: "$userId" })
+    wiredGetClosesReachableAchievement({ error, data }) {
+        if (data) {
+            if (data.Success) {
+                this.closestAchievement = data.Success
+                this.isLoading = false;
+            } else if (data.Error) {
+                console.log(JSON.stringify(data.Error))
+                this.isError = true
+                this.isLoading = false;
+            }
+        } else if (error) {
+            console.log(JSON.stringify(error))
+            this.isError = true
+            this.isLoading = false;
+        }
+    }
+
+    get showReached() {
+        return this.reachedAchievement
+    }
+
+    get showClosest() {
+        return this.closestAchievement && !this.achievementId && !this.reachedAchievement
+    }
 }

@@ -1,14 +1,55 @@
 @IsTest(isParallel=true)
 private class GameForceNotificationControllerTest {
+	
 	@IsTest
-	private static void getAchievementById_AchievementIdPassed_AchievementReturned() {
+	private static void getAchievementById_allDataExists_AchievementReturned() {
 		// Given
+		Id userId = UserInfo.getUserId();
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
+		ReachedAchievement__c reachedAchievement = TestDataFactory.createReachedAchievement(userId, achievement.Id);
+		
+		// When
+		Test.startTest();
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id, userId);
+		Test.stopTest();
+
+		// Then
+		System.assert(result.containsKey('Success'), 'Success is expected');
+		System.assert(!result.containsKey('Error'), 'Error is not expected');
+		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		DataWrappers.AchievementCardData resultObj = (DataWrappers.AchievementCardData) result.get('Success');
+		System.assertEquals(achievement.Id, resultObj.id, 'Achievement is expected to be returned');
+	}
+
+	@IsTest
+	private static void getAchievementById_noDataExists_AchievementReturned() {
+		// Given
+		Id userId = UserInfo.getUserId();
+
+		// When
+		Test.startTest();
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(userId, userId);
+		Test.stopTest();
+
+		// Then
+		System.assert(result.containsKey('Success'), 'Success is expected');
+		System.assert(!result.containsKey('Error'), 'Error is not expected');
+		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		DataWrappers.AchievementCardData resultObj = (DataWrappers.AchievementCardData) result.get('Success');
+		System.assertEquals(null, resultObj, 'null is expected to be returned');
+	}
+
+	@IsTest
+	private static void getAchievementById_noReachedAchievement_AchievementReturned() {
+		// Given
+		Id userId = UserInfo.getUserId();
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
 		
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id);
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id, userId);
 		Test.stopTest();
 
 		// Then
@@ -23,12 +64,13 @@ private class GameForceNotificationControllerTest {
 	private static void getAchievementById_UnexpectedException_ExceptionHandled() {
 		// Given
 		GameForceNotificationController.throwException = true;
+		Id userId = UserInfo.getUserId();
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
 		
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id);
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id, userId);
 		Test.stopTest();
 
 		// Then

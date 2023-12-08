@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
-import ModalTest from 'c/compareUsersModal';
+import CompareUsersModal from 'c/compareUsersModal';
+import CurrentUserId from "@salesforce/user/Id";
 
 //Custom Labels
 import LoadingLabel from '@salesforce/label/c.Loading';
@@ -13,6 +14,7 @@ export default class LeaderboardTab extends LightningElement {
         LoadingLabel, BeTheFirstOneLabel, NoOneHasUnlockedAchievementLabel, ErrorLabel, UnableToLoadLeadeboardLabel
     };
 
+    currentUserId = CurrentUserId;
     @api users = []
     @api isReady = false
     @api isError = false
@@ -34,16 +36,13 @@ export default class LeaderboardTab extends LightningElement {
     }
 
     async handleUserCardClicked(event) {
-        const result = await ModalTest.open({
-            // `label` is not included here in this example.
-            // it is set on lightning-modal-header instead
-            label: 'test',
-            size: 'large',
-            description: 'Accessible description of modal\'s purpose',
-            content: 'Passed into content api',
-        });
-        // if modal closed with X button, promise returns result = 'undefined'
-        // if modal closed with OK button, promise returns result = 'okay'
-        console.log(result);
+        if (this.currentUserId && event.detail && this.currentUserId !== event.detail) {
+            const result = await CompareUsersModal.open({
+                label: 'test',
+                size: 'medium',
+                description: 'Accessible description of modal\'s purpose',
+                content: [this.currentUserId, event.detail],
+            });
+        }
     }
 }

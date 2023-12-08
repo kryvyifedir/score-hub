@@ -1,13 +1,12 @@
 public with sharing class UserInfoController {
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getCurrentUserInfo() {
-		DataWrappers.UserCardData result;
+	public static Map<String, Object> getUsersInfo(List<Id> userIds) {
+		Map<Id, DataWrappers.UserCardData> result = new Map<Id, DataWrappers.UserCardData>();
 		try {
-			Id userId = UserInfo.getUserId();
 			Integer allAchievementsCount = AchievementSelector.getInstance().getAll().size();
-			result = UserDataHelper.getUserCardDataById(new Set<Id> { userId }, allAchievementsCount).get(userId);
+			result = UserDataHelper.getUserCardDataById(new Set<Id>(userIds), allAchievementsCount);
 		} catch (Exception e) {
-			Logger.saveSingleLog('Unexpected exception caught in UserAchievementsController. ' + e.getMessage() + '. ' + e.getStackTraceString());
+			Logger.saveSingleLog('Unexpected exception caught in UserInfoController. ' + e.getMessage() + '. ' + e.getStackTraceString());
 			return ControllerResponse.error('Unable to get total achievements count');
 		}
 

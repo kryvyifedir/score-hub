@@ -1,7 +1,7 @@
 @IsTest
 private class UserInfoControllerTest {
 	@IsTest
-	private static void getUserInfoById_userWithReachedAchivementsExists_infoReturned() {
+	private static void getUsersInfo_userWithReachedAchivementsExists_infoReturned() {
 		// Given
 		User usr = [SELECT Id, Name, FullPhotoUrl FROM User WHERE ID = :UserInfo.getUserId() LIMIT 1];
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
@@ -12,14 +12,16 @@ private class UserInfoControllerTest {
 
 		// When 
 		Test.startTest();
-		Map<String, Object> result = UserInfoController.getCurrentUserInfo();
+		Map<String, Object> result = UserInfoController.getUsersInfo(new List<Id> { usr.Id });
 		Test.stopTest();
 
 		// Then
 		System.assert(result.containsKey('Success'), 'Map is expected to contain Success key');
 		System.assert(!result.containsKey('Error'), 'Map is not expected to contain Error key');
 		System.assert(!result.containsKey('Warning'), 'Map is not expected to contain Warning key');
-		DataWrappers.UserCardData cardData = (DataWrappers.UserCardData) result.get('Success');
+		Map<Id, DataWrappers.UserCardData> cardDataMap = (Map<Id, DataWrappers.UserCardData>) result.get('Success');
+		System.assert(cardDataMap != null, 'Map with userInfo is expected to be returned');
+		DataWrappers.UserCardData cardData = cardDataMap.get(usr.Id);
 		System.assertEquals(usr.Name, cardData.name, 'Name of current user is expected to be returned');
 		System.assertEquals(usr.FullPhotoUrl, cardData.fullPhotoUrl, 'FullPhotoUrl of current user is expected to be returned');
 		System.assertEquals(2, cardData.reachedAchievementsCount, 'Total number of reached achievements is expected');

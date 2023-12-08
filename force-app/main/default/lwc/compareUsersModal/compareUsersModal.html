@@ -1,6 +1,15 @@
 <template>
     <lightning-modal-header label="Compare Users"></lightning-modal-header>
-    <lightning-modal-body> Content: {content} </lightning-modal-body>
+    <lightning-modal-body>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-right_xxx-small">
+                <c-user-card user-info={userInfo1}></c-user-card>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-left_xxx-small">
+                <c-user-card user-info={userInfo2}></c-user-card>
+            </div>
+        </div>
+    </lightning-modal-body>
     <lightning-modal-footer>
         <lightning-button label="OK" onclick={handleOkay}></lightning-button>
     </lightning-modal-footer>

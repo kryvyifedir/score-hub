@@ -1,6 +1,7 @@
 import { LightningElement, wire } from 'lwc';
+import CurrentUserId from "@salesforce/user/Id";
 // APEX Controller methods
-import getCurrentUserAchievementsList from '@salesforce/apex/AchievementsListController.getCurrentUserAchievementsList';
+import getUserAchievementsById from '@salesforce/apex/AchievementsInfoController.getUserAchievementsById';
 //Custom Labels
 import YourAchievementsLabel from '@salesforce/label/c.YourAchievements';
 import ErrorLabel from '@salesforce/label/c.Error';
@@ -17,16 +18,18 @@ export default class CurrentUserAchievements extends LightningElement {
         ContactAdministratorLabel
     };
 
+    userId = CurrentUserId
+    userIds = [CurrentUserId]
     achievements
     isError = false
     isLoading = true
 
     // Getting current user info
-    @wire(getCurrentUserAchievementsList)
+    @wire(getUserAchievementsById, { userIds: "$userIds" })
     wiredAchievementsList({ error, data }) {
         if (data) {
             if (data.Success) {
-                this.achievements = data.Success
+                this.achievements = data.Success[this.userId]
                 this.isLoading = false;
             } else if (data.Error) {
                 console.log(JSON.stringify(data.Error))

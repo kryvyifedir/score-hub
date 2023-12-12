@@ -1,6 +1,6 @@
 public with sharing class UserInfoController {
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getUsersInfo(List<Id> userIds) {
+	public static Map<String, Object> getUserInfoById(List<Id> userIds) {
 		Map<Id, DataWrappers.UserCardData> result = new Map<Id, DataWrappers.UserCardData>();
 		try {
 			Integer allAchievementsCount = AchievementSelector.getInstance().getAll().size();

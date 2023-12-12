@@ -1,7 +1,7 @@
 @IsTest
 private class UserInfoControllerTest {
 	@IsTest
-	private static void getUsersInfo_userWithReachedAchivementsExists_infoReturned() {
+	private static void getUserInfoById_userWithReachedAchivementsExists_infoReturned() {
 		// Given
 		User usr = [SELECT Id, Name, FullPhotoUrl FROM User WHERE ID = :UserInfo.getUserId() LIMIT 1];
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
@@ -12,7 +12,7 @@ private class UserInfoControllerTest {
 
 		// When 
 		Test.startTest();
-		Map<String, Object> result = UserInfoController.getUsersInfo(new List<Id> { usr.Id });
+		Map<String, Object> result = UserInfoController.getUserInfoById(new List<Id> { usr.Id });
 		Test.stopTest();
 
 		// Then

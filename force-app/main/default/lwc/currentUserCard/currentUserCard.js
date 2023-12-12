@@ -2,7 +2,7 @@ import { LightningElement, wire, track } from 'lwc';
 import CurrentUserId from "@salesforce/user/Id";
 
 // APEX Controller methods
-import getUsersInfo from '@salesforce/apex/UserInfoController.getUsersInfo';
+import getUserInfoById from '@salesforce/apex/UserInfoController.getUserInfoById';
 
 export default class UserView extends LightningElement {
     userId = CurrentUserId
@@ -10,7 +10,7 @@ export default class UserView extends LightningElement {
     userInfo
 
     // Getting current user info
-    @wire(getUsersInfo, { userIds: "$userIds" })
+    @wire(getUserInfoById, { userIds: "$userIds" })
     wiredUserInfo({ error, data }) {
         if (data) {
             if (data.Success) {

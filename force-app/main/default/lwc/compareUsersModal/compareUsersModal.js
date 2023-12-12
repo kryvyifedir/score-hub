@@ -2,7 +2,7 @@ import { LightningElement, api, wire } from 'lwc';
 import LightningModal from 'lightning/modal';
 
 // APEX Controller methods
-import getUsersInfo from '@salesforce/apex/UserInfoController.getUsersInfo';
+import getUserInfoById from '@salesforce/apex/UserInfoController.getUserInfoById';
 
 export default class CompareUsersModal extends LightningModal {
     @api content;
@@ -10,7 +10,7 @@ export default class CompareUsersModal extends LightningModal {
     userInfo2
 
     // Getting current user info
-    @wire(getUsersInfo, { userIds: "$content" })
+    @wire(getUserInfoById, { userIds: "$content" })
     wiredUserInfo({ error, data }) {
         if (data) {
             if (data.Success) {

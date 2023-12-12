@@ -38,9 +38,8 @@ export default class LeaderboardTab extends LightningElement {
     async handleUserCardClicked(event) {
         if (this.currentUserId && event.detail && this.currentUserId !== event.detail) {
             const result = await CompareUsersModal.open({
-                label: 'test',
                 size: 'medium',
-                description: 'Accessible description of modal\'s purpose',
+                description: 'Compare user achievements',
                 content: [this.currentUserId, event.detail],
             });
         }

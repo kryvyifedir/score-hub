@@ -1,12 +1,21 @@
 <template>
-    <lightning-modal-header label="Compare Users"></lightning-modal-header>
-    <lightning-modal-body>
-        <div class="slds-grid">
+    <lightning-modal-header label="Compare Achievements">
+        <div class="slds-grid slds-var-m-top_x-small">
             <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-right_xxx-small">
                 <c-user-card user-info={userInfo1}></c-user-card>
             </div>
             <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-left_xxx-small">
                 <c-user-card user-info={userInfo2}></c-user-card>
+            </div>
+        </div>
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2 slds-var-m-right_xxx-small slds-var-p-left_large">
+                <c-achievements-list achievements={achievementsList1} is-loading={isLoadingAchievements}></c-achievements-list>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-var-m-left_xxx-small slds-var-p-left_large">
+                <c-achievements-list achievements={achievementsList2} is-loading={isLoadingAchievements}></c-achievements-list>
             </div>
         </div>
     </lightning-modal-body>

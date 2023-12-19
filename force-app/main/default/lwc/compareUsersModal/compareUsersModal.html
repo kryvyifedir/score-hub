@@ -1,25 +1,32 @@
 <template>
-    <lightning-modal-header label="Compare Achievements">
-        <div class="slds-grid slds-var-m-top_x-small">
-            <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-right_xxx-small">
-                <c-user-card user-info={userInfo1}></c-user-card>
+    <lightning-modal-header label={labels.CompareAchievementsHeaderLabel}>
+        <template lwc:if={showHeader}>
+            <div class="slds-grid slds-var-m-top_x-small">
+                <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-right_xxx-small">
+                    <c-user-card user-info={userInfo1}></c-user-card>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-left_xxx-small">
+                    <c-user-card user-info={userInfo2}></c-user-card>
+                </div>
             </div>
-            <div class="slds-col slds-size_1-of-2 slds-box slds-var-m-left_xxx-small">
-                <c-user-card user-info={userInfo2}></c-user-card>
-            </div>
-        </div>
+        </template>
     </lightning-modal-header>
     <lightning-modal-body>
-        <div class="slds-grid">
-            <div class="slds-col slds-size_1-of-2 slds-var-m-right_xxx-small slds-var-p-left_large">
-                <c-achievements-list achievements={achievementsList1} is-loading={isLoadingAchievements}></c-achievements-list>
+        <template lwc:if={isLoadingAchievementsIssue}>
+            <c-svg-error header={labels.ErrorLabel} subheader={labels.ErrorLoadingAchievementsLabel}></c-svg-error>
+        </template>
+        <template lwc:else>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2 slds-var-m-right_xxx-small slds-var-p-left_large">
+                    <c-achievements-list achievements={achievementsList1} is-loading={isLoadingAchievements}></c-achievements-list>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-var-m-left_xxx-small slds-var-p-left_large">
+                    <c-achievements-list achievements={achievementsList2} is-loading={isLoadingAchievements}></c-achievements-list>
+                </div>
             </div>
-            <div class="slds-col slds-size_1-of-2 slds-var-m-left_xxx-small slds-var-p-left_large">
-                <c-achievements-list achievements={achievementsList2} is-loading={isLoadingAchievements}></c-achievements-list>
-            </div>
-        </div>
+        </template>
     </lightning-modal-body>
     <lightning-modal-footer>
-        <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+        <lightning-button label={labels.CloseButtonLabel} onclick={handleOkay}></lightning-button>
     </lightning-modal-footer>
 </template>

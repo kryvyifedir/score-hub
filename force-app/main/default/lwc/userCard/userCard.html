@@ -1,12 +1,12 @@
 <template>
-  <div class="slds-card slds-box" onclick={handleUserCardClicked}>
+  <div class="slds-card slds-box" onclick={handleUserCardClicked} style="text-align: left;">
     <div class="slds-grid slds-grid_vertical-align-center">
       <template lwc:if={userInfo}>
         <div class="slds-col slds-grow-none">
           <lightning-avatar variant="circle" fallback-icon-name="standard:avatar_loading" size="large"
             src={userInfo.fullPhotoUrl} alternative-text={labels.AvatarAltTextLabel}></lightning-avatar>
         </div>
-        <div class="slds-col slds-var-p-horizontal_small slds-truncate">
+        <div class="slds-col slds-var-p-horizontal_small slds-truncate slds-grid_align-end">
           <!-- Name -->
           <lightning-formatted-text class="slds-text-heading_medium" value={userInfo.name}
             title={userInfo.name}></lightning-formatted-text>

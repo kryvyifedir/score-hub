@@ -1,7 +1,7 @@
 <template>
     <template lwc:if={showData}>
         <template for:each={users} for:item="userData">
-            <c-user-card key={userData.id} user-info={userData}></c-user-card>
+            <c-user-card key={userData.id} user-info={userData} onclicked={handleUserCardClicked}></c-user-card>
         </template>
     </template>
     <template lwc:if={showLoading}>

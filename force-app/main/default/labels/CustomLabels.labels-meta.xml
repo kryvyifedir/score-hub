@@ -160,4 +160,20 @@
         <shortDescription>No Achievements Found</shortDescription>
         <value>No achievements found</value>
     </labels>
+    <labels>
+        <fullName>CompareAchievementsHeader</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CompareAchievementsHeader</shortDescription>
+        <value>Compare Achievements</value>
+    </labels>
+    <labels>
+        <fullName>Close</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Close</shortDescription>
+        <value>Close</value>
+    </labels>
 </CustomLabels>

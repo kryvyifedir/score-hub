@@ -34,4 +34,8 @@ export default class UserCard extends LightningElement {
     get getScore() {
         return this.userInfo.totalScore ? this.userInfo.totalScore : 0;
     }
+
+    handleUserCardClicked() {
+        this.dispatchEvent(new CustomEvent("clicked", { detail: this.userInfo.id }));
+    }
 }

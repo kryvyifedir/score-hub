@@ -1,7 +1,7 @@
 @IsTest
-private class AchievementsListControllerTest {
+private class AchievementsInfoControllerTest {
     @IsTest 
-	private static void getCurrentUserAchievementsList_ReachedAchievementExists_AchievementListReturned() {
+	private static void getUserAchievementsById_ReachedAchievementExists_AchievementListReturned() {
         // Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement1 = TestDataFactory.initAchievement('Ach1', measurement.Id);
@@ -12,7 +12,7 @@ private class AchievementsListControllerTest {
 
 		// When
 		Test.startTest();
-        Map<String, Object> result = AchievementsListController.getCurrentUserAchievementsList();
+        Map<String, Object> result = AchievementsInfoController.getUserAchievementsById(new List<Id>{UserInfo.getUserId()});
 		Test.stopTest();
 
 		// Then
@@ -20,8 +20,11 @@ private class AchievementsListControllerTest {
         System.assert(!result.containsKey('Warning'), 'Resulting map is not expected to have "Warning" key');
         System.assert(!result.containsKey('Error'), 'Resulting map is not expected to have "Error" key');
 
-        List<DataWrappers.AchievementCardData> userAchievementCardDataList = (List<DataWrappers.AchievementCardData>) result.get('Success');
-        System.assertEquals(2, userAchievementCardDataList.size(), '2 Achievements are expected');
+		Map<Id, List<DataWrappers.AchievementCardData>> achievementsByUserIdMap = (Map<Id, List<DataWrappers.AchievementCardData>>) result.get('Success');
+        List<DataWrappers.AchievementCardData> userAchievementCardDataList =  achievementsByUserIdMap.get(UserInfo.getUserId());
+        
+		System.assertNotEquals(null, userAchievementCardDataList, 'Achievements are expected to be found for current user');
+		System.assertEquals(2, userAchievementCardDataList.size(), '2 Achievements are expected');
 		for (DataWrappers.AchievementCardData achievementData : userAchievementCardDataList) {
 			if (achievementData.id == achievement1.Id) {
 				System.assertEquals(true, achievementData.isReached, 'First achievement for the user is expected to be marked as reached');

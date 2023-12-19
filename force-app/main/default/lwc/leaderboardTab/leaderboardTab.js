@@ -1,4 +1,7 @@
 import { LightningElement, api } from 'lwc';
+import CompareUsersModal from 'c/compareUsersModal';
+import CurrentUserId from "@salesforce/user/Id";
+
 //Custom Labels
 import LoadingLabel from '@salesforce/label/c.Loading';
 import BeTheFirstOneLabel from '@salesforce/label/c.BeTheFirstOne';
@@ -11,6 +14,7 @@ export default class LeaderboardTab extends LightningElement {
         LoadingLabel, BeTheFirstOneLabel, NoOneHasUnlockedAchievementLabel, ErrorLabel, UnableToLoadLeadeboardLabel
     };
 
+    currentUserId = CurrentUserId;
     @api users = []
     @api isReady = false
     @api isError = false
@@ -29,5 +33,15 @@ export default class LeaderboardTab extends LightningElement {
 
     get showError() {
         return this.isError
+    }
+
+    async handleUserCardClicked(event) {
+        if (this.currentUserId && event.detail && this.currentUserId !== event.detail) {
+            const result = await CompareUsersModal.open({
+                size: 'medium',
+                description: 'Compare user achievements',
+                content: [this.currentUserId, event.detail],
+            });
+        }
     }
 }

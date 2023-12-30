@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants access to use GameForce app</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>GameForce User</label>
+    <permissionSets>GameForceApexClasses</permissionSets>
+    <permissionSets>GameForceAppLeaderboardsTab</permissionSets>
+    <permissionSets>GameForceAppPermisssion</permissionSets>
+    <permissionSets>GameForceModifyLogs</permissionSets>
+    <permissionSets>GameForcePlatformEvents</permissionSets>
+    <permissionSets>GameForceViewAchievements</permissionSets>
+    <permissionSets>GameForceViewMeasurements</permissionSets>
+    <permissionSets>GameForceViewReachedAchievements</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

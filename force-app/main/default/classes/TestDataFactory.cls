@@ -104,4 +104,11 @@ public class TestDataFactory {
 		post.Body = 'Post body';
 		return post;
 	}
+
+	public static Case initCase(String status) {
+		Case newCase = new Case();
+		newCase.OwnerId = UserInfo.getUserId();
+		newCase.Status = status;
+		return newCase;
+	}
 }

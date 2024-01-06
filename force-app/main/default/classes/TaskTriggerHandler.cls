@@ -32,7 +32,7 @@ public with sharing class TaskTriggerHandler extends BaseGameForceTriggerHandler
 
 			if(newTask.Status == 'Completed') {
 				Task oldTask = oldTasks?.get(taskId);
-				if (!(oldTask != null && oldTask.Status == 'Completed')) {
+				if (oldTask == null || oldTask.Status != 'Completed') {
 					tasksToProcess.add(newTask);
 				}
 			}

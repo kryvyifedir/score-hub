@@ -19,6 +19,6 @@ Project documentation includes:
 - [Aura LWC wrappers](/docs/AURA.md)
 - [Apex guidelines](/docs/CLASSES.md)
 - [GameForce data schema](/docs/OBJECTS.md)
-- LWC Components **WIP**
+- [LWC Components](/docs/LWC.md)
 - [Permission sets and groups](/docs/PERMISSIONSETSANDGROUPS.md)
 - [Communicating with Platform events](/docs/PLATFORMEVENTS.md)

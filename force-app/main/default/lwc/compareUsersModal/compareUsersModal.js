@@ -49,7 +49,6 @@ export default class CompareUsersModal extends LightningModal {
     @wire(getUserAchievementsById, { userIds: "$content" })
     wiredAchievementInfo({ error, data }) {
         if (data) {
-            console.log(JSON.stringify(data))
             if (data.Success) {
                 this.achievementsList1 = data.Success[this.content[0]]
                 this.achievementsList2 = data.Success[this.content[1]]

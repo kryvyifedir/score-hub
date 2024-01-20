@@ -2,15 +2,15 @@
     // Sets an empApi error handler on component initialization
     onInit : function(component, event, helper) {
         const empApi = component.find('empApi');
-        const channel = '/event/AchievementReached__e';
+        const channel = '/event/GameForce__AchievementReached__e';
         const replayId = -1;
 
         empApi.subscribe(channel, replayId, $A.getCallback(eventReceived => {
             console.log('Received event ', JSON.stringify(eventReceived));
-            if (eventReceived.data && eventReceived.data.payload && eventReceived.data.payload.UserId__c) {
+            if (eventReceived.data && eventReceived.data.payload && eventReceived.data.payload.GameForce__UserId__c) {
                 var userId = $A.get("$SObjectType.CurrentUser.Id");
-                if (userId === eventReceived.data.payload.UserId__c) {
-                    component.set("v.achievementId", eventReceived.data.payload.AchievementId__c);
+                if (userId === eventReceived.data.payload.GameForce__UserId__c) {
+                    component.set("v.achievementId", eventReceived.data.payload.GameForce__AchievementId__c);
                     var utilityAPI = component.find("utilitybar");
                     utilityAPI.openUtility();
                 }

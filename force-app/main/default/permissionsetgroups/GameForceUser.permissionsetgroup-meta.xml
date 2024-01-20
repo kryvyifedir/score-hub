@@ -3,13 +3,13 @@
     <description>Grants access to use GameForce app</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce User</label>
-    <permissionSets>GameForceApexClasses</permissionSets>
-    <permissionSets>GameForceAppLeaderboardsTab</permissionSets>
-    <permissionSets>GameForceAppPermisssion</permissionSets>
-    <permissionSets>GameForceModifyLogs</permissionSets>
-    <permissionSets>GameForcePlatformEvents</permissionSets>
-    <permissionSets>GameForceViewAchievements</permissionSets>
-    <permissionSets>GameForceViewMeasurements</permissionSets>
-    <permissionSets>GameForceViewReachedAchievements</permissionSets>
+    <permissionSets>GameForce__GameForceApexClasses</permissionSets>
+    <permissionSets>GameForce__GameForceAppLeaderboardsTab</permissionSets>
+    <permissionSets>GameForce__GameForceAppPermisssion</permissionSets>
+    <permissionSets>GameForce__GameForceModifyLogs</permissionSets>
+    <permissionSets>GameForce__GameForcePlatformEvents</permissionSets>
+    <permissionSets>GameForce__GameForceViewAchievements</permissionSets>
+    <permissionSets>GameForce__GameForceViewMeasurements</permissionSets>
+    <permissionSets>GameForce__GameForceViewReachedAchievements</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

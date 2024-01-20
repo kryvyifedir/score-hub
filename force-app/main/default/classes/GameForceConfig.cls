@@ -1,5 +1,5 @@
-public with sharing class GameForceConfig {
-	public static void config() {
+public with sharing class GameForceConfig implements InstallHandler {
+	public void onInstall(InstallContext context) {
 		List<Measurement__c> measurementsToInsert = new List<Measurement__c>();
 		List<Achievement__c> achievementsToInsert = new List<Achievement__c>();
 
@@ -232,7 +232,6 @@ public with sharing class GameForceConfig {
 			Enabled__c = true);
 		achievementsToInsert.add(case100Closed);
 		
-
 		insert achievementsToInsert;
 	}
 }

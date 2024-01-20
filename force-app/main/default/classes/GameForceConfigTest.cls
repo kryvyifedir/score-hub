@@ -3,10 +3,12 @@ private class GameForceConfigTest {
 	@IsTest
 	private static void config_noRecordsExist_recordsCreated(){
 		// Given
+		InstallContext context;
 
 		// When
 		Test.startTest();
-		GameForceConfig.config();
+		GameForceConfig config = new GameForceConfig();
+		config.onInstall(context);
 		Test.stopTest();
 
 		List<Measurement__c> result1 = [SELECT Id FROM Measurement__c];

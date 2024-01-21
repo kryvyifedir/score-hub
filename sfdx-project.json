@@ -2,15 +2,19 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true,
-      "package": "GameForce App",
+      "package": "GameForce",
       "versionName": "Version 1.0",
       "versionNumber": "1.0.0.NEXT",
+      "default": true,
+      "versionDescription": "GameForce MVP",
       "postInstallScript": "GameForceConfig"
     }
   ],
   "name": "GameForce",
   "namespace": "GameForce",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "59.0"
+  "sourceApiVersion": "59.0",
+  "packageAliases": {
+    "GameForce": "0Ho69000000GmhUCAS"
+  }
 }

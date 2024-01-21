@@ -1,99 +1,31 @@
 @IsTest(isParallel=true)
 private class MeasurementSelectorTest {
 	@IsTest
-	private static void getByIds_recordWithIdExists_recordsReturned(){
+	private static void sObjectApiName_sObjectNameReturned_nameIsValidated() {
 		// Given
-		Measurement__c measurement1 = TestDataFactory.createMeasurement('Found');
-		Measurement__c measurement2 = TestDataFactory.createMeasurement('Not found');
-
-		// When 
+		MeasurementSelector selector = MeasurementSelector.getInstance();
+		
+		// When
 		Test.startTest();
-		List<Measurement__c> result = MeasurementSelector.getByIds(new Set<Id>{ measurement1.Id });
-		Map<Id,Measurement__c> resultMap = new Map<Id,Measurement__c>(result);
+		String result = selector.sObjectApiName();
 		Test.stopTest();
 
-		// Then
-		System.assertEquals(1, result.size(), 'Record is expected to be found');
-		System.assert(resultMap.containsKey(measurement1.Id), 'Map is expected to have a specific measurement');
-		System.assert(!resultMap.containsKey(measurement2.Id), 'Map is not expected to have a specific measurement');
+		// Then 
+		system.assertEquals('Measurement__c', result, 'Measurement__c sObject ApiName is expected');
 	}
 
 	@IsTest
-	private static void getByIds_emptyIdsSet_emptyListReturned(){
+	private static void fieldApiNames_sObjectNameReturned_fieldSetIsValidated() {
 		// Given
-		Set<Id> ids = new Set<Id>();
-
-		// When 
+		MeasurementSelector selector = MeasurementSelector.getInstance();
+		
+		// When
 		Test.startTest();
-		List<Measurement__c> result = MeasurementSelector.getByIds(ids);
+		Set<String> result = selector.fieldApiNames();
 		Test.stopTest();
 
-		// Then
-		System.assertNotEquals(null, result, 'Empty list is expected');
-		System.assertEquals(0, result.size(), 'Empty list is expected');
-	}
-
-	@IsTest
-	private static void getByIds_noRecordsFound_emptyListReturned(){
-		// Given
-		Measurement__c measurement = TestDataFactory.createMeasurement('REMOVED');
-		Id measurementId = measurement.Id;
-		delete new List<Measurement__c> { measurement };
-
-		// When 
-		Test.startTest();
-		List<Measurement__c> result = MeasurementSelector.getByIds(new Set<Id> { measurementId });
-		Test.stopTest();
-
-		// Then
-		System.assertNotEquals(null, result, 'Empty list is expected');
-		System.assertEquals(0, result.size(), 'Empty list is expected');
-	}
-
-	@IsTest
-	private static void getByUniqueIds_recordWithUniqueIdExists_recordsReturned(){
-		// Given
-		Measurement__c measurement1 = TestDataFactory.createMeasurement('Found');
-		Measurement__c measurement2 = TestDataFactory.createMeasurement('Not found');
-
-		// When 
-		Test.startTest();
-		Map<String, Measurement__c> result = MeasurementSelector.getByUniqueIds(new Set<String>{ 'Found' });
-		Test.stopTest();
-
-		// Then
-		System.assertEquals(1, result.size(), 'Record is expected to be found');
-		System.assert(result.containsKey('Found'), 'Map is expected to have a specific measurement');
-		System.assert(!result.containsKey('Not found'), 'Map is not expected to have a specific measurement');
-	}
-
-	@IsTest
-	private static void getByUniqueIds_emptyIdsSet_emptyListReturned(){
-		// Given
-		Set<String> uniqueIds = new Set<String>();
-
-		// When 
-		Test.startTest();
-		Map<String, Measurement__c> result = MeasurementSelector.getByUniqueIds(uniqueIds);
-		Test.stopTest();
-
-		// Then
-		System.assertNotEquals(null, result, 'Empty map is expected');
-		System.assertEquals(0, result.size(), 'Empty map is expected');
-	}
-
-	@IsTest
-	private static void getByUniqueIds_noRecordsFound_emptyListReturned(){
-		// Given
-		Set<String> uniqueIds = new Set<String>{'Non existing id'};
-
-		// When 
-		Test.startTest();
-		Map<String, Measurement__c> result = MeasurementSelector.getByUniqueIds(uniqueIds);
-		Test.stopTest();
-
-		// Then
-		System.assertNotEquals(null, result, 'Empty list is expected');
-		System.assertEquals(0, result.size(), 'Empty list is expected');
+		// Then 
+		Set<String> expectedSet = new Set<String> {'Id', 'Name', 'UniqueIdentifier__c', 'Description__c'};
+		system.assertEquals(expectedSet, result, 'A specific field set is expected');
 	}
 }

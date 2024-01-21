@@ -1,0 +1,18 @@
+<template>
+    <template lwc:if={showData}>
+        <template for:each={users} for:item="userData">
+            <c-user-card key={userData.id} user-info={userData} onclicked={handleUserCardClicked}></c-user-card>
+        </template>
+    </template>
+    <template lwc:if={showLoading}>
+        <div class="slds-spinner_container slds-is-relative" style="height:10rem">
+            <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
+        </div>
+    </template>
+    <template lwc:if={showEmpty}>
+        <c-svg-no-data header={labels.BeTheFirstOneLabel} subheader={labels.NoOneHasUnlockedAchievementLabel}></c-svg-no-data>
+    </template>
+    <template lwc:if={showError}>
+        <c-svg-error header={labels.ErrorLabel} subheader={labels.UnableToLoadLeadeboardLabel}></c-svg-error>
+    </template>
+</template>

@@ -46,6 +46,3 @@ jobs:
       # Executing all unit tests
       - name: Run unit tests
         run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
-
-      
-

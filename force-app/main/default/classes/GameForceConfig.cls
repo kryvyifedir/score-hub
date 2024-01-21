@@ -1,5 +1,5 @@
-public with sharing class GameForceConfig {
-	public static void config() {
+public with sharing class GameForceConfig implements InstallHandler {
+	public void onInstall(InstallContext context) {
 		List<Measurement__c> measurementsToInsert = new List<Measurement__c>();
 		List<Achievement__c> achievementsToInsert = new List<Achievement__c>();
 
@@ -22,6 +22,11 @@ public with sharing class GameForceConfig {
 			UniqueIdentifier__c = Constants.CHATTER_POSTS_COUNTER_ID,
 			Description__c = 'Number of Tasks that were completed by user');
 		measurementsToInsert.add(chatterPostsMeasurement);
+
+		Measurement__c closedCasesMeasurement = new Measurement__c(
+			UniqueIdentifier__c = Constants.CLOSED_CASES_ID,
+			Description__c = 'Number of Cases that were closed by user');
+		measurementsToInsert.add(closedCasesMeasurement);
 
 		insert measurementsToInsert;
 
@@ -194,6 +199,39 @@ public with sharing class GameForceConfig {
 			Enabled__c = true);
 		achievementsToInsert.add(chatter200Posts);
 
+		Achievement__c case10Closed = new Achievement__c(
+			Measurement__c = closedCasesMeasurement.Id,
+			Name = 'Cases Closed LVL1',
+			UITitle__c = 'Detective',
+			UIDescription__c = 'Close 10 cases',
+			Description__c = 'Standard Achievement, that can be reached by closing 10 Cases',
+			Goal__c = 10,
+			Score__c = 10,
+			Enabled__c = true);
+		achievementsToInsert.add(case10Closed);
+
+		Achievement__c case50Closed = new Achievement__c(
+			Measurement__c = closedCasesMeasurement.Id,
+			Name = 'Cases Closed LVL2',
+			UITitle__c = 'Watson',
+			UIDescription__c = 'Close 50 cases',
+			Description__c = 'Standard Achievement, that can be reached by closing 50 Cases',
+			Goal__c = 50,
+			Score__c = 20,
+			Enabled__c = true);
+		achievementsToInsert.add(case50Closed);
+
+		Achievement__c case100Closed = new Achievement__c(
+			Measurement__c = closedCasesMeasurement.Id,
+			Name = 'Cases Closed LVL3',
+			UITitle__c = 'Sherlock',
+			UIDescription__c = 'Close 100 cases',
+			Description__c = 'Standard Achievement, that can be reached by closing 50 Cases',
+			Goal__c = 100,
+			Score__c = 100,
+			Enabled__c = true);
+		achievementsToInsert.add(case100Closed);
+		
 		insert achievementsToInsert;
 	}
 }

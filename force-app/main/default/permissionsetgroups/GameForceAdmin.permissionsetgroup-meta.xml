@@ -3,13 +3,14 @@
     <description>Grants access to modify GameForce measurements, achievements and implement custom achievement logic. Intended for use by Salesforce Admin users</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce Admin</label>
-    <permissionSets>GameForceApexClasses</permissionSets>
-    <permissionSets>GameForceAppAdminTabs</permissionSets>
-    <permissionSets>GameForceAppLeaderboardsTab</permissionSets>
-    <permissionSets>GameForceAppPermisssion</permissionSets>
-    <permissionSets>GameForceModifyAchievements</permissionSets>
-    <permissionSets>GameForceModifyLogs</permissionSets>
-    <permissionSets>GameForceModifyMeasurements</permissionSets>
-    <permissionSets>GameForcePlatformEvents</permissionSets>
+    <permissionSets>GameForce__GameForceApexClasses</permissionSets>
+    <permissionSets>GameForce__GameForceAppAdminTabs</permissionSets>
+    <permissionSets>GameForce__GameForceAppLeaderboardsTab</permissionSets>
+    <permissionSets>GameForce__GameForceAppPermisssion</permissionSets>
+    <permissionSets>GameForce__GameForceModifyAchievements</permissionSets>
+    <permissionSets>GameForce__GameForceModifyLogs</permissionSets>
+    <permissionSets>GameForce__GameForceModifyMeasurements</permissionSets>
+    <permissionSets>GameForce__GameForceModifyReachedAchievements</permissionSets>
+    <permissionSets>GameForce__GameForcePlatformEvents</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

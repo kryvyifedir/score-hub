@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Loading</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Loading</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>NumberOfAchievements</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Number of Achievements</shortDescription>
+        <value>Number of Achievements:</value>
+    </labels>
+    <labels>
+        <fullName>PersonalScore</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Personal Score</shortDescription>
+        <value>Personal Score:</value>
+    </labels>
+    <labels>
+        <fullName>YourAchievements</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Your Achievements</shortDescription>
+        <value>Your Achievements</value>
+    </labels>
+    <labels>
+        <fullName>OutOf</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Out of</shortDescription>
+        <value>out of</value>
+    </labels>
+    <labels>
+        <fullName>AvatarAltText</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Avatar Alt Text</shortDescription>
+        <value>User picture</value>
+    </labels>
+    <labels>
+        <fullName>OrderByCount</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order By Count</shortDescription>
+        <value>Number of Achievements</value>
+    </labels>
+    <labels>
+        <fullName>OrderByScore</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order By Score</shortDescription>
+        <value>Total Score</value>
+    </labels>
+    <labels>
+        <fullName>TopUsers</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Top users</shortDescription>
+        <value>Top users</value>
+    </labels>
+    <labels>
+        <fullName>UnableToRetrieveUsers</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unable to retrieve the list of users</shortDescription>
+        <value>Unable to retrieve the list of Users and their achievements. Please contact your system administrator</value>
+    </labels>
+    <labels>
+        <fullName>NoUsersHaverReachedAchievement</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No users have reached any achievement</shortDescription>
+        <value>No one has unlocked any achievement yet. Be the first one!</value>
+    </labels>
+    <labels>
+        <fullName>BeTheFirstOne</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Be the first one</shortDescription>
+        <value>Be the first one!</value>
+    </labels>
+    <labels>
+        <fullName>Error</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>NoOneHasUnlockedAchievement</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No one has unlocked any achievement</shortDescription>
+        <value>No one has unlocked any achievement yet!</value>
+    </labels>
+    <labels>
+        <fullName>UnableToLoadLeadeboard</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unable to load leadeboard</shortDescription>
+        <value>Unable to load the list of users, please contact your system administrator</value>
+    </labels>
+    <labels>
+        <fullName>KeepItUp</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Keep it up</shortDescription>
+        <value>Keep it up!</value>
+    </labels>
+    <labels>
+        <fullName>NoAchievementsUnlockedYet</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No achievements unlocked yet</shortDescription>
+        <value>You haven&apos;t unlocked any achievements yet</value>
+    </labels>
+    <labels>
+        <fullName>ContactAdministrator</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Contact Administrator</shortDescription>
+        <value>Please contact your system administrator</value>
+    </labels>
+    <labels>
+        <fullName>ErrorLoadingAchievements</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error Loading Achievements</shortDescription>
+        <value>Error occurred while loading the list of achievements</value>
+    </labels>
+    <labels>
+        <fullName>NoAchievementsFound</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No Achievements Found</shortDescription>
+        <value>No achievements found</value>
+    </labels>
+    <labels>
+        <fullName>CompareAchievementsHeader</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CompareAchievementsHeader</shortDescription>
+        <value>Compare Achievements</value>
+    </labels>
+    <labels>
+        <fullName>Close</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Close</shortDescription>
+        <value>Close</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-grid" style="position: relative; height: 100%; overflow:hidden;">
+        <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
+            <div style="height: 100%;">
+                <c-current-user-card></c-current-user-card>
+                <div class="slds-var-m-top_x-small" style="height: 95%">
+                    <c-current-user-achievements></c-current-user-achievements>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
+            <c-leaderboard></c-leaderboard>
+        </div>
+        <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
+            <c-svg-widgets-stub></c-svg-widgets-stub>
+        </div>
+    </div>
+</template>

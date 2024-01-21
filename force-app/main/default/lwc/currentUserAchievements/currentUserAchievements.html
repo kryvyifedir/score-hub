@@ -1,0 +1,42 @@
+<template>
+  <article class="slds-card" style="height: 87%;">
+    <div class="slds-card__header slds-grid">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+          <span class="slds-icon_container slds-icon-standard-account" title="account">
+            <lightning-icon alternative-text={labels.YourAchievementsLabel} icon-name="standard:entity_milestone">
+            </lightning-icon>
+            <span class="slds-assistive-text">{labels.YourAchievementsLabel}</span>
+          </span>
+        </div>
+        <div class="slds-media__body">
+          <h2 class="slds-card__header-title">
+            <span>{labels.YourAchievementsLabel}</span>
+          </h2>
+        </div>
+      </header>
+    </div>
+    <template lwc:if={isLoading}>
+      <div class="slds-card slds-spinner_container">
+        <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
+      </div>
+    </template>
+    <template lwc:if={isError}>
+      <div class="slds-var-m-around_small">
+        <c-svg-error header={labels.ErrorLabel} subheader={labels.ErrorLoadingAchievementsLabel}></c-svg-error>
+      </div>
+    </template>
+    <template lwc:elseif={showAchievements}>
+      <div class="slds-card__body slds-card__body_inner slds-box slds-var-m-around_small"
+        style="height: 83%; overflow: scroll;">
+        <c-achievements-list achievements={achievementsByDate} is-loading={isLoadingAchievements}></c-achievements-list>
+      </div>
+    </template>
+    <template lwc:elseif={showEmpty}>
+      <div class="slds-var-m-around_small">
+        <c-svg-no-data header={labels.NoAchievementsFoundLabel}
+          subheader={labels.ContactAdministratorLabel}></c-svg-no-data>
+      </div>
+    </template>
+  </article>
+</template>

@@ -34,7 +34,7 @@ public with sharing class FeedItemTriggerHandler extends BaseGameForceTriggerHan
 
 			if(newFeedItem.Status == 'Published') {
 				FeedItem oldFeedItem = oldFeedItems?.get(taskId);
-				if (!(oldFeedItem != null && oldFeedItem.Status == 'Published')) {
+				if (oldFeedItem == null || oldFeedItem.Status != 'Published') {
 					feedItemsToProcess.add(newFeedItem);
 				}
 			}

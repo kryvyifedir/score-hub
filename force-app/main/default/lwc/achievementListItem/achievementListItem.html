@@ -1,0 +1,16 @@
+<template>
+  <div class="slds-grid slds-grid_vertical-align-center">
+    <div class="slds-col slds-grow-none slds-var-m-right_x-small slds-var-m-around_small">
+      <c-achievement-icon achievement={achievement}></c-achievement-icon>
+    </div>
+    <div class="slds-col slds-var-p-horizontal_small slds-truncate">
+      <div>
+        <lightning-formatted-text class="slds-text-title_caps slds-var-m-bottom_xxx-small"
+          value={achievement.uiTitle}></lightning-formatted-text>
+      </div>
+      <div>
+        <lightning-formatted-text value={achievement.uiDescription}></lightning-formatted-text>
+      </div>
+    </div>
+  </div>
+</template>

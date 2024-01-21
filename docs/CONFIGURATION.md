@@ -30,6 +30,9 @@ GameForce provides a set of standard achievements that can be used right a way, 
 | 13 | Messenger    | Post 50 Chatter Posts  | 10 |
 | 14 | Collaborator | Post 100 Chatter Posts | 20 |
 | 15 | Team Player  | Post 200 Chatter Posts | 50 |
+| 16 | Detective  | Close 10 Cases  | 10  |
+| 17 | Watson     | Close 50 Cases  | 20  |
+| 18 | Sherlock   | Close 100 Cases | 100 |
 
 ### Creating Custom Achievement:
 GameForce allows and encourages you to setup a custom set of achievements that suite your use cases better than our standard set of achievements.

@@ -1,5 +1,7 @@
 @IsTest 
 public class TestDataFactory {	
+
+	public class TestException extends Exception {}
 	
 	public static Measurement__c initMeasurement(String uniqueIdentifier) {
 		Measurement__c measurement = new Measurement__c();
@@ -101,5 +103,12 @@ public class TestDataFactory {
 		post.Status = status;
 		post.Body = 'Post body';
 		return post;
+	}
+
+	public static Case initCase(String status) {
+		Case newCase = new Case();
+		newCase.OwnerId = UserInfo.getUserId();
+		newCase.Status = status;
+		return newCase;
 	}
 }

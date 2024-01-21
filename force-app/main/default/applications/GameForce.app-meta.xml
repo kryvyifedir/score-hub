@@ -14,7 +14,7 @@
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>GameForce</label>
     <navType>Standard</navType>
-    <tabs>Leaderboard</tabs>
+    <tabs>GameForceHome</tabs>
     <tabs>Achievement__c</tabs>
     <tabs>Measurement__c</tabs>
     <uiType>Lightning</uiType>

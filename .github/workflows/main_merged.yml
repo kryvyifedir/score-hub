@@ -1,0 +1,56 @@
+name: Build new package
+run-name: Builds a new package whenever PR gets merged to main
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the Source code from the latest commit
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+    
+      # Installing NPM so that SFDX can be installed
+      - name: Installing NPM
+        run: npm install
+
+      # Install JQ
+      - name: Install JQ
+        run: sudo apt-get install jq
+        
+      # Installing SFDX CLI
+      - name: Installing SFDX CLI
+        run: |
+          npm install @salesforce/cli --global
+    
+      # Creating new .key for .crt file stored in the Connected App
+      - name: Creating .key file
+        run: |
+          touch server.key
+          echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
+        
+      # Authorizing to DevHub
+      - name: Authorizing the DevHub
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}        
+      
+      # Creating a Scratch Org using the pull request number
+      - name: Building a new package version
+        run: |
+          JSON=$(sf package version create --target-dev-hub DevHub --installation-key ${{ secrets.PKG_KEY }} --package ${{ secrets.PKG_ID }} --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --wait 20 --json) 
+          STATUS=$(echo $JSON | jq '.result.Status')
+          ID=$(echo $JSON | jq -r '.result.Id')
+          if [ $STATUS = "\"Success\""  ];
+          then
+            sf package version promote --package $ID
+          else 
+            echo "";
+          fi
+
+      # Listing all package versions
+      - name: List package versions
+        run: sf package version list

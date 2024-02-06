@@ -38,18 +38,23 @@ jobs:
       - name: Authorizing the DevHub
         run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}        
       
-      # Creating a Scratch Org using the pull request number
-      - name: Building a new package version
+      # Creating a new Package version
+      - name: Creating a new Package version
         run: |
-          JSON=$(sf package version create --target-dev-hub DevHub --installation-key ${{ secrets.PKG_KEY }} --package ${{ secrets.PKG_ID }} --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --wait 20 --json) 
-          STATUS=$(echo $JSON | jq '.result.Status')
-          ID=$(echo $JSON | jq -r '.result.Id')
-          if [ $STATUS = "\"Success\""  ];
-          then
-            sf package version promote --package $ID
-          else 
-            echo "";
-          fi
+          sf package version create --target-dev-hub DevHub --installation-key ${{ secrets.PKG_KEY }} --package ${{ secrets.PKG_ID }} --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --json
+          # JSON=$(sf package version create --target-dev-hub DevHub --installation-key ${{ secrets.PKG_KEY }} --package ${{ secrets.PKG_ID }} --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --json);
+          # STATUS=$(echo $JSON | jq '.result.Status');
+          # ID=$(echo $JSON | jq -r '.result.Id');
+
+      # Promoting a new package version
+      # - name: Promoting a new package version
+      #   run: |
+      #     if [ $STATUS = "\"Success\""  ];
+      #     then
+      #       sf package version promote --package $ID
+      #     else 
+      #       echo "";
+      #     fi
 
       # Listing all package versions
       - name: List package versions

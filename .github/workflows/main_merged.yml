@@ -41,10 +41,10 @@ jobs:
       # Creating a new Package version
       - name: Creating a new Package version
         run: |
-          sf package version create --target-dev-hub DevHub --installation-key ${{ secrets.PKG_KEY }} --package ${{ secrets.PKG_ID }} --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --json
-          # JSON=$(sf package version create --target-dev-hub DevHub --installation-key ${{ secrets.PKG_KEY }} --package ${{ secrets.PKG_ID }} --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --json);
-          # STATUS=$(echo $JSON | jq '.result.Status');
-          # ID=$(echo $JSON | jq -r '.result.Id');
+          sf package version create --target-dev-hub DevHub --installation-key "${{ secrets.PKG_KEY }}" --package "${{ secrets.PKG_ID }}" --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --json
+      # JSON=$(sf package version create --target-dev-hub DevHub --installation-key ${{ secrets.PKG_KEY }} --package ${{ secrets.PKG_ID }} --code-coverage --releasenotes-url = ${{ secrets.PKG_RELEASE_NOTES }} --json);
+      # STATUS=$(echo $JSON | jq '.result.Status');
+      # ID=$(echo $JSON | jq -r '.result.Id');
 
       # Promoting a new package version
       # - name: Promoting a new package version

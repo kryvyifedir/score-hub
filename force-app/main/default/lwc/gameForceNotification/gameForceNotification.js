@@ -28,11 +28,11 @@ export default class GameForceNotification extends LightningElement {
                 this.isLoading = false;
             } else if (data.Error) {
                 console.log(JSON.stringify(data.Error))
-                isError = true;
+                this.isError = true;
             }
         } else if (error) {
             console.log(JSON.stringify(error))
-            isError = true;
+            this.isError = true;
         }
     }
 

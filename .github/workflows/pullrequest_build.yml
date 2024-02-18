@@ -34,10 +34,13 @@ jobs:
         run: |
           touch server.key
           echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
+
+      - name: Docker files
+        run: ls
       
       # Authorizing to DevHub
       - name: Authorizing the DevHub
-        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --jwt-key-file /home/runner/work/game-force/game-force/server.key --client-id ${{ secrets.SF_CLIENT_SECRET }}
       
       # Creating a Scratch Org using the pull request number
       - name: Creating a Scratch Org

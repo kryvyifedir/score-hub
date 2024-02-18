@@ -7,7 +7,7 @@ on:
       - main
     paths-ignore:
       - 'docs/*'
-      - '.github/*'
+      - '.github/workflows/*'
 
 jobs:
   build:
@@ -39,15 +39,15 @@ jobs:
       - name: Creating .key file
         run: |
           touch server.key
-          echo -e "${SERVER_KEY}" >> server.key
+          echo -e "$SERVER_KEY" >> server.key
       
       # Authorizing to DevHub
       - name: Authorizing the DevHub
-        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${USERNAME}" --jwt-key-file server.key --client-id ${CLINET_SECRET}
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "$USERNAME" --jwt-key-file server.key --client-id $CLINET_SECRET
       
       # Creating a Scratch Org using the pull request number
       - name: Creating a Scratch Org
-        run: sf org create scratch --target-dev-hub DevHub --name build_${PR_NUMBER} --definition-file config/project-scratch-def.json --set-default --duration-days 1
+        run: sf org create scratch --target-dev-hub DevHub --name build_$PR_NUMBER --definition-file config/project-scratch-def.json --set-default --duration-days 1
       
       # Pushing source to the Scratch Org
       - name: Pushing source and metadata to the Scratch Org

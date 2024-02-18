@@ -5,6 +5,9 @@ on:
     branches:
       - dev
       - main
+    paths-ignore:
+      - 'docs/*'
+      - 'github/*'
 
 jobs:
   build:

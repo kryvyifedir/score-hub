@@ -25,11 +25,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Checkout the Source code from the latest commit
-      - name: Checking server.key
-        run: |
-          cat server.key
-
       # Installing NPM so that SFDX can be installed
       # - name: Installing NPM
       #   run: |
@@ -40,11 +35,23 @@ jobs:
       #   run: |
       #     npm install @salesforce/cli --global
 
+
+
       # Creating new .key for .crt file stored in the Connected App
       - name: Creating .key file
         run: |
           touch server.key
           echo -e "$SERVER_KEY" >> server.key
+
+      # Container DIR
+      - name: Container DIR
+        run: |
+          ls
+      
+      # Checkout the Source code from the latest commit
+      - name: Checking server.key
+        run: |
+          cat server.key
       
       # Authorizing to DevHub
       - name: Authorizing the DevHub

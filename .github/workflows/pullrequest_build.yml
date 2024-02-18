@@ -26,12 +26,9 @@ jobs:
           fetch-depth: 0
 
       # Checkout the Source code from the latest commit
-      - name: Creating .key file
+      - name: Checking server.key
         run: |
-          echo $USERNAME
-          echo $CLINET_SECRET
-          echo $SERVER_KEY
-          echo $PR_NUMBER
+          cat server.key
 
       # Installing NPM so that SFDX can be installed
       # - name: Installing NPM

@@ -25,7 +25,6 @@ jobs:
         with:
           fetch-depth: 0
 
-    steps:
       # Checkout the Source code from the latest commit
       - name: Creating .key file
         run: |

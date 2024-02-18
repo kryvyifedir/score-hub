@@ -52,8 +52,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: 
-      image: salesforce/cli:latest-slim
+    container: salesforce/cli:latest-slim
 
     steps:
       # Checkout the Source code from the latest commit

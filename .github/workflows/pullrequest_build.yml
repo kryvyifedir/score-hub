@@ -69,7 +69,6 @@ jobs:
       - name: ECHO PWD
         run: |
           echo "$PWD"
-          ls dir
       
       # Authorizing to DevHub
       - name: Authorizing the DevHub

@@ -11,3 +11,5 @@ Aura components are used in the project as an exception and only in cases when A
 - `lightning:utilityBarAPI` is used to open the utility bar component automatically when new event is received and includes data relevant for current user
 
 All data processing and rendering is done in a child [gameForceNotification](../force-app/main/default/lwc/gameForceNotification/) LWC component
+
+TEST Change

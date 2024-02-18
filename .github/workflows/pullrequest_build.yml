@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: salesforce/cli:latest-slim
     steps:
       # Checkout the Source code from the latest commit
       - uses: actions/checkout@v3
@@ -19,14 +20,14 @@ jobs:
           fetch-depth: 0
 
       # Installing NPM so that SFDX can be installed
-      - name: Installing NPM
-        run: |
-          npm install
+      # - name: Installing NPM
+      #   run: |
+      #     npm install
       
       # Installing SFDX CLI
-      - name: Installing SFDX CLI
-        run: |
-          npm install @salesforce/cli --global
+      # - name: Installing SFDX CLI
+      #   run: |
+      #     npm install @salesforce/cli --global
 
       # Creating new .key for .crt file stored in the Connected App
       - name: Creating .key file

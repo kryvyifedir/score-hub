@@ -12,6 +12,46 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    steps:
+      # Checkout the Source code from the latest commit
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # Installing NPM so that SFDX can be installed
+      - name: Installing NPM
+        run: |
+          npm install
+      
+      # Installing SFDX CLI
+      - name: Installing SFDX CLI
+        run: |
+          npm install @salesforce/cli --global
+      # Creating new .key for .crt file stored in the Connected App
+      - name: Creating .key file
+        run: |
+          touch server.key
+          echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
+      
+      # Authorizing to DevHub
+      - name: Authorizing the DevHub
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}
+      
+      # Creating a Scratch Org using the pull request number
+      - name: Creating a Scratch Org
+        run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
+      
+      # Pushing source to the Scratch Org
+      - name: Pushing source and metadata to the Scratch Org
+        run: sf project deploy start
+        
+      # Executing all unit tests
+      - name: Run unit tests
+        run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
+
+# DOCKER VERSION DOESN'T WORK YET
+jobs:
+  build:
+    runs-on: ubuntu-latest
     container: salesforce/cli:latest-slim
     env:
       USERNAME: ${{ secrets.SF_CICD_USERNAME }}
@@ -24,18 +64,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      # Installing NPM so that SFDX can be installed
-      # - name: Installing NPM
-      #   run: |
-      #     npm install
-      
-      # Installing SFDX CLI
-      # - name: Installing SFDX CLI
-      #   run: |
-      #     npm install @salesforce/cli --global
-
-
 
       # Creating new .key for .crt file stored in the Connected App
       - name: Creating .key file

@@ -13,6 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container: salesforce/cli:latest-slim
+    env:
+      USERNAME: ${{ secrets.SF_CICD_USERNAME }}
+      CLINET_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+      SERVER_KEY: ${{ secrets.SF_CICD_SERVERKEY }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+
     steps:
       # Checkout the Source code from the latest commit
       - uses: actions/checkout@v3
@@ -33,18 +39,15 @@ jobs:
       - name: Creating .key file
         run: |
           touch server.key
-          echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
-
-      - name: Docker files
-        run: ls
+          echo -e "${SERVER_KEY}" >> server.key
       
       # Authorizing to DevHub
       - name: Authorizing the DevHub
-        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --jwt-key-file server.key --client-id ${{ secrets.SF_CLIENT_SECRET }}
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${USERNAME}" --jwt-key-file server.key --client-id ${CLINET_SECRET}
       
       # Creating a Scratch Org using the pull request number
       - name: Creating a Scratch Org
-        run: sf org create scratch --target-dev-hub DevHub --name build_${{ github.event.pull_request.number }} --definition-file config/project-scratch-def.json --set-default --duration-days 1
+        run: sf org create scratch --target-dev-hub DevHub --name build_${PR_NUMBER} --definition-file config/project-scratch-def.json --set-default --duration-days 1
       
       # Pushing source to the Scratch Org
       - name: Pushing source and metadata to the Scratch Org

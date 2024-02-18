@@ -60,15 +60,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: ECHO PWD
-        run: |
-          echo "$PWD"
-
       # Creating new .key for .crt file stored in the Connected App
       - name: Creating .key file
         run: |
           touch server.key
           echo -e "${{ secrets.SF_CICD_SERVERKEY }}" >> server.key
+
+      - name: ECHO PWD
+        run: |
+          echo "$PWD"
+          ls dir
       
       # Authorizing to DevHub
       - name: Authorizing the DevHub

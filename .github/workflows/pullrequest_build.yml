@@ -52,7 +52,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: salesforce/cli:latest-slim
+    container: 
+      image: salesforce/cli:latest-slim
 
     steps:
       # Checkout the Source code from the latest commit
@@ -69,7 +70,6 @@ jobs:
       - name: ECHO PWD
         run: |
           echo "$PWD"
-          ls dir
       
       # Authorizing to DevHub
       - name: Authorizing the DevHub

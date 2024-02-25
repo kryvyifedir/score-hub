@@ -1,10 +1,10 @@
-name: Build new package
-run-name: Builds a new package whenever PR gets merged to main
+name: Create new package version
+run-name: Creates new package version whenever PR gets merged to dev branch
 on:
   pull_request:
     types: [closed]
     branches:
-      - main
+      - dev
 
 jobs:
   build:
@@ -45,15 +45,15 @@ jobs:
           STATUS=$(echo $JSON | jq '.result.Status');
           ID=$(echo $JSON | jq -r '.result.Id');
 
-      # Promoting a new package version
-      - name: Promoting a new package version
-        run: |
-          if [ $STATUS = "\"Success\""  ];
-          then
-            sf package version promote --package $ID
-          else 
-            echo "Unable to promote package since package version create has failed";
-          fi
+      # Promoting a new package version (removed since main branch will no longer be used)
+      # - name: Promoting a new package version
+      #   run: |
+      #     if [ $STATUS = "\"Success\""  ];
+      #     then
+      #       sf package version promote --package $ID
+      #     else 
+      #       echo "Unable to promote package since package version create has failed";
+      #     fi
 
       # Listing all package versions
       - name: List package versions

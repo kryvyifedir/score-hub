@@ -13,5 +13,8 @@
   "name": "GameForce",
   "namespace": "GameForce",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "59.0"
+  "sourceApiVersion": "59.0",
+  "packageAliases": {
+    "GameForce": "0Ho69000000GmhUCAS"
+  }
 }

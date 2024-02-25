@@ -28,4 +28,24 @@ private class UserInfoControllerTest {
 		System.assertEquals(2, cardData.totalAchievementsCount, 'Total number of achievements is expected');
 		System.assertEquals(achievement1.Score__c + achievement2.Score__c, cardData.totalScore, 'Total score of all reached achievements is expected');
 	}
+	
+	@IsTest
+	private static void getUserInfoById_UnexpectedException_ExceptionHandled() {
+		// Given
+		UserInfoController.throwException = true;
+		User usr = [SELECT Id, Name, FullPhotoUrl FROM User WHERE ID = :UserInfo.getUserId() LIMIT 1];
+		
+		// When
+		Test.startTest();
+		Map<String, Object> result = UserInfoController.getUserInfoById(new List<Id> { usr.Id });
+		Test.stopTest();
+
+		// Then
+		System.assert(!result.containsKey('Success'), 'Success is expected');
+		System.assert(result.containsKey('Error'), 'Error is not expected');
+		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		System.assertEquals('Unable to get total achievements count', (String) result.get('Error'), 'Error message is expected');
+		List<Log__c> logs = [SELECT Id FROM Log__c];
+		System.assertEquals(1, logs.size(), 'Unable to get UserInfo by Id');
+	}
 }

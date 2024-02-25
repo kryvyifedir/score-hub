@@ -1,13 +1,14 @@
-name: PR Checks
-run-name: Checks running whenever new PR is created
+name: PR validation
+run-name: Runs unit tests before allowing PR to dev to be merged
 on: 
   pull_request:
     branches:
       - dev
-      - main
     paths-ignore:
       - 'docs/*'
+      - '.github/*'
       - '.github/workflows/*'
+      - 'sfdx-project.json'
 
 jobs:
   build:

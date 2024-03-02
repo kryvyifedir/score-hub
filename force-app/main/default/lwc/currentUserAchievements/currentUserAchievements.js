@@ -43,15 +43,6 @@ export default class CurrentUserAchievements extends LightningElement {
         }
     }
 
-    get achievementsByDate() {
-        let returnValue = [];
-        if (this.achievements) {
-            returnValue = [...this.achievements].sort((a, b) => { return b.reachedDate - a.reachedDate });
-        }
-
-        return returnValue;
-    }
-
     get showAchievements() {
         return this.achievements && this.achievements.length > 0
     }

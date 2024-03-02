@@ -29,7 +29,7 @@
     <template lwc:elseif={showAchievements}>
       <div class="slds-card__body slds-card__body_inner slds-box slds-var-m-around_small"
         style="height: 83%; overflow: scroll;">
-        <c-achievements-list achievements={achievementsByDate} is-loading={isLoadingAchievements}></c-achievements-list>
+        <c-achievements-list achievements={achievements} is-loading={isLoadingAchievements}></c-achievements-list>
       </div>
     </template>
     <template lwc:elseif={showEmpty}>

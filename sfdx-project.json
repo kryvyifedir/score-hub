@@ -3,10 +3,10 @@
     {
       "path": "force-app",
       "package": "GameForce",
-      "versionName": "Version 1.0",
-      "versionNumber": "1.0.0.NEXT",
+      "versionName": "GameForce (beta)",
+      "versionNumber": "0.0.0.NEXT",
       "default": true,
-      "versionDescription": "GameForce MVP",
+      "versionDescription": "GameForce pre-release (beta) version",
       "postInstallScript": "GameForceConfig"
     }
   ],

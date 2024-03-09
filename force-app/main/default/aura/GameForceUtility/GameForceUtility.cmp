@@ -8,5 +8,6 @@
 
     <!-- Holds the streaming event subscription -->
     <aura:attribute name="achievementId" type="String" />
-    <c:gameForceNotification achievementId="{! v.achievementId }"></c:gameForceNotification>
+    <aura:attribute name="userId" type="String" />
+    <c:gameForceNotification achievementId="{! v.achievementId }" userId="{! v.userId }"></c:gameForceNotification>
 </aura:component>

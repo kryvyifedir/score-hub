@@ -13,14 +13,23 @@ export default class GameForceNotification extends LightningElement {
     };
 
     @api achievementId
-    userId = Id;
+    @api
+    get userId() {
+        return this.currentUserId ? this.currentUserId : Id;
+    }
+
+    set userId(value) {
+        this.currentUserId = value;
+    }
+
+    currentUserId;
     reachedAchievement;
     closestAchievement;
 
     isLoading = false;
     isError;
 
-    @wire(getAchievementById, { achievementId: "$achievementId", userId: "$userId" })
+    @wire(getAchievementById, { achievementId: "$achievementId" })
     wiredAchievementData({ error, data }) {
         if (data) {
             if (data.Success) {
@@ -55,10 +64,10 @@ export default class GameForceNotification extends LightningElement {
     }
 
     get showReached() {
-        return this.reachedAchievement
+        return this.achievementId
     }
 
     get showClosest() {
-        return this.closestAchievement && !this.achievementId && !this.reachedAchievement
+        return !this.achievementId
     }
 }

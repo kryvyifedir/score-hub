@@ -4,14 +4,12 @@ private class GameForceNotificationControllerTest {
 	@IsTest
 	private static void getAchievementById_allDataExists_AchievementReturned() {
 		// Given
-		Id userId = UserInfo.getUserId();
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
-		ReachedAchievement__c reachedAchievement = TestDataFactory.createReachedAchievement(userId, achievement.Id);
 		
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id, userId);
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id);
 		Test.stopTest();
 
 		// Then
@@ -29,7 +27,7 @@ private class GameForceNotificationControllerTest {
 
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getAchievementById(userId, userId);
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(userId);
 		Test.stopTest();
 
 		// Then
@@ -43,13 +41,12 @@ private class GameForceNotificationControllerTest {
 	@IsTest
 	private static void getAchievementById_noReachedAchievement_AchievementReturned() {
 		// Given
-		Id userId = UserInfo.getUserId();
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
 		
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id, userId);
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id);
 		Test.stopTest();
 
 		// Then
@@ -64,13 +61,12 @@ private class GameForceNotificationControllerTest {
 	private static void getAchievementById_UnexpectedException_ExceptionHandled() {
 		// Given
 		GameForceNotificationController.throwException = true;
-		Id userId = UserInfo.getUserId();
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
 		
 		// When
 		Test.startTest();
-		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id, userId);
+		Map<String, Object> result = GameForceNotificationController.getAchievementById(achievement.Id);
 		Test.stopTest();
 
 		// Then

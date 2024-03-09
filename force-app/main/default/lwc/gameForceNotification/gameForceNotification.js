@@ -13,7 +13,16 @@ export default class GameForceNotification extends LightningElement {
     };
 
     @api achievementId
-    userId = Id;
+    @api
+    get userId() {
+        return this.user_id ? this.user_id : Id;
+    }
+
+    set userId(value) {
+        this.user_id = value;
+    }
+
+    user_id;
     reachedAchievement;
     closestAchievement;
 

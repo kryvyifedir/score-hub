@@ -9,6 +9,6 @@ public with sharing class AchievementSelector extends BaseSelector {
 	}
 
 	public override Set<String> fieldApiNames() {
-		return new Set<String> {'Id', 'Name', 'Description__c', 'Enabled__c', 'Goal__c', 'Score__c', 'UITitle__c', 'UIDescription__c', 'Measurement__c'};
+		return new Set<String> {'Id', 'Name', 'Description__c', 'Goal__c', 'Score__c', 'UITitle__c', 'UIDescription__c', 'Measurement__c'};
 	}
 }

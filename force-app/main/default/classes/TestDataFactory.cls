@@ -19,7 +19,6 @@ public class TestDataFactory {
 		Achievement__c achievement = new Achievement__c();
 		achievement.Name = 'Name ' + uniqueIdentifier;
 		achievement.Description__c = 'Generic description ' + uniqueIdentifier;
-		achievement.Enabled__c = true;
 		achievement.Goal__c = 100 + Math.round(1000 * Math.random());
 		achievement.Score__c = 100 + Math.round(1000 * Math.random());
 		achievement.UITitle__c = 'UI Title ' + uniqueIdentifier;

@@ -26,7 +26,7 @@ private class AchievementSelectorTest {
 		Test.stopTest();
 
 		// Then 
-		Set<String> expectedSet = new Set<String> {'Id', 'Name', 'Description__c', 'Enabled__c', 'Goal__c', 'Score__c', 'UITitle__c', 'UIDescription__c', 'Measurement__c'};
+		Set<String> expectedSet = new Set<String> {'Id', 'Name', 'Description__c', 'Goal__c', 'Score__c', 'UITitle__c', 'UIDescription__c', 'Measurement__c'};
 		system.assertEquals(expectedSet, result, 'A specific field set is expected');
 	}
 }

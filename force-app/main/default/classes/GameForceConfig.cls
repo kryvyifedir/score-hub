@@ -38,8 +38,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Created 10 Leads',
 			Description__c = 'Standard Achievement, that can be reached by creating 10 different Leads',
 			Goal__c = 10,
-			Score__c = 10,
-			Enabled__c = true);
+			Score__c = 10);
 		achievementsToInsert.add(created10Leads);
 
 		Achievement__c created50Leads = new Achievement__c(
@@ -49,8 +48,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Created 50 Leads',
 			Description__c = 'Standard Achievement, that can be reached by creating 50 different Leads',
 			Goal__c = 50,
-			Score__c = 20,
-			Enabled__c = true);
+			Score__c = 20);
 		achievementsToInsert.add(created50Leads);
 
 		Achievement__c created100Leads = new Achievement__c(
@@ -60,8 +58,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Created 100 Leads',
 			Description__c = 'Standard Achievement, that can be reached by creating 100 different Leads',
 			Goal__c = 100,
-			Score__c = 50,
-			Enabled__c = true);
+			Score__c = 50);
 		achievementsToInsert.add(created100Leads);
 
 		Achievement__c created200Leads = new Achievement__c(
@@ -71,8 +68,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Created 200 Leads',
 			Description__c = 'Standard Achievement, that can be reached by creating 200 different Leads',
 			Goal__c = 200,
-			Score__c = 100,
-			Enabled__c = true);
+			Score__c = 100);
 		achievementsToInsert.add(created200Leads);
 
 		// Converted Leads achievements
@@ -83,8 +79,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Converted 10 Leads',
 			Description__c = 'Standard Achievement, that can be reached by converting 10 different Leads to Accounts/Contacts/Opportunities',
 			Goal__c = 10,
-			Score__c = 10,
-			Enabled__c = true);
+			Score__c = 10);
 		achievementsToInsert.add(converted10Leads);
 
 		Achievement__c converted50Leads = new Achievement__c(
@@ -94,8 +89,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Converted 50 Leads',
 			Description__c = 'Standard Achievement, that can be reached by converting 50 different Leads to Accounts/Contacts/Opportunities',
 			Goal__c = 50,
-			Score__c = 20,
-			Enabled__c = true);
+			Score__c = 20);
 		achievementsToInsert.add(converted50Leads);
 
 		Achievement__c converted100Leads = new Achievement__c(
@@ -105,8 +99,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Converted 100 Leads',
 			Description__c = 'Standard Achievement, that can be reached by converting 100 different Leads to Accounts/Contacts/Opportunities',
 			Goal__c = 100,
-			Score__c = 100,
-			Enabled__c = true);
+			Score__c = 100);
 		achievementsToInsert.add(converted100Leads);
 
 		// Completed Tasks achievements
@@ -117,8 +110,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Complete 10 Tasks',
 			Description__c = 'Standard Achievement, that can be reached by completing 10 different tasks',
 			Goal__c = 10,
-			Score__c = 10,
-			Enabled__c = true);
+			Score__c = 10);
 		achievementsToInsert.add(complete10Tasks);
 
 		Achievement__c complete50Tasks = new Achievement__c(
@@ -128,8 +120,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Complete 50 Tasks',
 			Description__c = 'Standard Achievement, that can be reached by completing 50 different tasks',
 			Goal__c = 50,
-			Score__c = 20,
-			Enabled__c = true);
+			Score__c = 20);
 		achievementsToInsert.add(complete50Tasks);
 
 		Achievement__c complete100Tasks = new Achievement__c(
@@ -139,8 +130,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Complete 100 Tasks',
 			Description__c = 'Standard Achievement, that can be reached by completing 100 different tasks',
 			Goal__c = 100,
-			Score__c = 20,
-			Enabled__c = true);
+			Score__c = 20);
 		achievementsToInsert.add(complete100Tasks);
 
 		Achievement__c complete200Tasks = new Achievement__c(
@@ -150,8 +140,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Complete 200 Tasks',
 			Description__c = 'Standard Achievement, that can be reached by completing 200 different tasks',
 			Goal__c = 200,
-			Score__c = 100,
-			Enabled__c = true);
+			Score__c = 100);
 		achievementsToInsert.add(complete200Tasks);
 
 		// Posted chatted posts achievements
@@ -162,8 +151,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Create 10 Chatter posts',
 			Description__c = 'Standard Achievement, that can be reached by creating 10 posts in Chatter',
 			Goal__c = 10,
-			Score__c = 10,
-			Enabled__c = true);
+			Score__c = 10);
 		achievementsToInsert.add(chatter10Posts);
 
 		Achievement__c chatter50Posts = new Achievement__c(
@@ -173,8 +161,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Create 50 Chatter posts',
 			Description__c = 'Standard Achievement, that can be reached by creating 50 posts in Chatter',
 			Goal__c = 50,
-			Score__c = 10,
-			Enabled__c = true);
+			Score__c = 10);
 		achievementsToInsert.add(chatter50Posts);
 
 		Achievement__c chatter100Posts = new Achievement__c(
@@ -184,8 +171,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Create 100 Chatter posts',
 			Description__c = 'Standard Achievement, that can be reached by creating 100 posts in Chatter',
 			Goal__c = 100,
-			Score__c = 20,
-			Enabled__c = true);
+			Score__c = 20);
 		achievementsToInsert.add(chatter100Posts);
 
 		Achievement__c chatter200Posts = new Achievement__c(
@@ -195,8 +181,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Create 200 Chatter posts',
 			Description__c = 'Standard Achievement, that can be reached by creating 200 posts in Chatter',
 			Goal__c = 200,
-			Score__c = 50,
-			Enabled__c = true);
+			Score__c = 50);
 		achievementsToInsert.add(chatter200Posts);
 
 		Achievement__c case10Closed = new Achievement__c(
@@ -206,8 +191,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Close 10 cases',
 			Description__c = 'Standard Achievement, that can be reached by closing 10 Cases',
 			Goal__c = 10,
-			Score__c = 10,
-			Enabled__c = true);
+			Score__c = 10);
 		achievementsToInsert.add(case10Closed);
 
 		Achievement__c case50Closed = new Achievement__c(
@@ -217,8 +201,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Close 50 cases',
 			Description__c = 'Standard Achievement, that can be reached by closing 50 Cases',
 			Goal__c = 50,
-			Score__c = 20,
-			Enabled__c = true);
+			Score__c = 20);
 		achievementsToInsert.add(case50Closed);
 
 		Achievement__c case100Closed = new Achievement__c(
@@ -228,8 +211,7 @@ public with sharing class GameForceConfig implements InstallHandler {
 			UIDescription__c = 'Close 100 cases',
 			Description__c = 'Standard Achievement, that can be reached by closing 50 Cases',
 			Goal__c = 100,
-			Score__c = 100,
-			Enabled__c = true);
+			Score__c = 100);
 		achievementsToInsert.add(case100Closed);
 		
 		insert achievementsToInsert;

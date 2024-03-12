@@ -8,11 +8,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Achievement__c.Enabled__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Achievement__c.Score__c</field>
         <readable>true</readable>
     </fieldPermissions>

@@ -53,7 +53,6 @@ Here is how the new custom achievement can be configured:
     * UIDescription__c - Achievement description that is going to be shown to user once he unlocks the achievement
     * Goal__c - Goal that need to be reached by user for achievement to be treated as unlocked/reached. For example, our standard "Create 10 Leads" achievement has a Goal__c set to 10 and is related to relevant measurement called "CreatedLeadsCounter". Once user has 10 Created Leads - achievement is going to be treated as unlocked.
     * Score__c - Number of points that user gets for unlocking an achievement. Used for leaderboards.
-    * Enabled__c - Allows Admin users to enable/disable achievements without removing data from the system. 
 3. Once both Measurement and Achievement are defined, you can now define the logic for your new measurement to be increased per each user. This can be done in a trigger or by no-code tools built into Salesforce. In the end, each time the metric is expected to be increased for a specific user `UserMeasurementIncrement__e` platform event has to be fired by your custom logic. 
 `UserMeasurementIncrement__e` fields: 
     * Increment__c - number of points to increment/decrement from a user measurement

@@ -4,7 +4,6 @@
     <columns>NAME</columns>
     <columns>UITitle__c</columns>
     <columns>UIDescription__c</columns>
-    <columns>Enabled__c</columns>
     <columns>Measurement__c</columns>
     <columns>Goal__c</columns>
     <columns>Score__c</columns>

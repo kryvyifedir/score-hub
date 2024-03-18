@@ -11,5 +11,6 @@
     <permissionSets>GameForce__GameForceViewAchievements</permissionSets>
     <permissionSets>GameForce__GameForceViewMeasurements</permissionSets>
     <permissionSets>GameForce__GameForceViewReachedAchievements</permissionSets>
+    <permissionSets>GameForce__GameForceViewUserMeasurements</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

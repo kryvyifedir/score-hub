@@ -11,6 +11,7 @@
     <permissionSets>GameForce__GameForceModifyLogs</permissionSets>
     <permissionSets>GameForce__GameForceModifyMeasurements</permissionSets>
     <permissionSets>GameForce__GameForceModifyReachedAchievements</permissionSets>
+    <permissionSets>GameForce__GameForceModifyUserMeasurements</permissionSets>
     <permissionSets>GameForce__GameForcePlatformEvents</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

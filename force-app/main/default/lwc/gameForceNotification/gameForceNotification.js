@@ -1,15 +1,20 @@
 import { LightningElement, api, wire } from 'lwc';
 
+import hasUtilityAccess from '@salesforce/customPermission/GameForceUtilityAccess';
+
 import Id from "@salesforce/user/Id";
 import getAchievementById from '@salesforce/apex/GameForceNotificationController.getAchievementById'
 import getClosestReachableAchievement from '@salesforce/apex/GameForceNotificationController.getClosestReachableAchievement'
 
 //Custom Labels
 import ErrorLabel from '@salesforce/label/c.Error';
+import UnableToRetrieveAchievementsDataLabel from '@salesforce/label/c.UnableToRetrieveAchievementsData';
+import Oopslabel from '@salesforce/label/c.Oops';
+import YouDontHaveAccessToGameForceLabel from '@salesforce/label/c.YouDontHaveAccessToGameForce';
 
 export default class GameForceNotification extends LightningElement {
     labels = {
-        ErrorLabel
+        ErrorLabel, UnableToRetrieveAchievementsDataLabel, Oopslabel, YouDontHaveAccessToGameForceLabel
     };
 
     @api achievementId
@@ -61,6 +66,10 @@ export default class GameForceNotification extends LightningElement {
             this.isError = true
             this.isLoading = false;
         }
+    }
+
+    get userHasUtilityAccess(){
+        return hasUtilityAccess;
     }
 
     get showReached() {

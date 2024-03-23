@@ -1,4 +1,4 @@
-<aura:component implements="lightning:utilityItem" access="global" >
+<aura:component implements="lightning:utilityItem" access="global" controller="GameForceUtilityController">
     <aura:attribute name="supportsPopOut" type="Boolean" default="false" />
     <lightning:utilityBarAPI aura:id="utilitybar" />
 

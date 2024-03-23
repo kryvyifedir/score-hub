@@ -1,21 +1,28 @@
 <template>
     <div>
-        <template lwc:if={isLoading}>
-            <div class="slds-is-relative slds-var-p-top_medium" style="height: 12rem;">
-                <lightning-spinner title="Loading" size="medium"></lightning-spinner>
-            </div>
+        <template lwc:if={userHasUtilityAccess}>
+            <template lwc:if={isLoading}>
+                <div class="slds-is-relative slds-var-p-top_medium" style="height: 12rem;">
+                    <lightning-spinner title="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+            <template lwc:elseif={isError}>
+                <div class="slds-var-m-around_small">
+                    <c-svg-error header={labels.ErrorLabel} subheader={labels.UnableToRetrieveAchievementsDataLabel}></c-svg-error>
+                </div>
+            </template>
+            <template lwc:elseif={showReached}>
+                <c-game-force-notification-card achievement={reachedAchievement}></c-game-force-notification-card>
+                <c-confetti></c-confetti>
+            </template>
+            <template lwc:elseif={showClosest}>
+                <c-game-force-notification-card achievement={closestAchievement}></c-game-force-notification-card>
+            </template>
         </template>
-        <template lwc:elseif={isError}>
+        <template lwc:else>
             <div class="slds-var-m-around_small">
-                <c-svg-error header={labels.ErrorLabel} subheader="Unable to retrieve information about achievements"></c-svg-error>
+                <c-svg-no-access header={labels.Oopslabel} subheader={labels.YouDontHaveAccessToGameForceLabel}></c-svg-no-access>
             </div>
-        </template>
-        <template lwc:elseif={showReached}>
-            <c-game-force-notification-card achievement={reachedAchievement}></c-game-force-notification-card>
-            <c-confetti></c-confetti>
-        </template>
-        <template lwc:elseif={showClosest}>
-            <c-game-force-notification-card achievement={closestAchievement}></c-game-force-notification-card>
         </template>
     </div>
 </template>

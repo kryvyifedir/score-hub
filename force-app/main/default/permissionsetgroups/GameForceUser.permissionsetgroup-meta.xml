@@ -3,6 +3,7 @@
     <description>Grants access to use GameForce app</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce User</label>
+    <permissionSets>GameForce__GameForceAccessNotificationUtility</permissionSets>
     <permissionSets>GameForce__GameForceApexClasses</permissionSets>
     <permissionSets>GameForce__GameForceAppLeaderboardsTab</permissionSets>
     <permissionSets>GameForce__GameForceAppPermisssion</permissionSets>

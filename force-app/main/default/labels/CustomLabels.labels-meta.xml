@@ -176,4 +176,28 @@
         <shortDescription>Close</shortDescription>
         <value>Close</value>
     </labels>
+    <labels>
+        <fullName>Oops</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Oops</shortDescription>
+        <value>Oops...</value>
+    </labels>
+    <labels>
+        <fullName>UnableToRetrieveAchievementsData</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unable to retrieve achievements data</shortDescription>
+        <value>Unable to retrieve information about achievements</value>
+    </labels>
+    <labels>
+        <fullName>YouDontHaveAccessToGameForce</fullName>
+        <categories>GameForce LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>You don&apos;t have access to GameForce</shortDescription>
+        <value>It looks like you don&apos;t have access to GameForce functionality. Please contact your System Administrator for more details</value>
+    </labels>
 </CustomLabels>

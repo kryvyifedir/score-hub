@@ -16,12 +16,12 @@
                 <componentInstanceProperties>
                     <name>icon</name>
                     <type>decorator</type>
-                    <value>fallback</value>
+                    <value>ribbon</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
                     <type>decorator</type>
-                    <value>GameForceUtility</value>
+                    <value>GameForce</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>scrollable</name>
@@ -34,7 +34,7 @@
                     <value>340</value>
                 </componentInstanceProperties>
                 <componentName>GameForceUtility</componentName>
-                <identifier>GameForceUtility</identifier>
+                <identifier>GameForce_GameForceUtility</identifier>
             </componentInstance>
         </itemInstances>
         <name>utilityItems</name>

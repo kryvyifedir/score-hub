@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Gives user access to GameForce Notification utility app</description>
+    <isLicensed>false</isLicensed>
+    <label>GameForce Utility Access</label>
+</CustomPermission>

@@ -3,6 +3,7 @@
     <description>Grants access to modify GameForce measurements, achievements and implement custom achievement logic. Intended for use by Salesforce Admin users</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>GameForce Admin</label>
+    <permissionSets>GameForce__GameForceAccessNotificationUtility</permissionSets>
     <permissionSets>GameForce__GameForceApexClasses</permissionSets>
     <permissionSets>GameForce__GameForceAppAdminTabs</permissionSets>
     <permissionSets>GameForce__GameForceAppLeaderboardsTab</permissionSets>

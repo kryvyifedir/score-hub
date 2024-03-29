@@ -1,13 +1,13 @@
 # Apex guidelines
-All the backend logic of GameForce is done using Apex Classes. Low-code tools are not used for development.
+All the backend logic of GameForce is done using Apex Classes. No-code tools are not used for development.
 This section is meant to explain some key concepts that are utilized across the GameForce code.
 
 ## Using BaseSelector class to retrieve data instead of direct SOQL request
-GameForce relies on [`BaseSelector`](../../force-app/main/default/classes/BaseSelector.cls) class to retrieve data for different sObjects. Concreate realizations of the BaseSelector class are used to retrieve data for a specific sObject
+GameForce relies on [`BaseSelector`](../../force-app/main/default/classes/BaseSelector.cls) class to retrieve data for different sObjects. Concrete realizations of the BaseSelector class are used to retrieve data for a specific sObject
 
-To create a concrete realization of a BaseSelector class, child class has to realize 3 methods:
+To create a concrete realization of a BaseSelector class, the child class has to realize 3 methods:
 - `public String sObjectApiName()`: this method should return the API name of the sObject
-- `public override Set<String> fieldApiNames()`: returns a list of field API names that will be retrieved by Selector class
+- `public override Set<String> fieldApiNames()`: returns a list of field API names that will be retrieved by the Selector class
 
 `BaseSelector` class provides a set of methods that can be used to retrieve data without the need to create additional methods on the concrete selector class:
 ### getByFieldValue(String filterFieldApiName, String compOperator, Object values)
@@ -60,17 +60,17 @@ equals to this SOQL
 ```
 [SELECT ... FROM ... ]
 ```
-This method should be used with caution since it doesn't have any limitation and can result in SOQL query limit
+This method should be used with caution since it doesn't have any limitations and can result in SOQL query limit
 
 ## Using Logger class to save information about exceptions
-`Logger` class is used to save information about issues that might have occured in a system. This class will be refined in future to allow storing more granular information about the issues.
+`Logger` class is used to save information about issues that might have occurred in a system. This class will be refined in the future to allow for storing more granular information about the issues.
 
-There are two main method of a Logger class that are used for storing runtime issues:
+There are two main methods of a Logger class that are used for storing runtime issues:
 ### saveSingleLog(String log)
 ```
 public static void saveSingleLog(String log)
 ```
-Stores a single issue in a `Log__c` sObject. Asyncronous and can be called from cached LWC methods.
+Stores a single issue in a `Log__c` sObject. Asynchronous and can be called from cached LWC methods.
 Example:
 ```
 } catch (Exception e) {
@@ -83,10 +83,10 @@ public void addLog(String log)
 ```
 Adds a new log record, but doesn't commit changes. `commitChanges()` has to be called once all issues are collected 
 
-## Using ControllerResponse class to pass result of Apex controller to LWC components
-`ControllerResponse` class is used to wrap the result of the execution of backend controller and have a more control over the issues (expected and unexpected) that might occure during the backend controller execution.
+## Using ControllerResponse class to pass the result of Apex controller to LWC components
+`ControllerResponse` class is used to wrap the result of the execution of the backend controller and have more control over the issues (expected and unexpected) that might occur during the backend controller execution.
 
-There are 3 methods that should be used to return result of a backend controller execution in a form of `Map<String, Object>`:
+There are 3 methods that can be used to return the result of a backend controller execution in the form of `Map<String, Object>`:
 
 ### success(Object obj)
 ```
@@ -143,6 +143,3 @@ public static Map<String, Object> method(){
     return result;
 }
 ```
-
-## Trigger Handlers
-TBD

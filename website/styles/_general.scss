@@ -1,0 +1,20 @@
+@import "./vars";
+@import "./mixins";
+
+@font-face {
+    font-family: "Avant Garde";
+    src: url("../fonts/avantgarde-4.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Salesforce Sans";
+    src: url("../fonts/SalesforceSans-Regular.ttf") format("truetype");
+}
+
+body {
+    @include fonts($fontFamilyText, 16px, 24px);
+}
+
+.section-title {
+    @include fonts($fontFamilyTitle, 40px, 48px);
+}

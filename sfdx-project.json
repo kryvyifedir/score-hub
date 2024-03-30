@@ -4,7 +4,7 @@
       "path": "force-app",
       "package": "GameForce",
       "versionName": "GameForce (beta)",
-      "versionNumber": "0.0.0.NEXT",
+      "versionNumber": "1.0.0.NEXT",
       "default": true,
       "versionDescription": "GameForce pre-release (beta) version",
       "postInstallScript": "GameForceConfig"

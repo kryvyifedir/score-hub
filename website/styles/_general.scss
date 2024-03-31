@@ -2,19 +2,73 @@
 @import "./mixins";
 
 @font-face {
-    font-family: "Avant Garde";
-    src: url("../fonts/avantgarde-4.ttf") format("truetype");
+    font-family: "Avant Garde Bold";
+    src: url("../fonts/ITC_Avant_Garde_Pro_2.000.1000/ITCAvantGardePro-Bold.otf") format("opentype");;
+}
+
+@font-face {
+    font-family: "Avant Garde Medium";
+    src: url("../fonts/ITC_Avant_Garde_Pro_2.000.1000/ITCAvantGardePro-Md.otf") format("opentype");;
 }
 
 @font-face {
     font-family: "Salesforce Sans";
-    src: url("../fonts/SalesforceSans-Regular.ttf") format("truetype");
+    src: url("../fonts/SalesForceSans/SalesforceSans-Regular.ttf") format("truetype");
 }
 
 body {
-    @include fonts($fontFamilyText, 16px, 24px);
+    @include fonts($fontFamilyText, 18px, 24px);
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: $primary;
+}
+
+iframe {
+    border: 0;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.section {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .section-title {
-    @include fonts($fontFamilyTitle, 40px, 48px);
+    @include fonts($fontFamilyTitle, 32px, 40px);
 }
+
+.subtitle {
+    @include fonts($fontFamilySubtitle, 24px, 28px);
+}
+
+//test
+.intro {
+height: 600px;
+//clip-path: polygon(100% 0, 100% 68%, 50% 100%, 0 65%, 0 0);
+background-color: $background;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
+width: 100%;
+}
+
+h1 {
+    margin: 0;
+    @include fonts($fontFamilyTitle, 62px, 48px);
+    margin-top: 150px;
+}
+.intro-test {
+    @include fonts($info, 32px, 40px);
+    color: #181818;
+    margin: 0;
+    margin-top: -80px;
+}
+
+
+

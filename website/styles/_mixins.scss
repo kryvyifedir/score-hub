@@ -1,5 +1,12 @@
 @mixin fonts($a, $b, $c) {
-    font-family: $a;
-    font-size: $b;
-    line-height: $c;
-  }
+  font-family: $a;
+  font-size: $b;
+  line-height: $c;
+}
+
+@mixin flex($flex-direction, $justify, $align) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify;
+  align-items: $align;
+}

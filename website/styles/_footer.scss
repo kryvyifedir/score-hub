@@ -1,0 +1,15 @@
+@import "./vars";
+@import "./mixins";
+
+.footer {
+background-color: $footer;
+&-list {
+ @include flex(row, flex-end, center);
+ gap: 25px;
+ padding-top: 24px;
+ padding-bottom: 24px;
+ color: $light;
+ margin: 0 auto;
+ height: 96px;
+}
+}

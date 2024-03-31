@@ -1,0 +1,39 @@
+@import "./vars";
+@import "./mixins";
+
+.section-video {
+    background-color: $background;
+    height: 100%;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+    margin-top: 30px;
+    padding-bottom: 40px;
+}
+
+.swipper-slide {
+    &-video {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.btn-next,
+.btn-prev,
+.btns-pagination {
+    color: $hover;
+}
+
+.btns-pagination {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

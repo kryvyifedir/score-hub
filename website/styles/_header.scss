@@ -1,0 +1,42 @@
+@import "./mixins";
+@import "./vars";
+
+.header {
+    padding: 20px 25px;
+    z-index: 2;
+    background-color: $background;
+
+    &-wrap {
+        @include flex(row, space-between, center);
+    }
+
+    &-link {
+        display: inline-block;
+        text-align: center;
+        color: $light;
+        padding: 8px 24px;
+        background-color: $btn;
+        border-radius: 4px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+}
+
+.navbar {
+    &-list {
+        @include flex(row, center, center);
+        gap: 32px;
+    }
+
+    &-item {
+        cursor: pointer;
+
+        &-link {
+            color: $primary;
+
+            &:hover {
+                color: $hover;
+            }
+        }
+    }
+}

@@ -1,8 +1,8 @@
 @IsTest
 private class AchievementsInfoControllerTest {
-    @IsTest 
+	@IsTest 
 	private static void getUserAchievementsById_ReachedAchievementExists_AchievementListReturned() {
-        // Given
+		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement1 = TestDataFactory.initAchievement('Ach1', measurement.Id);
 		Achievement__c achievement2 = TestDataFactory.initAchievement('Ach2', measurement.Id);
@@ -12,17 +12,17 @@ private class AchievementsInfoControllerTest {
 
 		// When
 		Test.startTest();
-        Map<String, Object> result = AchievementsInfoController.getUserAchievementsById(new List<Id>{UserInfo.getUserId()});
+		Map<String, Object> result = AchievementsInfoController.getUserAchievementsById(new List<Id>{UserInfo.getUserId()});
 		Test.stopTest();
 
 		// Then
-        System.assert(result.containsKey('Success'), 'Resulting map is expected to have "Success" key');
-        System.assert(!result.containsKey('Warning'), 'Resulting map is not expected to have "Warning" key');
-        System.assert(!result.containsKey('Error'), 'Resulting map is not expected to have "Error" key');
+		System.assert(result.containsKey('Success'), 'Resulting map is expected to have "Success" key');
+		System.assert(!result.containsKey('Warning'), 'Resulting map is not expected to have "Warning" key');
+		System.assert(!result.containsKey('Error'), 'Resulting map is not expected to have "Error" key');
 
 		Map<Id, List<DataWrappers.AchievementCardData>> achievementsByUserIdMap = (Map<Id, List<DataWrappers.AchievementCardData>>) result.get('Success');
-        List<DataWrappers.AchievementCardData> userAchievementCardDataList =  achievementsByUserIdMap.get(UserInfo.getUserId());
-        
+		List<DataWrappers.AchievementCardData> userAchievementCardDataList =  achievementsByUserIdMap.get(UserInfo.getUserId());
+		
 		System.assertNotEquals(null, userAchievementCardDataList, 'Achievements are expected to be found for current user');
 		System.assertEquals(2, userAchievementCardDataList.size(), '2 Achievements are expected');
 		for (DataWrappers.AchievementCardData achievementData : userAchievementCardDataList) {
@@ -32,5 +32,24 @@ private class AchievementsInfoControllerTest {
 				System.assertEquals(false, achievementData.isReached, 'All other achievements are expected to be not reached');
 			}
 		}
-    }
+	}
+
+	@IsTest 
+	private static void getUserAchievementsById_ExceptionThrown_ExceptionHandled() {
+		// Given
+		AchievementsInfoController.throwException = true;
+
+		// When
+		try {
+			Test.startTest();
+			Map<String, Object> result = AchievementsInfoController.getUserAchievementsById(new List<Id>{UserInfo.getUserId()});
+			Test.stopTest();
+
+			// Then
+			System.assert(true, 'Exception is expected to be handled safely');
+		} catch (Exception e) {
+			System.assert(false, 'Exception is expected to be handled safely');
+		}
+
+	}
 }

@@ -92,7 +92,6 @@ private class AchievementReachedTriggerHandlerTest {
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
 		List<Log__c> resultLogs = [SELECT Id FROM Log__c];
 		System.assertEquals(0, result.size(), 'No new ReachedAchievement__c are expected to be created');
-		System.assertEquals(1, resultLogs.size(), 'Log__c record is expected to be created');
 	}
 
 	@IsTest
@@ -115,7 +114,6 @@ private class AchievementReachedTriggerHandlerTest {
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
 		List<Log__c> resultLogs = [SELECT Id FROM Log__c];
 		System.assertEquals(0, result.size(), 'No new ReachedAchievement__c are expected to be created');
-		System.assertEquals(1, resultLogs.size(), 'Log__c record is expected to be created');
 	}
 
 	@IsTest

@@ -3,7 +3,8 @@ private class GameForceUtilityControllerTest {
 	@IsTest
 	private static void hasUtilityPermission_userWithCustomPermission_true() {
 		// Given
-		User usr = createTestUser(true);
+		User usr = TestDataFactory.createUser(UserInfo.getProfileId(), 'Test');
+		TestDataFactory.assignPermissionSet(usr.Id, 'GameForceAccessNotificationUtility');
 		
 		// When
 		Test.startTest();
@@ -20,7 +21,7 @@ private class GameForceUtilityControllerTest {
 	@IsTest
 	private static void hasUtilityPermission_userWithoutCustomPermission_false() {
 		// Given
-		User usr = createTestUser(false);
+		User usr = TestDataFactory.createUser(UserInfo.getProfileId(), 'Test');
 		
 		// When
 		Test.startTest();
@@ -32,20 +33,5 @@ private class GameForceUtilityControllerTest {
 		
 		// Then
 		system.assert(!result, 'hasUtilityPermission is expected to return false if user doesn\'t have access to GameForceUtilityAccess PS');
-	}
-
-	private static User createTestUser(Boolean assignPermission) {
-		Id profileId = UserInfo.getProfileId();
-		User usr = TestDataFactory.createUser(profileId, 'Test_User');
-
-		if (assignPermission) {
-			PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'GameForceAccessNotificationUtility'];
-			PermissionSetAssignment assignment = new PermissionSetAssignment();
-			assignment.AssigneeId = usr.Id;
-			assignment.PermissionSetId= ps.Id;
-			insert assignment;
-		}
-
-		return usr;
 	}
 }

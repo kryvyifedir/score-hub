@@ -3,10 +3,10 @@
     {
       "path": "force-app",
       "package": "GameForce",
-      "versionName": "GameForce (beta)",
-      "versionNumber": "1.0.0.NEXT",
+      "versionName": "GameForce",
+      "versionNumber": "1.1.0.NEXT",
       "default": true,
-      "versionDescription": "GameForce pre-release (beta) version",
+      "versionDescription": "GameForce version 1.0",
       "postInstallScript": "GameForceConfig",
       "ancestorVersion": "HIGHEST"
     }
@@ -16,6 +16,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "59.0",
   "packageAliases": {
-    "GameForce": "0Ho69000000GmhUCAS"
+    "GameForce": "0Ho69000000GmhUCAS",
+    "GameForce@1.1.0-1": "04t690000018aAWAAY"
   }
 }

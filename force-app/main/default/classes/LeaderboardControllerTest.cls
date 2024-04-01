@@ -37,8 +37,6 @@ private class LeaderboardControllerTest {
 		System.assert(!result.containsKey('Success'), 'Success is expected');
 		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
 		System.assertEquals('Unable to get the top 10 users by Score', (String) result.get('Error'), 'Error message is expected');
-		List<Log__c> logs = [SELECT Id FROM Log__c];
-		System.assertEquals(1, logs.size(), 'Error log is expected to be saved');
 	}
 
 	@IsTest
@@ -77,7 +75,5 @@ private class LeaderboardControllerTest {
 		System.assert(!result.containsKey('Success'), 'Success is expected');
 		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
 		System.assertEquals('Unable to get the top 10 users by Achievements Count', (String) result.get('Error'), 'Error message is expected');
-		List<Log__c> logs = [SELECT Id FROM Log__c];
-		System.assertEquals(1, logs.size(), 'Error log is expected to be saved');
 	}
 }

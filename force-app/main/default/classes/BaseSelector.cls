@@ -1,4 +1,4 @@
-public abstract class BaseSelector {
+public abstract with sharing class BaseSelector {
 
 	public abstract String sObjectApiName();
 	public abstract Set<String> fieldApiNames();
@@ -16,7 +16,8 @@ public abstract class BaseSelector {
 	}
 
 	public List<sObject> getAll() {
-		return Database.query('SELECT ' + queryFieldApiNamesStr() + ' FROM ' + sObjectApiName(), System.AccessLevel.SYSTEM_MODE);
+		Map<String, Object> binds = new Map<String, Object> ();
+		return Database.queryWithBinds('SELECT ' + queryFieldApiNamesStr() + ' FROM ' + sObjectApiName(), binds, System.AccessLevel.SYSTEM_MODE);
 	}
 
 	public List<sObject> getByIds(Set<Id> ids) {
@@ -24,6 +25,18 @@ public abstract class BaseSelector {
 	}
 
 	private String queryFieldApiNamesStr() {
-		return String.join(new List<String>(fieldApiNames()), ',');
+		return String.escapeSingleQuotes(String.join(new List<String>(fieldApiNames()), ','));
 	}
+
+	// private String queryFieldApiNamesStr() {
+	// 	List<String> validFieldApiNames = new List<String>();
+	// 	Map<String, Schema.SObjectField> fieldsMap = Schema.getGlobalDescribe().get('GameForce__'+sObjectApiName()).getDescribe().fields.getMap();
+
+	// 	for (String fieldApiName : fieldApiNames()) {
+	// 		if (fieldsMap.get(fieldApiName).getDescribe().isAccessible()) {
+	// 			validFieldApiNames.add(fieldApiName);
+	// 		}
+	// 	}
+	// 	return String.escapeSingleQuotes(String.join(validFieldApiNames, ','));
+	// }
 }

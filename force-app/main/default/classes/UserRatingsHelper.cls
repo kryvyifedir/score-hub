@@ -16,7 +16,8 @@ public with sharing class UserRatingsHelper {
 	}
 
 	public static List<Id> getTopUsersByScore() {
-		List<AggregateResult> aggregateResults = Database.query('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c GROUP BY User__c ORDER BY SUM(Score__c) DESC LIMIT 10', System.AccessLevel.SYSTEM_MODE);
+		Map<String, Object> binds = new Map<String, Object>();
+		List<AggregateResult> aggregateResults = Database.queryWithBinds('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c GROUP BY User__c ORDER BY SUM(Score__c) DESC LIMIT 10', binds, System.AccessLevel.SYSTEM_MODE);
 		List<Id> topUserIds = new List<Id>();
 		for (AggregateResult aggregateResult : aggregateResults) {
 			topUserIds.add((Id) aggregateResult.get('GameForce__User__c'));
@@ -26,7 +27,8 @@ public with sharing class UserRatingsHelper {
 	}
 
 	public static List<Id> getTopUsersByAchievementsCount() {
-		List<AggregateResult> aggregateResults = Database.query('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c GROUP BY User__c ORDER BY COUNT(Id) DESC LIMIT 10', System.AccessLevel.SYSTEM_MODE);
+		Map<String, Object> binds = new Map<String, Object>();
+		List<AggregateResult> aggregateResults = Database.queryWithBinds('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c GROUP BY User__c ORDER BY COUNT(Id) DESC LIMIT 10', binds, System.AccessLevel.SYSTEM_MODE);
 		List<Id> topUserIds = new List<Id>();
 		for (AggregateResult aggregateResult : aggregateResults) {
 			topUserIds.add((Id) aggregateResult.get('GameForce__User__c'));

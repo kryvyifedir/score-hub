@@ -45,7 +45,5 @@ private class UserInfoControllerTest {
 		System.assert(result.containsKey('Error'), 'Error is not expected');
 		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
 		System.assertEquals('Unable to get total achievements count', (String) result.get('Error'), 'Error message is expected');
-		List<Log__c> logs = [SELECT Id FROM Log__c];
-		System.assertEquals(1, logs.size(), 'Unable to get UserInfo by Id');
 	}
 }

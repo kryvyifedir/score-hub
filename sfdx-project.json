@@ -16,7 +16,6 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "59.0",
   "packageAliases": {
-    "GameForce": "0Ho69000000GmhUCAS",
-    "GameForce@1.1.0-1": "04t690000018aAWAAY"
+    "GameForce": "0Ho69000000GmhUCAS"
   }
 }

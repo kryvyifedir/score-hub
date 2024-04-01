@@ -7,7 +7,8 @@
       "versionNumber": "1.0.0.NEXT",
       "default": true,
       "versionDescription": "GameForce pre-release (beta) version",
-      "postInstallScript": "GameForceConfig"
+      "postInstallScript": "GameForceConfig",
+      "ancestorVersion": "HIGHEST"
     }
   ],
   "name": "GameForce",

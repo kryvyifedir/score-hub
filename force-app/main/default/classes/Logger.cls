@@ -19,7 +19,12 @@ public with sharing class Logger {
 			return;
 		}
 
-		Database.insert(logs);
+		if (Log__c.SObjectType.getDescribe().isAccessible() && 
+			Log__c.SObjectType.getDescribe().isCreateable() &&
+			Schema.SObjectType.Log__c.fields.ErrorMessage__c.isAccessible() && 
+			Schema.SObjectType.Log__c.fields.ErrorMessage__c.isCreateable()) {
+			Database.insert(logs);
+		}
 	}
 
 	@future

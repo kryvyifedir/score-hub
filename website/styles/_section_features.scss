@@ -18,7 +18,7 @@
     }
     &-info {
         line-height: 24px;
-        padding: 2%;
+        padding: 36px;
         width: 50%;
     }
     &-img-wrap {
@@ -30,7 +30,8 @@
         object-fit: cover;
     }
     &-subtitle {
-        margin-bottom: 2rem;
+        margin-bottom: 36px;
+        text-align: center;
     }
     &-text {
         @include fonts($fontFamilyText, 18px, 24px);

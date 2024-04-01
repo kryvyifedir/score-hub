@@ -41,6 +41,7 @@
         display: inline-block;
         margin-bottom: 15px;
         position: relative;
+        transition: all .7s ease;
         &::after{
             content: "";
             position: absolute;
@@ -49,12 +50,13 @@
             background-color: $primary;
             bottom: 3px;
             left: 0;
+            transition: color .7s ease;
         }
         &:hover {
             color: $hover;
         }
         &:hover::after {
-            background-color: $hover;
+            opacity: 0;
         }
     }
 }

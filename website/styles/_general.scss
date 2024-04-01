@@ -48,7 +48,7 @@ iframe {
 
 //test
 .intro {
-height: 600px;
+height: 500px;
 //clip-path: polygon(100% 0, 100% 68%, 50% 100%, 0 65%, 0 0);
 background-color: $background;
 display: flex;
@@ -60,7 +60,7 @@ width: 100%;
 
 h1 {
     margin: 0;
-    @include fonts($fontFamilyTitle, 62px, 48px);
+    @include fonts($fontFamilyTitle, 64px, 56px);
     margin-top: 150px;
 }
 .intro-test {

@@ -79,7 +79,7 @@ iframe {
 }
 
 .intro {
-  height: 600px;
+  height: 500px;
   background-color: #eaf6fe;
   display: flex;
   flex-direction: column;
@@ -91,8 +91,8 @@ iframe {
 h1 {
   margin: 0;
   font-family: "Avant Garde Bold", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
-  font-size: 62px;
-  line-height: 48px;
+  font-size: 64px;
+  line-height: 56px;
   margin-top: 150px;
 }
 
@@ -106,7 +106,8 @@ h1 {
 }
 
 .header {
-  padding: 20px 25px;
+  padding: 20px 30px;
+  position: relative;
   z-index: 2;
   background-color: #eaf6fe;
 }
@@ -123,8 +124,12 @@ h1 {
   padding: 8px 24px;
   background-color: #2e844a;
   border-radius: 4px;
-  font-weight: 400;
+  font-weight: 700;
   cursor: pointer;
+  transition: all 0.7s ease;
+}
+.header-link:hover {
+  background-color: #1c3326;
 }
 
 .navbar-list {
@@ -139,9 +144,10 @@ h1 {
 }
 .navbar-item-link {
   color: #032d60;
+  transition: all 0.7s ease;
 }
 .navbar-item-link:hover {
-  color: #0176d3;
+  color: #0b5acb;
 }
 
 .section-features-wrap {
@@ -169,7 +175,7 @@ h1 {
 }
 .feature-item-info {
   line-height: 24px;
-  padding: 2%;
+  padding: 36px;
   width: 50%;
 }
 .feature-item-img-wrap {
@@ -182,7 +188,8 @@ h1 {
      object-fit: cover;
 }
 .feature-item-subtitle {
-  margin-bottom: 2rem;
+  margin-bottom: 36px;
+  text-align: center;
 }
 .feature-item-text {
   font-family: "Salesforce Sans", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
@@ -238,6 +245,7 @@ h1 {
   display: inline-block;
   margin-bottom: 15px;
   position: relative;
+  transition: all 0.7s ease;
 }
 .blog-link::after {
   content: "";
@@ -247,12 +255,13 @@ h1 {
   background-color: #032d60;
   bottom: 3px;
   left: 0;
+  transition: color 0.7s ease;
 }
 .blog-link:hover {
-  color: #0176d3;
+  color: #0b5acb;
 }
 .blog-link:hover::after {
-  background-color: #0176d3;
+  opacity: 0;
 }
 
 .footer {
@@ -261,7 +270,7 @@ h1 {
 .footer-list {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 25px;
   padding-top: 24px;
@@ -297,7 +306,7 @@ h1 {
 .btn-next,
 .btn-prev,
 .btns-pagination {
-  color: #0176d3;
+  color: #0b5acb;
 }
 
 .btns-pagination {

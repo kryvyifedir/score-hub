@@ -2,7 +2,8 @@
 @import "./vars";
 
 .header {
-    padding: 20px 25px;
+    padding: 20px 30px;
+    position: relative;
     z-index: 2;
     background-color: $background;
 
@@ -17,8 +18,13 @@
         padding: 8px 24px;
         background-color: $btn;
         border-radius: 4px;
-        font-weight: 400;
+        font-weight: 700;
         cursor: pointer;
+        transition: all .7s ease;
+
+        &:hover{
+            background-color: $btnHover;
+        }
     }
 }
 
@@ -33,6 +39,7 @@
 
         &-link {
             color: $primary;
+            transition: all .7s ease;
 
             &:hover {
                 color: $hover;

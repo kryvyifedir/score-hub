@@ -4,7 +4,7 @@
 .footer {
 background-color: $footer;
 &-list {
- @include flex(row, flex-end, center);
+ @include flex(row, center, center);
  gap: 25px;
  padding-top: 24px;
  padding-bottom: 24px;

@@ -2,40 +2,55 @@
 @import "./mixins";
 
 .section-features-wrap {
-     @include flex(column, center, center);
-     gap: 20px;
+    display: grid;
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
 }
 .feature-item {
-    @include flex(row, flex-start, center);
-    gap: 60px;
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, auto);
+    align-items: center;
+    gap: 20px;
+    
+    &:nth-child(even) &-info {
+        grid-column: 2 / 4;
+        grid-row: 1 / 2;
+    }
+    
+    &:nth-child(even) &-img-wrap {
+       grid-column: 1 / 2;
+       grid-row: 1 / 2;
+    }
     line-height: 0;
-    width: 100%;
-    height: 320px;
-    padding: 20px 40px;
-    overflow: hidden;
+    padding: 20px;
     border-radius: 16px;
     box-shadow: 0 2px 8px -2px hsla(0, 0%, 9%, .08), 0 8px 12px -2px hsla(0, 0%, 9%, .16);
-    &--position {
-        order: 2;
-    }
     &-info {
         line-height: 24px;
-        max-width: 960px;
         text-align: justify;
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
     }
     &-img-wrap {
-        max-width: 320px;
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+        align-content: center;
     }
     &-img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
     &-subtitle {
         margin-bottom: 36px;
     }
     &-text {
-        @include fonts($fontFamilyText, 18px, 24px);
+        @include fonts($fontFamilyText, 18px, 28px);
         font-weight: 400;
         color: $info;
-        text-align: left;
+        text-align: justify;
     }
 }

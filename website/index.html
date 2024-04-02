@@ -7,168 +7,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="styles/styles.css">
     <title>GameForce</title>
+    <link rel="icon" type="image/x-icon" href="/website/images/favicon.ico">
 </head>
 
 <body>
     <header class="header">
-            <div class="header-wrap">
-                <nav class="navbar">
-                    <ul class="navbar-list">
-                        <li class="navbar-item"><a class="navbar-item-link" href="#features">Features</a></li>
-                        <li class="navbar-item"><a class="navbar-item-link" href="#video">Guide Videos</a></li>
-                        <li class="navbar-item"><a class="navbar-item-link" href="#blog">Blog</a></li>
-                    </ul>
-                </nav>
-                <a href="#" class="header-link" target="_blank">AppExchange</a>
-            </div>       
+        <div class="header-wrap">
+            <nav class="navbar">
+                <ul class="navbar-list">
+                    <li class="navbar-item"><a class="navbar-item-link" href="#features">Features</a></li>
+                    <li class="navbar-item"><a class="navbar-item-link" href="#guides">Guides</a></li>
+                    <li class="navbar-item"><a class="navbar-item-link" href="#blog">Articles</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="header-link" target="_blank">AppExchange</a>
+        </div>
     </header>
     <main class="main">
         <section class="intro">
-            <h1>GameForce<h1>
-                <p class="intro-test">Lorem ipsum dolor sit amet consectetur adipisicing elit.<p>
+            <div class="container">
+                <h1 class="intro-title">GameForce</h1>
+                <p class="intro-about">GameForce is an open-source project that aims to bring Xbox/Playstation-like
+                    achievements into Salesforce. Gamification is a proven and unobtrusive way to boost engagement and
+                    productivity by leveraging the natural competitive instinct in people. It can help employees develop
+                    their skills and be more motivated while making their job more engaging and fun.
+                <p>
+            </div>
+
         </section>
         <section id="features" class="section section-features">
             <div class="container">
-                <h2 class="section-title">Our features</h2>
                 <div class="section-features-wrap">
                     <article class="feature-item">
                         <div class="feature-item-info">
-                            <h3 class="feature-item-subtitle subtitle">Subheader 1</h3>
-                            <p class="feature-item-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Facilisearum eosullam! Et molestias atque maiores expedita magni debitis, eos deserunt
-                                cum mollitia fuga
-                                totam
-                                placeat corporis consectetur aspernatur impedit.
+                            <h2 class="feature-item-subtitle section-title">Simple configuration</h2>
+                            <p class="feature-item-text">GameForce relies on a pre-built list of achievements and simple
+                                and yet robust configuration process to make sure your users can use the app and get the
+                                benefits as soon as possible
                             </p>
                         </div>
                         <div class="feature-item-img-wrap">
-                            <img class="feature-item-img"
-                                src="https://images.unsplash.com/photo-1438786657495-640937046d18?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                alt="feature_photo" width="400" height="350">
+                            <img class="feature-item-img" src="images/features/003-setting.png" alt="setting_icon"
+                                width="300" height="300">
                         </div>
                     </article>
                     <article class="feature-item">
                         <div class="feature-item-info feature-item--position">
-                            <h3 class="feature-item-subtitle subtitle">Subheader 2</h3>
-                            <p class="feature-item-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Facilis
-                                earum eos
-                                ullam! Et molestias atque maiores expedita magni debitis, eos deserunt cum mollitia fuga
-                                totam
-                                placeat corporis consectetur aspernatur impedit.
+                            <h2 class="feature-item-subtitle section-title">Compete with your teammates</h2>
+                            <p class="feature-item-text"> GameForce Leaderboard facilitates competitive spirit and
+                                motivates your users to achieve more
                             </p>
                         </div>
                         <div class="feature-item-img-wrap">
-                            <img class="feature-item-img"
-                                src="https://images.unsplash.com/photo-1438786657495-640937046d18?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                alt="feature_photo" width="400" height="350">
+                            <img class="feature-item-img" src="images/features/002-podium.png" alt="podium_icon"
+                                width="300" height="300">
                         </div>
                     </article>
                     <article class="feature-item">
                         <div class="feature-item-info">
-                            <h3 class="feature-item-subtitle subtitle">Subheader 1</h3>
-                            <p class="feature-item-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Facilis
-                                earum eos
-                                ullam! Et molestias atque maiores expedita magni debitis, eos deserunt cum mollitia fuga
-                                totam
-                                placeat corporis consectetur aspernatur impedit.
+                            <h2 class="feature-item-subtitle section-title">Extend the functionality to your own liking
+                            </h2>
+                            <p class="feature-item-text">Create your own custom achievements and integrate GameForce
+                                with your existing business processes using Flows or Apex
                             </p>
                         </div>
                         <div class="feature-item-img-wrap">
-                            <img class="feature-item-img"
-                                src="https://images.unsplash.com/photo-1438786657495-640937046d18?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                alt="feature_photo" width="400" height="350">
+                            <img class="feature-item-img" src="images/features/001-integration.png"
+                                alt="integration_icon" width="300" height="300">
                         </div>
                     </article>
                 </div>
 
             </div>
         </section>
-        <section id="video" class="section section-video">
+        <section id="guides" class="section section-guides">
             <div class="container">
-                <h2 class="section-title">Guide Videos</h2>
-                <div class="swiper mySwiper">
-                        <ul class="swiper-wrapper">
-                      <li class="swiper-slide"><iframe class="swiper-slide-video"
-                        src="https://www.youtube.com/embed/R6a2YGUiUIA?si=sePMw9L0ZxwHr1QR" width="800" height="520"></iframe></li>
-                      <li class="swiper-slide"><iframe class="swiper-slide-video" width="800" height="520"
-                        src="https://www.youtube.com/embed/JdqL89ZZwFw?si=uq1w34-vCOknnsK-"></iframe></li>
-                      <li class="swiper-slide"><iframe class="swiper-slide-video" width="800" height="520"
-                        src="https://www.youtube.com/embed/5m8iNHJPCXM?si=KrXLE-ZqHnXk8w0Z"></iframe></li>
-                      <li class="swiper-slide"><iframe class="swiper-slide-video" width="800" height="520"
-                        src="https://www.youtube.com/embed/9FvvbVI5rYA?si=LQRUXoyMKeqWy4mB"></iframe></li>
-                      <li class="swiper-slide"><iframe class="swiper-slide-video" width="800" height="520"
-                        src="https://www.youtube.com/embed/GrG2-oX5z24?si=_qPwBCNpm6_QpLr-"></iframe></li>
+                <div class="swiper mySwiperGuides">
+                    <ul class="swiper-wrapper">
+                        <li class="swiper-slide"><iframe class="swiper-slide-guides"
+                                src="https://www.youtube.com/embed/R6a2YGUiUIA?si=sePMw9L0ZxwHr1QR" width="800"
+                                height="520"></iframe></li>
+                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
+                                src="https://www.youtube.com/embed/JdqL89ZZwFw?si=uq1w34-vCOknnsK-"></iframe></li>
+                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
+                                src="https://www.youtube.com/embed/5m8iNHJPCXM?si=KrXLE-ZqHnXk8w0Z"></iframe></li>
+                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
+                                src="https://www.youtube.com/embed/9FvvbVI5rYA?si=LQRUXoyMKeqWy4mB"></iframe></li>
+                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
+                                src="https://www.youtube.com/embed/GrG2-oX5z24?si=_qPwBCNpm6_QpLr-"></iframe></li>
                     </ul>
                     <div class="swiper-pagination btns-pagination"></div>
                     <div class="swiper-button-next btn-next"></div>
-                    <div class="swiper-button-prev btn-prev"></div> 
-            </div>
+                    <div class="swiper-button-prev btn-prev"></div>
+                </div>
             </div>
         </section>
         <section id="blog" class="section section-blog">
             <div class="container">
-                <h2 class="section-title">Blog</h2>
-                <div class="blog-wrap blog">
-                    <article class="blog-item">
-                        <img class="blog-img"
-                            src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt="blog_photo" width="350" height="300">
-                        <div class="blog-info">
-                            <h3 class="blog-subtitle subtitle">Blog Title</h3>
-                            <p class="blog-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-                                suscipit
-                                veritatis
-                                quia recusandae at modi. Maxime modi corrupti, qui quidem labore unde dicta quae
-                                reiciendis
-                                aliquam
-                                perspiciatis quos alias animi!</p>
-                            <a class="blog-link" href="#" target="_blank">Read more</a>
-                        </div>
-
-                    </article>
-                    <article class="blog-item">
-                        <img class="blog-img"
-                            src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt="blog_photo" width="350" height="300">
-                        <div class="blog-info">
-                            <h3 class="blog-subtitle subtitle">Blog Title</h3>
-                            <p class="blog-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-                                suscipit
-                                veritatis
-                                quia recusandae at modi. Maxime modi corrupti, qui quidem labore unde dicta quae
-                                reiciendis
-                                aliquam
-                                perspiciatis quos alias animi!</p>
-                            <a class="blog-link" href="#" target="_blank">Read more</a>
-                        </div>
-
-                    </article>
-                    <article class="blog-item">
-                        <img class="blog-img"
-                            src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt="blog_photo" width="350" height="300">
-                        <div class="blog-info">
-                            <h3 class="blog-subtitle subtitle">Blog Title</h3>
-                            <p class="blog-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-                                suscipit
-                                veritatis
-                                quia recusandae at modi. Maxime modi corrupti, qui quidem labore unde dicta quae
-                                reiciendis
-                                aliquam
-                                perspiciatis quos alias animi!</p>
-                            <a class="blog-link" href="#" target="_blank">Read more</a>
-                        </div>
-
-                    </article>
+                <div class="swiper mySwiperBlog">
+                    <div class="blog blog-wrap swiper-wrapper"></div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev blog-button-prev"></div>
+                    <div class="swiper-button-next blog-button-next"></div>
                 </div>
-
             </div>
         </section>
     </main>
@@ -176,33 +123,19 @@
         <div class="container">
             <nav class="footer-nav">
                 <ul class="footer-list">
-                    <li class="footer-item"><a href="#" target="_blank"><img src="./images/github.svg" alt="github-icon" width="30"
-                                height="30"></a></li>
-                    <li class="footer-item"><a href="#" target="_blank"><img src="./images/linkedin.svg" alt="linkedin-icon" width="30"
-                                height="30"></a></li>
-                    <li class="footer-item"><a href="mailto:test@test.com"><img src="./images/envelope-regular.svg" alt="mail-icon"
+                    <li class="footer-item"><a href="https://github.com/kryvyifedir/game-force" target="_blank"><img src="./images/github.svg" alt="github-icon"
                                 width="30" height="30"></a></li>
+                    <li class="footer-item"><a href="https://www.linkedin.com/newsletters/gameforce-7165796654950825984/" target="_blank"><img src="./images/linkedin.svg"
+                                alt="linkedin-icon" width="30" height="30"></a></li>
+                    <li class="footer-item"><a href="mailto:fedirkryvyi@outlook.com"><img src="./images/envelope-regular.svg"
+                                alt="mail-icon" width="30" height="30"></a></li>
                 </ul>
             </nav>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>let swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        keyboard: {
-            enabled: true,
-          },
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-          },
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-    });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="scripts/guides.js" type="module"></script>
+    <script src="scripts/articles.js" type="module"></script>
 </body>
 
 </html>

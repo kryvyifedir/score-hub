@@ -42,33 +42,26 @@ iframe {
     @include fonts($fontFamilyTitle, 32px, 40px);
 }
 
-.subtitle {
-    @include fonts($fontFamilySubtitle, 24px, 28px);
+.btn-next,
+.btn-prev,
+.btns-pagination {
+    color: $hover;
 }
 
-//test
-.intro {
-height: 500px;
-//clip-path: polygon(100% 0, 100% 68%, 50% 100%, 0 65%, 0 0);
-background-color: $background;
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: center;
-width: 100%;
+.swiper {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
-h1 {
-    margin: 0;
-    @include fonts($fontFamilyTitle, 64px, 56px);
-    margin-top: 150px;
+
+.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+    margin-top: 30px;
+    padding-bottom: 40px;
 }
-.intro-test {
-    @include fonts($info, 32px, 40px);
-    color: #181818;
-    margin: 0;
-    margin-top: -80px;
-}
+
 
 
 

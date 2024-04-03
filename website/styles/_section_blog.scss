@@ -8,13 +8,13 @@
 .blog {
     &-wrap {
         width: 100%;
+       
     }
 
     &-item {
-        width: calc((100% - 20px) / 3);
+       width: calc((100% - 20px) / 3);
         margin-bottom: 1rem;
         @include flex(column, center, center);
-        height: 500px;
         border-radius: 16px;
         box-shadow: 0 2px 8px 3px hsla(0, 0%, 9%, .08), 0 8px 9px -2px hsla(0, 0%, 9%, .16);
     }
@@ -23,6 +23,7 @@
         width: 100%;
         object-fit: contain;
         height: 100%;
+        flex: 1;
     }
     &-info {
         width: 100%;
@@ -30,7 +31,7 @@
         padding: 0 15px 15px;
         @include flex(column, space-between, center);
         overflow: hidden;
-        
+        flex: 2;
     }
     &-subtitle {
        flex: .5
@@ -39,10 +40,9 @@
          color: $info;
          @include fonts($fontFamilyText, 16px, 24px);
          font-weight: 400;
-         overflow: hidden;
-         text-overflow: ellipsis;
          text-align: justify;
-         flex: 1;
+         flex: 1.5;
+         
     }
     &-link {
         color: $primary;
@@ -70,7 +70,7 @@
 
 .blog-button-prev, .blog-button-next {
     position: absolute;
-    top: 97%;
+    top: 96%;
 }
 
 .blog-button-next {
@@ -88,8 +88,11 @@
     font-size: 25px;
 }
 
-.swiper {
-    padding: 5px;
+.mySwiperBlog {
+    padding: 15px 15px 50px 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: column;
 }
 
 

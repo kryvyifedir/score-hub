@@ -11,7 +11,7 @@
   align-items: $align;
 }
 
-@mixin responsive($min-width, $max-width) {
+@mixin mobile($min-width, $max-width) {
   @media (min-width: #{$min-width}px) and (max-width: #{$max-width}px) {
       @content;
   }

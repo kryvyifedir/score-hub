@@ -2,6 +2,8 @@
 @import "./vars";
 
 .header {
+    position: relative;
+    top: 100%;
     padding: 20px 30px;
     width: 100%;
     position: fixed;
@@ -29,9 +31,9 @@
         }
     }
 
-    @include responsive(320, 576){
+@include mobile(360, 576){
           & {
-            padding: 10px 10px;
+            padding: 10px 15px;
           }
           &-link {
             padding: 4px 12px;
@@ -58,10 +60,9 @@
             }
         }
     }
-    @include responsive(320, 576){
+    @include mobile(360, 576){
         &-list {
-            gap: 10px;
+            gap: 15px;
         }
-        
   }
 }

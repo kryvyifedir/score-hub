@@ -39,7 +39,6 @@
                     their skills and be more motivated while making their job more engaging and fun.
                 <p>
             </div>
-
         </section>
         <section id="features" class="section section-features">
             <div class="container">
@@ -86,24 +85,48 @@
         </section>
         <section id="guides" class="section section-guides">
             <div class="container">
-                <div class="swiper mySwiperGuides">
-                    <ul class="swiper-wrapper">
-                        <li class="swiper-slide"><iframe class="swiper-slide-guides"
-                                src="https://www.youtube.com/embed/R6a2YGUiUIA?si=sePMw9L0ZxwHr1QR" width="800"
-                                height="520"></iframe></li>
-                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
-                                src="https://www.youtube.com/embed/JdqL89ZZwFw?si=uq1w34-vCOknnsK-"></iframe></li>
-                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
-                                src="https://www.youtube.com/embed/5m8iNHJPCXM?si=KrXLE-ZqHnXk8w0Z"></iframe></li>
-                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
-                                src="https://www.youtube.com/embed/9FvvbVI5rYA?si=LQRUXoyMKeqWy4mB"></iframe></li>
-                        <li class="swiper-slide"><iframe class="swiper-slide-guides" width="800" height="520"
-                                src="https://www.youtube.com/embed/GrG2-oX5z24?si=_qPwBCNpm6_QpLr-"></iframe></li>
+                    <div class="swiper mySwiperGuides items-container">
+                    <ul class="swiper-wrapper items-body">
+                        <li class="swiper-slide item">
+                            <div class="item-video">
+                            <iframe class="swiper-slide-guides"
+                            src="https://www.youtube.com/embed/R6a2YGUiUIA?si=IiKcWFpo9hxiK1ny"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
+                            </div>
+                        </li>
+                        <li class="swiper-slide item">
+                            <div class="item-video">
+                            <iframe class="swiper-slide-guides"
+                            src="https://www.youtube.com/embed/R6a2YGUiUIA?si=IiKcWFpo9hxiK1ny"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
+                            </div>
+                        </li>
+                        <li class="swiper-slide item">
+                            <div class="item-video">
+                            <iframe class="swiper-slide-guides"
+                            src="https://www.youtube.com/embed/R6a2YGUiUIA?si=IiKcWFpo9hxiK1ny"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
+                            </div>
+                        </li>
                     </ul>
                     <div class="swiper-pagination btns-pagination"></div>
                     <div class="swiper-button-next btn-next"></div>
                     <div class="swiper-button-prev btn-prev"></div>
                 </div>
+                
+                
             </div>
         </section>
         <section id="blog" class="section section-blog">
@@ -214,7 +237,7 @@
                         </div>
                         </article>
                     </div>
-                    <div class="swiper-pagination"></div>
+
                     <div class="swiper-button-prev blog-button-prev"></div>
                     <div class="swiper-button-next blog-button-next"></div>    
                 
@@ -239,7 +262,7 @@
     <script>
         let swiperFirst = new Swiper(".mySwiperGuides", {
     slidesPerView: 1,
-    spaceBetween: 30,
+    spaceBetween: 10,
     pagination: {
         el: ".btns-pagination",
         clickable: true,
@@ -253,11 +276,21 @@
     <script>
     let swiper = new Swiper(".mySwiperBlog", {
     slidesPerView: 3,
-    slidesPerGroup: 3,
-    spaceBetween: 10,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
+    spaceBetween: 30,
+    breakpoints: {
+    360: {
+      slidesPerView: 1,
+      slidesPerGroup: 1
+    },
+    640: {
+      slidesPerView: 2,
+      slidesPerGroup: 2
+      
+    },
+    768: {
+        slidesPerView: 3,
+        slidesPerGroup: 3
+    }
     },
     navigation: {
         nextEl: '.swiper-button-next',

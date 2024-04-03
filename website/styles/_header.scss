@@ -28,6 +28,16 @@
             background-color: $btnHover;
         }
     }
+
+    @include responsive(320, 576){
+          & {
+            padding: 10px 10px;
+          }
+          &-link {
+            padding: 4px 12px;
+            font-weight: 600;
+          }
+    }
 }
 
 .navbar {
@@ -48,4 +58,10 @@
             }
         }
     }
+    @include responsive(320, 576){
+        &-list {
+            gap: 10px;
+        }
+        
+  }
 }

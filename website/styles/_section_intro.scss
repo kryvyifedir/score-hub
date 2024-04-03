@@ -13,8 +13,24 @@
     }
 
     &-about {
-        @include fonts($info, 24px, 32px);
+        @include fonts($fontFamilyText, 24px, 32px);
         color: $info;
-        margin: 40px 0 0;
+        margin: 40px auto;
+        width: 90%;
+    }
+    @include responsive(320, 576) {
+        & {
+            height: 450px;
+            &-title {
+                @include fonts($fontFamilyTitle, 48px, 25px);
+                margin-top: 50px;
+            }
+            &-about {
+                text-align: justify;
+                @include fonts($fontFamilyText, 16px, 24px);
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
     }
 }

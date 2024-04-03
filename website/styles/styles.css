@@ -55,6 +55,13 @@ body {
   margin: 0;
   color: #032d60;
 }
+@media (min-width: 320px) and (max-width: 576px) {
+  body {
+    font-family: "Salesforce Sans", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
 
 iframe {
   border: 0;
@@ -123,6 +130,15 @@ iframe {
 .header-link:hover {
   background-color: #1c3326;
 }
+@media (min-width: 320px) and (max-width: 576px) {
+  .header {
+    padding: 10px 10px;
+  }
+  .header-link {
+    padding: 4px 12px;
+    font-weight: 600;
+  }
+}
 
 .navbar-list {
   display: flex;
@@ -141,6 +157,11 @@ iframe {
 .navbar-item-link:hover {
   color: #0b5acb;
 }
+@media (min-width: 320px) and (max-width: 576px) {
+  .navbar-list {
+    gap: 10px;
+  }
+}
 
 .intro {
   height: 500px;
@@ -158,11 +179,31 @@ iframe {
   line-height: 56px;
 }
 .intro-about {
-  font-family: #181818;
+  font-family: "Salesforce Sans", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
   font-size: 24px;
   line-height: 32px;
   color: #181818;
-  margin: 40px 0 0;
+  margin: 40px auto;
+  width: 90%;
+}
+@media (min-width: 320px) and (max-width: 576px) {
+  .intro {
+    height: 450px;
+  }
+  .intro-title {
+    font-family: "Avant Garde Bold", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
+    font-size: 48px;
+    line-height: 25px;
+    margin-top: 50px;
+  }
+  .intro-about {
+    text-align: justify;
+    font-family: "Salesforce Sans", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 .section-features-wrap {
@@ -243,18 +284,17 @@ iframe {
 
 .blog-wrap {
   width: 100%;
-  height: 100%;
 }
 .blog-item {
-  width: 33.33%;
+  width: calc((100% - 20px) / 3);
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 500px;
-  overflow: hidden;
   border-radius: 16px;
-  box-shadow: 0 2px 8px -2px hsla(0, 0%, 9%, 0.08), 0 8px 12px -2px hsla(0, 0%, 9%, 0.16);
+  box-shadow: 0 2px 8px 3px hsla(0, 0%, 9%, 0.08), 0 8px 9px -2px hsla(0, 0%, 9%, 0.16);
 }
 .blog-img {
   width: 100%;
@@ -273,7 +313,7 @@ iframe {
   overflow: hidden;
 }
 .blog-subtitle {
-  margin-bottom: 15px;
+  flex: 0.5;
 }
 .blog-text {
   color: #181818;
@@ -281,9 +321,10 @@ iframe {
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  margin-bottom: 15px;
   overflow: hidden;
+  text-overflow: ellipsis;
   text-align: justify;
+  flex: 1;
 }
 .blog-link {
   color: #032d60;
@@ -310,7 +351,7 @@ iframe {
 
 .blog-button-prev, .blog-button-next {
   position: absolute;
-  top: 96%;
+  top: 97%;
 }
 
 .blog-button-next {
@@ -327,12 +368,8 @@ iframe {
   font-size: 25px;
 }
 
-.swiper-item {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  overflow: hidden;
-  padding: 10px;
+.swiper {
+  padding: 5px;
 }
 
 .footer {

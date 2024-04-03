@@ -8,16 +8,15 @@
 .blog {
     &-wrap {
         width: 100%;
-        height: 100%;
     }
 
     &-item {
-        width: 33.33%;
+        width: calc((100% - 20px) / 3);
+        margin-bottom: 1rem;
         @include flex(column, center, center);
         height: 500px;
-        overflow: hidden;
         border-radius: 16px;
-        box-shadow: 0 2px 8px -2px hsla(0, 0%, 9%, .08), 0 8px 12px -2px hsla(0, 0%, 9%, .16);
+        box-shadow: 0 2px 8px 3px hsla(0, 0%, 9%, .08), 0 8px 9px -2px hsla(0, 0%, 9%, .16);
     }
 
     &-img {
@@ -31,17 +30,19 @@
         padding: 0 15px 15px;
         @include flex(column, space-between, center);
         overflow: hidden;
+        
     }
     &-subtitle {
-        margin-bottom: 15px;
+       flex: .5
     }
     &-text {
          color: $info;
          @include fonts($fontFamilyText, 16px, 24px);
          font-weight: 400;
-         margin-bottom: 15px;
          overflow: hidden;
+         text-overflow: ellipsis;
          text-align: justify;
+         flex: 1;
     }
     &-link {
         color: $primary;
@@ -69,7 +70,7 @@
 
 .blog-button-prev, .blog-button-next {
     position: absolute;
-    top: 96%;
+    top: 97%;
 }
 
 .blog-button-next {
@@ -87,12 +88,8 @@
     font-size: 25px;
 }
 
-.swiper-item{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    overflow: hidden;
-    padding: 10px;
+.swiper {
+    padding: 5px;
 }
 
 

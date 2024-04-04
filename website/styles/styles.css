@@ -89,12 +89,12 @@ iframe {
   }
 }
 
-.btn-next,
-.btn-prev,
-.blog-button-next,
-.blog-button-prev {
+.swiper-button-next,
+.swiper-button-prev {
   color: #0b5acb;
   transition: transform 0.5 ease-in-out;
+  position: absolute;
+  top: 95%;
 }
 
 .swiper-pagination-bullet {
@@ -110,7 +110,12 @@ iframe {
 .swiper-wrapper {
   width: 100%;
   height: 100%;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
+}
+@media (min-width: 360px) and (max-width: 575px) {
+  .swiper-wrapper {
+    padding-bottom: 40px;
+  }
 }
 
 .btn-next:active,
@@ -118,6 +123,20 @@ iframe {
 .blog-button-next:active,
 .blog-button-prev:active {
   transform: scale(1.05);
+}
+
+.swiper-button-next {
+  left: auto;
+  right: 40%;
+}
+
+.swiper-button-prev {
+  left: 40%;
+  right: auto;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 25px;
 }
 
 .header {
@@ -279,7 +298,7 @@ iframe {
 @media (min-width: 360px) and (max-width: 574px) {
   .feature-item {
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: auto minmax(250px, 1fr);
+    grid-template-rows: 1fr;
     gap: 0;
     align-items: start;
   }
@@ -288,8 +307,7 @@ iframe {
     grid-row: 1/2;
   }
   .feature-item:nth-child(even) .feature-item-img-wrap {
-    grid-column: 1/2;
-    grid-row: 2/3;
+    display: none;
   }
   .feature-item-info {
     text-align: left;
@@ -301,8 +319,7 @@ iframe {
     margin-bottom: 20px;
   }
   .feature-item-img-wrap {
-    grid-column: 1/1;
-    grid-row: 2/3;
+    display: none;
   }
   .feature-item-subtitle {
     margin: 0;
@@ -316,12 +333,6 @@ iframe {
 
 .section-guides {
   background-color: #eaf6fe;
-}
-
-.btns-pagination {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .items-container {
@@ -343,7 +354,7 @@ iframe {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 80%;
+  width: 90%;
   height: 100%;
   margin: auto;
 }
@@ -425,25 +436,6 @@ iframe {
   .blog-subtitle {
     font-size: 18px;
   }
-}
-
-.blog-button-prev, .blog-button-next {
-  position: absolute;
-  top: 96%;
-}
-
-.blog-button-next {
-  right: 40%;
-  left: auto;
-}
-
-.blog-button-prev {
-  right: auto;
-  left: 40%;
-}
-
-.blog-button-prev::after, .blog-button-next::after {
-  font-size: 25px;
 }
 
 .mySwiperBlog {

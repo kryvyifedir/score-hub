@@ -78,26 +78,6 @@
 }
 }
 
-.blog-button-prev, .blog-button-next {
-    position: absolute;
-    top: 96%;
-}
-
-.blog-button-next {
-    right: 40%;
-    left: auto;
-    
-}
-
-.blog-button-prev {
-    right: auto;
-    left: 40%;
-}
-
-.blog-button-prev::after, .blog-button-next::after {
-    font-size: 25px;
-}
-
 .mySwiperBlog {
     padding: 15px 15px 50px 15px;
     display: grid;

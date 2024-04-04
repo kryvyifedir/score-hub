@@ -57,7 +57,7 @@
     @include mobile(360, 574) {
         & {
             grid-template-columns: repeat(1, 1fr);
-            grid-template-rows: auto minmax(250px, 1fr);
+            grid-template-rows: 1fr;
             gap: 0;
             align-items: start;
 
@@ -67,8 +67,7 @@
             }
 
             &:nth-child(even) &-img-wrap {
-                grid-column: 1 / 2;
-                grid-row: 2 / 3;
+                display: none;
              }
 
             &-info {
@@ -82,8 +81,7 @@
             }
 
             &-img-wrap {
-                grid-column: 1 / 1;
-                grid-row: 2 / 3;
+                display: none;
             }
             &-subtitle {
                 margin: 0;

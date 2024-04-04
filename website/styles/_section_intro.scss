@@ -20,14 +20,16 @@
     @include mobile(360, 768) {
         & {
             &-title {
-                @include fonts($fontFamilyTitle, 40px, 24px);
+                font-size: 40px;
+                line-height: 24px;
                 text-align: left;
                 margin-left: 15px;
                 font-weight: 600;
             }
             &-about {
                 text-align: left;
-                @include fonts($fontFamilyText, 16px, 28px);
+                font-size: 16px;
+                line-height: 28px;
                 margin: 30px 0 0 20px;
             }
         }

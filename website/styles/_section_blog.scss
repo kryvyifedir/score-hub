@@ -23,7 +23,7 @@
         width: 100%;
         object-fit: contain;
         height: 100%;
-        flex: 1;
+        flex: .5;
     }
     &-info {
         width: 100%;
@@ -31,10 +31,11 @@
         padding: 0 15px 15px;
         @include flex(column, space-between, center);
         overflow: hidden;
-        flex: 2;
+        flex: 3;
     }
     &-subtitle {
-       flex: .5
+      flex: .5
+
     }
     &-text {
          color: $info;
@@ -42,6 +43,7 @@
          font-weight: 400;
          text-align: justify;
          flex: 1.5;
+         overflow: hidden;
          
     }
     &-link {
@@ -66,6 +68,14 @@
             opacity: 0;
         }
     }
+    @include mobile(768, 992) {
+        &-text {
+            font-size: 14px;
+        }
+        &-subtitle {
+            font-size: 18px;
+        }
+}
 }
 
 .blog-button-prev, .blog-button-next {

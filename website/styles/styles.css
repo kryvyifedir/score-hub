@@ -57,7 +57,6 @@ body {
 }
 @media (min-width: 320px) and (max-width: 576px) {
   body {
-    font-family: "Salesforce Sans", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
     font-size: 14px;
     line-height: 20px;
   }
@@ -84,7 +83,6 @@ iframe {
 }
 @media (min-width: 320px) and (max-width: 574px) {
   .section-title {
-    font-family: "Avant Garde Bold", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
     font-size: 28px;
     line-height: 36px;
   }
@@ -195,7 +193,6 @@ iframe {
 }
 @media (min-width: 360px) and (max-width: 768px) {
   .intro-title {
-    font-family: "Avant Garde Bold", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
     font-size: 40px;
     line-height: 24px;
     text-align: left;
@@ -204,7 +201,6 @@ iframe {
   }
   .intro-about {
     text-align: left;
-    font-family: "Salesforce Sans", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
     font-size: 16px;
     line-height: 28px;
     margin: 30px 0 0 20px;
@@ -285,7 +281,6 @@ iframe {
     text-align: left;
   }
   .feature-item-text {
-    font-family: "Salesforce Sans", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Helvetica Neue", arial, "Noto Sans", sans-serif;
     font-size: 16px;
     line-height: 24px;
     margin-top: 20px;
@@ -361,7 +356,7 @@ iframe {
   -o-object-fit: contain;
      object-fit: contain;
   height: 100%;
-  flex: 1;
+  flex: 0.5;
 }
 .blog-info {
   width: 100%;
@@ -372,7 +367,7 @@ iframe {
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  flex: 2;
+  flex: 3;
 }
 .blog-subtitle {
   flex: 0.5;
@@ -385,6 +380,7 @@ iframe {
   font-weight: 400;
   text-align: justify;
   flex: 1.5;
+  overflow: hidden;
 }
 .blog-link {
   color: #032d60;
@@ -407,6 +403,14 @@ iframe {
 }
 .blog-link:hover::after {
   opacity: 0;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .blog-text {
+    font-size: 14px;
+  }
+  .blog-subtitle {
+    font-size: 18px;
+  }
 }
 
 .blog-button-prev, .blog-button-next {

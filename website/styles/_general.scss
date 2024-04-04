@@ -24,7 +24,8 @@ body {
     color: $primary;
     @include mobile(320, 576) {
         & {
-            @include fonts($fontFamilyText, 14px, 20px);
+            font-size: 14px;
+            line-height: 20px;
         }
     }
 }
@@ -46,7 +47,8 @@ iframe {
 .section-title {
     @include fonts($fontFamilyTitle, 32px, 40px);
     @include mobile(320, 574) {
-        @include fonts($fontFamilyTitle, 28px, 36px);
+        font-size: 28px;
+        line-height: 36px;
     }
 }
 

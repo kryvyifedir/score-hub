@@ -54,8 +54,14 @@ iframe {
 
 .btn-next,
 .btn-prev,
-.btns-pagination {
+.blog-button-next,
+.blog-button-prev {
     color: $hover;
+    transition: transform .5 ease-in-out;
+}
+
+.swiper-pagination-bullet{
+    background: $hover;
 }
 
 .swiper {
@@ -71,6 +77,12 @@ iframe {
     padding-bottom: 40px;
 }
 
-
+.btn-next:active,
+.btn-prev:active,
+.blog-button-next:active,
+.blog-button-prev:active
+ {
+    transform: scale(1.05);
+}
 
 

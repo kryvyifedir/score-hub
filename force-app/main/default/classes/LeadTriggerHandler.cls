@@ -1,4 +1,4 @@
-public with sharing class LeadTriggerHandler extends BaseGameForceTriggerHandler {
+public with sharing class LeadTriggerHandler extends BaseScoreHubTriggerHandler {
 
 	public static void onAfterInsert(List<Lead> leads) {
 		try { 

@@ -1,9 +1,9 @@
 # Apex guidelines
-All the backend logic of GameForce is done using Apex Classes. No-code tools are not used for development.
-This section is meant to explain some key concepts that are utilized across the GameForce code.
+All the backend logic of ScoreHub is done using Apex Classes. No-code tools are not used for development.
+This section is meant to explain some key concepts that are utilized across the ScoreHub code.
 
 ## Using BaseSelector class to retrieve data instead of direct SOQL request
-GameForce relies on [`BaseSelector`](../../force-app/main/default/classes/BaseSelector.cls) class to retrieve data for different sObjects. Concrete realizations of the BaseSelector class are used to retrieve data for a specific sObject
+ScoreHub relies on [`BaseSelector`](../../force-app/main/default/classes/BaseSelector.cls) class to retrieve data for different sObjects. Concrete realizations of the BaseSelector class are used to retrieve data for a specific sObject
 
 To create a concrete realization of a BaseSelector class, the child class has to realize 3 methods:
 - `public String sObjectApiName()`: this method should return the API name of the sObject

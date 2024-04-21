@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#113F6F</headerColor>
+        <logo>appicon</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand>
+    <description>Achievements and Leaderbords for Salesforce</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>ScoreHub</label>
+    <navType>Standard</navType>
+    <tabs>ScoreHubHome</tabs>
+    <tabs>Achievement__c</tabs>
+    <tabs>Measurement__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>ScoreHub_UtilityBar</utilityBar>
+</CustomApplication>

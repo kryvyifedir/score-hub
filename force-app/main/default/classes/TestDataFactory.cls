@@ -64,8 +64,8 @@ public class TestDataFactory {
 		User user = new User();
 		user.ProfileId = profileId;
 		user.LastName = lastName;
-		user.Email = lastName + '@gameforce.com';
-		user.Username = lastName + '@gameforce.com';
+		user.Email = lastName + '@scoreHub.com';
+		user.Username = lastName + '@scoreHub.com';
 		user.Title = lastName + ' title';
 		user.Alias = 'alias';
 		user.TimeZoneSidKey = 'America/Los_Angeles';

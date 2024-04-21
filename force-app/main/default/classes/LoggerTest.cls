@@ -6,7 +6,7 @@ public with sharing class LoggerTest {
 		// Given
 		String log = 'LOG';
 		User testUsr = TestDataFactory.createUser(UserInfo.getProfileId(), 'Test');
-		TestDataFactory.assignPermissionSet(testUsr.Id, 'GameForceModifyLogs');
+		TestDataFactory.assignPermissionSet(testUsr.Id, 'ScoreHubModifyLogs');
 
 		system.runAs(testUsr) {
 			// When
@@ -60,7 +60,7 @@ public with sharing class LoggerTest {
 		// Given
 		String log = 'LOG';
 		User testUsr = TestDataFactory.createUser(UserInfo.getProfileId(), 'Test');
-		TestDataFactory.assignPermissionSet(testUsr.Id, 'GameForceModifyLogs');
+		TestDataFactory.assignPermissionSet(testUsr.Id, 'ScoreHubModifyLogs');
 
 		system.runAs(testUsr) {
 			// When

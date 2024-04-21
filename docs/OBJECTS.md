@@ -1,8 +1,8 @@
-# GameForce data schema
-This section is meant to explain some key concepts related to data storage and relationships between sObjects in GameForce.
+# ScoreHub data schema
+This section is meant to explain some key concepts related to data storage and relationships between sObjects in ScoreHub.
 
 ## Updating data in sObjects
-One key concept that needs explanation is that in GameForce all the data should be either changed from the UI (by GameForce [admins](PERMISSIONSETSANDGROUPS.md)), or indirectly by firing a specific [platform event](PLATFORMEVENTS.md). 
+One key concept that needs explanation is that in ScoreHub all the data should be either changed from the UI (by ScoreHub [admins](PERMISSIONSETSANDGROUPS.md)), or indirectly by firing a specific [platform event](PLATFORMEVENTS.md). 
 
 ## Measurement__c and UserMeasurement__c sObjects
 `Measurement__c` sObjects stores metrics that are tracked for each individual user, like "Number of converted leads". Specific values per each user are stored in `UserMeasurement__c` sObject.

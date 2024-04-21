@@ -27,16 +27,4 @@ public abstract with sharing class BaseSelector {
 	private String queryFieldApiNamesStr() {
 		return String.escapeSingleQuotes(String.join(new List<String>(fieldApiNames()), ','));
 	}
-
-	// private String queryFieldApiNamesStr() {
-	// 	List<String> validFieldApiNames = new List<String>();
-	// 	Map<String, Schema.SObjectField> fieldsMap = Schema.getGlobalDescribe().get('GameForce__'+sObjectApiName()).getDescribe().fields.getMap();
-
-	// 	for (String fieldApiName : fieldApiNames()) {
-	// 		if (fieldsMap.get(fieldApiName).getDescribe().isAccessible()) {
-	// 			validFieldApiNames.add(fieldApiName);
-	// 		}
-	// 	}
-	// 	return String.escapeSingleQuotes(String.join(validFieldApiNames, ','));
-	// }
 }

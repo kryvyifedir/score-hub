@@ -1,4 +1,4 @@
-public with sharing class FeedItemTriggerHandler extends BaseGameForceTriggerHandler{
+public with sharing class FeedItemTriggerHandler extends BaseScoreHubTriggerHandler{
 	
 	public static void onAfterInsert(Map<Id, FeedItem> newPosts) {
 		try {

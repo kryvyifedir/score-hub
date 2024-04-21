@@ -2,20 +2,19 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "package": "GameForce",
-      "versionName": "GameForce",
-      "versionNumber": "1.1.0.NEXT",
       "default": true,
-      "versionDescription": "GameForce version 1.0",
-      "postInstallScript": "GameForceConfig",
-      "ancestorVersion": "HIGHEST"
+      "package": "ScoreHub",
+      "versionName": " ScoreHub v1.0",
+      "versionNumber": "1.0.0.NEXT",
+      "versionDescription": "ScoreHub version 1.0",
+      "postInstallScript": "ScoreHubConfig"
     }
   ],
-  "name": "GameForce",
-  "namespace": "GameForce",
+  "name": "ScoreHub",
+  "namespace": "SidebarApps",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "59.0",
   "packageAliases": {
-    "GameForce": "0Ho69000000GmhUCAS"
+    "ScoreHub": "0Ho69000000GmhoCAC"
   }
 }

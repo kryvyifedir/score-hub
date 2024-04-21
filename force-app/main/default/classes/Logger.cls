@@ -5,13 +5,13 @@ public with sharing class Logger {
 	public Logger () { }
 
 	public void addLog(String log) {
-		Log__c gameForceLog = new Log__c();
+		Log__c scoreHubLog = new Log__c();
 		if (String.isBlank(log)) {
 			return;
 		}
 
-		gameForceLog.ErrorMessage__c = log;
-		logs.add(gameForceLog);
+		scoreHubLog.ErrorMessage__c = log;
+		logs.add(scoreHubLog);
 	}
 
 	public void commitChanges() {

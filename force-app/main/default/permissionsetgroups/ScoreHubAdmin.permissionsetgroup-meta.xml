@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants access to modify ScoreHub measurements, achievements and implement custom achievement logic. Intended for use by Salesforce Admin users</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>ScoreHub Admin</label>
+    <permissionSets>SidebarApps__ScoreHubAccessNotificationUtility</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubApexClasses</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubAppAdminTabs</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubAppLeaderboardsTab</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubAppPermisssion</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubModifyAchievements</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubModifyLogs</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubModifyMeasurements</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubModifyReachedAchievements</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubModifyUserMeasurements</permissionSets>
+    <permissionSets>SidebarApps__ScoreHubPlatformEvents</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

@@ -1,0 +1,28 @@
+<template>
+    <div>
+        <template lwc:if={userHasUtilityAccess}>
+            <template lwc:if={isLoading}>
+                <div class="slds-is-relative slds-var-p-top_medium" style="height: 12rem;">
+                    <lightning-spinner title="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+            <template lwc:elseif={isError}>
+                <div class="slds-var-m-around_small">
+                    <c-svg-error header={labels.ErrorLabel} subheader={labels.UnableToRetrieveAchievementsDataLabel}></c-svg-error>
+                </div>
+            </template>
+            <template lwc:elseif={showReached}>
+                <c-score-hub-notification-card achievement={reachedAchievement}></c-score-hub-notification-card>
+                <c-confetti></c-confetti>
+            </template>
+            <template lwc:elseif={showClosest}>
+                <c-score-hub-notification-card achievement={closestAchievement}></c-score-hub-notification-card>
+            </template>
+        </template>
+        <template lwc:else>
+            <div class="slds-var-m-around_small">
+                <c-svg-no-access header={labels.Oopslabel} subheader={labels.YouDontHaveAccessToScoreHubLabel}></c-svg-no-access>
+            </div>
+        </template>
+    </div>
+</template>

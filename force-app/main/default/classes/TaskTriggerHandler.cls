@@ -1,4 +1,4 @@
-public with sharing class TaskTriggerHandler extends BaseGameForceTriggerHandler {
+public with sharing class TaskTriggerHandler extends BaseScoreHubTriggerHandler {
 
 	public static void onAfterInsert(Map<Id, Task> newTasks) {
 		try {

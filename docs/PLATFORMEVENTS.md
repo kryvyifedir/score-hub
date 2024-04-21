@@ -1,5 +1,5 @@
-# GameForce Platform events
-GameForce relies on platform events to track changes in user measurements as well as notifying users about unlocked achievements. Platform events are used as a means for integration with the logic outside of the GameForce and obfuscate complex data changes/validations that are required for GameForce to properly track users' progress
+# ScoreHub Platform events
+ScoreHub relies on platform events to track changes in user measurements as well as notifying users about unlocked achievements. Platform events are used as a means for integration with the logic outside of the ScoreHub and obfuscate complex data changes/validations that are required for ScoreHub to properly track users' progress
 
 ## AchievementReached__e 
 `AchievementReached__e` platform event is fired whenever the user reaches a specific achievement.
@@ -8,7 +8,7 @@ Payload:
 - `AchievementId__c`: Id from `Achievement__c` sObject
 - `UserId__c`: User Id
 
-Whenever `AchievementReached__e` platform event is fired, `GameForceUtility` aura component handles the event, and shows a pop-up notification to a user, in case his user id matches the one in the event payload.
+Whenever `AchievementReached__e` platform event is fired, `ScoreHubUtility` aura component handles the event, and shows a pop-up notification to a user, in case his user id matches the one in the event payload.
 Also, `AchievementReachedTrigger` fires a logic that stores the information about the reached achievement in `AchievementReached__c` sObject.
 
 ## UserMeasurementIncrement__e

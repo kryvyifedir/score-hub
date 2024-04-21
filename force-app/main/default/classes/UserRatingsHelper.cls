@@ -9,7 +9,7 @@ public with sharing class UserRatingsHelper {
 		List<AggregateResult> aggregateResults = Database.queryWithBinds('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c WHERE User__c IN :ids GROUP BY User__c ', binds, System.AccessLevel.SYSTEM_MODE);
 		
 		for (AggregateResult aggregateResult : aggregateResults) {
-			result.put((Id) aggregateResult.get('GameForce__User__c'), aggregateResult);
+			result.put((Id) aggregateResult.get('SidebarApps__User__c'), aggregateResult);
 		}
 	
 		return result;
@@ -20,7 +20,7 @@ public with sharing class UserRatingsHelper {
 		List<AggregateResult> aggregateResults = Database.queryWithBinds('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c GROUP BY User__c ORDER BY SUM(Score__c) DESC LIMIT 10', binds, System.AccessLevel.SYSTEM_MODE);
 		List<Id> topUserIds = new List<Id>();
 		for (AggregateResult aggregateResult : aggregateResults) {
-			topUserIds.add((Id) aggregateResult.get('GameForce__User__c'));
+			topUserIds.add((Id) aggregateResult.get('SidebarApps__User__c'));
 		}
 
 		return topUserIds;
@@ -31,7 +31,7 @@ public with sharing class UserRatingsHelper {
 		List<AggregateResult> aggregateResults = Database.queryWithBinds('SELECT User__c, SUM(Score__c)score, COUNT(Id)cnt FROM ReachedAchievement__c GROUP BY User__c ORDER BY COUNT(Id) DESC LIMIT 10', binds, System.AccessLevel.SYSTEM_MODE);
 		List<Id> topUserIds = new List<Id>();
 		for (AggregateResult aggregateResult : aggregateResults) {
-			topUserIds.add((Id) aggregateResult.get('GameForce__User__c'));
+			topUserIds.add((Id) aggregateResult.get('SidebarApps__User__c'));
 		}
 
 		return topUserIds;

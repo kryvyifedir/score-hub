@@ -1,4 +1,4 @@
-public with sharing class CaseTriggerHandler extends BaseGameForceTriggerHandler {
+public with sharing class CaseTriggerHandler extends BaseScoreHubTriggerHandler {
     public static void onAfterUpdate(Map<Id, Case> newCases, Map<Id, Case> oldCases) {
 		try {
 			List<Case> casesToProcess = getCasesToProcess(newCases, oldCases);

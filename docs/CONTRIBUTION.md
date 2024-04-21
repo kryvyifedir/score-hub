@@ -17,8 +17,8 @@ To start contributing, follow these steps:
 3. Clone the forked repository to your local machine.
 4. Create a new branch for your contributions (use dev branch as origin).
 5. Deploy the code to your own Scratch org
-6. Assign `GameForce Admin` or `GameForce User` permission set group to your user
-7. Run GameForceConfig.config() static method to generate basic Measurements and Achievements
+6. Assign `ScoreHub Admin` or `ScoreHub User` permission set group to your user
+7. Run ScoreHubConfig.config() static method to generate basic Measurements and Achievements
 8. Configure necessary Measurements and Achievements
 9. Do necessary changes and test them on your Scratch Org 
 10. Commit your changes with a clear and descriptive commit message.

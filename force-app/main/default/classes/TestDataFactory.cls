@@ -113,9 +113,9 @@ public class TestDataFactory {
 
 	public static void assignPermissionSet(Id userId, String psName) {
 		PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = :psName];
-		PermissionSetAssignment assignment = new PermissionSetAssignment();
-		assignment.AssigneeId = userId;
-		assignment.PermissionSetId= ps.Id;
-		insert assignment;
+		insert new PermissionSetAssignment(
+			AssigneeId = userId,
+			PermissionSetId = ps.Id
+		);
 	}
 }

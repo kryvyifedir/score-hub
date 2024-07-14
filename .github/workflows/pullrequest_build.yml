@@ -53,3 +53,13 @@ jobs:
       # Executing all unit tests
       - name: Run unit tests
         run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
+
+      # Run Salesforce Code Analyzer scans
+      - name: Salesforce Code Analyzer 'Security'
+        run: sf scanner run --category Security --severity-threshold 3
+
+      - name: Salesforce Code Analyzer DFA 'Security'
+        run: sf scanner dfa run --category Security --severity-threshold 3
+
+      - name: Salesforce Code Analyzer PMD
+        run: sf scanner run --engine pmd-appexchange --severity-threshold 3

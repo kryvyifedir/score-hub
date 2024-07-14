@@ -9,7 +9,7 @@ public with sharing class AchievementReachedEventsManager {
 		this.populateAchievementsByMeasurementIdMap();
 		this.populateExistingReachedAchievementsByKey();
 
-		system.debug('TEST YAML DEF');
+		system.debug('TEST YAML DEF 02');
 	}
 
 	public List<Database.SaveResult> fireEvents() {

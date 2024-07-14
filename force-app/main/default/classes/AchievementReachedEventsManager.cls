@@ -8,6 +8,8 @@ public with sharing class AchievementReachedEventsManager {
 		this.userMeasurementsByIdMap = userMeasurementsByIdMap;
 		this.populateAchievementsByMeasurementIdMap();
 		this.populateExistingReachedAchievementsByKey();
+
+		system.debug('Test forked PR');
 	}
 
 	public List<Database.SaveResult> fireEvents() {

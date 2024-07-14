@@ -38,7 +38,7 @@ jobs:
         
       # Authorizing to DevHub
       - name: Authorizing the DevHub
-        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/game-force/game-force/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}        
+        run: sf org login jwt --json --alias DevHub --set-default --set-default-dev-hub --username "${{ secrets.SF_CICD_USERNAME }}" --keyfile /home/runner/work/score-hub/score-hub/server.key --clientid ${{ secrets.SF_CLIENT_SECRET }}        
       
       # Creating a new Package version
       - name: Creating a new Package version

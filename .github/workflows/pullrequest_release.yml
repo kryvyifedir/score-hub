@@ -1,7 +1,7 @@
 name: Create new package version
 run-name: Creates new package version whenever PR gets merged to dev branch
 on:
-  pull_request:
+  pull_request_target:
     types: [closed]
     branches:
       - dev

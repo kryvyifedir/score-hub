@@ -67,9 +67,30 @@ private class UserMeasurementIncrTriggerHandlerTest{
 		// Given
 		Id userId = UserInfo.getUserId();
 		Measurement__c measurement = TestDataFactory.createMeasurement('measurement');
-		String measurementId = measurement.Id;
-		delete measurement;
-		UserMeasurementIncrement__e event = new UserMeasurementIncrement__e(UserId__c = userId, MeasurementId__c = measurementId, Increment__c = 1);
+		Achievement__c achievement = TestDataFactory.createAchievement('achievement', measurement.Id);
+		UserMeasurementIncrement__e event = new UserMeasurementIncrement__e(UserId__c = userId, MeasurementId__c = achievement.Id, Increment__c = 1);
+
+		// When
+		try {
+			Test.startTest();
+			UserMeasurementIncrementTriggerHandler handler = new UserMeasurementIncrementTriggerHandler(new List<UserMeasurementIncrement__e> { event });
+			handler.processEvents();
+			Test.stopTest();
+
+			// Then
+			System.assert(true, 'Exception is expected to be handled safely');
+		} catch (Exception e) {
+			System.assert(false, 'Exception is expected to be handled safely');
+		}
+	}
+
+	@IsTest
+	private static void processEvents_nonExistingUserId_logCreated() {
+		// Given
+		Id userId = UserInfo.getUserId();
+		Measurement__c measurement = TestDataFactory.createMeasurement('measurement');
+		Achievement__c achievement = TestDataFactory.createAchievement('achievement', measurement.Id);
+		UserMeasurementIncrement__e event = new UserMeasurementIncrement__e(UserId__c = achievement.Id, MeasurementId__c = measurement.Id, Increment__c = 1);
 
 		// When
 		try {

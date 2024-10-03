@@ -13,3 +13,6 @@ package.xml
 
 # Profiles
 force-app/main/default/profiles
+**/tsconfig.json
+
+**/*.ts

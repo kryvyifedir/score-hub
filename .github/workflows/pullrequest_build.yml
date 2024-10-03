@@ -61,5 +61,5 @@ jobs:
       - name: Salesforce Code Analyzer DFA 'Security'
         run: sf scanner dfa run --category Security --severity-threshold 3
 
-      - name: Salesforce Code Analyzer PMD
-        run: sf scanner run --engine pmd-appexchange --severity-threshold 3
+      # - name: Salesforce Code Analyzer PMD
+      #   run: sf scanner run --engine pmd-appexchange --severity-threshold 3

@@ -21,8 +21,8 @@ public with sharing class CaseTriggerHandlerTest {
 
 		// Then
 		List<UserMeasurement__c> result = [SELECT Id, User__c, Measurement__c, Value__c FROM UserMeasurement__c];
-		System.assertEquals(1, result.size(), 'Single UserMeasurement__c is expected for all 201 Case records');
-		System.assertEquals(202, result[0].Value__c, 'Single UserMeasurement__c Value is expected to a total number of Cases');
+		Assert.areEqual(1, result.size(), 'Single UserMeasurement__c is expected for all 201 Case records');
+		Assert.areEqual(202, result[0].Value__c, 'Single UserMeasurement__c Value is expected to a total number of Cases');
 	}
 
 	@IsTest
@@ -45,7 +45,7 @@ public with sharing class CaseTriggerHandlerTest {
 
 		// Then
 		List<UserMeasurement__c> result = [SELECT Id, User__c, Measurement__c, Value__c FROM UserMeasurement__c];
-		System.assertEquals(0, result.size(), 'Zero UserMeasurement__c is expected to be created');
+		Assert.areEqual(0, result.size(), 'Zero UserMeasurement__c is expected to be created');
 	}
 
 	@IsTest
@@ -58,9 +58,8 @@ public with sharing class CaseTriggerHandlerTest {
 			Test.stopTest();
 
 			// Then
-			System.assert(true, 'Exception is expected to be handled safely');
 		} catch (Exception e) {
-			System.assert(false, 'Exception is expected to be handled safely'); 
+			Assert.fail('Exception is expected to be handled safely'); 
 		}
 	}
 }

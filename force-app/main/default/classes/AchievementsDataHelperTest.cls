@@ -21,23 +21,23 @@ private class AchievementsDataHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey(user1.Id), 'Map is expected to have keys for both users');
-		System.assert(result.containsKey(user2.Id), 'Map is expected to have keys for both users');
+		Assert.isTrue(result.containsKey(user1.Id), 'Map is expected to have keys for both users');
+		Assert.isTrue(result.containsKey(user2.Id), 'Map is expected to have keys for both users');
 
 		List<DataWrappers.AchievementCardData> resultUser1 = result.get(user1.Id);
-		System.assertEquals(2, resultUser1.size(), '2 Achievements are expected');
+		Assert.areEqual(2, resultUser1.size(), '2 Achievements are expected');
 		for (DataWrappers.AchievementCardData achievementData : resultUser1) {
 			if (achievementData.id == achievement1.Id) {
-				System.assertEquals(true, achievementData.isReached, 'First achievement for the first user is expected to be marked as reached');
+				Assert.isTrue(achievementData.isReached, 'First achievement for the first user is expected to be marked as reached');
 			} else {
-				System.assertEquals(false, achievementData.isReached, 'All other achievements are expected to be not reached');
+				Assert.isFalse(achievementData.isReached, 'All other achievements are expected to be not reached');
 			}
 		}
 
 		List<DataWrappers.AchievementCardData> resultUser2 = result.get(user2.Id);
-		System.assertEquals(2, resultUser2.size(), '2 Achievements are expected');
+		Assert.areEqual(2, resultUser2.size(), '2 Achievements are expected');
 		for (DataWrappers.AchievementCardData achievementData : resultUser2) {
-			System.assertEquals(false, achievementData.isReached, 'All achievements for second user are expected to be not reached');
+			Assert.isFalse(achievementData.isReached, 'All achievements for second user are expected to be not reached');
 		}
 	}
 
@@ -56,7 +56,7 @@ private class AchievementsDataHelperTest {
 		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
 		Test.stopTest();
 
-		System.assertEquals(achievement1.Id, result.id, 'Information about achievement 1 is expected to be returned');
+		Assert.areEqual(achievement1.Id, result.id, 'Information about achievement 1 is expected to be returned');
 	}
 
 	@IsTest 
@@ -75,7 +75,7 @@ private class AchievementsDataHelperTest {
 		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
 		Test.stopTest();
 
-		System.assertEquals(achievement2.Id, result.id, 'Information about achievement 2 is expected to be returned');
+		Assert.areEqual(achievement2.Id, result.id, 'Information about achievement 2 is expected to be returned');
 	}
 
 	@IsTest 
@@ -94,7 +94,7 @@ private class AchievementsDataHelperTest {
 		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
 		Test.stopTest();
 
-		System.assertEquals(null, result.id, 'Null is expected since all achievements were reached');
+		Assert.isNull(result.id, 'Null is expected since all achievements were reached');
 	}
 
 	@IsTest 
@@ -116,7 +116,7 @@ private class AchievementsDataHelperTest {
 		DataWrappers.AchievementCardData result = AchievementsDataHelper.getClosestAchievementForUser(UserInfo.getUserId());
 		Test.stopTest();
 
-		System.assertEquals(achievement3.Id, result.id, 'Information about achievement 3 is expected to be returned');
+		Assert.areEqual(achievement3.Id, result.id, 'Information about achievement 3 is expected to be returned');
 	}
 
 	@IsTest
@@ -133,12 +133,12 @@ private class AchievementsDataHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(achievement1.Id, cardData.Id);
-		System.assertEquals(achievement1.UITitle__c, cardData.uiTitle);
-		System.assertEquals(achievement1.UIDescription__c, cardData.uiDescription);
-		System.assertEquals(achievement1.Score__c, cardData.score);
-		System.assertEquals(true, cardData.isReached);
-		System.assertEquals(reachedAchievement.CreatedDate.getTime(), cardData.ReachedDate);
+		Assert.areEqual(achievement1.Id, cardData.Id);
+		Assert.areEqual(achievement1.UITitle__c, cardData.uiTitle);
+		Assert.areEqual(achievement1.UIDescription__c, cardData.uiDescription);
+		Assert.areEqual(achievement1.Score__c, cardData.score);
+		Assert.isTrue(cardData.isReached);
+		Assert.areEqual(reachedAchievement.CreatedDate.getTime(), cardData.ReachedDate);
 	}
 
 	@IsTest
@@ -153,12 +153,12 @@ private class AchievementsDataHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(achievement1.Id, cardData.Id);
-		System.assertEquals(achievement1.UITitle__c, cardData.uiTitle);
-		System.assertEquals(achievement1.UIDescription__c, cardData.uiDescription);
-		System.assertEquals(achievement1.Score__c, cardData.score);
-		System.assertEquals(false, cardData.isReached);
-		System.assertEquals(0, cardData.ReachedDate);
+		Assert.areEqual(achievement1.Id, cardData.Id);
+		Assert.areEqual(achievement1.UITitle__c, cardData.uiTitle);
+		Assert.areEqual(achievement1.UIDescription__c, cardData.uiDescription);
+		Assert.areEqual(achievement1.Score__c, cardData.score);
+		Assert.isFalse(cardData.isReached);
+		Assert.areEqual(0, cardData.ReachedDate);
 	}
 
 	

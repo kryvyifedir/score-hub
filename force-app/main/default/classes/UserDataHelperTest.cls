@@ -24,16 +24,16 @@ private class UserDataHelperTest {
 
 		// Then
 		DataWrappers.UserCardData usr1DataCard = result.get(usr1.Id);
-		System.assertEquals(usr1.Id, usr1DataCard.id);
-		System.assertEquals(2, usr1DataCard.totalAchievementsCount);
-		System.assertEquals(2, usr1DataCard.reachedAchievementsCount, 'Two reached achievement is expected to be counted');
-		System.assertEquals(achievement1.Score__c + achievement2.Score__c, usr1DataCard.totalScore, 'Total score of all reached achievements is expected');
+		Assert.areEqual(usr1.Id, usr1DataCard.id);
+		Assert.areEqual(2, usr1DataCard.totalAchievementsCount);
+		Assert.areEqual(2, usr1DataCard.reachedAchievementsCount, 'Two reached achievement is expected to be counted');
+		Assert.areEqual(achievement1.Score__c + achievement2.Score__c, usr1DataCard.totalScore, 'Total score of all reached achievements is expected');
 
-		System.assert(result.containsKey(usr2.Id));
+		Assert.isTrue(result.containsKey(usr2.Id));
 		DataWrappers.UserCardData usr2DataCard = result.get(usr2.Id);
-		System.assertEquals(usr2.Id, usr2DataCard.id);
-		System.assertEquals(2, usr2DataCard.totalAchievementsCount);
-		System.assertEquals(0, usr2DataCard.reachedAchievementsCount, 'Zero reached achievements exist so value is expected to be 0');
-		System.assertEquals(0, usr2DataCard.totalScore, 'There are no reached achievements for second user, so score should be zero');
+		Assert.areEqual(usr2.Id, usr2DataCard.id);
+		Assert.areEqual(2, usr2DataCard.totalAchievementsCount);
+		Assert.areEqual(0, usr2DataCard.reachedAchievementsCount, 'Zero reached achievements exist so value is expected to be 0');
+		Assert.areEqual(0, usr2DataCard.totalScore, 'There are no reached achievements for second user, so score should be zero');
 	}
 }

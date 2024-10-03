@@ -16,20 +16,20 @@ private class AchievementsInfoControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Success'), 'Resulting map is expected to have "Success" key');
-		System.assert(!result.containsKey('Warning'), 'Resulting map is not expected to have "Warning" key');
-		System.assert(!result.containsKey('Error'), 'Resulting map is not expected to have "Error" key');
+		Assert.isTrue(result.containsKey('Success'), 'Resulting map is expected to have "Success" key');
+		Assert.isTrue(!result.containsKey('Warning'), 'Resulting map is not expected to have "Warning" key');
+		Assert.isTrue(!result.containsKey('Error'), 'Resulting map is not expected to have "Error" key');
 
 		Map<Id, List<DataWrappers.AchievementCardData>> achievementsByUserIdMap = (Map<Id, List<DataWrappers.AchievementCardData>>) result.get('Success');
 		List<DataWrappers.AchievementCardData> userAchievementCardDataList =  achievementsByUserIdMap.get(UserInfo.getUserId());
 		
-		System.assertNotEquals(null, userAchievementCardDataList, 'Achievements are expected to be found for current user');
-		System.assertEquals(2, userAchievementCardDataList.size(), '2 Achievements are expected');
+		Assert.isNotNull(userAchievementCardDataList, 'Achievements are expected to be found for current user');
+		Assert.areEqual(2, userAchievementCardDataList.size(), '2 Achievements are expected');
 		for (DataWrappers.AchievementCardData achievementData : userAchievementCardDataList) {
 			if (achievementData.id == achievement1.Id) {
-				System.assertEquals(true, achievementData.isReached, 'First achievement for the user is expected to be marked as reached');
+				Assert.isTrue(achievementData.isReached, 'First achievement for the user is expected to be marked as reached');
 			} else {
-				System.assertEquals(false, achievementData.isReached, 'All other achievements are expected to be not reached');
+				Assert.isFalse(achievementData.isReached, 'All other achievements are expected to be not reached');
 			}
 		}
 	}
@@ -46,9 +46,8 @@ private class AchievementsInfoControllerTest {
 			Test.stopTest();
 
 			// Then
-			System.assert(true, 'Exception is expected to be handled safely');
 		} catch (Exception e) {
-			System.assert(false, 'Exception is expected to be handled safely');
+			Assert.fail('Exception is expected to be handled safely');
 		}
 
 	}

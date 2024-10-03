@@ -18,10 +18,10 @@ private class AchievementReachedEventsManagerTest {
 		Test.stopTest();
 
 		// Then
-		System.assertNotEquals(null, results, 'Results are expected to be returned by the method');
-		System.assertEquals(1, results.size(), 'Single event is expected to be sent per 1 stat');
+		Assert.isNotNull(results, 'Results are expected to be returned by the method');
+		Assert.areEqual(1, results.size(), 'Single event is expected to be sent per 1 stat');
 		for (Database.SaveResult result : results) {
-			System.assert(result.isSuccess(), 'Event is expected to be sent without any issues');
+			Assert.isTrue(result.isSuccess(), 'Event is expected to be sent without any issues');
 		}
 	}
 
@@ -41,7 +41,7 @@ private class AchievementReachedEventsManagerTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(null, results, 'Since achievement was already reached no Events are expected to be fired');
+		Assert.isNull(results, 'Since achievement was already reached no Events are expected to be fired');
 	}
 
 	@IsTest
@@ -61,7 +61,7 @@ private class AchievementReachedEventsManagerTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(null, results, 'Validation is expected to prevent any Events from being sent');
+		Assert.isNull(results, 'Validation is expected to prevent any Events from being sent');
 	}
 
 	@IsTest
@@ -76,6 +76,6 @@ private class AchievementReachedEventsManagerTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(null, results, 'Validation is expected to prevent any Events from being sent');
+		Assert.isNull(results, 'Validation is expected to prevent any Events from being sent');
 	}
 }

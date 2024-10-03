@@ -13,11 +13,11 @@ private class ScoreHubNotificationControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		Assert.isTrue(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
 		DataWrappers.AchievementCardData resultObj = (DataWrappers.AchievementCardData) result.get('Success');
-		System.assertEquals(achievement.Id, resultObj.id, 'Achievement is expected to be returned');
+		Assert.areEqual(achievement.Id, resultObj.id, 'Achievement is expected to be returned');
 	}
 
 	@IsTest
@@ -31,11 +31,11 @@ private class ScoreHubNotificationControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		Assert.isTrue(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
 		DataWrappers.AchievementCardData resultObj = (DataWrappers.AchievementCardData) result.get('Success');
-		System.assertEquals(null, resultObj, 'null is expected to be returned');
+		Assert.areEqual(null, resultObj, 'null is expected to be returned');
 	}
 
 	@IsTest
@@ -50,11 +50,11 @@ private class ScoreHubNotificationControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		Assert.isTrue(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
 		DataWrappers.AchievementCardData resultObj = (DataWrappers.AchievementCardData) result.get('Success');
-		System.assertEquals(achievement.Id, resultObj.id, 'Achievement is expected to be returned');
+		Assert.areEqual(achievement.Id, resultObj.id, 'Achievement is expected to be returned');
 	}
 
 	@IsTest
@@ -70,10 +70,10 @@ private class ScoreHubNotificationControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(!result.containsKey('Success'), 'Success is expected');
-		System.assert(result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
-		System.assertEquals('Unable to get Achievement by Id', (String) result.get('Error'), 'Error message is expected');
+		Assert.isFalse(result.containsKey('Success'), 'Success is expected');
+		Assert.isTrue(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
+		Assert.areEqual('Unable to get Achievement by Id', (String) result.get('Error'), 'Error message is expected');
 	}
 
 	@IsTest
@@ -93,11 +93,11 @@ private class ScoreHubNotificationControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		Assert.isTrue(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
 		DataWrappers.AchievementCardData resultObj = (DataWrappers.AchievementCardData) result.get('Success');
-		System.assertEquals(achievement2.Id, resultObj.id, 'Information about achievement 2 is expected to be returned');
+		Assert.areEqual(achievement2.Id, resultObj.id, 'Information about achievement 2 is expected to be returned');
 	}
 
 	@IsTest
@@ -111,9 +111,9 @@ private class ScoreHubNotificationControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(!result.containsKey('Success'), 'Success is expected');
-		System.assert(result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
-		System.assertEquals('Unable to get the closes achievement by user Id', (String) result.get('Error'), 'Error message is expected');
+		Assert.isFalse(result.containsKey('Success'), 'Success is expected');
+		Assert.isTrue(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
+		Assert.areEqual('Unable to get the closes achievement by user Id', (String) result.get('Error'), 'Error message is expected');
 	}
 }

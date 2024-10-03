@@ -12,6 +12,6 @@ private class UniqueKeyFormatterTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(userId + '-' + measurement.Id, result, 'Key is expected to match the format');
+		Assert.areEqual(userId + '-' + measurement.Id, result, 'Key is expected to match the format');
 	}
 }

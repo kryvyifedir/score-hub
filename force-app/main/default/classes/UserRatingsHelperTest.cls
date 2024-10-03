@@ -22,12 +22,12 @@ private class UserRatingsHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey(user1.Id), 'AggregateResult is expected to exist in map');
-		System.assertEquals(3, (Decimal) result.get(user1.Id).get('cnt'), 'Total count of reached achievements is expected to be 3');
-		System.assertEquals(achievement1.Score__c + achievement2.Score__c + achievement3.Score__c, (Decimal) result.get(user1.Id).get('score'), 'Score should match the total of reached scores for the user');
-		System.assert(result.containsKey(user2.Id), 'AggregateResult is expected to exist in map');
-		System.assertEquals(1, (Decimal) result.get(user2.Id).get('cnt'), 'Total count of reached achievements is expected to be 3');
-		System.assertEquals(achievement1.Score__c, (Decimal) result.get(user2.Id).get('score'), 'Score should match the total of reached scores for the user');
+		Assert.isTrue(result.containsKey(user1.Id), 'AggregateResult is expected to exist in map');
+		Assert.areEqual(3, (Decimal) result.get(user1.Id).get('cnt'), 'Total count of reached achievements is expected to be 3');
+		Assert.areEqual(achievement1.Score__c + achievement2.Score__c + achievement3.Score__c, (Decimal) result.get(user1.Id).get('score'), 'Score should match the total of reached scores for the user');
+		Assert.isTrue(result.containsKey(user2.Id), 'AggregateResult is expected to exist in map');
+		Assert.areEqual(1, (Decimal) result.get(user2.Id).get('cnt'), 'Total count of reached achievements is expected to be 3');
+		Assert.areEqual(achievement1.Score__c, (Decimal) result.get(user2.Id).get('score'), 'Score should match the total of reached scores for the user');
 	}
 
 	@IsTest
@@ -41,7 +41,7 @@ private class UserRatingsHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.isEmpty(), 'Map is expected to be empty');
+		Assert.isTrue(result.isEmpty(), 'Map is expected to be empty');
 	}
 
 	@IsTest
@@ -55,7 +55,7 @@ private class UserRatingsHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.isEmpty(), 'Map is expected to be empty');
+		Assert.isTrue(result.isEmpty(), 'Map is expected to be empty');
 	}
 
 	@IsTest
@@ -84,8 +84,8 @@ private class UserRatingsHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(10, result.size(), '10 users are expected to be returned');
-		System.assert(!result.contains(users[11].Id), 'Only users with top 10 score are expected to be returned');
+		Assert.areEqual(10, result.size(), '10 users are expected to be returned');
+		Assert.isFalse(result.contains(users[11].Id), 'Only users with top 10 score are expected to be returned');
 	}
 
 	@IsTest
@@ -114,7 +114,7 @@ private class UserRatingsHelperTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(10, result.size(), '10 users are expected to be returned');
-		System.assert(!result.contains(users[11].Id), 'Only users with top top 10 number of achievements are expected to be returned');
+		Assert.areEqual(10, result.size(), '10 users are expected to be returned');
+		Assert.isFalse(result.contains(users[11].Id), 'Only users with top top 10 number of achievements are expected to be returned');
 	}
 }

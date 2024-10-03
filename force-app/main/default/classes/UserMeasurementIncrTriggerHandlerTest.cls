@@ -16,8 +16,8 @@ private class UserMeasurementIncrTriggerHandlerTest{
 
 		// Then
 		List<UserMeasurement__c> measurements = [SELECT Id, Value__c FROM UserMeasurement__c WHERE User__c = :userId AND Measurement__c = :measurement.Id];
-		system.assertEquals(1, measurements.size(), 'Single stat is expected to be created');
-		system.assertEquals(1, measurements[0].Value__c, 'Value__c value should be increased for the sum of the increments from the event');
+		Assert.areEqual(1, measurements.size(), 'Single stat is expected to be created');
+		Assert.areEqual(1, measurements[0].Value__c, 'Value__c value should be increased for the sum of the increments from the event');
 	}
 
 	@IsTest
@@ -36,8 +36,8 @@ private class UserMeasurementIncrTriggerHandlerTest{
 
 		// Then
 		List<UserMeasurement__c> measurements = [SELECT Id, Value__c FROM UserMeasurement__c WHERE User__c = :userId AND Measurement__c = :measurement.Id];
-		system.assertEquals(1, measurements.size(), 'Single stat is expected to be created');
-		system.assertEquals(3, measurements[0].Value__c, 'Value__c value should be increased for the sum of the increments from the event');
+		Assert.areEqual(1, measurements.size(), 'Single stat is expected to be created');
+		Assert.areEqual(3, measurements[0].Value__c, 'Value__c value should be increased for the sum of the increments from the event');
 	}
 
 	@IsTest
@@ -57,9 +57,9 @@ private class UserMeasurementIncrTriggerHandlerTest{
 
 		// Then
 		List<UserMeasurement__c> measurements = [SELECT Id, Value__c FROM UserMeasurement__c WHERE User__c = :userId AND Measurement__c = :measurement.Id];
-		system.assertEquals(1, measurements.size(), 'Single stat is expected to be created');
-		system.assertEquals(stat.Id, measurements[0].Id, 'Existing UserMeasurement__c is expected to be updated');
-		system.assertEquals(11, measurements[0].Value__c, 'Value__c value should be increased for the sum of the increments from the event');
+		Assert.areEqual(1, measurements.size(), 'Single stat is expected to be created');
+		Assert.areEqual(stat.Id, measurements[0].Id, 'Existing UserMeasurement__c is expected to be updated');
+		Assert.areEqual(11, measurements[0].Value__c, 'Value__c value should be increased for the sum of the increments from the event');
 	}
 
 	@IsTest
@@ -78,9 +78,8 @@ private class UserMeasurementIncrTriggerHandlerTest{
 			Test.stopTest();
 
 			// Then
-			System.assert(true, 'Exception is expected to be handled safely');
 		} catch (Exception e) {
-			System.assert(false, 'Exception is expected to be handled safely');
+			Assert.fail('Exception is expected to be handled safely');
 		}
 	}
 
@@ -100,9 +99,8 @@ private class UserMeasurementIncrTriggerHandlerTest{
 			Test.stopTest();
 
 			// Then
-			System.assert(true, 'Exception is expected to be handled safely');
 		} catch (Exception e) {
-			System.assert(false, 'Exception is expected to be handled safely');
+			Assert.fail('Exception is expected to be handled safely');
 		}
 	}
 
@@ -121,9 +119,8 @@ private class UserMeasurementIncrTriggerHandlerTest{
 			Test.stopTest();
 
 			// Then
-			System.assert(true, 'Exception is expected to be handled safely');
 		} catch (Exception e) {
-			System.assert(false, 'Exception is expected to be handled safely');
+			Assert.fail('Exception is expected to be handled safely');
 		}
 	}
 
@@ -149,7 +146,7 @@ private class UserMeasurementIncrTriggerHandlerTest{
 
 		// Then
 		List<UserMeasurement__c> userMeasurements = [SELECT Id, Value__c FROM UserMeasurement__c WHERE User__c = :userId];
-		system.assertEquals(202, userMeasurements.size(), 'Single stat is expected to be created');
+		Assert.areEqual(202, userMeasurements.size(), 'Single stat is expected to be created');
 	}
 
 }

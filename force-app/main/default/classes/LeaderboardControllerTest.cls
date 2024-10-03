@@ -14,12 +14,12 @@ private class LeaderboardControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		Assert.isTrue(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
 		List<DataWrappers.UserCardData> resultList = (List<DataWrappers.UserCardData>) result.get('Success');
-		System.assertEquals(1, resultList.size(), 'User data is expected to be packed in DataWrappers.UserCardData UI data provider');
-		System.assertEquals(UserInfo.getUserId(), resultList[0].Id, 'Packed data is expected to have an Id of current user (since he is the only one with achievements)');
+		Assert.areEqual(1, resultList.size(), 'User data is expected to be packed in DataWrappers.UserCardData UI data provider');
+		Assert.areEqual(UserInfo.getUserId(), resultList[0].Id, 'Packed data is expected to have an Id of current user (since he is the only one with achievements)');
 	}
 
 	@IsTest
@@ -33,10 +33,10 @@ private class LeaderboardControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
-		System.assertEquals('Unable to get the top 10 users by Score', (String) result.get('Error'), 'Error message is expected');
+		Assert.isTrue(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
+		Assert.areEqual('Unable to get the top 10 users by Score', (String) result.get('Error'), 'Error message is expected');
 	}
 
 	@IsTest
@@ -52,12 +52,12 @@ private class LeaderboardControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
+		Assert.isTrue(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
 		List<DataWrappers.UserCardData> resultList = (List<DataWrappers.UserCardData>) result.get('Success');
-		System.assertEquals(1, resultList.size(), 'User data is expected to be packed in DataWrappers.UserCardData UI data provider');
-		System.assertEquals(UserInfo.getUserId(), resultList[0].Id, 'Packed data is expected to have an Id of current user (since he is the only one with achievements)');
+		Assert.areEqual(1, resultList.size(), 'User data is expected to be packed in DataWrappers.UserCardData UI data provider');
+		Assert.areEqual(UserInfo.getUserId(), resultList[0].Id, 'Packed data is expected to have an Id of current user (since he is the only one with achievements)');
 	}
 
 	@IsTest
@@ -71,9 +71,9 @@ private class LeaderboardControllerTest {
 		Test.stopTest();
 
 		// Then
-		System.assert(result.containsKey('Error'), 'Error is not expected');
-		System.assert(!result.containsKey('Success'), 'Success is expected');
-		System.assert(!result.containsKey('Warning'), 'Warning is not expected');
-		System.assertEquals('Unable to get the top 10 users by Achievements Count', (String) result.get('Error'), 'Error message is expected');
+		Assert.isTrue(result.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(result.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(result.containsKey('Warning'), 'Warning is not expected');
+		Assert.areEqual('Unable to get the top 10 users by Achievements Count', (String) result.get('Error'), 'Error message is expected');
 	}
 }

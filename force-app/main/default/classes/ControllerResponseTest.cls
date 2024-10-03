@@ -11,10 +11,10 @@ private class ControllerResponseTest {
 		Test.stopTest();
 
 		// Then
-		system.assert(result.containsKey('Success'), 'Map is expected to include Success key');
-		system.assert(!result.containsKey('Error'), 'Map is not expected to include Error key');
-		system.assert(!result.containsKey('Warning'), 'Map is not expected to include Warning key');
-		system.assertEquals('Test', (String) result.get('Success'), 'Value is expected to be stored in Map under Success key');
+		Assert.isTrue(result.containsKey('Success'), 'Map is expected to include Success key');
+		Assert.isFalse(result.containsKey('Error'), 'Map is not expected to include Error key');
+		Assert.isFalse(result.containsKey('Warning'), 'Map is not expected to include Warning key');
+		Assert.areEqual('Test', (String) result.get('Success'), 'Value is expected to be stored in Map under Success key');
 	}
 
 	@IsTest
@@ -28,10 +28,10 @@ private class ControllerResponseTest {
 		Test.stopTest();
 
 		// Then
-		system.assert(!result.containsKey('Success'), 'Map is not expected to include Success key');
-		system.assert(result.containsKey('Error'), 'Map is expected to include Error key');
-		system.assert(!result.containsKey('Warning'), 'Map is not expected to include Warning key');
-		system.assertEquals('Test', (String) result.get('Error'), 'Value is expected to be stored in Map under Success key');
+		Assert.isFalse(result.containsKey('Success'), 'Map is not expected to include Success key');
+		Assert.isTrue(result.containsKey('Error'), 'Map is expected to include Error key');
+		Assert.isFalse(result.containsKey('Warning'), 'Map is not expected to include Warning key');
+		Assert.areEqual('Test', (String) result.get('Error'), 'Value is expected to be stored in Map under Success key');
 	}
 
 	@IsTest
@@ -45,9 +45,9 @@ private class ControllerResponseTest {
 		Test.stopTest();
 
 		// Then
-		system.assert(!result.containsKey('Success'), 'Map is not expected to include Success key');
-		system.assert(!result.containsKey('Error'), 'Map is not expected to include Error key');
-		system.assert(result.containsKey('Warning'), 'Map is expected to include Warning key');
-		system.assertEquals('Test', (String) result.get('Warning'), 'Value is expected to be stored in Map under Success key');
+		Assert.isFalse(result.containsKey('Success'), 'Map is not expected to include Success key');
+		Assert.isFalse(result.containsKey('Error'), 'Map is not expected to include Error key');
+		Assert.isTrue(result.containsKey('Warning'), 'Map is expected to include Warning key');
+		Assert.areEqual('Test', (String) result.get('Warning'), 'Value is expected to be stored in Map under Success key');
 	}
 }

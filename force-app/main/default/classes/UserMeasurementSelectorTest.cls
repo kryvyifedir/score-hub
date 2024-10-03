@@ -12,7 +12,7 @@ private class UserMeasurementSelectorTest {
 		Test.stopTest();
 
 		// Then 
-		system.assertEquals('UserMeasurement__c', result, 'UserMeasurement__c sObject ApiName is expected');
+		Assert.areEqual('UserMeasurement__c', result, 'UserMeasurement__c sObject ApiName is expected');
 	}
 
 	@IsTest
@@ -27,6 +27,6 @@ private class UserMeasurementSelectorTest {
 
 		// Then 
 		Set<String> expectedSet = new Set<String> {'Id', 'Name', 'Key__c', 'Measurement__c', 'User__c', 'Value__c'};
-		system.assertEquals(expectedSet, result, 'A specific field set is expected');
+		Assert.areEqual(expectedSet, result, 'A specific field set is expected');
 	}
 }

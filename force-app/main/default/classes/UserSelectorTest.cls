@@ -12,7 +12,7 @@ public with sharing class UserSelectorTest {
 		Test.stopTest();
 
 		// Then 
-		system.assertEquals('User', result, 'User sObject ApiName is expected');
+		Assert.areEqual('User', result, 'User sObject ApiName is expected');
 	}
 
 	@IsTest
@@ -27,7 +27,7 @@ public with sharing class UserSelectorTest {
 
 		// Then 
 		Set<String> expectedSet = new Set<String> {'Id', 'FullPhotoUrl', 'Name'};
-		system.assertEquals(expectedSet, result, 'A specific field set is expected');
+		Assert.areEqual(expectedSet, result, 'A specific field set is expected');
 	}
 	
 	@IsTest
@@ -44,9 +44,9 @@ public with sharing class UserSelectorTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(1, result.size(), 'Record is expected to be found');
-		System.assert(resultMap.containsKey(user1.Id), 'Map is expected to have a specific user');
-		System.assert(!resultMap.containsKey(user2.Id), 'Map is not expected to have a specific user');
+		Assert.areEqual(1, result.size(), 'Record is expected to be found');
+		Assert.isTrue(resultMap.containsKey(user1.Id), 'Map is expected to have a specific user');
+		Assert.isFalse(resultMap.containsKey(user2.Id), 'Map is not expected to have a specific user');
 	}
 
 	@IsTest
@@ -65,7 +65,7 @@ public with sharing class UserSelectorTest {
 		List<User> users = [SELECT Id FROM USER];
 
 		// Then
-		System.assertEquals(users.size(), result.size(), 'All records are expected to be returned by selector');
+		Assert.areEqual(users.size(), result.size(), 'All records are expected to be returned by selector');
 	}
 
 	@IsTest
@@ -79,7 +79,7 @@ public with sharing class UserSelectorTest {
 		Test.stopTest();
 
 		// Then
-		System.assertNotEquals(null, result, 'Empty list is expected');
-		System.assertEquals(0, result.size(), 'Empty list is expected');
+		Assert.isNotNull(result, 'Empty list is expected');
+		Assert.areEqual(0, result.size(), 'Empty list is expected');
 	}
 }

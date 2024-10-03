@@ -15,7 +15,7 @@ private class ScoreHubUtilityControllerTest {
 		Test.stopTest();
 		
 		// Then
-		system.assert(result, 'hasUtilityPermission is expected to return true if user has access to ScoreHubUtilityAccess PS');
+		Assert.isTrue(result, 'hasUtilityPermission is expected to return true if user has access to ScoreHubUtilityAccess PS');
 	}
 
 	@IsTest
@@ -32,6 +32,6 @@ private class ScoreHubUtilityControllerTest {
 		Test.stopTest();
 		
 		// Then
-		system.assert(!result, 'hasUtilityPermission is expected to return false if user doesn\'t have access to ScoreHubUtilityAccess PS');
+		Assert.isFalse(result, 'hasUtilityPermission is expected to return false if user doesn\'t have access to ScoreHubUtilityAccess PS');
 	}
 }

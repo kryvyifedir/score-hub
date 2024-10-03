@@ -23,9 +23,9 @@ private class UserMeasurementTriggerHandlerTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(1, result.size(), 'Only one UserMeasurement__c record is expected to be returned');
-		System.assert(result.containsKey(userMeasurementNew1.Id), 'Changed UserMeasurement__c is expected to be included');
-		System.assert(!result.containsKey(userMeasurementNew2.Id), 'Not changed UserMeasurement__c is not expected to be included');
+		Assert.areEqual(1, result.size(), 'Only one UserMeasurement__c record is expected to be returned');
+		Assert.isTrue(result.containsKey(userMeasurementNew1.Id), 'Changed UserMeasurement__c is expected to be included');
+		Assert.isFalse(result.containsKey(userMeasurementNew2.Id), 'Not changed UserMeasurement__c is not expected to be included');
 	}
 
 	@IsTest
@@ -46,9 +46,9 @@ private class UserMeasurementTriggerHandlerTest {
 		Test.stopTest();
 
 		// Then
-		System.assertEquals(2, result.size(), 'Only one UserMeasurement__c record is expected to be returned');
-		System.assert(result.containsKey(userMeasurementNew1.Id), 'Since there are no old UserMeasurement__c records to compare, all "new" records are treated as "changed"');
-		System.assert(result.containsKey(userMeasurementNew2.Id), 'Since there are no old UserMeasurement__c records to compare, all "new" records are treated as "changed"');
+		Assert.areEqual(2, result.size(), 'Only one UserMeasurement__c record is expected to be returned');
+		Assert.isTrue(result.containsKey(userMeasurementNew1.Id), 'Since there are no old UserMeasurement__c records to compare, all "new" records are treated as "changed"');
+		Assert.isTrue(result.containsKey(userMeasurementNew2.Id), 'Since there are no old UserMeasurement__c records to compare, all "new" records are treated as "changed"');
 	}
 
 	@IsTest
@@ -63,8 +63,8 @@ private class UserMeasurementTriggerHandlerTest {
 		Test.stopTest();
 
 		// Then
-		System.assertNotEquals(null, result, 'Empty map is expected but not null');
-		System.assertEquals(0, result.size(), 'Empty map is expected but not null');
+		Assert.isNotNull(result, 'Empty map is expected but not null');
+		Assert.areEqual(0, result.size(), 'Empty map is expected but not null');
 	}
 
 	@IsTest
@@ -89,9 +89,8 @@ private class UserMeasurementTriggerHandlerTest {
 			Test.stopTest();
 
 			// Then
-			system.assert(true, 'No exception is expected once events are fired');
 		} catch (Exception e) {
-			system.assert(false, 'No exception is expected once events are fired');
+			Assert.fail('No exception is expected once events are fired');
 		}
 	}
 
@@ -122,9 +121,8 @@ private class UserMeasurementTriggerHandlerTest {
 			Test.stopTest();
 
 			// Then
-			system.assert(true, 'No exception is expected once events are fired');
 		} catch (Exception e) {
-			system.assert(false, 'No exception is expected once events are fired');
+			Assert.fail('No exception is expected once events are fired');
 		}
 	}
 }

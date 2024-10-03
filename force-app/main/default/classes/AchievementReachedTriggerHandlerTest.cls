@@ -18,10 +18,10 @@ private class AchievementReachedTriggerHandlerTest {
 
 		// Then
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
-		System.assertNotEquals(null, result, 'ReachedAchievement__c are expected to be created');
-		System.assertEquals(1, result.size(), 'Single ReachedAchievement__c is expected to be created');
-		System.assertEquals(userId, result[0].User__c, 'User__c filed value is expected to match userId');
-		System.assertEquals(achievement.Id, result[0].Achievement__c, 'User__c filed value is expected to match userId');
+		Assert.isNotNull(result, 'ReachedAchievement__c are expected to be created');
+		Assert.areEqual(1, result.size(), 'Single ReachedAchievement__c is expected to be created');
+		Assert.areEqual(userId, result[0].User__c, 'User__c filed value is expected to match userId');
+		Assert.areEqual(achievement.Id, result[0].Achievement__c, 'User__c filed value is expected to match userId');
 	}
 
 	@IsTest
@@ -43,7 +43,7 @@ private class AchievementReachedTriggerHandlerTest {
 
 		// Then
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
-		System.assertEquals(1, result.size(), 'No new ReachedAchievement__c are expected to be created');
+		Assert.areEqual(1, result.size(), 'No new ReachedAchievement__c are expected to be created');
 	}
 
 	@IsTest
@@ -66,10 +66,10 @@ private class AchievementReachedTriggerHandlerTest {
 
 		// Then
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
-		System.assertNotEquals(null, result, 'ReachedAchievement__c are expected to be created');
-		System.assertEquals(1, result.size(), 'Single ReachedAchievement__c is expected to be created');
-		System.assertEquals(userId, result[0].User__c, 'User__c filed value is expected to match userId');
-		System.assertEquals(achievement.Id, result[0].Achievement__c, 'User__c filed value is expected to match userId');
+		Assert.isNotNull(result, 'ReachedAchievement__c are expected to be created');
+		Assert.areEqual(1, result.size(), 'Single ReachedAchievement__c is expected to be created');
+		Assert.areEqual(userId, result[0].User__c, 'User__c filed value is expected to match userId');
+		Assert.areEqual(achievement.Id, result[0].Achievement__c, 'User__c filed value is expected to match userId');
 	}
 
 	@IsTest
@@ -91,7 +91,7 @@ private class AchievementReachedTriggerHandlerTest {
 		// Then
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
 		List<Log__c> resultLogs = [SELECT Id FROM Log__c];
-		System.assertEquals(0, result.size(), 'No new ReachedAchievement__c are expected to be created');
+		Assert.isTrue(result.isEmpty(), 'No new ReachedAchievement__c are expected to be created');
 	}
 
 	@IsTest
@@ -113,7 +113,7 @@ private class AchievementReachedTriggerHandlerTest {
 		// Then
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
 		List<Log__c> resultLogs = [SELECT Id FROM Log__c];
-		System.assertEquals(0, result.size(), 'No new ReachedAchievement__c are expected to be created');
+		Assert.isTrue(result.isEmpty(), 'No new ReachedAchievement__c are expected to be created');
 	}
 
 	@IsTest
@@ -139,7 +139,7 @@ private class AchievementReachedTriggerHandlerTest {
 
 		// Then
 		List<ReachedAchievement__c> result = [SELECT Id, Key__c, User__c, Achievement__c FROM ReachedAchievement__c];
-		System.assertNotEquals(null, result, 'ReachedAchievement__c are expected to be created');
-		System.assertEquals(202, result.size(), 'Single ReachedAchievement__c is expected to be created');
+		Assert.isNotNull(result, 'ReachedAchievement__c are expected to be created');
+		Assert.areEqual(202, result.size(), 'Single ReachedAchievement__c is expected to be created');
 	}
 }

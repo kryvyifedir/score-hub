@@ -11,7 +11,7 @@ private class ReachedAchievementSelectorTest {
 		Test.stopTest();
 
 		// Then 
-		system.assertEquals('ReachedAchievement__c', result, 'ReachedAchievement__c sObject ApiName is expected');
+		Assert.areEqual('ReachedAchievement__c', result, 'ReachedAchievement__c sObject ApiName is expected');
 	}
 
 	@IsTest
@@ -26,6 +26,6 @@ private class ReachedAchievementSelectorTest {
 
 		// Then 
 		Set<String> expectedSet = new Set<String> {'Id', 'Key__c', 'User__c', 'Achievement__c', 'Score__c', 'CreatedDate'};
-		system.assertEquals(expectedSet, result, 'A specific field set is expected');
+		Assert.areEqual(expectedSet, result, 'A specific field set is expected');
 	}
 }

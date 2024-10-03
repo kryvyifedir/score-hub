@@ -18,8 +18,8 @@ public with sharing class LoggerTest {
 
 			// Then
 			List<Log__c> logs = [SELECT Id, ErrorMessage__c, UserId__c, AchievementId__c FROM Log__c];
-			System.assertEquals(1, logs.size(), 'Single log is expected to be created');
-			System.assertEquals(log, logs[0].ErrorMessage__c, 'Log value is expected to be saved in Log__c field');
+			Assert.areEqual(1, logs.size(), 'Single log is expected to be created');
+			Assert.areEqual(log, logs[0].ErrorMessage__c, 'Log value is expected to be saved in Log__c field');
 		}
 	}
 
@@ -35,7 +35,7 @@ public with sharing class LoggerTest {
 
 		// Then
 		List<Log__c> logs = [SELECT Id, ErrorMessage__c FROM Log__c];
-		System.assertEquals(0, logs.size(), 'No logs are expected to be created');
+		Assert.areEqual(0, logs.size(), 'No logs are expected to be created');
 	}
 
 	@IsTest
@@ -52,7 +52,7 @@ public with sharing class LoggerTest {
 
 		// Then
 		List<Log__c> logs = [SELECT Id, ErrorMessage__c FROM Log__c];
-		System.assertEquals(0, logs.size(), 'No logs are expected to be created');
+		Assert.areEqual(0, logs.size(), 'No logs are expected to be created');
 	}
 
 	@IsTest
@@ -70,8 +70,8 @@ public with sharing class LoggerTest {
 
 			// Then
 			List<Log__c> logs = [SELECT Id, ErrorMessage__c FROM Log__c];
-			System.assertEquals(1, logs.size(), 'Single log is expected to be created');
-			System.assertEquals(log, logs[0].ErrorMessage__c, 'Log value is expected to be saved in Log__c field');
+			Assert.areEqual(1, logs.size(), 'Single log is expected to be created');
+			Assert.areEqual(log, logs[0].ErrorMessage__c, 'Log value is expected to be saved in Log__c field');
 		}
 	}
 }

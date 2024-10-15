@@ -43,7 +43,7 @@ jobs:
       # Creating a new Package version
       - name: Creating a new Package version
         run: |
-          JSON=$(sf package version create --target-dev-hub DevHub --package ${{ vars.SF_PKG_ID }} --installation-key ${{ secrets.SF_PKG_INSTALL_KEY }} --code-coverage --json --releasenotes-url ${{ vars.SF_RELEASE_NOTES_URL }} --json --wait 20);
+          JSON=$(sf package version create --target-dev-hub DevHub --package ${{ vars.SF_PKG_ID }} --installation-key ${{ secrets.SF_PKG_INSTALL_KEY }} --releasenotes-url ${{ vars.SF_RELEASE_NOTES_URL }} --json --code-coverage --wait 20);
           STATUS=$(echo $JSON | jq '.result.Status');
           ID=$(echo $JSON | jq -r '.result.Id');
 

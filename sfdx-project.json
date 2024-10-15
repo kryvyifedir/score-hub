@@ -4,9 +4,10 @@
       "path": "force-app",
       "default": true,
       "package": "ScoreHub",
-      "versionName": " ScoreHub v1.0",
-      "versionNumber": "1.0.0.NEXT",
-      "versionDescription": "ScoreHub version 1.0",
+      "versionName": " ScoreHub v2.0",
+      "versionNumber": "2.0.0.NEXT",  
+      "ancestorVersion": "HIGHEST",
+      "versionDescription": "ScoreHub version 2.0",
       "postInstallScript": "ScoreHubConfig"
     }
   ],

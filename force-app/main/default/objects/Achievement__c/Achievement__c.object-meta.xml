@@ -143,6 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
     <description>The list of achievement that users can get</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
@@ -150,7 +151,7 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>false</enableSearch>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ControlledByParent</externalSharingModel>
@@ -160,7 +161,13 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Achievements</pluralLabel>
-    <searchLayouts></searchLayouts>
+    <searchLayouts>
+        <searchResultsAdditionalFields>UITitle__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UIDescription__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Measurement__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Goal__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Score__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

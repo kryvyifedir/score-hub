@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Score__c</fullName>
     <defaultValue>0</defaultValue>
+    <deprecated>false</deprecated>
     <description>Number of points that user gets, once reaching the achievement. Used to calculate high-score on the leaderboard</description>
     <externalId>false</externalId>
     <label>Score</label>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Description__c</fullName>
+    <deprecated>false</deprecated>
     <description>Short description for the achievement</description>
     <externalId>false</externalId>
     <inlineHelpText>Short description used by admin users to better identify list of achievements</inlineHelpText>

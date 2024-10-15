@@ -1,6 +1,9 @@
 # ScoreHub Release Notes
 
 ## version 2.0.0.WIP
+### version 2.0.0.3
+- Adjusting "Recently Viewed" list views for Achievements and Measurements to have the same set of fields as "All Measurements" and "All Achievements" views
+
 ### version 2.0.0.2
 - Unsubscribing from `AchievementReached__e` platform event during `unrender` of ScoreHubUtility component
 

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>UITitle__c</fullName>
     <caseSensitive>false</caseSensitive>
+    <deprecated>false</deprecated>
     <description>Achievement title that is going to be shown in the UI elements</description>
     <externalId>false</externalId>
     <inlineHelpText>Supports plain text, as well as reference to the Custom Labels API Name</inlineHelpText>

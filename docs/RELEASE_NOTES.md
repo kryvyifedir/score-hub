@@ -1,5 +1,10 @@
 # ScoreHub Release Notes
 
+## version 2.0.0.WIP
+### version 2.0.0.1
+- Optimizing SOQL queries 
+- Refactoring Unit tests to migrate from System.Assert to Assert class
+
 ## version 1.0.0.1
 First release version of ScoreHub app
 Main functionality included in the release:

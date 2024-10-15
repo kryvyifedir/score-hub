@@ -1,6 +1,9 @@
 # ScoreHub Release Notes
 
 ## version 2.0.0.WIP
+### version 2.0.0.2
+- Unsubscribing from `AchievementReached__e` platform event during `unrender` of ScoreHubUtility component
+
 ### version 2.0.0.1
 - Optimizing SOQL queries 
 - Refactoring Unit tests to migrate from System.Assert to Assert class
@@ -14,4 +17,4 @@ Main functionality included in the release:
 - ScoreHub App and related LWC components
 - ScoreHub utility bar component for custom notifications
 
-More detailed informatin can be found in the [article](https://www.linkedin.com/pulse/gameforce-part-7-mvp-fedir-kryvyi-sqkyf/?trackingId=dKd2vpClQCGbSjQrzyrKcA%3D%3D) that describes an MVP features of ScoreHub
+More detailed information can be found in the [article](https://www.linkedin.com/pulse/gameforce-part-7-mvp-fedir-kryvyi-sqkyf/?trackingId=dKd2vpClQCGbSjQrzyrKcA%3D%3D)

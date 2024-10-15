@@ -22,13 +22,11 @@
                     }
                 }))
                 .then(subscription => {
-                    // Subscription response received.
-                    // We haven't received an event yet.
+                    component.set('v.subscription', subscription);
                     console.log('Subscription request sent to: ', subscription.channel);
                 });
 
                 empApi.onError($A.getCallback(error => {
-                    // console.error for deubgging purposes
                     console.error('EMP API error: ', JSON.stringify(error));
                 }));
             }

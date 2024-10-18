@@ -9,6 +9,6 @@ public with sharing class UserSelector extends BaseSelector {
 	}
 
 	public override Set<String> fieldApiNames() {
-		return new Set<String> {'Id', 'FullPhotoUrl', 'Name'};
+		return new Set<String> {'Id', 'SmallPhotoUrl', 'Name'};
 	}
 }

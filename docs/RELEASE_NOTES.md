@@ -2,6 +2,9 @@
 
 ## version 2.0.0.WIP
 ### version 2.0.0.4
+- Improving the User Card component to ensure that avatars with aspect ratios different from 1:1 are correctly displayed.
+
+### version 2.0.0.4
 - The Achievements list on the Leaderboard page and the Comparison UI were adjusted to group Achievements by their related Measurement and order by Name. This improvement makes it easier for ScoreHub Admins to organize achievements in the list and makes the list more user-friendly.
 
 ### version 2.0.0.3

@@ -6,7 +6,7 @@ public with sharing class DataWrappers {
 		@AuraEnabled
 		public String name { get; set; }
 		@AuraEnabled
-		public String fullPhotoUrl { get; set; }
+		public String smallPhotoUrl { get; set; }
 		@AuraEnabled
 		public Decimal reachedAchievementsCount { get; set; }
 		@AuraEnabled

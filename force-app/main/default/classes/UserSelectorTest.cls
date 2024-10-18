@@ -26,7 +26,7 @@ public with sharing class UserSelectorTest {
 		Test.stopTest();
 
 		// Then 
-		Set<String> expectedSet = new Set<String> {'Id', 'FullPhotoUrl', 'Name'};
+		Set<String> expectedSet = new Set<String> {'Id', 'SmallPhotoUrl', 'Name'};
 		Assert.areEqual(expectedSet, result, 'A specific field set is expected');
 	}
 	

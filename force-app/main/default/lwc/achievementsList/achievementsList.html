@@ -1,7 +1,7 @@
 <template>
   <template lwc:if={achievements}>
     <div class="slds-card">
-      <template for:each={achievements} for:item="achievement">
+      <template for:each={orderedList} for:item="achievement">
         <c-achievement-list-item key={achievement.id} achievement={achievement}></c-achievement-list-item>
       </template>
     </div>

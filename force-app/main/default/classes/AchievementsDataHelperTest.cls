@@ -134,6 +134,8 @@ private class AchievementsDataHelperTest {
 
 		// Then
 		Assert.areEqual(achievement1.Id, cardData.Id);
+		Assert.areEqual(achievement1.Name, cardData.name);
+		Assert.areEqual(achievement1.Measurement__c, cardData.measurementId);
 		Assert.areEqual(achievement1.UITitle__c, cardData.uiTitle);
 		Assert.areEqual(achievement1.UIDescription__c, cardData.uiDescription);
 		Assert.areEqual(achievement1.Score__c, cardData.score);
@@ -154,6 +156,8 @@ private class AchievementsDataHelperTest {
 
 		// Then
 		Assert.areEqual(achievement1.Id, cardData.Id);
+		Assert.areEqual(achievement1.Name, cardData.name);
+		Assert.areEqual(achievement1.Measurement__c, cardData.measurementId);
 		Assert.areEqual(achievement1.UITitle__c, cardData.uiTitle);
 		Assert.areEqual(achievement1.UIDescription__c, cardData.uiDescription);
 		Assert.areEqual(achievement1.Score__c, cardData.score);

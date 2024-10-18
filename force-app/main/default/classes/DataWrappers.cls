@@ -28,5 +28,9 @@ public with sharing class DataWrappers {
 		public Boolean isReached { get; set; }
 		@AuraEnabled
 		public Long reachedDate { get; set; }
+		@AuraEnabled
+		public Id measurementId { get; set; }
+		@AuraEnabled
+		public String name { get; set; }
 	}
 }

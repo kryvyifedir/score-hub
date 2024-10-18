@@ -63,6 +63,8 @@ public with sharing class AchievementsDataHelper {
 		achievementWrapper.score = achievement.Score__c;
 		achievementWrapper.isReached = false;
 		achievementWrapper.ReachedDate = 0;
+		achievementWrapper.measurementId = achievement.Measurement__c;
+		achievementWrapper.name = achievement.Name;
 		return achievementWrapper;
 	}
 

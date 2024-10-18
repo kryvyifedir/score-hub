@@ -14,7 +14,7 @@ public with sharing class UserDataHelper {
 		DataWrappers.UserCardData userCardData = new DataWrappers.UserCardData();
 		userCardData.Id = user.Id;
 		userCardData.name = user.Name;
-		userCardData.fullPhotoUrl = user.FullPhotoUrl;
+		userCardData.smallPhotoUrl = user.SmallPhotoUrl;
 		userCardData.totalAchievementsCount = allAchievementsCount;
 		userCardData.totalScore = userAgResult != null ? (Decimal) userAgResult.get('score') : 0;
 		userCardData.reachedAchievementsCount = userAgResult != null ? (Decimal) userAgResult.get('cnt') : 0;

@@ -2,31 +2,31 @@
 private class UserMeasurementSelectorTest {
 	
 	@IsTest
-	private static void sObjectApiName_sObjectNameReturned_nameIsValidated() {
+	private static void sObjectType_sObjectTypeReturned_nameIsValidated() {
 		// Given
 		UserMeasurementSelector selector = UserMeasurementSelector.getInstance();
 		
 		// When
 		Test.startTest();
-		String result = selector.sObjectApiName();
+		SObjectType result = selector.sObjectType();
 		Test.stopTest();
 
 		// Then 
-		Assert.areEqual('UserMeasurement__c', result, 'UserMeasurement__c sObject ApiName is expected');
+		Assert.areEqual(UserMeasurement__c.getSobjectType(), result, 'UserMeasurement__c sObject ApiName is expected');
 	}
 
 	@IsTest
-	private static void fieldApiNames_sObjectNameReturned_fieldSetIsValidated() {
+	private static void queryFields_sObjectFieldsReturned_fieldSetIsValidated() {
 		// Given
 		UserMeasurementSelector selector = UserMeasurementSelector.getInstance();
 		
 		// When
 		Test.startTest();
-		Set<String> result = selector.fieldApiNames();
+		Set<SObjectField> result = selector.queryFields();
 		Test.stopTest();
 
 		// Then 
-		Set<String> expectedSet = new Set<String> {'Id', 'Name', 'Key__c', 'Measurement__c', 'User__c', 'Value__c'};
+		Set<SObjectField> expectedSet = new Set<SObjectField> { UserMeasurement__c.Id, UserMeasurement__c.Name, UserMeasurement__c.Key__c, UserMeasurement__c.Measurement__c, UserMeasurement__c.User__c, UserMeasurement__c.Value__c };
 		Assert.areEqual(expectedSet, result, 'A specific field set is expected');
 	}
 }

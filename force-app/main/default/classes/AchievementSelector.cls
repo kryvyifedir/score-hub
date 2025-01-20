@@ -4,11 +4,11 @@ public with sharing class AchievementSelector extends BaseSelector {
 		return new AchievementSelector();
 	}
 
-	public override String sObjectApiName() {
-		return 'Achievement__c';
+	public override SObjectType sObjectType() {
+		return Achievement__c.getSobjectType();
 	}
 
-	public override Set<String> fieldApiNames() {
-		return new Set<String> {'Id', 'Name', 'Description__c', 'Goal__c', 'Score__c', 'UITitle__c', 'UIDescription__c', 'Measurement__c'};
+	public override Set<SObjectField> queryFields() {
+		return new Set<SObjectField> { Achievement__c.Id, Achievement__c.Name, Achievement__c.Description__c, Achievement__c.Goal__c, Achievement__c.Score__c, Achievement__c.UITitle__c, Achievement__c.UIDescription__c, Achievement__c.Measurement__c};
 	}
 }

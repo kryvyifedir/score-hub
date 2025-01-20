@@ -3,7 +3,7 @@ public with sharing class AchievementsDataHelper {
 		Map<Id, List<DataWrappers.AchievementCardData>> result = new Map<Id, List<DataWrappers.AchievementCardData>>();
 		List<Achievement__c> allAchievements = AchievementSelector.getInstance().getAll();
 		Map<String, ReachedAchievement__c> reachedAchievementByKeyMap = new Map<String, ReachedAchievement__c>();
-		List<ReachedAchievement__c> reachedAchievements = ReachedAchievementSelector.getInstance().getByFieldValue('User__c', 'IN', userIds);
+		List<ReachedAchievement__c> reachedAchievements = ReachedAchievementSelector.getInstance().getByFieldValue(ReachedAchievement__c.User__c, 'IN', userIds);
 		for (ReachedAchievement__c reachedAchievement : reachedAchievements) {
 			reachedAchievementByKeyMap.put(reachedAchievement.Key__c, reachedAchievement);
 		}
@@ -30,7 +30,7 @@ public with sharing class AchievementsDataHelper {
 		List<Achievement__c> achievements = AchievementSelector.getInstance().getAll();
 		Map<Id, Achievement__c> achievementByIdsMap = new Map<Id, Achievement__c>(achievements);
 
-		List<UserMeasurement__c> userMeasurements = UserMeasurementSelector.getInstance().getByFieldValue('User__c', 'IN', new Set<Id>{ userId });
+		List<UserMeasurement__c> userMeasurements = UserMeasurementSelector.getInstance().getByFieldValue(UserMeasurement__c.User__c, 'IN', new Set<Id>{ userId });
 		Map<Id, UserMeasurement__c> userMeasurementsByMeasurementIdMap = new Map<Id, UserMeasurement__c>();
 		for (UserMeasurement__c measurement : userMeasurements) {
 			userMeasurementsByMeasurementIdMap.put(measurement.Measurement__c, measurement);

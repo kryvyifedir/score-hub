@@ -40,7 +40,7 @@ public with sharing class AchievementReachedEventsManager {
 			measurementIds.add(userMeasurement.Measurement__c);
 		}
 
-		List<Achievement__c> achievements = AchievementSelector.getInstance().getByFieldValue('Measurement__c', 'IN', measurementIds);
+		List<Achievement__c> achievements = AchievementSelector.getInstance().getByFieldValue(Achievement__c.Measurement__c, 'IN', measurementIds);
 		for (Achievement__c achievement : achievements) {
 			if (!achievementByMeasurementIdMap.containsKey(achievement.Measurement__c)) {
 				achievementByMeasurementIdMap.put(achievement.Measurement__c, new List<Achievement__c>());
@@ -55,7 +55,7 @@ public with sharing class AchievementReachedEventsManager {
 			userIds.add(userMeasurement.User__c);
 		}
 		
-		List<ReachedAchievement__c> reachedAchievements = ReachedAchievementSelector.getInstance().getByFieldValue('User__c', 'IN', userIds);
+		List<ReachedAchievement__c> reachedAchievements = ReachedAchievementSelector.getInstance().getByFieldValue(ReachedAchievement__c.User__c, 'IN', userIds);
 		for (ReachedAchievement__c reachedAchievement : reachedAchievements) {
 			existingReachedAchievementsByKey.put(reachedAchievement.Key__c, reachedAchievement);
 		}

@@ -4,11 +4,11 @@ public with sharing class UserSelector extends BaseSelector {
 		return new UserSelector();
 	}
 
-	public override String sObjectApiName() {
-		return 'User';
+	public override SObjectType sObjectType() {
+		return User.getSObjectType();
 	}
 
-	public override Set<String> fieldApiNames() {
-		return new Set<String> {'Id', 'SmallPhotoUrl', 'Name'};
+	public override Set<SObjectField> queryFields() {
+		return new Set<SObjectField> { User.Id, User.SmallPhotoUrl, User.Name };
 	}
 }

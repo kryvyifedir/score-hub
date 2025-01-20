@@ -17,6 +17,11 @@ public abstract with sharing class BaseSelector {
 		return result;
 	}
 
+	public List<sObject> getBy(QueryBuilder queryBuilder) {
+		Map<String, Object> binds = new Map<String, Object>();
+		return this.getBy(queryBuilder, binds);
+	}
+
 	public List<sObject> getByFieldValue(SObjectField sObjectField, String compOperator, Object values) {
 		QueryBuilder builder = selectorQueryBuilder();
 		builder.addFilter(sObjectField, compOperator, 'value');
@@ -25,7 +30,7 @@ public abstract with sharing class BaseSelector {
 
 	public List<sObject> getAll() {
 		QueryBuilder builder = selectorQueryBuilder();
-		return getBy(builder, new Map<String, Object>());
+		return getBy(builder);
 	}
 
 	public List<sObject> getByIds(Set<Id> ids) {

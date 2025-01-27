@@ -1,7 +1,7 @@
 @IsTest(isParallel=true)
 private class FeedItemTriggerHandlerTest {
 	@IsTest
-	private static void onAfterInsert_201RecordsInserted_userMeasurementsCreated(){
+	private static void onAfterInsert_201RecordsInserted_userMeasurementsCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement(Constants.CHATTER_POSTS_COUNTER_ID);
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -22,7 +22,7 @@ private class FeedItemTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterUpdate_201RecordsConverted_userMeasurementsCreated(){
+	private static void onAfterUpdate_201RecordsConverted_userMeasurementsCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement(Constants.CHATTER_POSTS_COUNTER_ID);
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -47,7 +47,7 @@ private class FeedItemTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void fireEventsForNewFeedItems_measurementSetupIsMissing_userMeasurementsNotCreated(){
+	private static void fireEventsForNewFeedItems_measurementSetupIsMissing_userMeasurementsNotCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('WEIRD NAME');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -66,7 +66,7 @@ private class FeedItemTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterUpdate_newMapIsNull_exceptionIsCreated(){
+	private static void onAfterUpdate_newMapIsNull_exceptionIsCreated() {
 		// Given
 		// When
 		try {

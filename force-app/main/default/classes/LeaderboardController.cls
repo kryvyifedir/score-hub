@@ -4,7 +4,7 @@ public with sharing class LeaderboardController {
 	private static Boolean throwException = false;
 
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getTopUsersByScore(){
+	public static Map<String, Object> getTopUsersByScore() {
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {
@@ -23,7 +23,7 @@ public with sharing class LeaderboardController {
 	}
 
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getTopUsersByAchievementsCount(){
+	public static Map<String, Object> getTopUsersByAchievementsCount() {
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {

@@ -3,7 +3,7 @@ public with sharing class ScoreHubNotificationController {
 	private static Boolean throwException = false;
 
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getAchievementById(String achievementId){
+	public static Map<String, Object> getAchievementById(String achievementId) {
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {
@@ -27,7 +27,7 @@ public with sharing class ScoreHubNotificationController {
 	}
 
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getClosestReachableAchievement(String userId){
+	public static Map<String, Object> getClosestReachableAchievement(String userId) {
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {

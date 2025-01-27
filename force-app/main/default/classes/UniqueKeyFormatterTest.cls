@@ -1,7 +1,7 @@
 @IsTest(isParallel=true)
 private class UniqueKeyFormatterTest {
 	@IsTest
-	private static void generateUniqueKey_idsPassed_keyGenerated(){
+	private static void generateUniqueKey_idsPassed_keyGenerated() {
 		// Given
 		Id userId = UserInfo.getUserId();
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');

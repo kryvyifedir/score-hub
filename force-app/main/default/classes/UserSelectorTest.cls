@@ -31,7 +31,7 @@ public with sharing class UserSelectorTest {
 	}
 	
 	@IsTest
-	private static void getByIds_recordWithIdExists_recordsReturned(){
+	private static void getByIds_recordWithIdExists_recordsReturned() {
 		// Given
 		Id profileId = UserInfo.getProfileId();
 		User user1 = TestDataFactory.createUser(profileId, 'user1');
@@ -50,7 +50,7 @@ public with sharing class UserSelectorTest {
 	}
 
 	@IsTest
-	private static void getAll_recordsExists_recordsReturned(){
+	private static void getAll_recordsExists_recordsReturned() {
 		// Given
 		Id profileId = UserInfo.getProfileId();
 		User user1 = TestDataFactory.createUser(profileId, 'user1');
@@ -69,7 +69,7 @@ public with sharing class UserSelectorTest {
 	}
 
 	@IsTest
-	private static void getByIds_emptyIdsSet_emptyListReturned(){
+	private static void getByIds_emptyIdsSet_emptyListReturned() {
 		// Given
 		Set<Id> ids = new Set<Id>();
 

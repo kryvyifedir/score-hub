@@ -3,7 +3,7 @@ public with sharing class ConfigurationTabController {
 	private static Boolean throwException = false;
 
 	@AuraEnabled(cacheable=false)
-	public static Map<String, Object> restoreDefaultAchievements(){
+	public static Map<String, Object> restoreDefaultAchievements() {
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {

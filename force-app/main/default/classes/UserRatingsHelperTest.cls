@@ -1,7 +1,7 @@
 @IsTest
 private class UserRatingsHelperTest {
 	@IsTest
-	private static void getTotalScoreAndCountByUser_usersPasses_groupedValuesReturned(){
+	private static void getTotalScoreAndCountByUser_usersPasses_groupedValuesReturned() {
 		// Given
 		Id profileId = UserInfo.getProfileId();
 		User user1 = TestDataFactory.createUser(profileId, 'FirstUser');
@@ -31,7 +31,7 @@ private class UserRatingsHelperTest {
 	}
 
 	@IsTest
-	private static void getTotalScoreAndCountByUser_emptyList_emptyMapReturned(){
+	private static void getTotalScoreAndCountByUser_emptyList_emptyMapReturned() {
 		// Given
 		Set<Id> userIds = new Set<Id>();
 
@@ -45,7 +45,7 @@ private class UserRatingsHelperTest {
 	}
 
 	@IsTest
-	private static void getTotalScoreAndCountByUser_userWithNoAchievements_emptyMapReturned(){
+	private static void getTotalScoreAndCountByUser_userWithNoAchievements_emptyMapReturned() {
 		// Given
 		Set<Id> userIds = new Set<Id>{UserInfo.getUserId()};
 
@@ -59,7 +59,7 @@ private class UserRatingsHelperTest {
 	}
 
 	@IsTest
-	private static void getTopUsersByScore_usersHaveAchievements_topTenUsersReturned(){
+	private static void getTopUsersByScore_usersHaveAchievements_topTenUsersReturned() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -89,7 +89,7 @@ private class UserRatingsHelperTest {
 	}
 
 	@IsTest
-	private static void getTopUsersByAchievementsCount_usersHaveAchievements_topTenUsersReturned(){
+	private static void getTopUsersByAchievementsCount_usersHaveAchievements_topTenUsersReturned() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);

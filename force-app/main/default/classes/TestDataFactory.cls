@@ -125,4 +125,10 @@ public class TestDataFactory {
 		newSeason.To__c = toDate;
 		return newSeason;
 	}
+
+	public static Season__c createSeason(Date dateFrom, Date toDate) {
+		Season__c newSeason = TestDataFactory.initSeason(dateFrom, toDate);
+		insert newSeason;
+		return newSeason;
+	}
 }

@@ -48,6 +48,12 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 	}
 
 	public void finish(Database.BatchableContext bc) {
+		// TODO: SAVE LOG IF ERROR
+        // AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
+        // TotalJobItems, CreatedBy.Email
+        // FROM AsyncApexJob WHERE Id =
+        // :bc.getJobId()];
+
 		Database.executeBatch(new SeasonReachedAchievementsBatch(this.currentSeasonId));
 	}
 

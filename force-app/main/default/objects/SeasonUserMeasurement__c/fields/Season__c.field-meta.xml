@@ -5,8 +5,8 @@
     <externalId>false</externalId>
     <label>Season</label>
     <referenceTo>Season__c</referenceTo>
-    <relationshipLabel>Season Reached Achievements</relationshipLabel>
-    <relationshipName>SeasonReachedAchievements</relationshipName>
+    <relationshipLabel>Season User Measurements</relationshipLabel>
+    <relationshipName>SeasonUserMeasurements</relationshipName>
     <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

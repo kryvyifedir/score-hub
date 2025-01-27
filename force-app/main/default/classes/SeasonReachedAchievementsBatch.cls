@@ -31,9 +31,13 @@ public with sharing class SeasonReachedAchievementsBatch implements Database.Bat
 	}
 
 	public void finish(Database.BatchableContext bc) {
-		// if (isSeasonMissing) {
-		// 	Logger.saveSingleLog('Unable to execute SeasonUserStatsBatch - current season is missing.');
-		// }
+		// TODO: SAVE LOG IF ERROR
+        // AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
+        // TotalJobItems, CreatedBy.Email
+        // FROM AsyncApexJob WHERE Id =
+        // :bc.getJobId()];
+
+		Database.executeBatch(new SeasonUserMeasurementsBatch(this.currentSeasonId));
 	}
 
 	public class SeasonReachedAchievementsBatchException extends Exception {}

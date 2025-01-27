@@ -19,10 +19,11 @@ private class SeasonReachedAchievementsBatchTest {
 		List<ReachedAchievement__c> reachedAchievements = [SELECT Id FROM ReachedAchievement__c];
 		Assert.isTrue(reachedAchievements.isEmpty(), 'ReachedAchievement__c sObject records are supposed to be cleaned-up');
 
-		List<SeasonReachedAchievement__c> seasonReachedAchievements = [SELECT Id, User__c, Achievement__c FROM SeasonReachedAchievement__c];
+		List<SeasonReachedAchievement__c> seasonReachedAchievements = [SELECT Id, User__c, Season__c, Achievement__c FROM SeasonReachedAchievement__c];
 		Assert.areEqual(1, seasonReachedAchievements.size(), 'Each ReachedAchievement__c is expected to be migrated');
 
 		SeasonReachedAchievement__c seasonReachedAchievement = seasonReachedAchievements[0];
+		Assert.areEqual(currentSeason.Id, seasonReachedAchievement.Season__c, 'Season is expected to be set');
 		Assert.areEqual(userWithAchievement.Id, seasonReachedAchievement.User__c, 'User Id is expected to be migrated');
 		Assert.areEqual(achievement.Id, seasonReachedAchievement.Achievement__c, 'Achievement Id is expected to be migrated');
 	}

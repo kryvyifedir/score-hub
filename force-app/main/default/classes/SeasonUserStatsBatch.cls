@@ -48,9 +48,7 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 	}
 
 	public void finish(Database.BatchableContext bc) {
-		// if (isSeasonMissing) {
-		// 	Logger.saveSingleLog('Unable to execute SeasonUserStatsBatch - current season is missing.');
-		// }
+		Database.executeBatch(new SeasonReachedAchievementsBatch(this.currentSeasonId));
 	}
 
 	public class SeasonUserStatsBatchException extends Exception {}

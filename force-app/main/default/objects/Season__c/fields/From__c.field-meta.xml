@@ -3,7 +3,7 @@
     <fullName>From__c</fullName>
     <externalId>false</externalId>
     <label>From</label>
-    <required>true</required>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>

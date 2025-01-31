@@ -1,19 +1,59 @@
 public with sharing class SeasonsDataHelper {
-	public static void createNewSeason() {
-		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
 
-		// TODO: 
-		// - THIS METHOD WILL SEARCH FOR EXISTING SEASON
-		// - IF NO SEASON EXIST - CREATE PRE-SEASON USING config.StartDate TO FROM__C and TO__C as StartDate + Cadence
-		// - IF EXISTS - FROM__C = LAST_SEASON.DATE_TO + 1, TO__C = LAST_SEASON.DATE_TO + Cadence
+	SeasonsConfiguration__c config;
+	private static final Set<String> SUPPORTED_CADENCE_VALUES = new Set<String>{ 'month', 'quarter', 'year' };
 
-		// - Seasson__c NEEDS AN After Insert TRIGGER
-		// - TRIGGER WILL SCHEDULE NEW JOB AND SAVE JOB ID TO SeasonsConfiguration__c
+	public SeasonsDataHelper() {
+		config = SeasonsConfiguration__c.getOrgDefaults();
+	}
 
-		// - SCHEDULABLE JOB WILL CALL SeasonUserStatsBatch
-		// + SeasonUserStatsBatch WILL SAVE USER STATS AND CALL SeasonReachedAchievementsBatch
-		// + SeasonReachedAchievementsBatch WILL SAVE REACHED ACHIVEMENTS AND CALL SeasonUserMeasurementsBatch
-		// + SeasonUserMeasurementsBatch WILL SAVE USER MEASUREMENTS AND CALL SeasonsDataHelper
-		// - SeasonsDataHelper WILL CREATE NEW SEASON
+	public Season__c createNewSeason() {
+		Season__c newSeason = new Season__c();
+
+		if (this.validate()) {
+			Season__c lastSeason = SeasonSelector.getInstance().getLatestSeason();
+			newSeason.From__c = lastSeason == null ? null : lastSeason.To__c.addDays(1);
+			newSeason.To__c = newSeason.From__c == null ? config.StartDate__c.addDays(-1) : this.calculateNextToDate(newSeason.From__c);
+
+			if (newSeason.To__c == null) {
+				Logger.saveSingleLog('Unable to initialize next season - unable to identify To date');
+			} else {
+				insert newSeason;
+			}
+		}
+
+		return newSeason;
+	}
+
+	@TestVisible
+	private Boolean validate() {
+		Boolean result = true;
+
+		if (config?.IsActive__c != true) {
+			result = false;
+			Logger.saveSingleLog('Unable to initialize next season - Seasons Feature is disabled');
+		} else if (!SUPPORTED_CADENCE_VALUES.contains(config?.Cadence__c)) {
+			result = false;
+			Logger.saveSingleLog('Unable to initialize next season - Selected Cadence is not supported');
+		}
+
+		return result;
+	}
+
+	@TestVisible
+	private Date calculateNextToDate(Date baseDate) {
+		Date result;
+
+		if (baseDate != null) {
+			if (config.Cadence__c.toLowercase() == 'month') {
+				result = baseDate.addMonths(1).addDays(-1);
+			} else if (config.Cadence__c.toLowercase() == 'quarter') {
+				result = baseDate.addMonths(3).addDays(-1);
+			} else if (config.Cadence__c.toLowercase() == 'year') {
+				result = baseDate.addYears(1).addDays(-1);
+			}
+		}
+
+		return result;
 	}
 }

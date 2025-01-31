@@ -51,6 +51,8 @@ public with sharing class SeasonsCardController {
 			result = ControllerResponse.error('Unable to get Seassons Configuration');
 		}
 		return result;
+
+		// TODO cancel next schedule
 	}
 
 

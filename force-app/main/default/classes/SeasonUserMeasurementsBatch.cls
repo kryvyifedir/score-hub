@@ -16,6 +16,8 @@ public with sharing class SeasonUserMeasurementsBatch implements Database.Batcha
 
 	public void execute(Database.BatchableContext bc, List<sObject> scope) {
 
+		// TODO Don't allow execution if Season Feature is disabled
+
 		List<SeasonUserMeasurement__c> seasonUserMeasurementsToCreate = new List<SeasonUserMeasurement__c>();
 
 		for (UserMeasurement__c userMeasurement : (List<UserMeasurement__c>)scope) {
@@ -38,7 +40,8 @@ public with sharing class SeasonUserMeasurementsBatch implements Database.Batcha
         // FROM AsyncApexJob WHERE Id =
         // :bc.getJobId()];
 
-        SeasonsDataHelper.createNewSeason();
+        SeasonsDataHelper helper = new SeasonsDataHelper();
+		helper.createNewSeason();
 	}
 
 	public class SeasonUserMeasurementsBatchException extends Exception {}

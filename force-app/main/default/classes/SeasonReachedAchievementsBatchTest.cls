@@ -1,5 +1,15 @@
 @IsTest(isParallel=false)
 private class SeasonReachedAchievementsBatchTest {
+
+	@TestSetup
+	private static void setup() {
+		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
+		config.IsActive__c = true;
+		config.Cadence__c = 'month';
+		config.StartDate__c = Date.today();
+		insert config;
+	}
+
 	@IsTest
 	private static void execute_allDataExists_reachedAchievementsStored() {
 		// Given 
@@ -82,4 +92,6 @@ private class SeasonReachedAchievementsBatchTest {
 		}
 		
 	}
+	
+	// TODO Check finilize method for execution of next batch
 }

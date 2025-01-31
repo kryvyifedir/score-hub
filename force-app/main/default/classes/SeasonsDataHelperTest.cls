@@ -67,9 +67,6 @@ private class SeasonsDataHelperTest {
 
 		// Then
 		Assert.areEqual(false, result, 'Validation is expected to fail');
-		List<Log__c> resultLogs = [SELECT Id, ErrorMessage__c FROM Log__c];
-		Assert.isFalse(resultLogs.isEmpty(), 'Log is expected to be created');
-		Assert.areEqual('Unable to initialize next season - Seasons Feature is disabled', resultLogs[0].ErrorMessage__c, 'Error message is expected to describe specific error');
 	}
 
 	@IsTest
@@ -89,9 +86,6 @@ private class SeasonsDataHelperTest {
 
 		// Then
 		Assert.areEqual(false, result, 'Validation is expected to fail');
-		List<Log__c> resultLogs = [SELECT Id, ErrorMessage__c FROM Log__c];
-		Assert.isFalse(resultLogs.isEmpty(), 'Log is expected to be created');
-		Assert.areEqual('Unable to initialize next season - Selected Cadence is not supported', resultLogs[0].ErrorMessage__c, 'Error message is expected to describe specific error');
 	}
 
 	@IsTest

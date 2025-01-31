@@ -21,6 +21,9 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 	}
 
 	public void execute(Database.BatchableContext bc, List<sObject> scope) {
+
+		// TODO Don't allow execution if Season Feature is disabled
+		
 		Set<Id> userIds = new Set<Id>(); 
 
 		for (sObject sObj : scope) {

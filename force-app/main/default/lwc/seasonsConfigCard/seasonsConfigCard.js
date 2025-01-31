@@ -5,6 +5,8 @@ import getSeasonsConfig from '@salesforce/apex/SeasonsCardController.getSeasonsC
 import activateModifySeasons from '@salesforce/apex/SeasonsCardController.activateModifySeasons';
 import deactivateSeasons from '@salesforce/apex/SeasonsCardController.deactivateSeasons';
 
+// TODO: Add labels
+
 export default class SeasonsConfigCard extends LightningElement {
 
     isConfigLoaded

@@ -119,10 +119,10 @@ public class TestDataFactory {
 		);
 	}
 
-	public static Season__c initSeason(Date dateFrom, Date toDate) {
+	public static Season__c initSeason(Date dateFrom, Date dateTo) {
 		Season__c newSeason = new Season__c();
 		newSeason.From__c = dateFrom;
-		newSeason.To__c = toDate;
+		newSeason.To__c = dateTo;
 		return newSeason;
 	}
 

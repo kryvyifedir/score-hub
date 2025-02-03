@@ -2,10 +2,14 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 	public Id currentSeasonId;
 
 	public SeasonUserStatsBatch(Id seasonId) {
+		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
+		if (config.IsActive__c != true) {
+			throw new SeasonUserStatsBatchException('SeasonUserStatsBatch execution was stopped - Seasons feature is not active');
+		}
+
 		if (seasonId == null || seasonId.getSobjectType() != Season__c.getSobjectType()) {
 			throw new SeasonUserStatsBatchException('Unable to execute SeasonUserStatsBatch. Provided season id is either null or is not of Season__c type'); 
 		}
-
 		currentSeasonId = seasonId;
 	}
 
@@ -21,9 +25,6 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 	}
 
 	public void execute(Database.BatchableContext bc, List<sObject> scope) {
-
-		// TODO Don't allow execution if Season Feature is disabled
-		
 		Set<Id> userIds = new Set<Id>(); 
 
 		for (sObject sObj : scope) {
@@ -34,7 +35,7 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 		List<SeasonUserStat__c> seasonResultsToInsert = new List<SeasonUserStat__c>();
 		for (Id userId : seasonResultsMap.keySet()) {
 			DataWrappers.UserCardData seasonResult = seasonResultsMap.get(userId);
-			if (seasonResult.reachedAchievementsCount == 0 ) {
+			if (seasonResult.reachedAchievementsCount == 0) {
 				continue;
 			}
 
@@ -51,13 +52,14 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 	}
 
 	public void finish(Database.BatchableContext bc) {
-		// TODO: SAVE LOG IF ERROR
-        // AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
-        // TotalJobItems, CreatedBy.Email
-        // FROM AsyncApexJob WHERE Id =
-        // :bc.getJobId()];
+		AsyncApexJob asyncJobInfo = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed, TotalJobItems, CreatedBy.Email
+				FROM AsyncApexJob WHERE Id = :bc.getJobId()];
 
-		Database.executeBatch(new SeasonReachedAchievementsBatch(this.currentSeasonId));
+		if (asyncJobInfo.NumberOfErrors != 0 || asyncJobInfo.Status == 'Failed') {
+			Logger.saveSingleLog('SeasonUserStatsBatch with Id: ' + asyncJobInfo.Id +' has failed. New Season is not going to be created.');
+		} else {
+			Database.executeBatch(new SeasonReachedAchievementsBatch(this.currentSeasonId));
+		}
 	}
 
 	public class SeasonUserStatsBatchException extends Exception {}

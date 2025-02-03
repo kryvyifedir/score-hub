@@ -2,6 +2,11 @@ public with sharing class SeasonReachedAchievementsBatch implements Database.Bat
 	public Id currentSeasonId;
 
 	public SeasonReachedAchievementsBatch(Id seasonId) {
+		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
+		if (config.IsActive__c != true) {
+			throw new SeasonReachedAchievementsBatchException('SeasonReachedAchievementsBatch execution was stopped - Seasons feature is not active');
+		}
+
 		if (seasonId == null || seasonId.getSobjectType() != Season__c.getSobjectType()) {
 			throw new SeasonReachedAchievementsBatchException('Unable to execute SeasonReachedAchievementsBatch. Provided season id is either null or is not of Season__c type'); 
 		}
@@ -15,8 +20,6 @@ public with sharing class SeasonReachedAchievementsBatch implements Database.Bat
 	}
 
 	public void execute(Database.BatchableContext bc, List<sObject> scope) {
-
-		// TODO Don't allow execution if Season Feature is disabled
 		// TODO Run static validation and fix access issues
 		List<SeasonReachedAchievement__c> seasonReachedAchievementsToCreate = new List<SeasonReachedAchievement__c>();
 
@@ -33,13 +36,14 @@ public with sharing class SeasonReachedAchievementsBatch implements Database.Bat
 	}
 
 	public void finish(Database.BatchableContext bc) {
-		// TODO: SAVE LOG IF ERROR
-        // AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
-        // TotalJobItems, CreatedBy.Email
-        // FROM AsyncApexJob WHERE Id =
-        // :bc.getJobId()];
+		AsyncApexJob asyncJobInfo = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed, TotalJobItems, CreatedBy.Email
+				FROM AsyncApexJob WHERE Id = :bc.getJobId()];
 
-		Database.executeBatch(new SeasonUserMeasurementsBatch(this.currentSeasonId));
+		if (asyncJobInfo.NumberOfErrors != 0 || asyncJobInfo.Status == 'Failed') {
+			Logger.saveSingleLog('SeasonReachedAchievementsBatch with Id: ' + asyncJobInfo.Id +' has failed. New Season is not going to be created.');
+		} else {
+			Database.executeBatch(new SeasonUserMeasurementsBatch(this.currentSeasonId));
+		}
 	}
 
 	public class SeasonReachedAchievementsBatchException extends Exception {}

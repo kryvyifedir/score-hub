@@ -72,6 +72,31 @@ private class SeasonUserStatsBatchTest {
 	}
 
 	@IsTest
+	private static void execute_seasonsAreDisabled_exceptionIsThrown() {
+		// Given 
+		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
+		config.IsActive__c = false;
+		update config;
+		
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+
+		// When 
+		try { 
+			Test.startTest();
+			Database.executeBatch(new SeasonUserStatsBatch(measurement.Id), 200);
+			Test.stopTest();
+
+		// Then
+			Assert.fail('Exception is expected to be thrown');
+		} catch (SeasonUserStatsBatch.SeasonUserStatsBatchException e) {
+			String msg = 'SeasonUserStatsBatch execution was stopped - Seasons feature is not active';
+			Assert.areEqual(msg, e.getMessage(), 'SeasonUserStatsBatchException exception is expected');
+		} catch (Exception e) {
+			Assert.fail('Exception of SeasonUserStatsBatchException is expected');
+		}
+	}
+
+	@IsTest
 	private static void execute_seasonIdIsWrong_exceptionIsThrown() {
 		// Given 
 		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
@@ -82,6 +107,7 @@ private class SeasonUserStatsBatchTest {
 			Database.executeBatch(new SeasonUserStatsBatch(measurement.Id), 200);
 			Test.stopTest();
 
+		// Then
 			Assert.fail('Exception is expected to be thrown');
 		} catch (SeasonUserStatsBatch.SeasonUserStatsBatchException e) {
 			String msg = 'Unable to execute SeasonUserStatsBatch. Provided season id is either null or is not of Season__c type';
@@ -89,7 +115,6 @@ private class SeasonUserStatsBatchTest {
 		} catch (Exception e) {
 			Assert.fail('Exception of SeasonUserStatsBatchException is expected');
 		}
-		
 	}
 
 	@IsTest
@@ -131,6 +156,28 @@ private class SeasonUserStatsBatchTest {
 		Assert.isFalse(newSeason.isEmpty(), 'New Season is expected to be created');
 	}
 
-	// TODO Check finilize method for execution of next batch
+	@IsTest
+	private static void finalize_batchExecutedCorrectly_newBatchEnqueued() {
+		// Given 
+		User userWithAchievement = TestDataFactory.createUser(UserInfo.getProfileId(), 'Test_SidebarApps');
+		Season__c currentSeason = TestDataFactory.createSeason(Date.today().addDays(-3), Date.today());
+
+		Measurement__c measurement = TestDataFactory.createMeasurement('Measurement');
+		Achievement__c achievement1 = TestDataFactory.createAchievement('Achievement1', measurement.Id);
+		ReachedAchievement__c reachedAchievement1 = TestDataFactory.createReachedAchievement(userWithAchievement.Id, achievement1.Id);
+
+		Achievement__c achievement2 = TestDataFactory.createAchievement('Achievement2', measurement.Id);
+		ReachedAchievement__c reachedAchievement2 = TestDataFactory.createReachedAchievement(userWithAchievement.Id, achievement2.Id);
+		
+		// When 
+		Test.startTest();
+		Id jobId = Database.executeBatch(new SeasonUserStatsBatch(currentSeason.Id), 200);
+		Test.stopTest();
+
+		// Then
+		List<AsyncApexJob> asyncJobInfo = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed, TotalJobItems, CreatedBy.Email
+				FROM AsyncApexJob WHERE Id != :jobId];
+		Assert.isFalse(asyncJobInfo.isEmpty(), 'New job is expected to be enqueued.');
+	}
 
 }

@@ -81,6 +81,7 @@ private class SeasonUserMeasurementsBatchTest {
 			Database.executeBatch(new SeasonUserMeasurementsBatch(measurement.Id), 200);
 			Test.stopTest();
 
+		// Then
 			Assert.fail('Exception is expected to be thrown');
 		} catch (SeasonUserMeasurementsBatch.SeasonUserMeasurementsBatchException e) {
 			String msg = 'Unable to execute SeasonUserMeasurementsBatch. Provided season id is either null or is not of Season__c type';
@@ -88,8 +89,5 @@ private class SeasonUserMeasurementsBatchTest {
 		} catch (Exception e) {
 			Assert.fail('Exception of SeasonUserMeasurementsBatchException is expected');
 		}
-		
 	}
-	
-	// TODO Check finilize method for execution of next batch
 }

@@ -2,6 +2,11 @@ public with sharing class SeasonUserMeasurementsBatch implements Database.Batcha
 	public Id currentSeasonId;
 
 	public SeasonUserMeasurementsBatch(Id seasonId) {
+		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
+		if (config.IsActive__c != true) {
+			throw new SeasonUserMeasurementsBatchException('SeasonUserMeasurementsBatch execution was stopped - Seasons feature is not active');
+		}
+
 		if (seasonId == null || seasonId.getSobjectType() != Season__c.getSobjectType()) {
 			throw new SeasonUserMeasurementsBatchException('Unable to execute SeasonUserMeasurementsBatch. Provided season id is either null or is not of Season__c type'); 
 		}
@@ -15,9 +20,6 @@ public with sharing class SeasonUserMeasurementsBatch implements Database.Batcha
 	}
 
 	public void execute(Database.BatchableContext bc, List<sObject> scope) {
-
-		// TODO Don't allow execution if Season Feature is disabled
-
 		List<SeasonUserMeasurement__c> seasonUserMeasurementsToCreate = new List<SeasonUserMeasurement__c>();
 
 		for (UserMeasurement__c userMeasurement : (List<UserMeasurement__c>)scope) {
@@ -34,14 +36,15 @@ public with sharing class SeasonUserMeasurementsBatch implements Database.Batcha
 	}
 
 	public void finish(Database.BatchableContext bc) {
-		// TODO: SAVE LOG IF ERROR
-        // AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
-        // TotalJobItems, CreatedBy.Email
-        // FROM AsyncApexJob WHERE Id =
-        // :bc.getJobId()];
+		AsyncApexJob asyncJobInfo = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed, TotalJobItems, CreatedBy.Email
+				FROM AsyncApexJob WHERE Id = :bc.getJobId()];
 
-        SeasonsDataHelper helper = new SeasonsDataHelper();
-		helper.createNewSeason();
+		if (asyncJobInfo.NumberOfErrors != 0 || asyncJobInfo.Status == 'Failed') {
+			Logger.saveSingleLog('SeasonUserMeasurementsBatch with Id: ' + asyncJobInfo.Id +' has failed. New Season is not going to be created.');
+		} else {
+			SeasonsDataHelper helper = new SeasonsDataHelper();
+			helper.createNewSeason();
+		}
 	}
 
 	public class SeasonUserMeasurementsBatchException extends Exception {}

@@ -59,22 +59,45 @@ private class SeasonsConfigDataHelperTest {
 	}
 
 	@IsTest
-	private static void upsertConfiguration_noExistingConfig_configCreated() {
+	private static void activateConfiguration_noExistingConfig_configCreated() {
 		// Given
 		// When
 		Test.startTest();
-		SeasonsConfigDataHelper.upsertConfiguration(false, 'month', Date.today().addDays(5));
+		SeasonsConfigDataHelper.activateConfiguration('month', Date.today().addDays(5));
 		Test.stopTest();
 
 		// Then
 		SeasonsConfiguration__c result = SeasonsConfiguration__c.getOrgDefaults();
-		Assert.areEqual(false, result.IsActive__c, 'Expected to update existing config');
+		Assert.areEqual(true, result.IsActive__c, 'Expected to update existing config');
 		Assert.areEqual('month', result.Cadence__c, 'Expected to update existing config');
 		Assert.areEqual(Date.today().addDays(5), result.StartDate__c, 'Expected to update existing config');
 	}
 
 	@IsTest
-	private static void upsertConfiguration_configExists_configUpdated() {
+	private static void activateConfiguration_configExists_configUpdated() {
+		// Given
+		SeasonsConfiguration__c config = new SeasonsConfiguration__c(
+			IsActive__c = false,
+			Cadence__c = 'year',
+			StartDate__c = Date.today()
+		);
+		insert config;
+
+		// When
+		Test.startTest();
+		SeasonsConfigDataHelper.activateConfiguration('month', Date.today().addDays(5));
+		Test.stopTest();
+
+		// Then
+		SeasonsConfiguration__c result = SeasonsConfiguration__c.getOrgDefaults();
+		Assert.areEqual(config.Id, result.Id, 'Expected to update existing config');
+		Assert.areEqual(true, result.IsActive__c, 'Expected to update existing config');
+		Assert.areEqual('month', result.Cadence__c, 'Expected to update existing config');
+		Assert.areEqual(Date.today().addDays(5), result.StartDate__c, 'Expected to update existing config');
+	}
+
+	@IsTest
+	private static void deactivateConfiguration_configExists_configUpdated() {
 		// Given
 		SeasonsConfiguration__c config = new SeasonsConfiguration__c(
 			IsActive__c = true,
@@ -85,14 +108,12 @@ private class SeasonsConfigDataHelperTest {
 
 		// When
 		Test.startTest();
-		SeasonsConfigDataHelper.upsertConfiguration(false, 'month', Date.today().addDays(5));
+		SeasonsConfigDataHelper.deactivateConfiguration();
 		Test.stopTest();
 
 		// Then
 		SeasonsConfiguration__c result = SeasonsConfiguration__c.getOrgDefaults();
 		Assert.areEqual(config.Id, result.Id, 'Expected to update existing config');
 		Assert.areEqual(false, result.IsActive__c, 'Expected to update existing config');
-		Assert.areEqual('month', result.Cadence__c, 'Expected to update existing config');
-		Assert.areEqual(Date.today().addDays(5), result.StartDate__c, 'Expected to update existing config');
 	}
 }

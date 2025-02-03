@@ -24,11 +24,20 @@ public with sharing class SeasonsConfigDataHelper {
 		return configWrapper;
 	}
 
-	public static void upsertConfiguration(Boolean isActive, String cadence, Date startDate) {
+	public static void activateConfiguration(String cadence, Date startDate) {
 		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
-		config.isActive__c = isActive;
+		config.IsActive__c = true;
 		config.StartDate__c = startDate;
 		config.Cadence__c = cadence;
 		upsert config;
+	}
+
+	public static void deactivateConfiguration() {
+		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
+		if (config.Id != null) {
+			config.IsActive__c = false;
+			config.SeasonScheduledJobId__c = null;
+			update config;
+		}
 	}
 }

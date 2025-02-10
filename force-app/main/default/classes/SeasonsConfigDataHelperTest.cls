@@ -1,3 +1,4 @@
+// TODO: Redo once SeasonsConfigDataHelper is refactored
 @IsTest(isParallel=true)
 private class SeasonsConfigDataHelperTest {
 	@IsTest
@@ -116,4 +117,6 @@ private class SeasonsConfigDataHelperTest {
 		Assert.areEqual(config.Id, result.Id, 'Expected to update existing config');
 		Assert.areEqual(false, result.IsActive__c, 'Expected to update existing config');
 	}
+
+	// TODO: deactivateConfiguration_jobScheduled_jobUnscheduled
 }

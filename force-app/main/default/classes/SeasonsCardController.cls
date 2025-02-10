@@ -26,11 +26,13 @@ public with sharing class SeasonsCardController {
 				throw new TestDataFactory.TestException();
 			}
 
-			SeasonsConfigDataHelper.upsertConfiguration(true, cadence, startDate);
+			// TODO: If no seasons existed - create new season
+			// TODO: If it existed: ???
+			SeasonsConfigDataHelper.activateConfiguration(cadence, startDate);
 			result = ControllerResponse.success(true);
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in SeasonsCardController. ' + e.getMessage() + '. ' + e.getStackTraceString());
-			result = ControllerResponse.error('Unable to get Seassons Configuration');
+			result = ControllerResponse.error('Unable to activate/modify Seassons feature');
 		}
 		return result;
 	}
@@ -42,18 +44,14 @@ public with sharing class SeasonsCardController {
 			if (throwException) {
 				throw new TestDataFactory.TestException();
 			}
-
-			DataWrappers.SeasonConfig config =  SeasonsConfigDataHelper.getDefaultConfiguration();
-			SeasonsConfigDataHelper.upsertConfiguration(false, config.cadence, config.startDate);
-			result = ControllerResponse.success(true);
+			
+			SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
+			SeasonsConfigDataHelper.deactivateConfiguration();
+			// TODO: Set To__c date for the last season to Today()
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in SeasonsCardController. ' + e.getMessage() + '. ' + e.getStackTraceString());
-			result = ControllerResponse.error('Unable to get Seassons Configuration');
+			result = ControllerResponse.error('Unable to deactivate Seassons feature');
 		}
 		return result;
-
-		// TODO cancel next schedule
 	}
-
-
 }

@@ -1,3 +1,4 @@
+// TODO: This class is just crap. It needs refactoring and it shouldn't mix context (UI/backend)
 public with sharing class SeasonsConfigDataHelper {
 
 	public static DataWrappers.SeasonConfig getDefaultConfiguration() {
@@ -36,7 +37,9 @@ public with sharing class SeasonsConfigDataHelper {
 		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
 		if (config.Id != null) {
 			config.IsActive__c = false;
-			config.SeasonScheduledJobId__c = null;
+			if (String.isNotBlank(config.SeasonScheduledJobId__c)) {
+				System.abortJob(config.SeasonScheduledJobId__c);
+			}
 			update config;
 		}
 	}

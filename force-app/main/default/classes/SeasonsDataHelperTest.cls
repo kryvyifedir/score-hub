@@ -1,4 +1,4 @@
-@IsTest(isParallel=true)
+@IsTest
 private class SeasonsDataHelperTest {
 
 	@IsTest
@@ -11,14 +11,12 @@ private class SeasonsDataHelperTest {
 		insert config;
 
 		Date today = Date.today();
-		Season__c season1 = TestDataFactory.initSeason(today.addDays(-10), today.addDays(-7));
-		Season__c season2 = TestDataFactory.initSeason(today.addDays(-6), today);
-		insert new List<Season__c> { season1, season2 };
-
+		Season__c oldSeason = TestDataFactory.createSeason(today.addDays(-6), today);
+		
 		// When
 		Test.startTest();
 		SeasonsDataHelper helper = new SeasonsDataHelper();
-		Season__c season = helper.createNewSeason();
+		Season__c season = helper.createNewSeason(oldSeason.Id);
 		Test.stopTest();
 
 		// Then

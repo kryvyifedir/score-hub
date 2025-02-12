@@ -6,13 +6,20 @@ public with sharing class SeasonsDataHelper {
 	public SeasonsDataHelper() {
 		config = SeasonsConfiguration__c.getOrgDefaults();
 	}
-
+	
 	public Season__c createNewSeason() {
-		Season__c newSeason = new Season__c();
+		return this.createNewSeason((Date)null);
+	}
 
+	public Season__c createNewSeason(Id seasonId) {
+		Season__c lastSeason = (Season__c)SeasonSelector.getInstance().getByIds(new Set<Id>{ seasonId }).get(0);
+		return this.createNewSeason(lastSeason.To__c);
+	}
+
+	private Season__c createNewSeason(Date lastSeasonToDate) {
+		Season__c newSeason = new Season__c();
 		if (this.validate()) {
-			Season__c lastSeason = SeasonSelector.getInstance().getLatestSeason();
-			newSeason.From__c = lastSeason == null ? null : lastSeason.To__c.addDays(1);
+			newSeason.From__c = lastSeasonToDate == null ? null : lastSeasonToDate.addDays(1);
 			newSeason.To__c = newSeason.From__c == null ? config.StartDate__c.addDays(-1) : this.calculateNextToDate(newSeason.From__c);
 
 			if (newSeason.To__c == null) {

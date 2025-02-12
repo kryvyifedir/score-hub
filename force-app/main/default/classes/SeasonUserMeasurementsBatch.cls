@@ -43,7 +43,7 @@ public with sharing class SeasonUserMeasurementsBatch implements Database.Batcha
 			Logger.saveSingleLog('SeasonUserMeasurementsBatch with Id: ' + asyncJobInfo.Id +' has failed. New Season is not going to be created.');
 		} else {
 			SeasonsDataHelper helper = new SeasonsDataHelper();
-			helper.createNewSeason();
+			helper.createNewSeason(this.currentSeasonId);
 		}
 	}
 

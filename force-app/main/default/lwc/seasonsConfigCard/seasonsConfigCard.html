@@ -25,7 +25,7 @@
                             </lightning-layout-item>
                             <lightning-layout-item padding="around-small">
                                 <lightning-input type="date" name="StartDate" class="startDate" label="Season start date"
-                                    value={originalDate} required onchange={handleDateChange}></lightning-input>
+                                    value={originalDate} onchange={handleDateChange} required disabled={startDateDisabled}></lightning-input>
                             </lightning-layout-item>
                         </lightning-layout>
                     </div>

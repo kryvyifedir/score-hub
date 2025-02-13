@@ -61,7 +61,7 @@ export default class SeasonsConfigCard extends LightningElement {
         if (!this.isActive || this.isModified) {
             buttonState.label = !this.isActive ? 'Activate' : 'Modify'
             buttonState.variant = 'brand'
-            buttonState.disabled = !this.selectedCadence || this.selectedDate <= this.currentDateString
+            buttonState.disabled = this.selectedDate <= this.currentDateString
         } else {
             buttonState.label = 'Deactivate'
             buttonState.variant = 'destructive'
@@ -73,6 +73,10 @@ export default class SeasonsConfigCard extends LightningElement {
 
     get dateValidity() {
         return false;
+    }
+
+    get startDateDisabled() {
+        return this.isActive && this.originalDate <= this.currentDateString
     }
 
     async handleClick(event) {

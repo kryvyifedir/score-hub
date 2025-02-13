@@ -7,10 +7,17 @@ public with sharing class SeasonsConfigDataHelper {
 		config.Cadence__c = cadence;
 		upsert config;
 
-		// TODO: Check if there is a season alread **not sure how, need to think**
-		// TODO: If no season exist - Call SeasonDataHelper.startNextSeason();
+		// TODO: IF (FIRST TIME ACTIVE)
+		// TODO: Call SeasonDataHelper.startNextSeason();
+		
+		// TODO: IF (MODIFIED)
+		// TODO: Unschedule job, update season date and schedule again?
+
+
+		// TODO: IF (ACTIVE AFTER DEACTIVATED)
 		// TODO: If season exists **not sure what to do**
 		// TODO: Maybe add LastSeasonId field to config to store season?
+
 	}
 
 	public static void deactivateConfiguration() {

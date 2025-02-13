@@ -1,7 +1,7 @@
 @IsTest(isParallel=true)
 private class SeasonsCardControllerTest {
 
-    @IsTest
+	@IsTest
 	private static void getSeasonsConfig_configExists_configReturned() {
 		// Given
 		SeasonsConfiguration__c config = new SeasonsConfiguration__c(
@@ -20,11 +20,32 @@ private class SeasonsCardControllerTest {
 		Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
 		Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
 		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
-        DataWrappers.SeasonConfig result = (DataWrappers.SeasonConfig)resultMap.get('Success');
-        Assert.areEqual(config.Id, result.id, 'Existing config is expected to be returned');
+		DataWrappers.SeasonConfig result = (DataWrappers.SeasonConfig)resultMap.get('Success');
+		Assert.areEqual(config.Id, result.id, 'Existing config is expected to be returned');
 		Assert.areEqual(config.IsActive__c, result.isActive, 'Existing config is expected to be returned');
 		Assert.areEqual(config.Cadence__c, result.cadence, 'Existing config is expected to be returned');
 		Assert.areEqual(config.StartDate__c, result.startDate, 'Existing config is expected to be returned');
+	}
+
+	@IsTest
+	private static void getSeasonsConfig_configDoesntExists_configInitialized() {
+		// Given
+		
+		// When
+		Test.startTest();
+		Map<String, Object> resultMap = SeasonsCardController.getSeasonsConfig();
+		Test.stopTest();
+
+		// Then
+		Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+		DataWrappers.SeasonConfig result = (DataWrappers.SeasonConfig)resultMap.get('Success');
+		Assert.areEqual(null, result.id, 'Existing config is expected to be returned');
+		Assert.areEqual(false, result.isActive, 'Existing config is expected to be returned');
+		Assert.areEqual('month', result.cadence, 'Existing config is expected to be returned');
+		Date nextMonth = Date.today().addMonths(1);
+		Assert.areEqual(Date.newInstance(nextMonth.year(), nextMonth.month(), 1), result.startDate, 'Existing config is expected to be returned');
 	}
 
 	@IsTest
@@ -71,7 +92,7 @@ private class SeasonsCardControllerTest {
 		Assert.areEqual(Date.today().addDays(5), result.StartDate__c, 'Values are expected to be updated');
 	}
 
-    @IsTest
+	@IsTest
 	private static void getSeasonsConfig_UnexpectedException_ExceptionHandled() {
 		// Given
 		SeasonsCardController.throwException = true;
@@ -118,8 +139,4 @@ private class SeasonsCardControllerTest {
 		Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected');
 		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
 	}
-
-	// TODO: activateSeasons_noSeasonExists_seasonCreated
-	// TODO: activateSeasons_seasonExists_???
-	// TODO: deactivateSeasons_???
 }

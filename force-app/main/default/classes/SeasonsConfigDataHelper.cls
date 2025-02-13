@@ -1,29 +1,4 @@
-// TODO: This class is just crap. It needs refactoring and it shouldn't mix context (UI/backend)
 public with sharing class SeasonsConfigDataHelper {
-
-	public static DataWrappers.SeasonConfig getDefaultConfiguration() {
-		DataWrappers.SeasonConfig configWrapper = new DataWrappers.SeasonConfig();
-
-		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
-		if (config.Id != null) {
-			configWrapper.id = config.Id;
-			configWrapper.isActive = config.IsActive__c;
-			configWrapper.cadence = config.Cadence__c;
-			configWrapper.startDate = config.StartDate__c;
-		} else {
-			configWrapper = initDefaultConfiguration();
-		}
-		return configWrapper;
-	}
-
-	public static DataWrappers.SeasonConfig initDefaultConfiguration() {
-		DataWrappers.SeasonConfig configWrapper = new DataWrappers.SeasonConfig();
-		configWrapper.isActive = false;
-		configWrapper.cadence = 'month';
-		Date nextMonth = Date.today().addMonths(1);
-		configWrapper.startDate = Date.newInstance(nextMonth.year(), nextMonth.month(), 1);
-		return configWrapper;
-	}
 
 	public static void activateConfiguration(String cadence, Date startDate) {
 		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
@@ -31,6 +6,11 @@ public with sharing class SeasonsConfigDataHelper {
 		config.StartDate__c = startDate;
 		config.Cadence__c = cadence;
 		upsert config;
+
+		// TODO: Check if there is a season alread **not sure how, need to think**
+		// TODO: If no season exist - Call SeasonDataHelper.startNextSeason();
+		// TODO: If season exists **not sure what to do**
+		// TODO: Maybe add LastSeasonId field to config to store season?
 	}
 
 	public static void deactivateConfiguration() {
@@ -41,6 +21,19 @@ public with sharing class SeasonsConfigDataHelper {
 				System.abortJob(config.SeasonScheduledJobId__c);
 			}
 			update config;
+
+			// TODO: Check if there is a season alread **not sure how, need to think**
+			// TODO: If there is a season set To__c date to today
+			// TODO: Maybe add LastSeasonId field to config to store season?
 		}
+	}
+
+	public static DataWrappers.SeasonConfig convertToWrapper(SeasonsConfiguration__c config) {
+		DataWrappers.SeasonConfig configWrapper = new DataWrappers.SeasonConfig();
+		configWrapper.id = config.Id;
+		configWrapper.isActive = config.IsActive__c;
+		configWrapper.cadence = config.Cadence__c;
+		configWrapper.startDate = config.StartDate__c;
+		return configWrapper;
 	}
 }

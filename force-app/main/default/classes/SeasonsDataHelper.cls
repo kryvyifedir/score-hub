@@ -23,7 +23,7 @@ public with sharing class SeasonsDataHelper {
 			newSeason.To__c = newSeason.From__c == null ? config.StartDate__c.addDays(-1) : this.calculateNextToDate(newSeason.From__c);
 
 			if (newSeason.To__c == null) {
-				Logger.saveSingleLog('Unable to initialize next season - unable to identify To date');
+				Logger.saveSingleLog('Unable to initialize next season - unable to define To date');
 			} else {
 				insert newSeason;
 

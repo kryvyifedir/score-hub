@@ -7,16 +7,16 @@ public with sharing class SeasonsDataHelper {
 		config = SeasonsConfiguration__c.getOrgDefaults();
 	}
 	
-	public Season__c createNewSeason() {
-		return this.createNewSeason((Date)null);
+	public Season__c startNextSeason() {
+		return this.startNextSeason((Date)null);
 	}
 
-	public Season__c createNewSeason(Id seasonId) {
+	public Season__c startNextSeason(Id seasonId) {
 		Season__c lastSeason = (Season__c)SeasonSelector.getInstance().getByIds(new Set<Id>{ seasonId }).get(0);
-		return this.createNewSeason(lastSeason.To__c);
+		return this.startNextSeason(lastSeason.To__c);
 	}
 
-	private Season__c createNewSeason(Date lastSeasonToDate) {
+	private Season__c startNextSeason(Date lastSeasonToDate) {
 		Season__c newSeason = new Season__c();
 		if (this.validate()) {
 			newSeason.From__c = lastSeasonToDate == null ? null : lastSeasonToDate.addDays(1);
@@ -26,6 +26,12 @@ public with sharing class SeasonsDataHelper {
 				Logger.saveSingleLog('Unable to initialize next season - unable to identify To date');
 			} else {
 				insert newSeason;
+
+				if (!Test.isRunningTest()) {
+					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(newSeason.To__c, Time.newInstance(10, 0, 0, 0)));
+					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(newSeason.Id), SeasonUserStatsBatch.class + '_' + newSeason.Id, jobExecutionTimeInMinutesFromNow);
+					update config;
+				}
 			}
 		}
 

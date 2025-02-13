@@ -2,7 +2,7 @@
 private class SeasonsDataHelperTest {
 
 	@IsTest
-	private static void createNewSeason_seasonExists_newSeasonCreated() {
+	private static void startNextSeason_seasonExists_newSeasonCreated() {
 		// Given
 		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
 		config.IsActive__c = true;
@@ -16,7 +16,7 @@ private class SeasonsDataHelperTest {
 		// When
 		Test.startTest();
 		SeasonsDataHelper helper = new SeasonsDataHelper();
-		Season__c season = helper.createNewSeason(oldSeason.Id);
+		Season__c season = helper.startNextSeason(oldSeason.Id);
 		Test.stopTest();
 
 		// Then
@@ -26,7 +26,7 @@ private class SeasonsDataHelperTest {
 	}
 
 	@IsTest
-	private static void createNewSeason_noSeasonExists_preSeasonCreated() {
+	private static void startNextSeason_noSeasonExists_preSeasonCreated() {
 		// Given
 		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
 		config.IsActive__c = true;
@@ -39,7 +39,7 @@ private class SeasonsDataHelperTest {
 		// When
 		Test.startTest();
 		SeasonsDataHelper helper = new SeasonsDataHelper();
-		Season__c season = helper.createNewSeason();
+		Season__c season = helper.startNextSeason();
 		Test.stopTest();
 
 		// Then

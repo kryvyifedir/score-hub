@@ -5,33 +5,53 @@ public with sharing class SeasonsConfigDataHelper {
 		config.IsActive__c = true;
 		config.StartDate__c = startDate;
 		config.Cadence__c = cadence;
+
+		SeasonsDataHelper seasonsHelper = new SeasonsDataHelper(config);
+		Season__c latestSeason = (Season__c)SeasonSelector.getInstance().getLatestSeason();
+
+		if (latestSeason?.Id == null) {
+			// Activating first time - pre-season needs to be created
+			seasonsHelper.startNextSeason();
+		} else if (latestSeason.From__c != null) {
+			// We don't want to modify anything for pre-season since its To__c date is bound to 
+			// config StartDate__c and it's not calculated based on cadence
+			if (latestSeason.To__c < Date.today()) {
+				// Activating after it was deactivated - new season needs to be created from the date of the last completed season
+				seasonsHelper.startNextSeason(latestSeason.Id);
+			} else if (latestSeason.To__c > Date.today()) {
+				// Season is already active but cadence was modified
+				// 1. modify To__c date of the currently active season
+				latestSeason.To__c = seasonsHelper.calculateNextToDate(latestSeason.From__c);
+				update latestSeason;
+	
+				// 2. cancel currently scheduled job
+				if (String.isNotBlank(config.SeasonScheduledJobId__c)) {
+					System.abortJob(config.SeasonScheduledJobId__c);
+				}
+	
+				// 3. Schedule new job for newly calculated To__c date and save it to config
+				if (!Test.isRunningTest()) {
+					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(latestSeason.To__c, Time.newInstance(10, 0, 0, 0)));
+					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(latestSeason.Id), SeasonUserStatsBatch.class + '_' + latestSeason.Id, jobExecutionTimeInMinutesFromNow);
+				}
+			}
+		}
+
 		upsert config;
-
-		// TODO: IF (FIRST TIME ACTIVE)
-		// TODO: Call SeasonDataHelper.startNextSeason();
-		
-		// TODO: IF (MODIFIED)
-		// TODO: Unschedule job, update season date and schedule again?
-
-
-		// TODO: IF (ACTIVE AFTER DEACTIVATED)
-		// TODO: If season exists **not sure what to do**
-		// TODO: Maybe add LastSeasonId field to config to store season?
-
 	}
 
 	public static void deactivateConfiguration() {
 		SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
 		if (config.Id != null) {
-			config.IsActive__c = false;
 			if (String.isNotBlank(config.SeasonScheduledJobId__c)) {
 				System.abortJob(config.SeasonScheduledJobId__c);
 			}
+			config.IsActive__c = false;
+			config.SeasonScheduledJobId__c = null;
 			update config;
 
-			// TODO: Check if there is a season alread **not sure how, need to think**
-			// TODO: If there is a season set To__c date to today
-			// TODO: Maybe add LastSeasonId field to config to store season?
+			List<Season__c> futureSeasons = (List<Season__c>)SeasonSelector.getInstance().getByFieldValue(Season__c.To__c, '>=', Date.today());
+			delete futureSeasons;
 		}
 	}
 

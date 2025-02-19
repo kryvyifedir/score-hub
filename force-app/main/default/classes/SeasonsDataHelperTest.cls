@@ -1,4 +1,4 @@
-@IsTest
+@IsTest(isParallel=true)
 private class SeasonsDataHelperTest {
 
 	@IsTest

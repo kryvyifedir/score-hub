@@ -5,9 +5,39 @@ import getSeasonsConfig from '@salesforce/apex/SeasonsCardController.getSeasonsC
 import activateModifySeasons from '@salesforce/apex/SeasonsCardController.activateModifySeasons';
 import deactivateSeasons from '@salesforce/apex/SeasonsCardController.deactivateSeasons';
 
+//Custom Labels
+import ConfigureSeasonsHeader from '@salesforce/label/c.ConfigureSeasonsHeader';
+import SeasonFeatureHelpText from '@salesforce/label/c.SeasonFeatureHelpText';
+import SeasonsCadenceConfigTitle from '@salesforce/label/c.SeasonsCadenceConfigTitle';
+import SeasonsCadenceConfigPlaceholder from '@salesforce/label/c.SeasonsCadenceConfigPlaceholder';
+import StartDateConfigTitle from '@salesforce/label/c.StartDateConfigTitle';
+import SomethingWentWrongErrorTitle from '@salesforce/label/c.SomethingWentWrongErrorTitle';
+import RetrieveSeasonConfigErrorMsg from '@salesforce/label/c.RetrieveSeasonConfigErrorMsg';
+import MonthCadenceOption from '@salesforce/label/c.MonthCadenceOption';
+import QuarterCadenceOption from '@salesforce/label/c.QuarterCadenceOption';
+import YearCadenceOption from '@salesforce/label/c.YearCadenceOption';
+import ActivateSeasonBtn from '@salesforce/label/c.ActivateSeasonBtn';
+import ModifySeasonBtn from '@salesforce/label/c.ModifySeasonBtn';
+import DeactivateSeasonBtn from '@salesforce/label/c.DeactivateSeasonBtn';
+import ModifiedToastMsg from '@salesforce/label/c.ModifiedToastMsg';
+import ModifiedToastHelpTxt from '@salesforce/label/c.ModifiedToastHelpTxt';
+import ActivatedToastMsg from '@salesforce/label/c.ActivatedToastMsg';
+import ActivatedToastHelpTxt from '@salesforce/label/c.ActivatedToastHelpTxt';
+import ActivatedModifiedToastErrorMsg from '@salesforce/label/c.ActivatedModifiedToastErrorMsg';
+import DeactivatedToastMsg from '@salesforce/label/c.DeactivatedToastMsg';
+import DeactivatedToastHelpTxt from '@salesforce/label/c.DeactivatedToastHelpTxt';
+import DeactivatedToastErrorMsg from '@salesforce/label/c.DeactivatedToastErrorMsg';
+import StartDateConfigValidationMsg  from '@salesforce/label/c.StartDateConfigValidationMsg';
+
 // TODO: Add labels
 
 export default class SeasonsConfigCard extends LightningElement {
+    labels = {
+        ConfigureSeasonsHeader, SeasonFeatureHelpText, SeasonsCadenceConfigTitle, SeasonsCadenceConfigPlaceholder, StartDateConfigTitle, SomethingWentWrongErrorTitle, 
+        RetrieveSeasonConfigErrorMsg, MonthCadenceOption, QuarterCadenceOption, YearCadenceOption, ActivateSeasonBtn, ModifySeasonBtn, DeactivateSeasonBtn, ModifiedToastMsg,
+        ActivatedToastMsg, DeactivatedToastMsg, ModifiedToastHelpTxt, ActivatedToastHelpTxt, ActivatedModifiedToastErrorMsg, DeactivatedToastHelpTxt, DeactivatedToastErrorMsg,
+        StartDateConfigValidationMsg
+    };
 
     isConfigLoaded
     isModified
@@ -33,16 +63,16 @@ export default class SeasonsConfigCard extends LightningElement {
             } else if (data.Error) {
                 console.log(JSON.stringify(data.Error))
                 Toast.show({
-                    label: 'Something went wrong...',
-                    message: 'We were unable to retrieve current Seasons Configuration. Please, try reloading the page.',
+                    label: this.labels.SomethingWentWrongErrorTitle,
+                    message: this.labels.RetrieveSeasonConfigErrorMsg,
                     variant: 'error'
                 }, this)
             }
         } else if (error) {
             console.log(JSON.stringify(error))
             Toast.show({
-                label: 'Something went wrong...',
-                message: 'We were unable to retrieve current Seasons Configuration. Please, try reloading the page.',
+                label: this.labels.SomethingWentWrongErrorTitle,
+                message: this.labels.RetrieveSeasonConfigErrorMsg,
                 variant: 'error'
             }, this)
         }
@@ -50,20 +80,20 @@ export default class SeasonsConfigCard extends LightningElement {
 
     get cadenceOptions() {
         return [
-            { label: 'Month', value: 'month' },
-            { label: 'Quarter', value: 'quarter' },
-            { label: 'Year', value: 'year' },
+            { label: this.labels.MonthCadenceOption, value: 'month' },
+            { label: this.labels.QuarterCadenceOption, value: 'quarter' },
+            { label: this.labels.YearCadenceOption, value: 'year' },
         ]
     }
 
     get buttonState() {
         var buttonState = {}
         if (!this.isActive || this.isModified) {
-            buttonState.label = !this.isActive ? 'Activate' : 'Modify'
+            buttonState.label = !this.isActive ? this.labels.ActivateSeasonBtn : this.labels.ModifySeasonBtn
             buttonState.variant = 'brand'
             buttonState.disabled = this.selectedDate <= this.currentDateString
         } else {
-            buttonState.label = 'Deactivate'
+            buttonState.label = this.labels.DeactivateSeasonBtn
             buttonState.variant = 'destructive'
             buttonState.disabled = false
         }
@@ -92,8 +122,8 @@ export default class SeasonsConfigCard extends LightningElement {
             var result = await activateModifySeasons({ cadence: this.selectedCadence, startDate: this.selectedDate });
             if (result.Success) {
                 Toast.show({
-                    label: this.isActive ? 'Modified' : 'Activated',
-                    message: this.isActive ? 'Seasons cadence modified successfully' : 'Seasons feature activated successfully',
+                    label: this.isActive ? this.labels.ModifiedToastMsg : this.labels.ActivatedToastMsg,
+                    message: this.isActive ? this.labels.ModifiedToastHelpTxt : this.labels.ActivatedToastHelpTxt,
                     variant: 'success'
                 }, this)
                 this.originalCadence = this.selectedCadence
@@ -103,16 +133,16 @@ export default class SeasonsConfigCard extends LightningElement {
             } else if (result.Error) {
                 console.log(JSON.stringify(data.Error))
                 Toast.show({
-                    label: 'Something went wrong...',
-                    message: 'We were not able to activate or modify Seasons Feature. Please try refreshing the page and/or contact your System Administrator',
+                    label: this.labels.SomethingWentWrongErrorTitle,
+                    message: this.labels.ActivatedModifiedToastErrorMsg,
                     variant: 'error'
                 }, this)
             }
         } catch (error) {
             console.log(JSON.stringify(error))
             Toast.show({
-                label: 'Something went wrong...',
-                message: 'We were not able to activate or modify Seasons Feature. Please try refreshing the page and/or contact your System Administrator',
+                label: this.labels.SomethingWentWrongErrorTitle,
+                message: this.labels.ActivatedModifiedToastErrorMsg,
                 variant: 'error'
             }, this)
         }
@@ -123,24 +153,24 @@ export default class SeasonsConfigCard extends LightningElement {
             var result = await deactivateSeasons();
             if (result.Success) {
                 Toast.show({
-                    label: 'Deactivated',
-                    message: 'Seasons feature deactivated successfully',
+                    label: this.labels.DeactivatedToastMsg,
+                    message: this.labels.DeactivatedToastHelpTxt,
                     variant: 'success'
                 }, this)
                 this.isActive = false;
             } else if (result.Error) {
                 console.log(JSON.stringify(data.Error))
                 Toast.show({
-                    label: 'Something went wrong...',
-                    message: 'We were not able to deactivate Seasons Feature. Please try refreshing the page and/or contact your System Administrator',
+                    label: this.labels.SomethingWentWrongErrorTitle,
+                    message: this.labels.DeactivatedToastErrorMsg,
                     variant: 'error'
                 }, this)
             }
         } catch (error) {
             console.log(JSON.stringify(error))
             Toast.show({
-                label: 'Something went wrong...',
-                message: 'We were not able to deactivate Seasons Feature. Please try refreshing the page and/or contact your System Administrator',
+                label: this.labels.SomethingWentWrongErrorTitle,
+                message: this.labels.DeactivatedToastErrorMsg,
                 variant: 'error'
             }, this)
         }

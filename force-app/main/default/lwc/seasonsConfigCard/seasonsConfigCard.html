@@ -4,13 +4,9 @@
             <div class="slds-media slds-media_center">
                 <div class="slds-media__body slds-var-m-right_medium">
                     <div class="slds-text-heading_small labelArea">
-                        Configure Seasons
+                        {labels.ConfigureSeasonsHeader}
                     </div>
-                    <div class="setup-text">The Seasons feature allows you to configure a set cadence for resetting user
-                        statistics, enabling users to compete on a leaderboard within a specified timeframe. Statistics
-                        gathered by users during the season, including information about achievements reached, will be
-                        saved as historical data. This allows users to become champions of specific seasons. Statistics
-                        gathered before the feature activation will be saved in the "pre-season" category.</div>
+                    <div class="setup-text">{labels.SeasonFeatureHelpText}</div>
                 </div>
             </div>
 
@@ -19,12 +15,12 @@
                     <div class="slds-media slds-media_center">
                         <lightning-layout>
                             <lightning-layout-item padding="around-small">
-                                <lightning-combobox name="Cadence" label="Seasons cadence" value={originalCadence}
-                                    placeholder="Select" options={cadenceOptions} required
+                                <lightning-combobox name="Cadence" label={labels.SeasonsCadenceConfigTitle} value={originalCadence}
+                                    placeholder={labels.SeasonsCadenceConfigPlaceholder} options={cadenceOptions} required
                                     onchange={handleCadenceChange}></lightning-combobox>
                             </lightning-layout-item>
                             <lightning-layout-item padding="around-small">
-                                <lightning-input type="date" name="StartDate" class="startDate" label="Season start date"
+                                <lightning-input type="date" name="StartDate" class="startDate" label={labels.StartDateConfigTitle}
                                     value={originalDate} onchange={handleDateChange} required disabled={startDateDisabled}></lightning-input>
                             </lightning-layout-item>
                         </lightning-layout>

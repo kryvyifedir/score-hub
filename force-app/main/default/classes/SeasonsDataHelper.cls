@@ -6,10 +6,6 @@ public with sharing class SeasonsDataHelper {
 	public SeasonsDataHelper() {
 		config = SeasonsConfiguration__c.getOrgDefaults();
 	}
-
-	public SeasonsDataHelper(SeasonsConfiguration__c configToUse) {
-		this.config = configToUse;
-	}
 	
 	public Season__c startNextSeason() {
 		return this.startNextSeason((Date)null);

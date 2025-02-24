@@ -5,8 +5,9 @@ public with sharing class SeasonsConfigDataHelper {
 		config.IsActive__c = true;
 		config.StartDate__c = startDate;
 		config.Cadence__c = cadence;
+		upsert config;
 
-		SeasonsDataHelper seasonsHelper = new SeasonsDataHelper(config);
+		SeasonsDataHelper seasonsHelper = new SeasonsDataHelper();
 		Season__c latestSeason = (Season__c)SeasonSelector.getInstance().getLatestSeason();
 
 		if (latestSeason?.Id == null) {
@@ -36,8 +37,6 @@ public with sharing class SeasonsConfigDataHelper {
 				}
 			}
 		}
-
-		upsert config;
 	}
 
 	public static void deactivateConfiguration() {

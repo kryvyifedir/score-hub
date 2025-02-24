@@ -56,6 +56,7 @@ public with sharing class SeasonsCardController {
 			
 			SeasonsConfiguration__c config = SeasonsConfiguration__c.getOrgDefaults();
 			SeasonsConfigDataHelper.deactivateConfiguration();
+			result = ControllerResponse.success(true);
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in SeasonsCardController. ' + e.getMessage() + '. ' + e.getStackTraceString());
 			result = ControllerResponse.error('Unable to deactivate Seassons feature');

@@ -29,8 +29,6 @@ import DeactivatedToastHelpTxt from '@salesforce/label/c.DeactivatedToastHelpTxt
 import DeactivatedToastErrorMsg from '@salesforce/label/c.DeactivatedToastErrorMsg';
 import StartDateConfigValidationMsg  from '@salesforce/label/c.StartDateConfigValidationMsg';
 
-// TODO: Add labels
-
 export default class SeasonsConfigCard extends LightningElement {
     labels = {
         ConfigureSeasonsHeader, SeasonFeatureHelpText, SeasonsCadenceConfigTitle, SeasonsCadenceConfigPlaceholder, StartDateConfigTitle, SomethingWentWrongErrorTitle, 

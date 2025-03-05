@@ -14,28 +14,33 @@ public with sharing class SeasonsConfigDataHelper {
 			// Activating first time - pre-season needs to be created
 			seasonsHelper.startNextSeason();
 		} else if (latestSeason.From__c != null) {
-			// We don't want to modify anything for pre-season since its To__c date is bound to 
-			// config StartDate__c and it's not calculated based on cadence
+			// Not a pre-season, it's a regular season
 			if (latestSeason.To__c < Date.today()) {
 				// Activating after it was deactivated - new season needs to be created from the date of the last completed season
-				seasonsHelper.startNextSeason(latestSeason.Id);
-			} else if (latestSeason.To__c >= Date.today()) {
-				// Season is already active but cadence was modified
-				// 1. modify To__c date of the currently active season
-				latestSeason.To__c = seasonsHelper.calculateNextToDate(latestSeason.From__c);
-				update latestSeason;
-	
-				// 2. cancel currently scheduled job
-				if (String.isNotBlank(config.SeasonScheduledJobId__c)) {
-					System.abortJob(config.SeasonScheduledJobId__c);
-				}
-	
-				// 3. Schedule new job for newly calculated To__c date and save it to config
-				if (!Test.isRunningTest()) {
-					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(latestSeason.To__c, Time.newInstance(10, 0, 0, 0)));
-					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(latestSeason.Id), SeasonUserStatsBatch.class + '_' + latestSeason.Id, jobExecutionTimeInMinutesFromNow);
-					upsert config;
-				}
+				Date fromDate = latestSeason.To__c.addDays(1);
+				Date toDate = config.StartDate__c.addDays(-1);
+				seasonsHelper.startNextSeason(fromDate, toDate);
+			}
+			// } else if (latestSeason.To__c >= Date.today()) {
+			// Modifying current season that wasn't deactivated yet is out of scope from 
+			// initial Seasons feature release
+			// }
+		} else if (latestSeason.From__c == null) {
+			// Pre-season exists but cadence or date was modified
+			// 1. modify To__c date according to new StartDate__c
+			latestSeason.To__c = config.StartDate__c.addDays(-1);
+			update latestSeason;
+
+			// 2. cancel currently scheduled job
+			if (String.isNotBlank(config.SeasonScheduledJobId__c)) {
+				System.abortJob(config.SeasonScheduledJobId__c);
+			}
+
+			// 3. Schedule new job for newly calculated To__c date and save it to config
+			if (!Test.isRunningTest()) {
+				Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(latestSeason.To__c, Time.newInstance(10, 0, 0, 0)));
+				config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(latestSeason.Id), SeasonUserStatsBatch.class + '_' + latestSeason.Id, jobExecutionTimeInMinutesFromNow);
+				upsert config;
 			}
 		}
 	}

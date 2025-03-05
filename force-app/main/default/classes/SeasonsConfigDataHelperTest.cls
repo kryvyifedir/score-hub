@@ -68,30 +68,24 @@ private class SeasonsConfigDataHelperTest {
 		
 		Assert.areNotEqual(oldDeactivatedSeason.Id, seasons[0].Id, 'New season is expected to be created');
 		Assert.areEqual(Date.today().addDays(-4), seasons[0].From__c, 'From__c date of new season is expected to be set as To__c date of deactivated season +1 day');
-		Assert.areEqual(seasons[0].From__c.addMonths(1).addDays(-1), seasons[0].To__c, 'From__c date + cadence');
+		Assert.areEqual(Date.today().addDays(5).addDays(-1), seasons[0].To__c, 'config StartDate -1 day');
 	}
 
 	@IsTest 
-	private static void activateConfiguration_modifyWithOngoingSeason_seasonModified() {
+	private static void activateConfiguration_modifyPreSeason_seasonModified() {
 		// Given
 		SeasonsConfigDataHelper.activateConfiguration('month', Date.today().addDays(5));
-		List<Season__c> seasons = [SELECT Id, From__c, To__c FROM Season__c ORDER BY To__c DESC LIMIT 1];
-		Season__c activeSeason = seasons[0];
-		activeSeason.From__c = Date.today().addDays(-10);
-		update activeSeason;
 
 		// When
 		Test.startTest();
-		SeasonsConfigDataHelper.activateConfiguration('year', Date.today().addDays(5));
+		SeasonsConfigDataHelper.activateConfiguration('year', Date.today().addDays(7));
 		Test.stopTest();
 
 		// Then
-		seasons = [SELECT Id, From__c, To__c FROM Season__c ORDER BY To__c DESC LIMIT 1];
-		Season__c modifiedSeason = seasons[0];
+		List<Season__c> seasons = [SELECT Id, From__c, To__c FROM Season__c];
 		
-		Assert.areEqual(activeSeason.Id, modifiedSeason.Id, 'No new season is expected to be created');
-		Assert.areNotEqual(activeSeason.To__c, modifiedSeason.To__c, 'To__c value is updated to match new cadence');
-		Assert.areEqual(modifiedSeason.From__c.addYears(1).addDays(-1), modifiedSeason.To__c, 'To__c value is updated to match new cadence');
+		Assert.areEqual(1, seasons.size(), 'No new season is expected to be created');
+		Assert.areEqual(Date.today().addDays(7).addDays(-1), seasons[0].To__c, 'To__c value is updated to match new cadence/date');
 	}
 
 	@IsTest

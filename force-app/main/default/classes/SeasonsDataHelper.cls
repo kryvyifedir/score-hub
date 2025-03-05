@@ -8,20 +8,23 @@ public with sharing class SeasonsDataHelper {
 	}
 	
 	public Season__c startNextSeason() {
-		return this.startNextSeason((Date)null);
+		Date fromDate = null;
+		Date toDate = config.StartDate__c.addDays(-1);
+		return this.startNextSeason(fromDate, toDate);
 	}
 
 	public Season__c startNextSeason(Id seasonId) {
 		Season__c lastSeason = (Season__c)SeasonSelector.getInstance().getByIds(new Set<Id>{ seasonId }).get(0);
-		return this.startNextSeason(lastSeason.To__c);
+		Date fromDate = lastSeason.To__c.addDays(1);
+		Date toDate = this.calculateNextToDate(fromDate);
+		return this.startNextSeason(fromDate, toDate);
 	}
 
-	private Season__c startNextSeason(Date lastSeasonToDate) {
+	public Season__c startNextSeason(Date fromDate, Date toDate) {
 		Season__c newSeason = new Season__c();
 		if (this.validate()) {
-			newSeason.From__c = lastSeasonToDate == null ? null : lastSeasonToDate.addDays(1);
-			newSeason.To__c = newSeason.From__c == null ? config.StartDate__c.addDays(-1) : this.calculateNextToDate(newSeason.From__c);
-
+			newSeason.From__c = fromDate;
+			newSeason.To__c = toDate;
 			if (newSeason.To__c == null) {
 				Logger.saveSingleLog('Unable to initialize next season - unable to define To date');
 			} else {

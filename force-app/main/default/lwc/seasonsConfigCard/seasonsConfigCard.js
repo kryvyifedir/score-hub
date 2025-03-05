@@ -107,6 +107,10 @@ export default class SeasonsConfigCard extends LightningElement {
         return this.isActive && this.originalDate <= this.currentDateString
     }
 
+    get cadenceDisabled() {
+        return this.isActive && this.originalDate <= this.currentDateString
+    }
+
     async handleClick(event) {
         if (!this.isActive || this.isModified) {
             this.handleActivateModify()

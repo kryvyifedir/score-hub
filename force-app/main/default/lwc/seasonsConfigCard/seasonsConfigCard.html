@@ -17,7 +17,7 @@
                             <lightning-layout-item padding="around-small">
                                 <lightning-combobox name="Cadence" label={labels.SeasonsCadenceConfigTitle} value={originalCadence}
                                     placeholder={labels.SeasonsCadenceConfigPlaceholder} options={cadenceOptions} required
-                                    onchange={handleCadenceChange}></lightning-combobox>
+                                    onchange={handleCadenceChange} disabled={cadenceDisabled}></lightning-combobox>
                             </lightning-layout-item>
                             <lightning-layout-item padding="around-small">
                                 <lightning-input type="date" name="StartDate" class="startDate" label={labels.StartDateConfigTitle}

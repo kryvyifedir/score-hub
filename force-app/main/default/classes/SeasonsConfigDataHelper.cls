@@ -19,7 +19,7 @@ public with sharing class SeasonsConfigDataHelper {
 			if (latestSeason.To__c < Date.today()) {
 				// Activating after it was deactivated - new season needs to be created from the date of the last completed season
 				seasonsHelper.startNextSeason(latestSeason.Id);
-			} else if (latestSeason.To__c > Date.today()) {
+			} else if (latestSeason.To__c >= Date.today()) {
 				// Season is already active but cadence was modified
 				// 1. modify To__c date of the currently active season
 				latestSeason.To__c = seasonsHelper.calculateNextToDate(latestSeason.From__c);

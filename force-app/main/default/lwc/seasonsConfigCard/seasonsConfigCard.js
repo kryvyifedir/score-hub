@@ -89,7 +89,7 @@ export default class SeasonsConfigCard extends LightningElement {
         if (!this.isActive || this.isModified) {
             buttonState.label = !this.isActive ? this.labels.ActivateSeasonBtn : this.labels.ModifySeasonBtn
             buttonState.variant = 'brand'
-            buttonState.disabled = this.selectedDate <= this.currentDateString
+            buttonState.disabled = !this.isActive && this.selectedDate <= this.currentDateString
         } else {
             buttonState.label = this.labels.DeactivateSeasonBtn
             buttonState.variant = 'destructive'

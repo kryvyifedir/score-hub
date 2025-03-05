@@ -53,6 +53,7 @@ public with sharing class SeasonsConfigDataHelper {
 			}
 			config.IsActive__c = false;
 			config.SeasonScheduledJobId__c = null;
+			config.startDate__c = null;
 			update config;
 
 			List<Season__c> futureSeasons = (List<Season__c>)SeasonSelector.getInstance().getByFieldValue(Season__c.To__c, '>=', Date.today());

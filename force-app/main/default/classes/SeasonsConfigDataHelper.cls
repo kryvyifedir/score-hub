@@ -34,6 +34,7 @@ public with sharing class SeasonsConfigDataHelper {
 				if (!Test.isRunningTest()) {
 					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(latestSeason.To__c, Time.newInstance(10, 0, 0, 0)));
 					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(latestSeason.Id), SeasonUserStatsBatch.class + '_' + latestSeason.Id, jobExecutionTimeInMinutesFromNow);
+					upsert config;
 				}
 			}
 		}

@@ -20,7 +20,6 @@ public with sharing class SeasonReachedAchievementsBatch implements Database.Bat
 	}
 
 	public void execute(Database.BatchableContext bc, List<sObject> scope) {
-		// TODO: (LAST PRIO) Run static validation and fix access issues
 		List<SeasonReachedAchievement__c> seasonReachedAchievementsToCreate = new List<SeasonReachedAchievement__c>();
 
 		for (ReachedAchievement__c reachedAchievement : (List<ReachedAchievement__c>)scope) {

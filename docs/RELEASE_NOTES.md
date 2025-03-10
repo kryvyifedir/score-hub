@@ -1,7 +1,7 @@
 # ScoreHub Release Notes
 
 ## version 2.0.0.WIP
-### version 2.0.0.6
+### version 2.0.0.7
 - Adding new sObject and Custom Settings to store data for "Seasons" functionality
 - Adding UI for ScoreHub admin to enable/configure/deactivate "Seasons" functionality
 - Creating APEX Batchables and Scheduler to periodicaly save user stats in scope of Season

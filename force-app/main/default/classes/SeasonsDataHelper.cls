@@ -51,14 +51,6 @@ public with sharing class SeasonsDataHelper {
 		} else if (!SUPPORTED_CADENCE_VALUES.contains(config?.Cadence__c)) {
 			result = false;
 			Logger.saveSingleLog('Unable to initialize next season - Selected Cadence is not supported');
-		} else if (!Season__c.SObjectType.getDescribe().isAccessible() || 
-					!Season__c.SObjectType.getDescribe().isCreateable() ||
-					!Schema.SObjectType.Season__c.fields.From__c.isAccessible() || 
-					!Schema.SObjectType.Season__c.fields.From__c.isCreateable() ||
-					!Schema.SObjectType.Season__c.fields.To__c.isAccessible() || 
-					!Schema.SObjectType.Season__c.fields.To__c.isCreateable()) {
-			result = false;
-			Logger.saveSingleLog('Unable to initialize next season - Insufficient access rights');
 		}
 
 		return result;

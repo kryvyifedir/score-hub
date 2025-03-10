@@ -3,6 +3,10 @@
 ## version 2.0.0.WIP
 ### version 2.0.0.6
 - Adding new sObject and Custom Settings to store data for "Seasons" functionality
+- Adding UI for ScoreHub admin to enable/configure/deactivate "Seasons" functionality
+- Creating APEX Batchables and Scheduler to periodicaly save user stats in scope of Season
+- Refactoring BaseSelector and related classes to allow more flexible logic to be used
+- Improving Logger class
 
 ### version 2.0.0.4
 - Improving the User Card component to ensure that avatars with aspect ratios different from 1:1 are correctly displayed.

@@ -1,7 +1,7 @@
 @IsTest(isParallel=true)
 public with sharing class CaseTriggerHandlerTest {
     @IsTest
-	private static void onAfterUpdate_201RecordsClosed_userMeasurementsCreated(){
+	private static void onAfterUpdate_201RecordsClosed_userMeasurementsCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement(Constants.CLOSED_CASES_ID);
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -26,7 +26,7 @@ public with sharing class CaseTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void fireEventsForNewCases_measurementSetupIsMissing_userMeasurementsNotCreated(){
+	private static void fireEventsForNewCases_measurementSetupIsMissing_userMeasurementsNotCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('WEIRD NAME');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -49,7 +49,7 @@ public with sharing class CaseTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterUpdate_newMapIsNull_exceptionIsCreated(){
+	private static void onAfterUpdate_newMapIsNull_exceptionIsCreated() {
 		// Given
 		// When
 		try {

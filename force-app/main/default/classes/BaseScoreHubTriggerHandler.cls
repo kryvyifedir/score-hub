@@ -10,7 +10,7 @@ public virtual class BaseScoreHubTriggerHandler {
 			measurementIdsByUniqueIds.put(measurementUniqueId, null);
 		}
 
-		List<Measurement__c> measurements = (List<Measurement__c>) MeasurementSelector.getInstance().getByFieldValue('UniqueIdentifier__c', 'IN', Constants.MEASUREMENT_UNIQUE_IDS);
+		List<Measurement__c> measurements = (List<Measurement__c>) MeasurementSelector.getInstance().getByFieldValue(Measurement__c.UniqueIdentifier__c, 'IN', Constants.MEASUREMENT_UNIQUE_IDS);
 		for (Measurement__c measurement : measurements) {
 			measurementIdsByUniqueIds.put(measurement.UniqueIdentifier__c, measurement.Id);
 		}

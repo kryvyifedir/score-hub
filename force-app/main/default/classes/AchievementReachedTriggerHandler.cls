@@ -25,7 +25,7 @@ public with sharing class AchievementReachedTriggerHandler {
 		existingUsersMap = new Map<Id, User> ((List<User>) UserSelector.getInstance().getByIds(userIds));
 		existingAchievementsMap = new Map<Id, Achievement__c> ((List<Achievement__c>) AchievementSelector.getInstance().getByIds(achievementIds));
 		
-		List<ReachedAchievement__c> existingReachedAchievements = (List<ReachedAchievement__c>) ReachedAchievementSelector.getInstance().getByFieldValue('Key__c', 'IN', achievementReachedKeys);
+		List<ReachedAchievement__c> existingReachedAchievements = (List<ReachedAchievement__c>) ReachedAchievementSelector.getInstance().getByFieldValue(ReachedAchievement__c.Key__c, 'IN', achievementReachedKeys);
 		for (ReachedAchievement__c existingReachedAchievement : existingReachedAchievements) {
 			existingReachedAchievementsByKeyMap.put(existingReachedAchievement.Key__c, existingReachedAchievement);
 		}

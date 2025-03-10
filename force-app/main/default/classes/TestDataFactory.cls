@@ -118,4 +118,17 @@ public class TestDataFactory {
 			PermissionSetId = ps.Id
 		);
 	}
+
+	public static Season__c initSeason(Date dateFrom, Date dateTo) {
+		Season__c newSeason = new Season__c();
+		newSeason.From__c = dateFrom;
+		newSeason.To__c = dateTo;
+		return newSeason;
+	}
+
+	public static Season__c createSeason(Date dateFrom, Date toDate) {
+		Season__c newSeason = TestDataFactory.initSeason(dateFrom, toDate);
+		insert newSeason;
+		return newSeason;
+	}
 }

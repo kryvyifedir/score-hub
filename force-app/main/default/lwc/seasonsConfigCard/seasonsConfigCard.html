@@ -1,0 +1,36 @@
+<template>
+    <div class="setupcontent">
+        <section class="slds-box slds-theme_default slds-var-m-bottom_medium">
+            <div class="slds-media slds-media_center">
+                <div class="slds-media__body slds-var-m-right_medium">
+                    <div class="slds-text-heading_small labelArea">
+                        {labels.ConfigureSeasonsHeader}
+                    </div>
+                    <div class="setup-text">{labels.SeasonFeatureHelpText}</div>
+                </div>
+            </div>
+
+            <div class="slds-media slds-media_center">
+                <div class="slds-media__body slds-var-m-right_medium">
+                    <div class="slds-media slds-media_center">
+                        <lightning-layout>
+                            <lightning-layout-item padding="around-small">
+                                <lightning-combobox name="Cadence" label={labels.SeasonsCadenceConfigTitle} value={originalCadence}
+                                    placeholder={labels.SeasonsCadenceConfigPlaceholder} options={cadenceOptions} required
+                                    onchange={handleCadenceChange} disabled={cadenceDisabled}></lightning-combobox>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small">
+                                <lightning-input type="date" name="StartDate" class="startDate" label={labels.StartDateConfigTitle}
+                                    value={originalDate} onchange={handleDateChange} required disabled={startDateDisabled}></lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+                <div>
+                    <lightning-button label={buttonState.label} variant={buttonState.variant}
+                        title={buttonState.label} disabled={buttonState.disabled} onclick={handleClick}></lightning-button>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>

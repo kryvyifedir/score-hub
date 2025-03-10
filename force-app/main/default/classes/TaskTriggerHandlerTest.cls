@@ -1,7 +1,7 @@
 @IsTest(isParallel=true)
 private class TaskTriggerHandlerTest {
 	@IsTest
-	private static void onAfterInsert_201RecordsInserted_userMeasurementsCreated(){
+	private static void onAfterInsert_201RecordsInserted_userMeasurementsCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement(Constants.COMPLETED_TASKS_COUNTER_ID);
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -22,7 +22,7 @@ private class TaskTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterUpdate_201RecordsInserted_userMeasurementsCreated(){
+	private static void onAfterUpdate_201RecordsInserted_userMeasurementsCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement(Constants.COMPLETED_TASKS_COUNTER_ID);
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -47,7 +47,7 @@ private class TaskTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterInsert_missingMeasurement_noUserMeasurementsCreated(){
+	private static void onAfterInsert_missingMeasurement_noUserMeasurementsCreated() {
 		// Given
 		Measurement__c measurement = TestDataFactory.createMeasurement('MISSING MEASUREMENT');
 		Achievement__c achievement = TestDataFactory.createAchievement('Achievement', measurement.Id);
@@ -67,7 +67,7 @@ private class TaskTriggerHandlerTest {
 	}
 
 	@IsTest
-	private static void onAfterUpdate_newMapIsNull_exceptionIsCreated(){
+	private static void onAfterUpdate_newMapIsNull_exceptionIsCreated() {
 		// Given
 		// When
 		try {

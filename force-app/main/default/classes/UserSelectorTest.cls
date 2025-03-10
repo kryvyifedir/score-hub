@@ -2,36 +2,36 @@
 public with sharing class UserSelectorTest {
 
 	@IsTest
-	private static void sObjectApiName_sObjectNameReturned_nameIsValidated() {
+	private static void sObjectType_sObjectTypeReturned_nameIsValidated() {
 		// Given
 		UserSelector selector = UserSelector.getInstance();
 		
 		// When
 		Test.startTest();
-		String result = selector.sObjectApiName();
+		SObjectType result = selector.sObjectType();
 		Test.stopTest();
 
 		// Then 
-		Assert.areEqual('User', result, 'User sObject ApiName is expected');
+		Assert.areEqual(User.getSObjectType(), result, 'User sObject ApiName is expected');
 	}
 
 	@IsTest
-	private static void fieldApiNames_sObjectNameReturned_fieldSetIsValidated() {
+	private static void queryFields_sObjectFieldsReturned_fieldSetIsValidated() {
 		// Given
 		UserSelector selector = UserSelector.getInstance();
 		
 		// When
 		Test.startTest();
-		Set<String> result = selector.fieldApiNames();
+		Set<SObjectField> result = selector.queryFields();
 		Test.stopTest();
 
 		// Then 
-		Set<String> expectedSet = new Set<String> {'Id', 'SmallPhotoUrl', 'Name'};
+		Set<SObjectField> expectedSet = new Set<SObjectField> { User.Id, User.SmallPhotoUrl, User.Name };
 		Assert.areEqual(expectedSet, result, 'A specific field set is expected');
 	}
 	
 	@IsTest
-	private static void getByIds_recordWithIdExists_recordsReturned(){
+	private static void getByIds_recordWithIdExists_recordsReturned() {
 		// Given
 		Id profileId = UserInfo.getProfileId();
 		User user1 = TestDataFactory.createUser(profileId, 'user1');
@@ -50,7 +50,7 @@ public with sharing class UserSelectorTest {
 	}
 
 	@IsTest
-	private static void getAll_recordsExists_recordsReturned(){
+	private static void getAll_recordsExists_recordsReturned() {
 		// Given
 		Id profileId = UserInfo.getProfileId();
 		User user1 = TestDataFactory.createUser(profileId, 'user1');
@@ -69,7 +69,7 @@ public with sharing class UserSelectorTest {
 	}
 
 	@IsTest
-	private static void getByIds_emptyIdsSet_emptyListReturned(){
+	private static void getByIds_emptyIdsSet_emptyListReturned() {
 		// Given
 		Set<Id> ids = new Set<Id>();
 

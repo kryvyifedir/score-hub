@@ -15,7 +15,7 @@ public with sharing class UserMeasurementIncrementTriggerHandler {
 			userMeasurementKeys.add(UniqueKeyFormatter.generateUniqueKey(event.UserId__c, event.MeasurementId__c));
 		}
 		
-		List<UserMeasurement__c> userMeasurements = (List<UserMeasurement__c>) UserMeasurementSelector.getInstance().getByFieldValue('Key__c', 'IN', userMeasurementKeys);
+		List<UserMeasurement__c> userMeasurements = (List<UserMeasurement__c>) UserMeasurementSelector.getInstance().getByFieldValue(UserMeasurement__c.Key__c, 'IN', userMeasurementKeys);
 		for (UserMeasurement__c userMeasurement : userMeasurements) {
 			existingUserMeasurementsMap.put(userMeasurement.Key__c, userMeasurement);
 		}

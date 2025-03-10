@@ -264,4 +264,180 @@
         <shortDescription>Restore Button Label</shortDescription>
         <value>Restore</value>
     </labels>
+    <labels>
+        <fullName>ActivateSeasonBtn</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Activate Season Button</shortDescription>
+        <value>Activate</value>
+    </labels>
+    <labels>
+        <fullName>ActivatedModifiedToastErrorMsg</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Activated/Modified Toast Error Message</shortDescription>
+        <value>We were not able to activate or modify Seasons Feature. Please try refreshing the page and/or contact your System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>ActivatedToastHelpTxt</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Activated Toast Help Text</shortDescription>
+        <value>Seasons feature activated successfully</value>
+    </labels>
+    <labels>
+        <fullName>ActivatedToastMsg</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Activated Toast Message</shortDescription>
+        <value>Activated</value>
+    </labels>
+    <labels>
+        <fullName>ConfigureSeasonsHeader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Configure Seasons Header</shortDescription>
+        <value>Configure Seasons</value>
+    </labels>
+    <labels>
+        <fullName>DeactivateSeasonBtn</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Deactivate Season Button</shortDescription>
+        <value>Deactivate</value>
+    </labels>
+    <labels>
+        <fullName>DeactivatedToastErrorMsg</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Deactivated Toast Error Message</shortDescription>
+        <value>We were not able to deactivate Seasons Feature. Please try refreshing the page and/or contact your System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>DeactivatedToastHelpTxt</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Deactivated Toast Help Text</shortDescription>
+        <value>Seasons feature deactivated successfully</value>
+    </labels>
+    <labels>
+        <fullName>DeactivatedToastMsg</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Deactivated Toast Message</shortDescription>
+        <value>Deactivated</value>
+    </labels>
+    <labels>
+        <fullName>ModifiedToastHelpTxt</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Modified Toast Help Text</shortDescription>
+        <value>Seasons cadence modified successfully</value>
+    </labels>
+    <labels>
+        <fullName>ModifiedToastMsg</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Modified Toast Message</shortDescription>
+        <value>Modified</value>
+    </labels>
+    <labels>
+        <fullName>ModifySeasonBtn</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Modify Season Button</shortDescription>
+        <value>Modify</value>
+    </labels>
+    <labels>
+        <fullName>MonthCadenceOption</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Month Cadence Option</shortDescription>
+        <value>Month</value>
+    </labels>
+    <labels>
+        <fullName>QuarterCadenceOption</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quarter Cadence Option</shortDescription>
+        <value>Quarter</value>
+    </labels>
+    <labels>
+        <fullName>RetrieveSeasonConfigErrorMsg</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Retrieve Season Config Error Message</shortDescription>
+        <value>We were unable to retrieve current Seasons Configuration. Please, try reloading the page.</value>
+    </labels>
+    <labels>
+        <fullName>SeasonFeatureHelpText</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Season Feature Help Text</shortDescription>
+        <value>The Seasons feature allows you to configure a set cadence for resetting user statistics, enabling users to compete on a leaderboard within a specified timeframe. Statistics gathered by users during the season, including information about achievements reached, will be saved as historical data. This allows users to become champions of specific seasons. Statistics gathered before the feature activation will be saved in the &quot;pre-season&quot; category.</value>
+    </labels>
+    <labels>
+        <fullName>SeasonsCadenceConfigPlaceholder</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Seasons Cadence Config Placeholder</shortDescription>
+        <value>Select cadence</value>
+    </labels>
+    <labels>
+        <fullName>SeasonsCadenceConfigTitle</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Seasons Cadence Config Title</shortDescription>
+        <value>Seasons cadence</value>
+    </labels>
+    <labels>
+        <fullName>SomethingWentWrongErrorTitle</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Something Went Wrong Error Title</shortDescription>
+        <value>Something went wrong...</value>
+    </labels>
+    <labels>
+        <fullName>StartDateConfigTitle</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Start Date Config Title</shortDescription>
+        <value>Season start date</value>
+    </labels>
+    <labels>
+        <fullName>StartDateConfigValidationMsg</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Start Date Config Validation Message</shortDescription>
+        <value>Season start date is expected to be in the future</value>
+    </labels>
+    <labels>
+        <fullName>YearCadenceOption</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Year Cadence Option</shortDescription>
+        <value>Year</value>
+    </labels>
 </CustomLabels>

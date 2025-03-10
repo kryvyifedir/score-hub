@@ -4,11 +4,11 @@ public with sharing class MeasurementSelector extends BaseSelector {
 		return new MeasurementSelector();
 	}
 
-	public override String sObjectApiName() {
-		return 'Measurement__c';
+	public override SObjectType sObjectType() {
+		return Measurement__c.getSobjectType();
 	}
 
-	public override Set<String> fieldApiNames() {
-		return new Set<String> {'Id', 'Name', 'UniqueIdentifier__c', 'Description__c'};
+	public override Set<SObjectField> queryFields() {
+		return new Set<SObjectField> { Measurement__c.Id, Measurement__c.Name, Measurement__c.UniqueIdentifier__c, Measurement__c.Description__c };
 	}
 }

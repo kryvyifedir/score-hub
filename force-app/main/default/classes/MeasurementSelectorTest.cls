@@ -1,31 +1,31 @@
 @IsTest(isParallel=true)
 private class MeasurementSelectorTest {
 	@IsTest
-	private static void sObjectApiName_sObjectNameReturned_nameIsValidated() {
+	private static void sObjectType_sObjectTypeReturned_nameIsValidated() {
 		// Given
 		MeasurementSelector selector = MeasurementSelector.getInstance();
 		
 		// When
 		Test.startTest();
-		String result = selector.sObjectApiName();
+		SObjectType result = selector.sObjectType();
 		Test.stopTest();
 
 		// Then 
-		Assert.areEqual('Measurement__c', result, 'Measurement__c sObject ApiName is expected');
+		Assert.areEqual(Measurement__c.getSobjectType(), result, 'Measurement__c sObject ApiName is expected');
 	}
 
 	@IsTest
-	private static void fieldApiNames_sObjectNameReturned_fieldSetIsValidated() {
+	private static void queryFields_sObjectFieldsReturned_fieldSetIsValidated() {
 		// Given
 		MeasurementSelector selector = MeasurementSelector.getInstance();
 		
 		// When
 		Test.startTest();
-		Set<String> result = selector.fieldApiNames();
+		Set<SObjectField> result = selector.queryFields();
 		Test.stopTest();
 
 		// Then 
-		Set<String> expectedSet = new Set<String> {'Id', 'Name', 'UniqueIdentifier__c', 'Description__c'};
+		Set<SObjectField> expectedSet = new Set<SObjectField> { Measurement__c.Id, Measurement__c.Name, Measurement__c.UniqueIdentifier__c, Measurement__c.Description__c };
 		Assert.areEqual(expectedSet, result, 'A specific field set is expected');
 	}
 }

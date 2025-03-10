@@ -3,7 +3,7 @@ public with sharing class AchievementsInfoController {
 	private static Boolean throwException = false;
 
 	@AuraEnabled(cacheable=true)
-	public static Map<String, Object> getUserAchievementsById(List<Id> userIds){
+	public static Map<String, Object> getUserAchievementsById(List<Id> userIds) {
 		Map<String, Object> result = new Map<String, Object>();
 		try {
 			if (throwException) {

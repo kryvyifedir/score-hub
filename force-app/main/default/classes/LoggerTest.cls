@@ -2,7 +2,7 @@
 public with sharing class LoggerTest {
 	
 	@IsTest
-	private static void saveNewLog_logsAddedAndCommited_logsSaved(){
+	private static void saveNewLog_logsAddedAndCommited_logsSaved() {
 		// Given
 		String log = 'LOG';
 		User testUsr = TestDataFactory.createUser(UserInfo.getProfileId(), 'Test');
@@ -24,7 +24,7 @@ public with sharing class LoggerTest {
 	}
 
 	@IsTest
-	private static void saveNewLog_noLogsAddedAndCommited_nothingWasSaved(){
+	private static void saveNewLog_noLogsAddedAndCommited_nothingWasSaved() {
 		// Given
 
 		// When
@@ -39,7 +39,7 @@ public with sharing class LoggerTest {
 	}
 
 	@IsTest
-	private static void saveNewLog_emptyLogValue_nothingWasSaved(){
+	private static void saveNewLog_emptyLogValue_nothingWasSaved() {
 		// Given
 		String log = '';
 
@@ -56,7 +56,7 @@ public with sharing class LoggerTest {
 	}
 
 	@IsTest
-	private static void saveSingleLog_noIssues_logsSaved(){
+	private static void saveSingleLog_noIssues_logsSaved() {
 		// Given
 		String log = 'LOG';
 		User testUsr = TestDataFactory.createUser(UserInfo.getProfileId(), 'Test');

@@ -7,35 +7,13 @@ public with sharing class ScoreHubConfig implements InstallHandler {
 	}
 
 	public void initOrResetDefaultConfiguration() {
+		Logger logger = new Logger();
+
 		Map<String, Measurement__c> defaultMeasurementsByUniqueId = initOrResetDefaultMeasurementsConfiguration();
-		if (Measurement__c.SObjectType.getDescribe().isAccessible() && 
-			Measurement__c.SObjectType.getDescribe().isCreateable() &&
-			Schema.SObjectType.Measurement__c.fields.Description__c.isAccessible() &&
-			Schema.SObjectType.Measurement__c.fields.Description__c.isCreateable() &&
-			Schema.SObjectType.Measurement__c.fields.UniqueIdentifier__c.isAccessible() &&
-			Schema.SObjectType.Measurement__c.fields.UniqueIdentifier__c.isCreateable()) {
-			upsert defaultMeasurementsByUniqueId.values();
-		}
+		DMLService.upsertRecord(defaultMeasurementsByUniqueId.values(), System.AccessLevel.USER_MODE);
 
 		Map<String, Achievement__c> defaultAchivementsByName = initOrResetDefaultAchievementsConfiguration(defaultMeasurementsByUniqueId);
-		if (Measurement__c.SObjectType.getDescribe().isAccessible() && 
-			Measurement__c.SObjectType.getDescribe().isCreateable() &&
-			Schema.SObjectType.Achievement__c.fields.Description__c.isAccessible() &&
-			Schema.SObjectType.Achievement__c.fields.Description__c.isCreateable() &&
-			Schema.SObjectType.Achievement__c.fields.Goal__c.isAccessible() &&
-			Schema.SObjectType.Achievement__c.fields.Goal__c.isCreateable() &&
-			Schema.SObjectType.Achievement__c.fields.Measurement__c.isAccessible() &&
-			Schema.SObjectType.Achievement__c.fields.Measurement__c.isCreateable() &&
-			Schema.SObjectType.Achievement__c.fields.Name.isAccessible() &&
-			Schema.SObjectType.Achievement__c.fields.Name.isCreateable() &&
-			Schema.SObjectType.Achievement__c.fields.Score__c.isAccessible() &&
-			Schema.SObjectType.Achievement__c.fields.Score__c.isCreateable() &&
-			Schema.SObjectType.Achievement__c.fields.UIDescription__c.isAccessible() &&
-			Schema.SObjectType.Achievement__c.fields.UIDescription__c.isCreateable() &&
-			Schema.SObjectType.Achievement__c.fields.UITitle__c.isAccessible() &&
-			Schema.SObjectType.Achievement__c.fields.UITitle__c.isCreateable()) {
-				upsert defaultAchivementsByName.values();
-		}
+		DMLService.upsertRecord(defaultAchivementsByName.values(), System.AccessLevel.USER_MODE);
 	}
 
 	private Map<String, Measurement__c> initOrResetDefaultMeasurementsConfiguration() {

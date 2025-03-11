@@ -28,12 +28,13 @@ public with sharing class SeasonsDataHelper {
 			if (newSeason.To__c == null) {
 				Logger.saveSingleLog('Unable to initialize next season - unable to define To date');
 			} else {
-				insert as system newSeason;
+				DMLService.insertRecord(new List<Season__c>{newSeason}, System.AccessLevel.SYSTEM_MODE);
 
 				if (!Test.isRunningTest()) {
 					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(newSeason.To__c, Time.newInstance(10, 0, 0, 0)));
 					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(newSeason.Id), SeasonUserStatsBatch.class + '_' + newSeason.Id, jobExecutionTimeInMinutesFromNow);
-					update as system config;
+					
+					DMLService.updateRecord(new List<SeasonsConfiguration__c>{config}, System.AccessLevel.SYSTEM_MODE);
 				}
 			}
 		}
@@ -51,14 +52,6 @@ public with sharing class SeasonsDataHelper {
 		} else if (!SUPPORTED_CADENCE_VALUES.contains(config?.Cadence__c)) {
 			result = false;
 			Logger.saveSingleLog('Unable to initialize next season - Selected Cadence is not supported');
-		} else if (!Season__c.SObjectType.getDescribe().isAccessible() || 
-					!Season__c.SObjectType.getDescribe().isCreateable() ||
-					!Schema.SObjectType.Season__c.fields.From__c.isAccessible() || 
-					!Schema.SObjectType.Season__c.fields.From__c.isCreateable() ||
-					!Schema.SObjectType.Season__c.fields.To__c.isAccessible() || 
-					!Schema.SObjectType.Season__c.fields.To__c.isCreateable()) {
-			result = false;
-			Logger.saveSingleLog('Unable to initialize next season - Insufficient access rights');
 		}
 
 		return result;

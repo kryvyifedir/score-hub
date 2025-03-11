@@ -15,9 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the Source code from the latest commit
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
+
+      - name: Verify branch
+        run: git branch 
 
       # Installing NPM so that SFDX can be installed
       - name: Installing NPM

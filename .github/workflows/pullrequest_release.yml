@@ -15,7 +15,11 @@ jobs:
       # Checkout the Source code from the latest commit
       - uses: actions/checkout@v4
         with:
+          ref: dev
           fetch-depth: 0
+          
+      - name: Verify branch
+        run: git branch 
     
       # Installing NPM so that SFDX can be installed
       - name: Installing NPM

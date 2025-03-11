@@ -5,7 +5,7 @@ public with sharing class SeasonsConfigDataHelper {
 		config.IsActive__c = true;
 		config.StartDate__c = startDate;
 		config.Cadence__c = cadence;
-		upsert as system config;
+		DMLService.upsertRecord(new List<SeasonsConfiguration__c>{config}, System.AccessLevel.SYSTEM_MODE);
 
 		SeasonsDataHelper seasonsHelper = new SeasonsDataHelper();
 		Season__c latestSeason = (Season__c)SeasonSelector.getInstance().getLatestSeason();
@@ -29,7 +29,7 @@ public with sharing class SeasonsConfigDataHelper {
 			// Pre-season exists but cadence or date was modified
 			// 1. modify To__c date according to new StartDate__c
 			latestSeason.To__c = config.StartDate__c.addDays(-1);
-			update as system latestSeason;
+			DMLService.updateRecord(new List<Season__c>{latestSeason}, System.AccessLevel.SYSTEM_MODE);
 
 			// 2. cancel currently scheduled job
 			if (String.isNotBlank(config.SeasonScheduledJobId__c)) {
@@ -40,7 +40,7 @@ public with sharing class SeasonsConfigDataHelper {
 			if (!Test.isRunningTest()) {
 				Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(latestSeason.To__c, Time.newInstance(10, 0, 0, 0)));
 				config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(latestSeason.Id), SeasonUserStatsBatch.class + '_' + latestSeason.Id, jobExecutionTimeInMinutesFromNow);
-				upsert as system config;
+				DMLService.upsertRecord(new List<SeasonsConfiguration__c>{config}, System.AccessLevel.SYSTEM_MODE);
 			}
 		}
 	}
@@ -54,10 +54,10 @@ public with sharing class SeasonsConfigDataHelper {
 			config.IsActive__c = false;
 			config.SeasonScheduledJobId__c = null;
 			config.StartDate__c = Date.today();
-			update as system config;
+			DMLService.updateRecord(new List<SeasonsConfiguration__c>{config}, System.AccessLevel.SYSTEM_MODE);
 
 			List<Season__c> futureSeasons = (List<Season__c>)SeasonSelector.getInstance().getByFieldValue(Season__c.To__c, '>=', Date.today());
-			delete as system futureSeasons;
+			DMLService.deleteRecord(futureSeasons, System.AccessLevel.SYSTEM_MODE);
 		}
 	}
 

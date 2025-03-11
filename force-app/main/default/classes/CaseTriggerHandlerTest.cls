@@ -16,6 +16,7 @@ public with sharing class CaseTriggerHandlerTest {
 		for (Case newCase : cases) {
 			newCase.Status = 'Closed';
 		}
+		
 		update cases;
 		Test.stopTest();
 

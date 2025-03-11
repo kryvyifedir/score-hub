@@ -48,7 +48,7 @@ public with sharing class SeasonUserStatsBatch implements Database.Batchable<sOb
 			seasonResultsToInsert.add(seasonResultRecord);
 		}
 
-		insert seasonResultsToInsert;
+		DMLService.insertRecord(seasonResultsToInsert, System.AccessLevel.SYSTEM_MODE);
 	}
 
 	public void finish(Database.BatchableContext bc) {

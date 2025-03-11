@@ -94,14 +94,7 @@ public with sharing class UserMeasurementIncrementTriggerHandler {
 		}
 
 		// Use proper Database class operations and throw events 
-		List<Database.UpsertResult> upsertResults = Database.upsert(measurementsToUpsert.values(), false);
-		for (Database.UpsertResult upsertResult : upsertResults) {
-			if (!upsertResult.isSuccess()) {
-				for (Database.Error error : upsertResult.getErrors()) {
-					logger.addLog('Unable to upsert User Measurement: ' + error.getMessage());
-				}
-			}
-		}
+		DMLService.upsertRecord(measurementsToUpsert.values(), System.AccessLevel.SYSTEM_MODE);
 	}
 
 	public static void onAfterInsert(List<UserMeasurementIncrement__e> events) {

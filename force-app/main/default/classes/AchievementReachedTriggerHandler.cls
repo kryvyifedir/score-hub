@@ -76,14 +76,7 @@ public with sharing class AchievementReachedTriggerHandler {
 			return;
 		}
 
-		Database.SaveResult[] saveResults = Database.insert(reachedAchievementsToInsert.values(), false);
-		for (Database.SaveResult saveResult : saveResults) {
-			if (!saveResult.isSuccess()) {
-				for (Database.Error error : saveResult.getErrors()) {
-					logger.addLog('Unable to insert ReachedAchievement__c: ' + error.getMessage());
-				}
-			}
-		}
+		DMLService.insertRecord(reachedAchievementsToInsert.values(), System.AccessLevel.SYSTEM_MODE);
 	}
 
 	private Boolean isValidUserId(Id userId) {

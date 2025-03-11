@@ -30,8 +30,9 @@ public with sharing class SeasonReachedAchievementsBatch implements Database.Bat
 
 			seasonReachedAchievementsToCreate.add(seasonReachedAchievement);
 		}
-		insert seasonReachedAchievementsToCreate;
-		delete scope;
+
+		DMLService.insertRecord(seasonReachedAchievementsToCreate, System.AccessLevel.SYSTEM_MODE);
+		DMLService.deleteRecord(scope, System.AccessLevel.SYSTEM_MODE);
 	}
 
 	public void finish(Database.BatchableContext bc) {

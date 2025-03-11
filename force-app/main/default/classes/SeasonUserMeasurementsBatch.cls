@@ -31,8 +31,9 @@ public with sharing class SeasonUserMeasurementsBatch implements Database.Batcha
 
 			seasonUserMeasurementsToCreate.add(seasonUserMeasurement);
 		}
-		insert seasonUserMeasurementsToCreate;
-		delete scope;
+
+		DMLService.insertRecord(seasonUserMeasurementsToCreate, System.AccessLevel.SYSTEM_MODE);
+		DMLService.deleteRecord(scope, System.AccessLevel.SYSTEM_MODE);
 	}
 
 	public void finish(Database.BatchableContext bc) {

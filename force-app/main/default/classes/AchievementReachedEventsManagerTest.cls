@@ -9,7 +9,8 @@ private class AchievementReachedEventsManagerTest {
 		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement.Id, achievement.Goal__c + 10);
 		Map<Id, UserMeasurement__c> userMeasurementByIdMap = new Map<Id, UserMeasurement__c> {userMeasurement.Id => userMeasurement};
 
-		delete [SELECT Id FROM ReachedAchievement__c];
+		List<ReachedAchievement__c> achievementsToDelete = [SELECT Id FROM ReachedAchievement__c];
+		DMLService.deleteRecord(achievementsToDelete, System.AccessLevel.SYSTEM_MODE);
 
 		// When
 		Test.startTest();
@@ -52,7 +53,8 @@ private class AchievementReachedEventsManagerTest {
 		UserMeasurement__c userMeasurement = TestDataFactory.createUserMeasurement(UserInfo.getUserId(), measurement.Id, achievement.Goal__c - 10);
 		Map<Id, UserMeasurement__c> userMeasurementByIdMap = new Map<Id, UserMeasurement__c> {userMeasurement.Id => userMeasurement};
 
-		delete [SELECT Id FROM ReachedAchievement__c];
+		List<ReachedAchievement__c> reachedAchievementsToDelete = [SELECT Id FROM ReachedAchievement__c];
+		DMLService.deleteRecord(reachedAchievementsToDelete, System.AccessLevel.SYSTEM_MODE);
 
 		// When
 		Test.startTest();

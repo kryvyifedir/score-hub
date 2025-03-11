@@ -28,12 +28,13 @@ public with sharing class SeasonsDataHelper {
 			if (newSeason.To__c == null) {
 				Logger.saveSingleLog('Unable to initialize next season - unable to define To date');
 			} else {
-				insert as system newSeason;
+				DMLService.insertRecord(new List<Season__c>{newSeason}, System.AccessLevel.SYSTEM_MODE);
 
 				if (!Test.isRunningTest()) {
 					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(newSeason.To__c, Time.newInstance(10, 0, 0, 0)));
 					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(newSeason.Id), SeasonUserStatsBatch.class + '_' + newSeason.Id, jobExecutionTimeInMinutesFromNow);
-					update as system config;
+					
+					DMLService.updateRecord(new List<SeasonsConfiguration__c>{config}, System.AccessLevel.SYSTEM_MODE);
 				}
 			}
 		}

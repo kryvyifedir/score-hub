@@ -10,28 +10,10 @@ public with sharing class ScoreHubConfig implements InstallHandler {
 		Logger logger = new Logger();
 
 		Map<String, Measurement__c> defaultMeasurementsByUniqueId = initOrResetDefaultMeasurementsConfiguration();
-		//upsert defaultMeasurementsByUniqueId.values();
-
-		List<Database.UpsertResult> upsertResults = Database.upsert(defaultMeasurementsByUniqueId.values(), false, System.AccessLevel.USER_MODE);
-		for (Database.UpsertResult upsertResult : upsertResults) {
-			if (!upsertResult.isSuccess()) {
-				for (Database.Error error : upsertResult.getErrors()) {
-					logger.addLog('Unable to upsert Measurement: ' + error.getMessage());
-				}
-			}
-		}
+		DMLService.upsertRecord(defaultMeasurementsByUniqueId.values(), System.AccessLevel.USER_MODE);
 
 		Map<String, Achievement__c> defaultAchivementsByName = initOrResetDefaultAchievementsConfiguration(defaultMeasurementsByUniqueId);
-		//upsert defaultAchivementsByName.values();
-
-		upsertResults = Database.upsert(defaultAchivementsByName.values(), false, System.AccessLevel.USER_MODE);
-		for (Database.UpsertResult upsertResult : upsertResults) {
-			if (!upsertResult.isSuccess()) {
-				for (Database.Error error : upsertResult.getErrors()) {
-					logger.addLog('Unable to upsert Achievement: ' + error.getMessage());
-				}
-			}
-		}
+		DMLService.upsertRecord(defaultAchivementsByName.values(), System.AccessLevel.USER_MODE);
 	}
 
 	private Map<String, Measurement__c> initOrResetDefaultMeasurementsConfiguration() {

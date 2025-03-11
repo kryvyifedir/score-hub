@@ -7,11 +7,31 @@ public with sharing class ScoreHubConfig implements InstallHandler {
 	}
 
 	public void initOrResetDefaultConfiguration() {
+		Logger logger = new Logger();
+
 		Map<String, Measurement__c> defaultMeasurementsByUniqueId = initOrResetDefaultMeasurementsConfiguration();
-		upsert defaultMeasurementsByUniqueId.values();
+		//upsert defaultMeasurementsByUniqueId.values();
+
+		List<Database.UpsertResult> upsertResults = Database.upsert(defaultMeasurementsByUniqueId.values(), false, System.AccessLevel.USER_MODE);
+		for (Database.UpsertResult upsertResult : upsertResults) {
+			if (!upsertResult.isSuccess()) {
+				for (Database.Error error : upsertResult.getErrors()) {
+					logger.addLog('Unable to upsert Measurement: ' + error.getMessage());
+				}
+			}
+		}
 
 		Map<String, Achievement__c> defaultAchivementsByName = initOrResetDefaultAchievementsConfiguration(defaultMeasurementsByUniqueId);
-		upsert defaultAchivementsByName.values();
+		//upsert defaultAchivementsByName.values();
+
+		upsertResults = Database.upsert(defaultAchivementsByName.values(), false, System.AccessLevel.USER_MODE);
+		for (Database.UpsertResult upsertResult : upsertResults) {
+			if (!upsertResult.isSuccess()) {
+				for (Database.Error error : upsertResult.getErrors()) {
+					logger.addLog('Unable to upsert Achievement: ' + error.getMessage());
+				}
+			}
+		}
 	}
 
 	private Map<String, Measurement__c> initOrResetDefaultMeasurementsConfiguration() {

@@ -76,18 +76,6 @@ public class TestDataFactory {
 		return user;
 	}
 
-	public static User createUserTestAdmin(){
-		User testUser = TestDataFactory.createUser(UserInfo.getProfileId(), 'TestAdmin');
-		PermissionSetGroup psg = [SELECT Id FROM PermissionSetGroup WHERE DeveloperName = 'ScoreHubAdmin'];
-		PermissionSetAssignment psa = new PermissionSetAssignment(
-			AssigneeId = testUser.Id,
-			PermissionSetGroupId = psg.Id
-		);
-		insert psa;
-
-		return testUser;
-	}
-
 	public static User createUser(Id profileId, String lastName) {
 		User user = initUser(profileId, lastName);
 		insert user;

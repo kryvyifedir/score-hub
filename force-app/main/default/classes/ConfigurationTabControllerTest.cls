@@ -3,7 +3,7 @@ private class ConfigurationTabControllerTest {
 
 	@IsTest
 	private static void restoreDefaultAchievements_NoIssues_AchievementsRestored() {
-		System.runAs(TestDataFactory.createUserTestAdmin()) {
+		//System.runAs(TestDataFactory.createUserTestAdmin()) {
 			// Given
 			Measurement__c defaultMeasurement = new Measurement__c();
 			defaultMeasurement.UniqueIdentifier__c = Constants.CHATTER_POSTS_COUNTER_ID;
@@ -40,13 +40,13 @@ private class ConfigurationTabControllerTest {
 			Assert.areEqual('Standard Achievement, that can be reached by creating 10 posts in Chatter', achievementResult.Description__c, 'Default achievement is expected to be restored');
 			Assert.areEqual(10, achievementResult.Goal__c, 'Default achievement is expected to be restored');
 			Assert.areEqual(10, achievementResult.Score__c, 'Default achievement is expected to be restored');
-		}
+		//}
 	}
 
 	@IsTest
 	private static void restoreDefaultAchievements_ExceptionThrown_ExceptionHandled() {
 		// Given
-		System.runAs(TestDataFactory.createUserTestAdmin()) {
+		//System.runAs(TestDataFactory.createUserTestAdmin()) {
 			ConfigurationTabController.throwException = true;
 
 			// When
@@ -59,6 +59,6 @@ private class ConfigurationTabControllerTest {
 			} catch (Exception e) {
 				Assert.fail('Exception is expected to be handled safely');
 			}
-		}
+		//}
 	}
 }

@@ -10,10 +10,10 @@ public with sharing class ScoreHubConfig implements InstallHandler {
 		Logger logger = new Logger();
 
 		Map<String, Measurement__c> defaultMeasurementsByUniqueId = initOrResetDefaultMeasurementsConfiguration();
-		DMLService.upsertRecord(defaultMeasurementsByUniqueId.values(), System.AccessLevel.USER_MODE);
+		DMLService.upsertRecord(defaultMeasurementsByUniqueId.values(), System.AccessLevel.SYSTEM_MODE);
 
 		Map<String, Achievement__c> defaultAchivementsByName = initOrResetDefaultAchievementsConfiguration(defaultMeasurementsByUniqueId);
-		DMLService.upsertRecord(defaultAchivementsByName.values(), System.AccessLevel.USER_MODE);
+		DMLService.upsertRecord(defaultAchivementsByName.values(), System.AccessLevel.SYSTEM_MODE);
 	}
 
 	private Map<String, Measurement__c> initOrResetDefaultMeasurementsConfiguration() {

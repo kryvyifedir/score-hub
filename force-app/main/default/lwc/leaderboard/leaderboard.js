@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 // APEX Controller methods
 import getTopUsersByScore from '@salesforce/apex/LeaderboardController.getTopUsersByScore';
 import getTopUsersByAchievementsCount from '@salesforce/apex/LeaderboardController.getTopUsersByAchievementsCount';

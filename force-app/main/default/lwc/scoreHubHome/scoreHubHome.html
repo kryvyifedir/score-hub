@@ -1,18 +1,41 @@
 <template>
-    <div class="slds-grid" style="position: relative; height: 100%; overflow:hidden;">
-        <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
-            <div style="height: 100%;">
-                <c-current-user-card></c-current-user-card>
-                <div class="slds-var-m-top_x-small" style="height: 95%">
-                    <c-current-user-achievements></c-current-user-achievements>
-                </div>
-            </div>
+  <div class="slds-grid" style="position: relative; height: 100%; overflow:hidden;">
+    <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
+      <c-score-hub-home-column>
+        <div slot="content">
+          <c-current-user-card></c-current-user-card>
+          <c-current-user-achievements></c-current-user-achievements>
+          <!-- <div class="slds-box slds-var-m-around_small" >
+            <c-current-user-achievements></c-current-user-achievements>
+          </div> -->
         </div>
-        <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
-            <c-leaderboard></c-leaderboard>
-        </div>
-        <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
-            <c-svg-widgets-stub></c-svg-widgets-stub>
-        </div>
+      </c-score-hub-home-column>
     </div>
+
+    <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
+      <c-score-hub-home-column>
+        <header class="slds-media slds-media_center slds-has-flexi-truncate" slot="header">
+          <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-standard-account" title="account">
+              <lightning-icon alternative-text={labels.TopUsersLabel} icon-name="standard:groups">
+              </lightning-icon>
+              <span class="slds-assistive-text">{labels.TopUsersLabel}</span>
+            </span>
+          </div>
+          <div class="slds-media__body">
+            <h2 class="slds-card__header-title">
+              <span>{labels.TopUsersLabel}</span>
+            </h2>
+          </div>
+        </header>
+        <c-leaderboard slot="content"></c-leaderboard> 
+      </c-score-hub-home-column>
+    </div>
+
+    <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
+      <c-score-hub-home-column>
+        <c-svg-widgets-stub slot="content"></c-svg-widgets-stub>
+      </c-score-hub-home-column>
+    </div>
+  </div>
 </template>

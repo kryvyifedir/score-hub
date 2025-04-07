@@ -3,13 +3,12 @@ import { LightningElement, wire } from 'lwc';
 import getTopUsersByScore from '@salesforce/apex/LeaderboardController.getTopUsersByScore';
 import getTopUsersByAchievementsCount from '@salesforce/apex/LeaderboardController.getTopUsersByAchievementsCount';
 //Custom Labels
-import TopUsersLabel from '@salesforce/label/c.TopUsers';
 import OrderByCountLabel from '@salesforce/label/c.OrderByCount';
 import OrderByScoreLabel from '@salesforce/label/c.OrderByScore';
 
 export default class Leaderboard extends LightningElement {
     labels = {
-        TopUsersLabel, OrderByCountLabel, OrderByScoreLabel
+        OrderByCountLabel, OrderByScoreLabel
     };
 
     topUsersByScore = []

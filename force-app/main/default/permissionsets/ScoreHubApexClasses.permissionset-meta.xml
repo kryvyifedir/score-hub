@@ -233,6 +233,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SeasonsLeaderboardController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SeasonsLeaderboardControllerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TaskTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>

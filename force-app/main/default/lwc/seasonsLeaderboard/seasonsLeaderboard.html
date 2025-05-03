@@ -1,0 +1,13 @@
+<template>
+    <template lwc:if={showLoading}>
+        <div class="slds-spinner_container slds-is-relative" style="height:10rem">
+            <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
+        </div>
+    </template>
+    <template lwc:elseif={isConfigNotActive}>
+        <c-svg-mountain header={labels.SeasonsAreNotEnabledHeader} subheader={labels.SeasonsAreNotEnabledSubheader}></c-svg-mountain>
+    </template>
+    <template lwc:elseif={isConfigActive}>
+        
+    </template>
+</template>

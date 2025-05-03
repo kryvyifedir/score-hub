@@ -440,4 +440,20 @@
         <shortDescription>Year Cadence Option</shortDescription>
         <value>Year</value>
     </labels>
+    <labels>
+        <fullName>SeasonsAreNotEnabledHeader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Seasons are not enabled</shortDescription>
+        <value>Seasons are not enabled yet</value>
+    </labels>
+    <labels>
+        <fullName>SeasonsAreNotEnabledSubheader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Seasons are not enabled yet explanation</shortDescription>
+        <value>Compete with teammates and climb the leaderboard! Seasons highlight the top 3 performers in your org each round. Want to join the fun? Contact your system administrator to enable it.</value>
+    </labels>
 </CustomLabels>

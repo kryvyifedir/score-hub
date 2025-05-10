@@ -31,6 +31,11 @@ public with sharing class QueryBuilder {
 		return this;
 	}
 
+	public QueryBuilder addOffset(Integer numberOfRecords) {
+		queryString += ' OFFSET ' + String.valueOf(numberOfRecords);
+		return this;
+	}
+
 	public String SOQL() {
 		return queryString;
 	}

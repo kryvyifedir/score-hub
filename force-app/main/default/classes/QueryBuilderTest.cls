@@ -84,5 +84,22 @@ private class QueryBuilderTest {
 		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account LIMIT 10';
 		Assert.areEqual(expectedSOQLQuery, builder.SOQL(), 'Expected SOQL to be formatted by builder');
 	}
+
+	@IsTest
+	private static void addOffset_offsetIsAdded_resultIsOffset() {
+		// Given
+		SObjectType type = Account.getSObjectType();
+		Set<sObjectField> fields = new Set<sObjectField> { Account.Name, Account.Phone };
+
+		// When
+		Test.startTest();
+		QueryBuilder builder = new QueryBuilder(type, fields);
+		builder.addOffset(10);
+		Test.stopTest();
+
+		// Then
+		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account OFFSET 10';
+		Assert.areEqual(expectedSOQLQuery, builder.SOQL(), 'Expected SOQL to be formatted by builder');
+	}
 	
 }

@@ -59,4 +59,49 @@ private class SeasonsLeaderboardControllerTest {
 		Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected');
 		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
 	}
+
+	@IsTest
+	private static void getTotalNumberOfSeasons_seasonsExist_numberIsReturned() {
+		// Given
+		Integer expectedNumberOfSeasons = 10;
+		Date today = Date.today();
+
+		List<Season__c> testData = new List<Season__c>();
+		for (Integer i = 0; i < expectedNumberOfSeasons; i++) {
+			testData.add(
+				TestDataFactory.initSeason(today.addDays(i), today.addDays(i + 1))
+			);
+		}
+
+		insert testData;
+
+		// When
+		Test.startTest();
+		Map<String, Object> resultMap = SeasonsLeaderboardController.getTotalNumberOfSeasons();
+		Test.stopTest();
+
+		// Then
+		Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+		Integer result = (Integer)resultMap.get('Success');
+		Assert.areEqual(10, result, 'Count of existing seasons is expected');
+	}
+
+
+	@IsTest
+	private static void getTotalNumberOfSeasons_exceptionThrown_exceptionHandled() {
+		// Given
+		SeasonsLeaderboardController.throwException = true;
+		
+		// When
+		Test.startTest();
+		Map<String, Object> resultMap = SeasonsLeaderboardController.getTotalNumberOfSeasons();
+		Test.stopTest();
+
+		// Then
+		Assert.isFalse(resultMap.containsKey('Success'), 'Success is not expected');
+		Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected');
+		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+	}
 }

@@ -23,4 +23,21 @@ public with sharing class SeasonsLeaderboardController {
 		}
 		return result;
 	}
+
+	@AuraEnabled(cacheable=true)
+	public static Map<String, Object> getTotalNumberOfSeasons() {
+		Map<String, Object> result = new Map<String, Object>();
+		try {
+			if (throwException) {
+				throw new TestDataFactory.TestException();
+			}
+
+			Integer count = SeasonSelector.getInstance().getSeasonCount();
+			result = ControllerResponse.success(count);
+		} catch (Exception e) {
+			Logger.saveSingleLog('Unexpected exception caught in SeasonsLeaderboardController. ' + e.getMessage() + '. ' + e.getStackTraceString());
+			result = ControllerResponse.error('Unable to get Total Number of Season');
+		}
+		return result;
+	}
 }

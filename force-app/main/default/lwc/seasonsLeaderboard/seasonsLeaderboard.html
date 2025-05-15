@@ -1,13 +1,21 @@
 <template>
-    <template lwc:if={showLoading}>
+    <template lwc:if={isLoading}>
         <div class="slds-spinner_container slds-is-relative" style="height:10rem">
             <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
         </div>
     </template>
-    <template lwc:elseif={isConfigNotActive}>
-        <c-svg-mountain header={labels.SeasonsAreNotEnabledHeader} subheader={labels.SeasonsAreNotEnabledSubheader}></c-svg-mountain>
+    <template lwc:elseif={isError}>
+        <c-svg-error header='TODO: ERROR TITLE' subheader='TODO: ERROR MSG'></c-svg-error>
     </template>
-    <template lwc:elseif={isConfigActive}>
-        
+    <template lwc:else>
+        <template lwc:if={isConfigNotActive}>
+            <c-svg-mountain header={labels.SeasonsAreNotEnabledHeader} subheader={labels.SeasonsAreNotEnabledSubheader}></c-svg-mountain>
+        </template>
+        <template lwc:elseif={isConfigActive}>
+            TODO:
+            1. Season card + buttons to switch
+            2. Tabset with 3 top users
+        </template>
     </template>
+    
 </template>

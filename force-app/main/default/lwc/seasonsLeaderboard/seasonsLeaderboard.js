@@ -3,6 +3,7 @@ import Toast from 'lightning/toast';
 
 // APEX Controller methods
 import getSeasonsConfig from '@salesforce/apex/SeasonsLeaderboardController.getSeasonsConfig';
+import getSeasonsCount from '@salesforce/apex/SeasonsLeaderboardController.getTotalNumberOfSeasons';
 
 //Custom Labels
 import LoadingLabel from '@salesforce/label/c.Loading';
@@ -16,39 +17,59 @@ export default class SeasonsLeaderboard extends LightningElement {
         LoadingLabel, SomethingWentWrongErrorTitle, RetrieveSeasonConfigErrorMsg, SeasonsAreNotEnabledHeader, SeasonsAreNotEnabledSubheader
     };
 
+    isError = false;
+    isLoading = true;
+
     isConfigActive = false;
-    loadingConfig = true;
 
-    get showLoading() {
-        return this.loadingConfig;
-    }
+    maxSeasonsCount = 0;
+    currentSeasonNumber = 0;
 
-    get isConfigNotActive() {
-        return !this.isConfigActive
-    }
-
-    @wire(getSeasonsConfig)
-    wiredSeasonsConfig({ data, error }) {
-        if (data) {
-            if (data.Success) {
-                var result = data.Success;
-                this.isConfigActive = result.isActive
-                this.loadingConfig = false;
-            } else if (data.Error) {
-                console.log(JSON.stringify(data.Error))
+    connectedCallback(){
+        Promise.all([
+            getSeasonsConfig(),
+            getSeasonsCount()
+        ]).then(results => {
+            if (results[0].Success) {
+                this.isConfigActive = results[0].Success.isActive
+            } else {
+                this.isError = true;
+                console.log(JSON.stringify(results[0].Error))
+                console.log(JSON.stringify(results[0].Warning))
                 Toast.show({
                     label: this.labels.SomethingWentWrongErrorTitle,
                     message: this.labels.RetrieveSeasonConfigErrorMsg,
                     variant: 'error'
                 }, this)
             }
-        } else if (error) {
+
+            if (!results[1].Error && !results[1].Warning) {
+                this.maxSeasonsCount = results[1].Success
+            } else {
+                this.isError = true;
+                console.log(JSON.stringify(results[1].Error))
+                console.log(JSON.stringify(results[1].Warning))
+                Toast.show({
+                    label: this.labels.SomethingWentWrongErrorTitle,
+                    message: 'TODO proper msg',
+                    variant: 'error'
+                }, this)
+            }
+        }).catch(error => {
             console.log(JSON.stringify(error))
+            this.isError = true;
             Toast.show({
                 label: this.labels.SomethingWentWrongErrorTitle,
-                message: this.labels.RetrieveSeasonConfigErrorMsg,
+                message: 'TODO MSG',
                 variant: 'error'
             }, this)
-        }
+
+        }).finally(() => {
+            this.isLoading = false;
+        });
+    }
+
+    get isConfigNotActive() {
+        return !this.isConfigActive
     }
 }

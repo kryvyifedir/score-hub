@@ -5,9 +5,6 @@
         <div slot="content">
           <c-current-user-card></c-current-user-card>
           <c-current-user-achievements></c-current-user-achievements>
-          <!-- <div class="slds-box slds-var-m-around_small" >
-            <c-current-user-achievements></c-current-user-achievements>
-          </div> -->
         </div>
       </c-score-hub-home-column>
     </div>
@@ -34,6 +31,20 @@
 
     <div class="slds-col slds-size_1-of-3 slds-var-m-horizontal_xx-small">
       <c-score-hub-home-column>
+        <header class="slds-media slds-media_center slds-has-flexi-truncate" slot="header">
+          <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-standard-account" title="account">
+              <lightning-icon alternative-text={labels.SeasonsLeaderboardLabel} icon-name="standard:goals">
+              </lightning-icon>
+              <span class="slds-assistive-text">{labels.SeasonsLeaderboardLabel}</span>
+            </span>
+          </div>
+          <div class="slds-media__body">
+            <h2 class="slds-card__header-title">
+              <span>{labels.SeasonsLeaderboardLabel}</span>
+            </h2>
+          </div>
+        </header>
         <c-seasons-leaderboard slot="content"></c-seasons-leaderboard>
       </c-score-hub-home-column>
     </div>

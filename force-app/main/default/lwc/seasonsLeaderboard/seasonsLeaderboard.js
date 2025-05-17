@@ -18,6 +18,8 @@ export default class SeasonsLeaderboard extends LightningElement {
     };
 
     isError = false;
+    errorTitle = '';
+    errorMsg = '';
     isLoading = true;
 
     isConfigActive = false;
@@ -36,11 +38,9 @@ export default class SeasonsLeaderboard extends LightningElement {
                 this.isError = true;
                 console.log(JSON.stringify(results[0].Error))
                 console.log(JSON.stringify(results[0].Warning))
-                Toast.show({
-                    label: this.labels.SomethingWentWrongErrorTitle,
-                    message: this.labels.RetrieveSeasonConfigErrorMsg,
-                    variant: 'error'
-                }, this)
+
+                this.errorTitle = this.labels.SomethingWentWrongErrorTitle
+                this.errorMsg = this.labels.RetrieveSeasonConfigErrorMsg
             }
 
             if (!results[1].Error && !results[1].Warning) {
@@ -49,21 +49,16 @@ export default class SeasonsLeaderboard extends LightningElement {
                 this.isError = true;
                 console.log(JSON.stringify(results[1].Error))
                 console.log(JSON.stringify(results[1].Warning))
-                Toast.show({
-                    label: this.labels.SomethingWentWrongErrorTitle,
-                    message: 'TODO proper msg',
-                    variant: 'error'
-                }, this)
+
+                this.errorTitle = this.labels.SomethingWentWrongErrorTitle
+                this.errorMsg = 'TODO proper msg'
             }
         }).catch(error => {
             console.log(JSON.stringify(error))
             this.isError = true;
-            Toast.show({
-                label: this.labels.SomethingWentWrongErrorTitle,
-                message: 'TODO MSG',
-                variant: 'error'
-            }, this)
 
+            this.errorTitle = this.labels.SomethingWentWrongErrorTitle
+            this.errorMsg = 'TODO proper msg'
         }).finally(() => {
             this.isLoading = false;
         });
@@ -71,5 +66,9 @@ export default class SeasonsLeaderboard extends LightningElement {
 
     get isConfigNotActive() {
         return !this.isConfigActive
+    }
+
+    get isCurrentSeason() {
+        return this.currentSeasonNumber === 0
     }
 }

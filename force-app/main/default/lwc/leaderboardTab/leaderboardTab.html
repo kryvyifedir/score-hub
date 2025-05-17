@@ -10,9 +10,11 @@
         </div>
     </template>
     <template lwc:if={showEmpty}>
-        <c-svg-no-data header={labels.BeTheFirstOneLabel} subheader={labels.NoOneHasUnlockedAchievementLabel}></c-svg-no-data>
+        <div class="slds-var-p-top_x-large">
+            <c-svg-no-data header={labels.BeTheFirstOneLabel} subheader={labels.NoOneHasUnlockedAchievementLabel}></c-svg-no-data>
+        </div>
     </template>
     <template lwc:if={showError}>
-        <c-svg-error header={labels.ErrorLabel} subheader={labels.UnableToLoadLeadeboardLabel}></c-svg-error>
+        <c-svg-error class="slds-var-p-top_x-large" header={labels.ErrorLabel} subheader={labels.UnableToLoadLeadeboardLabel}></c-svg-error>
     </template>
 </template>

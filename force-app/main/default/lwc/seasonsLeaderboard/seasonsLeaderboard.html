@@ -5,16 +5,46 @@
         </div>
     </template>
     <template lwc:elseif={isError}>
-        <c-svg-error header='TODO: ERROR TITLE' subheader='TODO: ERROR MSG'></c-svg-error>
+        <div class="slds-var-p-top_large">
+            <c-svg-error header={errorTitle} subheader={errorMsg}></c-svg-error>
+        </div>
     </template>
     <template lwc:else>
         <template lwc:if={isConfigNotActive}>
-            <c-svg-mountain header={labels.SeasonsAreNotEnabledHeader} subheader={labels.SeasonsAreNotEnabledSubheader}></c-svg-mountain>
+            <div class="slds-var-p-top_large">
+                <c-svg-mountain header={labels.SeasonsAreNotEnabledHeader} subheader={labels.SeasonsAreNotEnabledSubheader}></c-svg-mountain>
+            </div>
         </template>
         <template lwc:elseif={isConfigActive}>
-            TODO:
-            1. Season card + buttons to switch
-            2. Tabset with 3 top users
+            
+            <div class="leaderboard-header-div slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-var-p-around_medium">
+                <div class="slds-col slds-grow-none slds-size_1-of-12">
+                    <lightning-button-icon icon-name="utility:back" variant="border-filled" alternative-text="back" title="back"></lightning-button-icon>
+                </div>
+                <div class="slds-col slds-size_10-of-12">
+                    <div class="slds-align_absolute-center leaderboard-header-content-div">
+                        <!-- <div class="slds-text-body_regular slds-text-title_bold">Season</div> -->
+                        <div class="slds-text-heading_medium slds-var-m-top_xx-small slds-text-color_inverse">2025/01/12 - 2025/03/12</div>
+                    </div>
+                </div>
+                <div class="slds-col slds-grow-none slds-size_1-of-12">
+                    <lightning-button-icon icon-name="utility:forward"  variant="border-filled" disabled alternative-text="forward" title="forward"></lightning-button-icon>
+                </div>
+            </div>
+
+            <div class="slds-var-p-vertical_small">
+                <template lwc:if={isCurrentSeason}>
+                    <div class="slds-var-p-top_x-large">
+                        <c-svg-gone-fishing  header="Season is ongoing..." subheader ="We are still gathering statistics for an ongoing season. You can check the leaderboard for previous seasons by clikcing the 'back' button"></c-svg-gone-fishing>
+                    </div>
+                </template>
+                <template lwc:else>
+                    
+                </template>
+            </div>
+
+            
+            <!-- Tabset here -->
         </template>
     </template>
     

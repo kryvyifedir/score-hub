@@ -33,14 +33,38 @@
             </div>
 
             <div class="slds-var-p-vertical_small">
-                <template lwc:if={isCurrentSeason}>
+                <!-- <template lwc:if={isCurrentSeason}>
                     <div class="slds-var-p-top_x-large">
-                        <c-svg-gone-fishing  header="Season is ongoing..." subheader ="We are still gathering statistics for an ongoing season. You can check the leaderboard for previous seasons by clikcing the 'back' button"></c-svg-gone-fishing>
+                        <c-svg-gostyle="background-color: red;"ne-fishing  header="Season is ongoing..." subheader ="We are still gathering statistics for an ongoing season. You can check the leaderboard for previous seasons by clikcing the 'back' button"></c-svg-gone-fishing>
                     </div>
                 </template>
                 <template lwc:else>
                     
-                </template>
+                </template> -->
+
+                <!-- TODO Move this all to standings component -->
+                <div class="slds-var-p-top_x-large">
+                    <div class="slds-grid slds-gutters slds-grid_align-center slds-grid_vertical-align-end" style="height: 20rem;">
+                        <div class="slds-col slds-grow-none">
+                            <div class="slds-align_absolute-center" style="display: flex;flex-direction: column;" >
+                                <lightning-avatar variant="circle" src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" size="large" initials="FK" fallback-icon-name="standard:person_account" alternative-text="Amy Weaver" class="slds-var-p-bottom_medium"></lightning-avatar>
+                                <div class="slds-align_absolute-center" style="background-color: #E5E5E5; height: 10rem; width: 5rem;"> 1 </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-grow-none">
+                            <div class="slds-align_absolute-center" style="display: flex;flex-direction: column;" >
+                                <lightning-avatar variant="circle" src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" size="large" initials="IL" fallback-icon-name="standard:person_account" alternative-text="Amy Weaver" class="slds-var-p-bottom_medium"></lightning-avatar>
+                                <div class="slds-align_absolute-center" style="background-color: #FCC003; height: 15rem; width: 5rem;"> 1 </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-grow-none">
+                            <div class="slds-align_absolute-center" style="display: flex;flex-direction: column;" >
+                                <lightning-avatar variant="circle" src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" size="large" initials="JP" fallback-icon-name="standard:person_account" alternative-text="Amy Weaver" class="slds-var-p-bottom_medium"></lightning-avatar>
+                                <div class="slds-align_absolute-center" style="background-color: #DD7A01; height: 5rem; width: 5rem;"> 1 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </div>
 
             

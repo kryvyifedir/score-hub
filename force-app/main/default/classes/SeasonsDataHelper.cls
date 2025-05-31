@@ -72,4 +72,11 @@ public with sharing class SeasonsDataHelper {
 
 		return result;
 	}
+
+	public DataWrappers.SeasonData convertToWrapper(Season__c season) {
+		DataWrappers.SeasonData wrapper = new DataWrappers.SeasonData();
+		wrapper.dateFrom = season.From__c;
+		wrapper.dateTo = season.To__c;
+		return wrapper;
+	}
 }

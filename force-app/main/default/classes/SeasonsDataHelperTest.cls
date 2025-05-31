@@ -151,4 +151,20 @@ private class SeasonsDataHelperTest {
 		// Then
 		Assert.areEqual(expectedDate, resultDate, 'End of the year -1 day is expected');
 	}
+
+	@IsTest
+	private static void convertToWrapper_validSeason_returnsCorrectWrapper() {
+		// Given
+		Date fromDate = Date.newInstance(2024, 6, 1);
+		Date toDate = Date.newInstance(2024, 6, 30);
+		Season__c season = new Season__c(From__c = fromDate, To__c = toDate);
+
+		// When
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		DataWrappers.SeasonData wrapper = helper.convertToWrapper(season);
+
+		// Then
+		Assert.areEqual(fromDate, wrapper.dateFrom, 'Wrapper dateFrom should match season From__c');
+		Assert.areEqual(toDate, wrapper.dateTo, 'Wrapper dateTo should match season To__c');
+	}
 }

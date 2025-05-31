@@ -104,4 +104,58 @@ private class SeasonsLeaderboardControllerTest {
 		Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected');
 		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
 	}
+
+    @IsTest
+    private static void getSeasonData_seasonExists_seasonReturned() {
+        // Given
+        Date today = Date.today();
+        Season__c season1 = TestDataFactory.initSeason(today, today.addDays(5));
+        Season__c season2 = TestDataFactory.initSeason(today.addDays(6), today.addDays(15));
+        insert new List<Season__c> { season1, season2 };
+
+        // When
+        Test.startTest();
+        Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
+        Test.stopTest();
+
+        // Then
+        Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
+        Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
+        Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+        Object wrapperObj = resultMap.get('Success');
+        System.assertNotEquals(null, wrapperObj, 'Wrapper should not be null');
+    }
+
+    @IsTest
+    private static void getSeasonData_seasonDoesNotExist_nullReturned() {
+        // Given
+        // No seasons inserted
+
+        // When
+        Test.startTest();
+        Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
+        Test.stopTest();
+
+        // Then
+        Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
+        Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
+        Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+        Assert.areEqual(null, resultMap.get('Success'), 'Null is expected when no season exists');
+    }
+
+    @IsTest
+    private static void getSeasonData_exceptionThrown_exceptionHandled() {
+        // Given
+        SeasonsLeaderboardController.throwException = true;
+
+        // When
+        Test.startTest();
+        Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
+        Test.stopTest();
+
+        // Then
+        Assert.isFalse(resultMap.containsKey('Success'), 'Success is not expected');
+        Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected');
+        Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+    }
 }

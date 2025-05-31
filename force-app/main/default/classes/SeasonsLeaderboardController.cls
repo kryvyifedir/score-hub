@@ -40,4 +40,22 @@ public with sharing class SeasonsLeaderboardController {
 		}
 		return result;
 	}
+
+	@AuraEnabled(cacheable=true)
+	public static Map<String, Object> getSeasonData(Integer offset) {
+		Map<String, Object> result = new Map<String, Object>();
+		try {
+			if (throwException) {
+				throw new TestDataFactory.TestException();
+			}
+
+			Season__c season = SeasonSelector.getInstance().getSeasonWithOffset(offset);
+			result = ControllerResponse.success(season != null ? new SeasonsDataHelper().convertToWrapper(season) : null);
+		} catch (Exception e) {
+			Logger.saveSingleLog('Unexpected exception caught in SeasonsLeaderboardController. ' + e.getMessage() + '. ' + e.getStackTraceString());
+			result = ControllerResponse.error('Unable to get Seasons Information');
+		}
+		return result;
+	}
+
 }

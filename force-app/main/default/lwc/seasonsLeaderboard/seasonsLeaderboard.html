@@ -19,56 +19,44 @@
             
             <div class="leaderboard-header-div slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-var-p-around_medium">
                 <div class="slds-col slds-grow-none slds-size_1-of-12">
-                    <lightning-button-icon icon-name="utility:back" variant="border-filled" alternative-text="back" title="back"></lightning-button-icon>
+                    <lightning-button-icon icon-name="utility:back" variant="border-filled" alternative-text="back" title="back"
+                        onclick={backButtonClick} disabled={backButtonDisabled}></lightning-button-icon>
                 </div>
                 <div class="slds-col slds-size_10-of-12">
                     <div class="slds-align_absolute-center leaderboard-header-content-div">
-                        <!-- <div class="slds-text-body_regular slds-text-title_bold">Season</div> -->
-                        <div class="slds-text-heading_medium slds-var-m-top_xx-small slds-text-color_inverse">2025/01/12 - 2025/03/12</div>
+                        <!-- TODO: pass values from Seasons -->
+                        <div class="slds-text-heading_medium slds-var-m-top_xx-small slds-text-color_inverse">{dateFrom} - {dateTo}</div>
                     </div>
                 </div>
                 <div class="slds-col slds-grow-none slds-size_1-of-12">
-                    <lightning-button-icon icon-name="utility:forward"  variant="border-filled" disabled alternative-text="forward" title="forward"></lightning-button-icon>
+                    <lightning-button-icon icon-name="utility:forward" variant="border-filled" alternative-text="forward" title="forward"
+                        onclick={forwardButtonClick} disabled={forwardButtonDisabled}></lightning-button-icon>
                 </div>
             </div>
 
             <div class="slds-var-p-vertical_small">
-                <!-- <template lwc:if={isCurrentSeason}>
+                <template lwc:if={isCurrentSeason}>
                     <div class="slds-var-p-top_x-large">
-                        <c-svg-gostyle="background-color: red;"ne-fishing  header="Season is ongoing..." subheader ="We are still gathering statistics for an ongoing season. You can check the leaderboard for previous seasons by clikcing the 'back' button"></c-svg-gone-fishing>
+                        <c-svg-gone-fishing header="Season is ongoing..." subheader ="We are still gathering statistics for an ongoing season. You can check the leaderboard for previous seasons by clikcing the 'back' button"></c-svg-gone-fishing>
                     </div>
                 </template>
                 <template lwc:else>
-                    
-                </template> -->
-
-                <!-- TODO Move this all to standings component -->
-                <div class="slds-var-p-top_x-large">
-                    <div class="slds-grid slds-gutters slds-grid_align-center slds-grid_vertical-align-end" style="height: 20rem;">
-                        <div class="slds-col slds-grow-none">
-                            <div class="slds-align_absolute-center" style="display: flex;flex-direction: column;" >
-                                <lightning-avatar variant="circle" src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" size="large" initials="FK" fallback-icon-name="standard:person_account" alternative-text="Amy Weaver" class="slds-var-p-bottom_medium"></lightning-avatar>
-                                <div class="slds-align_absolute-center" style="background-color: #E5E5E5; height: 10rem; width: 5rem;"> 1 </div>
+                    <lightning-tabset>
+                        <lightning-tab label={labels.OrderByScoreLabel}>
+                            <div class="slds-var-p-top_x-large">
+                                <!-- TODO: pass information to the standings component -->
+                                <c-season-standings></c-season-standings>
                             </div>
-                        </div>
-                        <div class="slds-col slds-grow-none">
-                            <div class="slds-align_absolute-center" style="display: flex;flex-direction: column;" >
-                                <lightning-avatar variant="circle" src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" size="large" initials="IL" fallback-icon-name="standard:person_account" alternative-text="Amy Weaver" class="slds-var-p-bottom_medium"></lightning-avatar>
-                                <div class="slds-align_absolute-center" style="background-color: #FCC003; height: 15rem; width: 5rem;"> 1 </div>
+                        </lightning-tab>
+                        <lightning-tab label={labels.OrderByCountLabel}>
+                            <div class="slds-var-p-top_x-large">
+                                <!-- TODO: pass information to the standings component -->
+                                <c-season-standings></c-season-standings>
                             </div>
-                        </div>
-                        <div class="slds-col slds-grow-none">
-                            <div class="slds-align_absolute-center" style="display: flex;flex-direction: column;" >
-                                <lightning-avatar variant="circle" src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" size="large" initials="JP" fallback-icon-name="standard:person_account" alternative-text="Amy Weaver" class="slds-var-p-bottom_medium"></lightning-avatar>
-                                <div class="slds-align_absolute-center" style="background-color: #DD7A01; height: 5rem; width: 5rem;"> 1 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
+                        </lightning-tab>
+                    </lightning-tabset>
+                </template>
             </div>
-
-            
-            <!-- Tabset here -->
         </template>
     </template>
     

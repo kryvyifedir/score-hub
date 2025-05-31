@@ -31,7 +31,7 @@ public with sharing class SeasonsDataHelper {
 				DMLService.insertRecord(new List<Season__c>{newSeason}, System.AccessLevel.SYSTEM_MODE);
 
 				if (!Test.isRunningTest()) {
-					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(newSeason.To__c, Time.newInstance(10, 0, 0, 0)));
+					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(newSeason.To__c, Time.newInstance(23, 0, 0, 0)));
 					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(newSeason.Id), SeasonUserStatsBatch.class + '_' + newSeason.Id, jobExecutionTimeInMinutesFromNow);
 					
 					DMLService.updateRecord(new List<SeasonsConfiguration__c>{config}, System.AccessLevel.SYSTEM_MODE);

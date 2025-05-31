@@ -1,0 +1,25 @@
+.vertical-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.standings-column {
+    width: 5rem;
+    
+}
+
+.bronze-column {
+    background-color: #DD7A01; 
+    height: 5rem; 
+    
+}
+
+.silver-column {
+    background-color: #E5E5E5; 
+    height: 10rem;
+}
+
+.gold-column {
+    background-color: #FCC003; 
+    height: 15rem; 
+}

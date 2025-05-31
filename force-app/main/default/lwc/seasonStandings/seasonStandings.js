@@ -28,7 +28,7 @@ export default class SeasonStandings extends LightningElement {
     }
 
     getAvatar(standing) {
-        return standing?.smallPhotoUrl ? standing.smallPhotoUrl : "https://www.lightningdesignsystem.com/assets/images/avatar2.jpg"
+        return standing?.smallPhotoUrl
     }
 
     getName(standing) {

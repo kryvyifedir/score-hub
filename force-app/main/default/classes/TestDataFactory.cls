@@ -131,4 +131,14 @@ public class TestDataFactory {
 		insert newSeason;
 		return newSeason;
 	}
+
+	public static SeasonUserStat__c initSeasonUserStat(Id seasonId, Id userId, Integer score, Integer reachedAchievementCount) {
+		return new SeasonUserStat__c(Season__c = seasonId, User__c = userId, TotalScore__c = score, TotalAchievementsReached__c = reachedAchievementCount);
+	}
+
+	public static SeasonUserStat__c createSeasonUserStat(Id seasonId, Id userId, Integer score, Integer reachedAchievementCount) {
+		SeasonUserStat__c record = initSeasonUserStat(seasonId, userId, score, reachedAchievementCount);
+		insert record;
+		return record;
+	}
 }

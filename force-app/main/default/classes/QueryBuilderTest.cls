@@ -26,11 +26,11 @@ private class QueryBuilderTest {
 		// When
 		Test.startTest();
 		QueryBuilder builder = new QueryBuilder(type, fields);
-		builder.addFilter(Account.Name, '==', 'bindName');
+		builder.addFilter(Account.Name, '=', 'bindName');
 		Test.stopTest();
 
 		// Then
-		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account WHERE Name == :bindName';
+		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account WHERE Name = :bindName';
 		Assert.areEqual(expectedSOQLQuery, builder.SOQL(), 'Expected SOQL to be formatted by builder');
 	}
 

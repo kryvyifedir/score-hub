@@ -19,8 +19,8 @@
             
             <div class="leaderboard-header-div slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-var-p-around_medium">
                 <div class="slds-col slds-grow-none slds-size_1-of-12">
-                    <lightning-button-icon icon-name="utility:back" variant="border-filled" alternative-text="back" title="back"
-                        onclick={backButtonClick} disabled={backButtonDisabled}></lightning-button-icon>
+                    <lightning-button-icon lwc:if={isBackButtonVisible} icon-name="utility:back" variant="border-filled" alternative-text="back" title="back"
+                        onclick={backButtonClick}></lightning-button-icon>
                 </div>
                 <div class="slds-col slds-size_10-of-12">
                     <div class="slds-align_absolute-center leaderboard-header-content-div">
@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 <div class="slds-col slds-grow-none slds-size_1-of-12">
-                    <lightning-button-icon icon-name="utility:forward" variant="border-filled" alternative-text="forward" title="forward"
-                        onclick={forwardButtonClick} disabled={forwardButtonDisabled}></lightning-button-icon>
+                    <lightning-button-icon lwc:if={isForwardButtonVisible} icon-name="utility:forward" variant="border-filled" alternative-text="forward" title="forward"
+                        onclick={forwardButtonClick}></lightning-button-icon>
                 </div>
             </div>
 

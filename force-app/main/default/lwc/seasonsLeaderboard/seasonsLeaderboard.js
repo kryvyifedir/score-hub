@@ -104,20 +104,20 @@ export default class SeasonsLeaderboard extends LightningElement {
         return msg
     }
 
-    get backButtonDisabled() {
-        return this.currentSeasonNumber === this.maxSeasonsCount - 1
-    }
-
-    get forwardButtonDisabled() {
-        return this.currentSeasonNumber === 0
-    }
-
     get dateFrom() {
         return this.seasonData?.dateFrom ? this.seasonData?.dateFrom : '...'
     }
 
     get dateTo() {
         return this.seasonData?.dateTo ? this.seasonData?.dateTo : '...'
+    }
+
+    get isBackButtonVisible() {
+        return this.currentSeasonNumber !== this.maxSeasonsCount - 1
+    }
+
+    get isForwardButtonVisible() {
+        return this.currentSeasonNumber !== 0
     }
 
     backButtonClick() {

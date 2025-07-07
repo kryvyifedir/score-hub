@@ -37,7 +37,7 @@
             <div class="slds-var-p-vertical_small">
                 <template lwc:if={isCurrentSeason}>
                     <div class="slds-var-p-top_x-large">
-                        <c-svg-gone-fishing header="Season is ongoing..." subheader ="We are still gathering statistics for an ongoing season. You can check the leaderboard for previous seasons by clikcing the 'back' button"></c-svg-gone-fishing>
+                        <c-svg-gone-fishing header="Season is ongoing..." subheader={ongoingSeasonMessage}></c-svg-gone-fishing>
                     </div>
                 </template>
                 <template lwc:else>

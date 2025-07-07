@@ -93,6 +93,17 @@ export default class SeasonsLeaderboard extends LightningElement {
         return this.currentSeasonNumber === 0
     }
 
+    get ongoingSeasonMessage() {
+        let msg = "We are still gathering statistics for an ongoing season."
+        msg += " Leaderboard will be available after season ends."
+
+        if (this.maxSeasonsCount > 1) {
+            msg += " You can check the leaderboards for previous seasons by clikcing the 'back' arrow-button on top"
+        }
+
+        return msg
+    }
+
     get backButtonDisabled() {
         return this.currentSeasonNumber === this.maxSeasonsCount - 1
     }

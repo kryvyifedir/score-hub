@@ -20,4 +20,16 @@ public with sharing class UserDataHelper {
 		userCardData.reachedAchievementsCount = userAgResult != null ? (Decimal) userAgResult.get('cnt') : 0;
 		return userCardData;
 	}
+
+	public static DataWrappers.UserCardData getUserDataFromSeasonStats(User user, SeasonUserStat__c seasonUserStats, Integer allAchievementsCount) {
+		DataWrappers.UserCardData userCardData = new DataWrappers.UserCardData();
+		userCardData.Id = user.Id;
+		userCardData.name = user.Name;
+		userCardData.smallPhotoUrl = user.SmallPhotoUrl;
+		userCardData.totalAchievementsCount = allAchievementsCount;
+		userCardData.totalScore = seasonUserStats?.TotalScore__c == null ? 0 : seasonUserStats?.TotalScore__c;
+		userCardData.reachedAchievementsCount = seasonUserStats?.TotalAchievementsReached__c == null ? 0 : seasonUserStats?.TotalAchievementsReached__c;
+		return userCardData;
+	}
+
 }

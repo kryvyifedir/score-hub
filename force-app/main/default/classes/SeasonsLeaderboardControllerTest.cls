@@ -1,5 +1,16 @@
-@IsTest(isParallel=true)
+@IsTest(isParallel=false)
 private class SeasonsLeaderboardControllerTest {
+
+	@TestSetup
+	static void setup() {
+		Id profileId = UserInfo.getProfileId();
+		User user1 = TestDataFactory.initUser(profileId, 'UserTest1');
+		User user2 = TestDataFactory.initUser(profileId, 'UserTest2');
+		User user3 = TestDataFactory.initUser(profileId, 'UserTest3');
+		User user4 = TestDataFactory.initUser(profileId, 'UserTest4');
+		insert new List<User>{user1, user2, user3, user4};
+	}
+
 	@IsTest
 	private static void getSeasonsConfig_configExists_configReturned() {
 		// Given
@@ -105,57 +116,81 @@ private class SeasonsLeaderboardControllerTest {
 		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
 	}
 
-    @IsTest
-    private static void getSeasonData_seasonExists_seasonReturned() {
-        // Given
-        Date today = Date.today();
-        Season__c season1 = TestDataFactory.initSeason(today, today.addDays(5));
-        Season__c season2 = TestDataFactory.initSeason(today.addDays(6), today.addDays(15));
-        insert new List<Season__c> { season1, season2 };
+	@IsTest
+	private static void getSeasonData_seasonWithTopUsersExists_seasonReturned() {
+		// Given
+		Date today = Date.today();
+		Season__c season = TestDataFactory.createSeason(today, today.addDays(5));
 
-        // When
-        Test.startTest();
-        Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
-        Test.stopTest();
+		List<String> userLastNames =new List<string>{'UserTest1', 'UserTest2', 'UserTest3', 'UserTest4'};
+		List<User> users = [SELECT Id FROM User WHERE LastName IN :userLastNames];
 
-        // Then
-        Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
-        Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
-        Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
-        Object wrapperObj = resultMap.get('Success');
-        System.assertNotEquals(null, wrapperObj, 'Wrapper should not be null');
-    }
+		List<SeasonUserStat__c> stats = new List<SeasonUserStat__c>{
+			TestDataFactory.initSeasonUserStat(season.Id, users[0].Id, 100, 5),
+			TestDataFactory.initSeasonUserStat(season.Id, users[1].Id, 200, 3),
+			TestDataFactory.initSeasonUserStat(season.Id, users[2].Id, 300, 7),
+			TestDataFactory.initSeasonUserStat(season.Id, users[3].Id, 150, 2)
+		};
+		insert stats;
 
-    @IsTest
-    private static void getSeasonData_seasonDoesNotExist_nullReturned() {
-        // Given
-        // No seasons inserted
+		// When
+		Test.startTest();
+		Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
+		Test.stopTest();
 
-        // When
-        Test.startTest();
-        Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
-        Test.stopTest();
+		// Then
+		Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
+		Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
+		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
 
-        // Then
-        Assert.isTrue(resultMap.containsKey('Success'), 'Success is expected');
-        Assert.isFalse(resultMap.containsKey('Error'), 'Error is not expected');
-        Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
-        Assert.areEqual(null, resultMap.get('Success'), 'Null is expected when no season exists');
-    }
+		DataWrappers.SeasonData wrapperObj = (DataWrappers.SeasonData) resultMap.get('Success');
+		Assert.isNotNull(wrapperObj, 'Wrapper should not be null');
+		Assert.areEqual(wrapperObj.dateFrom, season.From__c, 'Season dates are expected to be populated');
+		Assert.areEqual(wrapperObj.dateTo, season.To__c, 'Season dates are expected to be populated');
 
-    @IsTest
-    private static void getSeasonData_exceptionThrown_exceptionHandled() {
-        // Given
-        SeasonsLeaderboardController.throwException = true;
+		List<DataWrappers.UserCardData> topThreeByScore = wrapperObj.topThreeByScore;
+		Assert.isNotNull(topThreeByScore, 'Top three users are expected to be packed in the wrapper');
+		Assert.areEqual(300, topThreeByScore[0].totalScore, 'Highest score should be first');
+		Assert.areEqual(200, topThreeByScore[1].totalScore, 'Second highest score should be second');
+		Assert.areEqual(150, topThreeByScore[2].totalScore, 'Third highest score should be third');
 
-        // When
-        Test.startTest();
-        Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
-        Test.stopTest();
+		List<DataWrappers.UserCardData> topThreeByCount = wrapperObj.topThreeByCount;
 
-        // Then
-        Assert.isFalse(resultMap.containsKey('Success'), 'Success is not expected');
-        Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected');
-        Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
-    }
+		Assert.isNotNull(topThreeByCount, 'Top three users are expected to be packed in the wrapper');
+		Assert.areEqual(7, topThreeByCount[0].reachedAchievementsCount, 'Highest score should be first');
+		Assert.areEqual(5, topThreeByCount[1].reachedAchievementsCount, 'Second highest score should be second');
+		Assert.areEqual(3, topThreeByCount[2].reachedAchievementsCount, 'Third highest score should be third');
+	}
+
+	@IsTest
+	private static void getSeasonData_seasonDoesNotExist_errorIsReturned() {
+		// Given
+		// No seasons inserted
+
+		// When
+		Test.startTest();
+		Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
+		Test.stopTest();
+
+		// Then
+		Assert.isFalse(resultMap.containsKey('Success'), 'Success is not expected');
+		Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected since season wasn\'t found');
+		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+	}
+
+	@IsTest
+	private static void getSeasonData_exceptionThrown_exceptionHandled() {
+		// Given
+		SeasonsLeaderboardController.throwException = true;
+
+		// When
+		Test.startTest();
+		Map<String, Object> resultMap = SeasonsLeaderboardController.getSeasonData(0);
+		Test.stopTest();
+
+		// Then
+		Assert.isFalse(resultMap.containsKey('Success'), 'Success is not expected');
+		Assert.isTrue(resultMap.containsKey('Error'), 'Error is expected');
+		Assert.isFalse(resultMap.containsKey('Warning'), 'Warning is not expected');
+	}
 }

@@ -50,12 +50,15 @@ public with sharing class SeasonsLeaderboardController {
 			}
 
 			Season__c season = SeasonSelector.getInstance().getSeasonWithOffset(offset);
-			result = ControllerResponse.success(season != null ? new SeasonsDataHelper().convertToWrapper(season) : null);
+			if (season != null) {
+				result = ControllerResponse.success(season != null ? new SeasonsDataHelper().getSeasonTopThreeStandings(season) : null);
+			} else {
+				result = ControllerResponse.error('Unable to get Seasons Information');
+			}
 		} catch (Exception e) {
 			Logger.saveSingleLog('Unexpected exception caught in SeasonsLeaderboardController. ' + e.getMessage() + '. ' + e.getStackTraceString());
 			result = ControllerResponse.error('Unable to get Seasons Information');
 		}
 		return result;
 	}
-
 }

@@ -44,14 +44,12 @@
                     <lightning-tabset>
                         <lightning-tab label={labels.OrderByScoreLabel}>
                             <div class="slds-var-p-top_x-large">
-                                <!-- TODO: pass information to the standings component -->
-                                <c-season-standings></c-season-standings>
+                                <c-season-standings standings={topThreeByScore}></c-season-standings>
                             </div>
                         </lightning-tab>
                         <lightning-tab label={labels.OrderByCountLabel}>
                             <div class="slds-var-p-top_x-large">
-                                <!-- TODO: pass information to the standings component -->
-                                <c-season-standings></c-season-standings>
+                                <c-season-standings standings={topThreeByCount}></c-season-standings>
                             </div>
                         </lightning-tab>
                     </lightning-tabset>

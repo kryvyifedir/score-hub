@@ -120,6 +120,14 @@ export default class SeasonsLeaderboard extends LightningElement {
         return this.currentSeasonNumber !== 0
     }
 
+    get topThreeByScore() {
+        return this.seasonData?.topThreeByScore
+    }
+
+    get topThreeByCount() {
+        return this.seasonData?.topThreeByCount
+    }
+    
     backButtonClick() {
         this.currentSeasonNumber++;
         this.fetchSeasonData();

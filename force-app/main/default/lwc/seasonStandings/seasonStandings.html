@@ -1,21 +1,23 @@
 <template>
-    <div class="slds-grid slds-gutters slds-grid_align-center slds-grid_vertical-align-end" style="height: 20rem;">
+    <div class="slds-grid slds-gutters slds-grid_align-center slds-grid_vertical-align-end slds-var-m-left_medium slds-var-m-right_x-large standings-container">
         <div class="slds-col slds-grow-none">
             <div class="slds-align_absolute-center vertical-column">
                 <lightning-avatar variant="circle" src={silverAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={silverName} class="slds-var-p-bottom_medium"></lightning-avatar>
-                <div class="slds-align_absolute-center standings-column silver-column"></div>
+                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column silver-column"></div>
             </div>
         </div>
         <div class="slds-col slds-grow-none">
             <div class="slds-align_absolute-center vertical-column">
                 <lightning-avatar variant="circle" src={goldAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={goldName} class="slds-var-p-bottom_medium"></lightning-avatar>
-                <div class="slds-align_absolute-center standings-column gold-column"></div>
+                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column gold-column">
+                    <c-standings-icons icon="1"></c-standings-icons>
+                </div>
             </div>
         </div>
         <div class="slds-col slds-grow-none">
             <div class="slds-align_absolute-center vertical-column">
                 <lightning-avatar variant="circle" src={bronzeAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={bronzeName} class="slds-var-p-bottom_medium"></lightning-avatar>
-                <div class="slds-align_absolute-center standings-column bronze-column"></div>
+                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column bronze-column"></div>
             </div>
         </div>
     </div>

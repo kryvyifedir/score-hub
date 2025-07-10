@@ -2,27 +2,32 @@
     <div class="slds-grid slds-gutters slds-grid_align-center slds-grid_vertical-align-end slds-var-m-left_medium slds-var-m-right_x-large standings-container">
         <div class="slds-col slds-grow-none">
             <div class="slds-align_absolute-center vertical-column">
-                <lightning-avatar variant="circle" src={silverAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={silverName} class="slds-var-p-bottom_medium"></lightning-avatar>
-                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column silver-column"></div>
-            </div>
-        </div>
-        <div class="slds-col slds-grow-none">
-            <div class="slds-align_absolute-center vertical-column">
-                <lightning-avatar variant="circle" src={goldAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={goldName} class="slds-var-p-bottom_medium"></lightning-avatar>
-                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column gold-column">
-                    <c-standings-icons icon="1"></c-standings-icons>
+                <lightning-avatar variant="circle" src={silverAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={silverName} class="slds-var-p-bottom_small"></lightning-avatar>
+                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column silver-column">
+                    <c-standings-icons icon="2" class="slds-var-p-bottom_small"></c-standings-icons>
                 </div>
             </div>
         </div>
         <div class="slds-col slds-grow-none">
             <div class="slds-align_absolute-center vertical-column">
-                <lightning-avatar variant="circle" src={bronzeAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={bronzeName} class="slds-var-p-bottom_medium"></lightning-avatar>
-                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column bronze-column"></div>
+                <lightning-avatar variant="circle" src={goldAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={goldName} class="slds-var-p-bottom_small"></lightning-avatar>
+                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column gold-column">
+                    <c-standings-icons icon="1" class="slds-var-p-bottom_small"></c-standings-icons>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-grow-none">
+            <div class="slds-align_absolute-center vertical-column">
+                <lightning-avatar variant="circle" src={bronzeAvatar} size="large" fallback-icon-name="standard:avatar_loading" alternative-text={bronzeName} class="slds-var-p-bottom_small"></lightning-avatar>
+                <div class="slds-color__border_gray-9 slds-align_absolute-center standings-column bronze-column">
+                    <c-standings-icons icon="3" class="slds-var-p-bottom_small"></c-standings-icons>
+                </div>
             </div>
         </div>
     </div>
-    <!-- TODO: Finalize design  -->
-    <!-- <template for:each={standings} for:item="userData">
-        <c-user-card key={userData.id} user-info={userData}></c-user-card>
-    </template> -->
+    <div class="slds-var-m-left_medium slds-var-m-right_x-large">
+        <template for:each={standings} for:item="userData">
+            <c-user-card key={userData.id} user-info={userData}></c-user-card>
+        </template>
+    </div>
 </template>

@@ -4,7 +4,7 @@
 }
 
 .standings-container {
-    height: 20rem; 
+    height: 12rem; 
     border-bottom-width:2px;
     border-bottom-style:solid;
 }
@@ -19,20 +19,21 @@
     border-right-style:solid;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    align-items: end;
 }
 
 .bronze-column {
     background-color: #DD7A01; 
-    height: 5rem; 
+    height: 4rem; 
     
 }
 
 .silver-column {
     background-color: #E5E5E5; 
-    height: 10rem;
+    height: 6rem;
 }
 
 .gold-column {
     background-color: #FCC003; 
-    height: 15rem; 
+    height: 9rem; 
 }

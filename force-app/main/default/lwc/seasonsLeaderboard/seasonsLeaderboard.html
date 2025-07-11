@@ -17,24 +17,6 @@
         </template>
         <template lwc:elseif={isConfigActive}>
             
-            <div class="leaderboard-header-div slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-var-p-around_medium">
-                <div class="slds-col slds-grow-none slds-size_1-of-12">
-                    <lightning-button-icon lwc:if={isBackButtonVisible} icon-name="utility:back" variant="border-filled" alternative-text="back" title="back"
-                        onclick={backButtonClick}></lightning-button-icon>
-                </div>
-                <div class="slds-col slds-size_10-of-12">
-                    <div class="slds-align_absolute-center leaderboard-header-content-div">
-                        <!-- TODO: pass values from Seasons -->
-                        <div class="slds-text-heading_medium slds-var-m-top_xx-small slds-text-color_inverse">{dateFrom} - {dateTo}</div>
-                    </div>
-                </div>
-                <div class="slds-col slds-grow-none slds-size_1-of-12">
-                    <lightning-button-icon lwc:if={isForwardButtonVisible} icon-name="utility:forward" variant="border-filled" alternative-text="forward" title="forward"
-                        onclick={forwardButtonClick}></lightning-button-icon>
-                </div>
-            </div>
-
-            <div class="slds-var-p-vertical_small">
                 <template lwc:if={isCurrentSeason}>
                     <div class="slds-var-p-top_x-large">
                         <c-svg-gone-fishing header="Season is ongoing..." subheader={ongoingSeasonMessage}></c-svg-gone-fishing>
@@ -54,7 +36,7 @@
                         </lightning-tab>
                     </lightning-tabset>
                 </template>
-            </div>
+            
         </template>
     </template>
     

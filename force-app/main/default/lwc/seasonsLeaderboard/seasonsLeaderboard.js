@@ -1,4 +1,4 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import Toast from 'lightning/toast';
 
 // APEX Controller methods
@@ -82,6 +82,7 @@ export default class SeasonsLeaderboard extends LightningElement {
         })
         .finally(() => {
             this.isLoading = false
+            this.stateChange();
         })
     }
 
@@ -104,21 +105,8 @@ export default class SeasonsLeaderboard extends LightningElement {
         return msg
     }
 
-    get dateFrom() {
-        return this.seasonData?.dateFrom ? this.seasonData?.dateFrom : '...'
-    }
+    
 
-    get dateTo() {
-        return this.seasonData?.dateTo ? this.seasonData?.dateTo : '...'
-    }
-
-    get isBackButtonVisible() {
-        return this.currentSeasonNumber !== this.maxSeasonsCount - 1
-    }
-
-    get isForwardButtonVisible() {
-        return this.currentSeasonNumber !== 0
-    }
 
     get topThreeByScore() {
         return this.seasonData?.topThreeByScore
@@ -128,13 +116,17 @@ export default class SeasonsLeaderboard extends LightningElement {
         return this.seasonData?.topThreeByCount
     }
     
+    @api
     backButtonClick() {
         this.currentSeasonNumber++;
+        this.stateChange();
         this.fetchSeasonData();
     }
 
+    @api
     forwardButtonClick() {
         this.currentSeasonNumber--;
+        this.stateChange();
         this.fetchSeasonData();
     }
 
@@ -161,5 +153,33 @@ export default class SeasonsLeaderboard extends LightningElement {
             .finally(() => {
                 this.isLoading = false;
             });
+    }
+
+    stateChange() {
+        let headerText = 'Seasons'
+
+        if (this.isConfigActive) {
+            if (this.currentSeasonNumber === 0) {
+                headerText = 'Season: Ongoing'
+            } else if (!this.dateFrom()) {
+                headerText = 'Season: Pre-season'
+            } else {
+                headerText = 'Season: ' + this.dateFrom() + ' - ' + this.dateTo()
+            }
+        } 
+
+        const changedEvent = new CustomEvent("changed", { detail: { 
+            isBackButtonDisabled: this.currentSeasonNumber === this.maxSeasonsCount - 1,
+            isForwardButtonDisabled: this.currentSeasonNumber === 0 ,
+            header: headerText}})
+        this.dispatchEvent(changedEvent);
+    }
+
+    dateFrom() {
+        return this.seasonData?.dateFrom ? this.seasonData?.dateFrom : '...'
+    }
+
+    dateTo() {
+        return this.seasonData?.dateTo ? this.seasonData?.dateTo : '...'
     }
 }

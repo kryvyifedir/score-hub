@@ -1,16 +1,20 @@
 <template>
-    <header class="slds-media slds-media_center slds-has-flexi-truncate">
-          <div class="slds-media__figure">
-            <span class="slds-icon_container slds-icon-standard-account" title="account">
-              <lightning-icon alternative-text={headerTitle} icon-name={headerIcon}>
-              </lightning-icon>
-              <span class="slds-assistive-text">{headerTitle}</span>
-            </span>
-          </div>
-          <div class="slds-media__body">
-            <h2 class="slds-card__header-title">
-              <span>{headerTitle}</span>
-            </h2>
-          </div>
-        </header>
+  <header class="slds-media slds-media_center slds-has-flexi-truncate">
+    <div class="slds-media__figure">
+      <span class="slds-icon_container slds-icon-standard-account" title="account">
+        <lightning-icon alternative-text={headerTitle} icon-name={headerIcon}>
+        </lightning-icon>
+        <span class="slds-assistive-text">{headerTitle}</span>
+      </span>
+    </div>
+    <div class="slds-media__body">
+      <h2 class="slds-card__header-title">
+        <span>{headerTitle}</span>
+      </h2>
+    </div>
+    <div class="slds-no-flex">
+      <slot name="buttonLeft"></slot>
+      <slot name="buttonRight"></slot>
+    </div>
+  </header>
 </template>

@@ -1,11 +1,11 @@
 <template>
-  <article class="slds-card" style="height: 100%;">
+  <article class="slds-card" style="height: 100%; overflow: scroll;">
     <template lwc:if={showHeader}>
       <div class="slds-card__header">
         <slot name="header"></slot>
       </div>
     </template>
-    <div class="slds-card__body" style="height: 100%; overflow: scroll;">
+    <div class="slds-card__body">
       <slot name="content"></slot>
     </div>
   </article>

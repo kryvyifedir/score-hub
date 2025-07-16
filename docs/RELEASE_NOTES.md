@@ -1,6 +1,9 @@
 # ScoreHub Release Notes
 
 ## version 2.0.0.WIP
+### version 2.0.0.8
+- Adding Seasons Standings component to ScoreHub Leaderboard that shows top three users by Number of Reached Achievements or Score for a given Season
+
 ### version 2.0.0.7
 - Adding new sObject and Custom Settings to store data for "Seasons" functionality
 - Adding UI for ScoreHub admin to enable/configure/deactivate "Seasons" functionality

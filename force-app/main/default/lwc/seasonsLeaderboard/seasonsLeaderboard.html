@@ -12,32 +12,32 @@
     <template lwc:else>
         <template lwc:if={isConfigNotActive}>
             <div class="slds-var-p-top_large">
-                <c-svg-mountain header={labels.SeasonsAreNotEnabledHeader} subheader={labels.SeasonsAreNotEnabledSubheader}></c-svg-mountain>
+                <c-svg-mountain header={labels.SeasonsAreNotEnabledHeader}
+                    subheader={labels.SeasonsAreNotEnabledSubheader}></c-svg-mountain>
             </div>
         </template>
         <template lwc:elseif={isConfigActive}>
-            
-                <template lwc:if={isCurrentSeason}>
-                    <div class="slds-var-p-top_x-large">
-                        <c-svg-gone-fishing header="Season is ongoing..." subheader={ongoingSeasonMessage}></c-svg-gone-fishing>
-                    </div>
-                </template>
-                <template lwc:else>
-                    <lightning-tabset>
-                        <lightning-tab label={labels.OrderByScoreLabel}>
-                            <div class="slds-var-p-top_x-large">
-                                <c-season-standings standings={topThreeByScore}></c-season-standings>
-                            </div>
-                        </lightning-tab>
-                        <lightning-tab label={labels.OrderByCountLabel}>
-                            <div class="slds-var-p-top_x-large">
-                                <c-season-standings standings={topThreeByCount}></c-season-standings>
-                            </div>
-                        </lightning-tab>
-                    </lightning-tabset>
-                </template>
-            
+            <template lwc:if={isCurrentSeason}>
+                <div class="slds-var-p-top_x-large">
+                    <c-svg-open-road header={labels.TheRaceIsOnTitleLabel}
+                        subheader={ongoingSeasonMessage}></c-svg-open-road>
+                </div>
+            </template>
+            <template lwc:else>
+                <lightning-tabset>
+                    <lightning-tab label={labels.OrderByScoreLabel}>
+                        <div class="slds-var-p-top_x-large">
+                            <c-season-standings standings={topThreeByScore}></c-season-standings>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label={labels.OrderByCountLabel}>
+                        <div class="slds-var-p-top_x-large">
+                            <c-season-standings standings={topThreeByCount}></c-season-standings>
+                        </div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </template>
         </template>
     </template>
-    
+
 </template>

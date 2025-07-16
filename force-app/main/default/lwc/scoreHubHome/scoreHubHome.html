@@ -20,9 +20,9 @@
       <c-score-hub-home-column>
         <c-score-hub-home-column-header header-title={seasonsColumnHeader} header-icon="standard:goals" slot="header">
           <lightning-button-icon slot="buttonLeft" icon-name="utility:back" variant="border-filled" alternative-text="back"
-            title="back" onclick={backButtonClick} disabled={isBackButtonDisabled}></lightning-button-icon>
+            title="back" onclick={backButtonClick} disabled={isBackButtonDisabled}><label>previous seasons</label></lightning-button-icon>
           <lightning-button-icon slot="buttonRight" icon-name="utility:forward" variant="border-filled" alternative-text="back"
-            title="forward" onclick={forwardButtonClick} disabled={isForwardButtonDisabled} class="slds-var-p-left_xx-small"></lightning-button-icon>
+            title="forward" onclick={forwardButtonClick} disabled={isForwardButtonDisabled} class="slds-var-p-left_xx-small"><label>next seasons</label></lightning-button-icon>
         </c-score-hub-home-column-header>
         <c-seasons-leaderboard slot="content" onchanged={handleLeaderboardChange}></c-seasons-leaderboard>
       </c-score-hub-home-column>

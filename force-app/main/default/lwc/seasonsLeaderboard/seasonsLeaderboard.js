@@ -1,5 +1,4 @@
 import { LightningElement, api } from 'lwc';
-import Toast from 'lightning/toast';
 
 // APEX Controller methods
 import getSeasonsConfig from '@salesforce/apex/SeasonsLeaderboardController.getSeasonsConfig';
@@ -14,10 +13,20 @@ import SeasonsAreNotEnabledHeader from '@salesforce/label/c.SeasonsAreNotEnabled
 import SeasonsAreNotEnabledSubheader from '@salesforce/label/c.SeasonsAreNotEnabledSubheader';
 import OrderByCountLabel from '@salesforce/label/c.OrderByCount';
 import OrderByScoreLabel from '@salesforce/label/c.OrderByScore';
+import UnableToRetrieveSeasonsLabel from '@salesforce/label/c.UnableToRetrieveSeasons';
+import CriticalIssueWhenLoadingSeasonsLabel from '@salesforce/label/c.CriticalIssueWhenLoadingSeasons';
+import CurrentSeasonProgressLabel from '@salesforce/label/c.CurrentSeasonProgress'
+import CurrentSeasonProgressExtendedLabel from '@salesforce/label/c.CurrentSeasonProgressExtended'
+import SeasonsHeaderLabel from '@salesforce/label/c.SeasonsHeader'
+import SeasonsPreSeasonHeaderLabel from '@salesforce/label/c.SeasonPreSeasonHeader'
+import SeasonOngoingHeaderLabel from '@salesforce/label/c.SeasonOngoingHeader'
+import SeasonPastHeaderLabel from '@salesforce/label/c.SeasonPastHeader'
+import TheRaceIsOnTitleLabel from '@salesforce/label/c.TheRaceIsOnTitle'
 
 export default class SeasonsLeaderboard extends LightningElement {
     labels = {
-        LoadingLabel, SomethingWentWrongErrorTitle, RetrieveSeasonConfigErrorMsg, SeasonsAreNotEnabledHeader, SeasonsAreNotEnabledSubheader, OrderByCountLabel, OrderByScoreLabel
+        LoadingLabel, SomethingWentWrongErrorTitle, RetrieveSeasonConfigErrorMsg, SeasonsAreNotEnabledHeader, SeasonsAreNotEnabledSubheader, OrderByCountLabel, OrderByScoreLabel, UnableToRetrieveSeasonsLabel, 
+        CriticalIssueWhenLoadingSeasonsLabel, CurrentSeasonProgressLabel, CurrentSeasonProgressExtendedLabel, SeasonsHeaderLabel, SeasonsPreSeasonHeaderLabel, SeasonOngoingHeaderLabel, SeasonPastHeaderLabel, TheRaceIsOnTitleLabel
     };
 
     isError = false;
@@ -60,7 +69,7 @@ export default class SeasonsLeaderboard extends LightningElement {
                 console.log(JSON.stringify(results[1].Error))
                 console.log(JSON.stringify(results[1].Warning))
                 this.errorTitle = this.labels.SomethingWentWrongErrorTitle
-                this.errorMsg = 'TODO proper msg'
+                this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel
             }
 
             // Handle getSeasonData
@@ -71,14 +80,14 @@ export default class SeasonsLeaderboard extends LightningElement {
                 console.log(JSON.stringify(results[2].Error))
                 console.log(JSON.stringify(results[2].Warning))
                 this.errorTitle = this.labels.SomethingWentWrongErrorTitle
-                this.errorMsg = 'TODO proper msg'
+                this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel
             }
         })
         .catch(error => {
             this.isError = true
             console.log(JSON.stringify(error))
             this.errorTitle = this.labels.SomethingWentWrongErrorTitle
-            this.errorMsg = 'TODO proper msg'
+            this.errorMsg = this.labels.CriticalIssueWhenLoadingSeasonsLabel
         })
         .finally(() => {
             this.isLoading = false
@@ -95,18 +104,14 @@ export default class SeasonsLeaderboard extends LightningElement {
     }
 
     get ongoingSeasonMessage() {
-        let msg = "We are still gathering statistics for an ongoing season."
-        msg += " Leaderboard will be available after season ends."
+        let msg = this.labels.CurrentSeasonProgressLabel
 
         if (this.maxSeasonsCount > 1) {
-            msg += " You can check the leaderboards for previous seasons by clikcing the 'back' arrow-button on top"
+            msg += ' ' + this.labels.CurrentSeasonProgressExtendedLabel
         }
 
         return msg
     }
-
-    
-
 
     get topThreeByScore() {
         return this.seasonData?.topThreeByScore
@@ -134,6 +139,10 @@ export default class SeasonsLeaderboard extends LightningElement {
         this.isLoading = true;
         getSeasonData({ offset: this.currentSeasonNumber })
             .then(result => {
+
+                console.log(JSON.stringify(this.currentSeasonNumber))
+                console.log(JSON.stringify(result.Success))
+
                 if (result && result.Success) {
                     this.seasonData = result.Success;
                 } else {
@@ -141,30 +150,31 @@ export default class SeasonsLeaderboard extends LightningElement {
                     console.log(JSON.stringify(result.Error));
                     console.log(JSON.stringify(result.Warning));
                     this.errorTitle = this.labels.SomethingWentWrongErrorTitle;
-                    this.errorMsg = 'TODO proper msg';
+                    this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel;
                 }
             })
             .catch(error => {
                 this.isError = true;
                 console.log(JSON.stringify(error));
                 this.errorTitle = this.labels.SomethingWentWrongErrorTitle;
-                this.errorMsg = 'TODO proper msg';
+                this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel;
             })
             .finally(() => {
                 this.isLoading = false;
+                this.stateChange()
             });
     }
 
     stateChange() {
-        let headerText = 'Seasons'
+        let headerText = this.labels.SeasonsHeaderLabel
 
         if (this.isConfigActive) {
             if (this.currentSeasonNumber === 0) {
-                headerText = 'Season: Ongoing'
-            } else if (!this.dateFrom()) {
-                headerText = 'Season: Pre-season'
+                headerText = this.labels.SeasonOngoingHeaderLabel
+            } else if (this.dateFrom() === '...') {
+                headerText = this.labels.SeasonsPreSeasonHeaderLabel
             } else {
-                headerText = 'Season: ' + this.dateFrom() + ' - ' + this.dateTo()
+                headerText = this.labels.SeasonPastHeaderLabel + ' ' + this.dateFrom() + ' / ' + this.dateTo()
             }
         } 
 

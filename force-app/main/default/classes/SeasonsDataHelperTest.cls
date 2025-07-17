@@ -1,5 +1,15 @@
-@IsTest(isParallel=true)
+@IsTest(isParallel=false)
 private class SeasonsDataHelperTest {
+
+	@TestSetup
+	static void setup() {
+		Id profileId = UserInfo.getProfileId();
+		User user1 = TestDataFactory.initUser(profileId, 'UserTest1');
+		User user2 = TestDataFactory.initUser(profileId, 'UserTest2');
+		User user3 = TestDataFactory.initUser(profileId, 'UserTest3');
+		User user4 = TestDataFactory.initUser(profileId, 'UserTest4');
+		insert new List<User>{user1, user2, user3, user4};
+	}
 
 	@IsTest
 	private static void startNextSeason_seasonExists_newSeasonCreated() {
@@ -150,5 +160,67 @@ private class SeasonsDataHelperTest {
 
 		// Then
 		Assert.areEqual(expectedDate, resultDate, 'End of the year -1 day is expected');
+	}
+
+	@IsTest
+	private static void getSeasonTopThreeStandings_statsExist_topThreeReturned() {
+		// Given
+		Season__c season = TestDataFactory.createSeason(Date.today(), Date.today().addDays(30));
+		List<String> userLastNames =new List<string>{'UserTest1', 'UserTest2', 'UserTest3', 'UserTest4'};
+
+		List<User> users = [SELECT Id FROM User WHERE LastName IN :userLastNames];
+
+		List<SeasonUserStat__c> stats = new List<SeasonUserStat__c>{
+			TestDataFactory.initSeasonUserStat(season.Id, users[0].Id, 100, 5),
+			TestDataFactory.initSeasonUserStat(season.Id, users[1].Id, 200, 3),
+			TestDataFactory.initSeasonUserStat(season.Id, users[2].Id, 300, 7),
+			TestDataFactory.initSeasonUserStat(season.Id, users[3].Id, 150, 2)
+		};
+		insert stats;
+
+		// When
+		Test.startTest();
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		DataWrappers.SeasonData seasonData = helper.getSeasonTopThreeStandings(season);
+		Test.stopTest();
+
+		// Then
+		Assert.areEqual(seasonData.dateFrom, season.From__c, 'Season dates are expected to be populated');
+		Assert.areEqual(seasonData.dateTo, season.To__c, 'Season dates are expected to be populated');
+
+		List<DataWrappers.UserCardData> topThreeByScore = seasonData.topThreeByScore;
+		Assert.isNotNull(topThreeByScore, 'Top three users are expected to be packed in the wrapper');
+		Assert.areEqual(300, topThreeByScore[0].totalScore, 'Highest score should be first');
+		Assert.areEqual(200, topThreeByScore[1].totalScore, 'Second highest score should be second');
+		Assert.areEqual(150, topThreeByScore[2].totalScore, 'Third highest score should be third');
+
+		List<DataWrappers.UserCardData> topThreeByCount = seasonData.topThreeByCount;
+
+		Assert.isNotNull(topThreeByCount, 'Top three users are expected to be packed in the wrapper');
+		Assert.areEqual(7, topThreeByCount[0].reachedAchievementsCount, 'Highest score should be first');
+		Assert.areEqual(5, topThreeByCount[1].reachedAchievementsCount, 'Second highest score should be second');
+		Assert.areEqual(3, topThreeByCount[2].reachedAchievementsCount, 'Third highest score should be third');
+	}
+
+	@IsTest
+	private static void getSeasonTopThreeStandings_statsDontExist_emptyListReturned() {
+		// Given
+		Season__c season = TestDataFactory.createSeason(Date.today(), Date.today().addDays(30));
+		// No stats inserted
+
+		// When
+		Test.startTest();
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		DataWrappers.SeasonData seasonData = helper.getSeasonTopThreeStandings(season);
+		Test.stopTest();
+
+		// Then
+		List<DataWrappers.UserCardData> topThreeByScore = seasonData.topThreeByScore;
+		Assert.isNotNull(topThreeByScore, 'Top three users are expected to be packed in the wrapper');
+		Assert.isTrue(topThreeByScore.isEmpty(), 'Top three by score is expected to be empty');
+
+		List<DataWrappers.UserCardData> topThreeByCount = seasonData.topThreeByCount;
+		Assert.isNotNull(topThreeByCount, 'Top three users are expected to be packed in the wrapper');
+		Assert.isTrue(topThreeByCount.isEmpty(), 'Top three by score is expected to be empty');
 	}
 }

@@ -31,7 +31,7 @@ public with sharing class SeasonsDataHelper {
 				DMLService.insertRecord(new List<Season__c>{newSeason}, System.AccessLevel.SYSTEM_MODE);
 
 				if (!Test.isRunningTest()) {
-					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(newSeason.To__c, Time.newInstance(10, 0, 0, 0)));
+					Integer jobExecutionTimeInMinutesFromNow = SchedulerService.calculateMinutesBetweenDates(Datetime.now(), DateTime.newInstance(newSeason.To__c, Time.newInstance(23, 0, 0, 0)));
 					config.SeasonScheduledJobId__c = System.scheduleBatch(new SeasonUserStatsBatch(newSeason.Id), SeasonUserStatsBatch.class + '_' + newSeason.Id, jobExecutionTimeInMinutesFromNow);
 					
 					DMLService.updateRecord(new List<SeasonsConfiguration__c>{config}, System.AccessLevel.SYSTEM_MODE);
@@ -67,6 +67,46 @@ public with sharing class SeasonsDataHelper {
 				result = baseDate.addMonths(3).addDays(-1);
 			} else if (config.Cadence__c.toLowercase() == 'year') {
 				result = baseDate.addYears(1).addDays(-1);
+			}
+		}
+
+		return result;
+	}
+
+	public DataWrappers.SeasonData getSeasonTopThreeStandings(Season__c season) {
+		DataWrappers.SeasonData result = new DataWrappers.SeasonData();// convertToWrapper(season);
+		result.dateFrom = season.From__c;
+		result.dateTo = season.To__c;
+		result.topThreeByScore = new List<DataWrappers.UserCardData>();
+		result.topThreeByCount = new List<DataWrappers.UserCardData>();
+
+		SeasonUserStatSelector selector = SeasonUserStatSelector.getInstance();
+		List<SeasonUserStat__c> userStatByScore = selector.getTopThreeByScore(season.Id);
+		List<SeasonUserStat__c> userStatByCount = selector.getTopThreeByCount(season.Id);
+		
+		if (!userStatByScore.isEmpty() || !userStatByCount.isEmpty()) {
+			// We need total number of achievements to initialize data in UserCardData
+			List<Achievement__c> allAchievements = AchievementSelector.getInstance().getAll();
+
+			Set<Id> userIdsToQuery = new Set<Id>();
+		
+			for (SeasonUserStat__c stat : userStatByScore) {
+				userIdsToQuery.add(stat.User__c);
+			}
+
+			for (SeasonUserStat__c stat : userStatByCount) {
+				userIdsToQuery.add(stat.User__c);
+			}
+
+			Map<Id, User> usersByIdMap = new Map<Id, User>((List<User>)UserSelector.getInstance().getByIds(userIdsToQuery));
+
+			// Converting information into DataWrapper.UserCardData and saving into the DataWrappers.SeasonData
+			for (SeasonUserStat__c stat : userStatByScore) {
+				result.topThreeByScore.add(UserDataHelper.getUserDataFromSeasonStats(usersByIdMap.get(stat.User__c), stat, allAchievements.size()));
+			}
+
+			for (SeasonUserStat__c stat : userStatByCount) {
+				result.topThreeByCount.add(UserDataHelper.getUserDataFromSeasonStats(usersByIdMap.get(stat.User__c), stat, allAchievements.size()));
 			}
 		}
 

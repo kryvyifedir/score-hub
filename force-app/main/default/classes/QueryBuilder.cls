@@ -16,11 +16,15 @@ public with sharing class QueryBuilder {
 		return this;
 	}
 
-	public QueryBuilder addOrderBy(SObjectField orderByField) {
+	public QueryBuilder addOrderByAsc(SObjectField orderByField) {
 		return this.addOrderBy(orderByField, false);
 	}
 
-	public QueryBuilder addOrderBy(SObjectField orderByField, Boolean descending) {
+	public QueryBuilder addOrderByDesc(SObjectField orderByField) {
+		return this.addOrderBy(orderByField, true);
+	}
+
+	private QueryBuilder addOrderBy(SObjectField orderByField, Boolean descending) {
 		String order = descending ? 'DESC' : 'ASC';
 		queryString += ' ORDER BY ' + orderByField + ' ' + order;
 		return this;
@@ -28,6 +32,11 @@ public with sharing class QueryBuilder {
 
 	public QueryBuilder addLimit(Integer numberOfRecords) {
 		queryString += ' LIMIT ' + String.valueOf(numberOfRecords);
+		return this;
+	}
+
+	public QueryBuilder addOffset(Integer numberOfRecords) {
+		queryString += ' OFFSET ' + String.valueOf(numberOfRecords);
 		return this;
 	}
 

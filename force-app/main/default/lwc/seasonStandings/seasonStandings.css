@@ -1,0 +1,39 @@
+.vertical-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.standings-container {
+    height: 12rem; 
+    border-bottom-width:2px;
+    border-bottom-style:solid;
+}
+
+.standings-column {
+    width: 5rem;
+    border-top-width:2px;
+    border-left-width:2px;
+    border-right-width:2px;
+    border-top-style:solid;
+    border-left-style:solid;
+    border-right-style:solid;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    align-items: start;
+}
+
+.bronze-column {
+    background-color: #DD7A01; 
+    height: 4rem; 
+    
+}
+
+.silver-column {
+    background-color: #E5E5E5; 
+    height: 6rem;
+}
+
+.gold-column {
+    background-color: #FCC003; 
+    height: 9rem; 
+}

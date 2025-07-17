@@ -201,6 +201,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SeasonUserStatSelector</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SeasonUserStatSelectorTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SeasonUserStatsBatch</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -230,6 +238,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SeasonsDataHelperTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SeasonsLeaderboardController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SeasonsLeaderboardControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

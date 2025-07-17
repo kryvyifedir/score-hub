@@ -1,7 +1,8 @@
 <template>
-  <div class="slds-card slds-box" onclick={handleUserCardClicked} style="text-align: left;">
-    <div class="slds-grid slds-grid_vertical-align-center">
-      <template lwc:if={userInfo}>
+  <template lwc:if={userInfo}>
+    <div class="slds-card slds-box" onclick={handleUserCardClicked}>
+      <div class="slds-grid slds-grid_vertical-align-center" style="text-align: left;">
+
         <div class="slds-col slds-grow-none">
           <lightning-avatar variant="circle" fallback-icon-name="standard:avatar_loading" size="large"
             src={userInfo.smallPhotoUrl} alternative-text={labels.AvatarAltTextLabel}></lightning-avatar>
@@ -24,12 +25,12 @@
               value={getNumberOfAchievements}></c-user-card-details>
           </template>
         </div>
-      </template>
-      <template lwc:else>
-        <div class="slds-col slds-spinner_container" style="height:6rem;position:relative;">
-          <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
-        </div>
-      </template>
+      </div>
     </div>
-  </div>
+  </template>
+  <template lwc:else>
+    <div class="slds-card" style="height:6rem;">
+      <lightning-spinner alternative-text={labels.LoadingLabel} size="medium"></lightning-spinner>
+    </div>
+  </template>
 </template>

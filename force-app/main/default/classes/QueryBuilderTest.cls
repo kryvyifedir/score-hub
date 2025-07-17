@@ -26,16 +26,16 @@ private class QueryBuilderTest {
 		// When
 		Test.startTest();
 		QueryBuilder builder = new QueryBuilder(type, fields);
-		builder.addFilter(Account.Name, '==', 'bindName');
+		builder.addFilter(Account.Name, '=', 'bindName');
 		Test.stopTest();
 
 		// Then
-		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account WHERE Name == :bindName';
+		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account WHERE Name = :bindName';
 		Assert.areEqual(expectedSOQLQuery, builder.SOQL(), 'Expected SOQL to be formatted by builder');
 	}
 
 	@IsTest
-	private static void addOrderBy_ascOptionIsUsed_soqlIsOrderedByDesc() {
+	private static void addOrderBy_ascOptionIsUsed_soqlIsOrderedByAsc() {
 		// Given
 		SObjectType type = Account.getSObjectType();
 		Set<sObjectField> fields = new Set<sObjectField> { Account.Name, Account.Phone };
@@ -43,7 +43,7 @@ private class QueryBuilderTest {
 		// When
 		Test.startTest();
 		QueryBuilder builder = new QueryBuilder(type, fields);
-		builder.addOrderBy(Account.Name);
+		builder.addOrderByAsc(Account.Name);
 		Test.stopTest();
 
 		// Then
@@ -52,7 +52,7 @@ private class QueryBuilderTest {
 	}
 
 	@IsTest
-	private static void addOrderBy_paramsPassed_soqlWithLimit() {
+	private static void addOrderBy_descOptionIsUsed_soqlIsOrderedByDesc() {
 		// Given
 		SObjectType type = Account.getSObjectType();
 		Set<sObjectField> fields = new Set<sObjectField> { Account.Name, Account.Phone };
@@ -60,7 +60,7 @@ private class QueryBuilderTest {
 		// When
 		Test.startTest();
 		QueryBuilder builder = new QueryBuilder(type, fields);
-		builder.addOrderBy(Account.Name, true);
+		builder.addOrderByDesc(Account.Name);
 		Test.stopTest();
 
 		// Then
@@ -69,7 +69,7 @@ private class QueryBuilderTest {
 	}
 
 	@IsTest
-	private static void addLimit_descOptionIsUsed_soqlIsOrderedByDesc() {
+	private static void addLimit_limitOf10Records_soqlIsLimited() {
 		// Given
 		SObjectType type = Account.getSObjectType();
 		Set<sObjectField> fields = new Set<sObjectField> { Account.Name, Account.Phone };
@@ -82,6 +82,23 @@ private class QueryBuilderTest {
 
 		// Then
 		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account LIMIT 10';
+		Assert.areEqual(expectedSOQLQuery, builder.SOQL(), 'Expected SOQL to be formatted by builder');
+	}
+
+	@IsTest
+	private static void addOffset_offsetIsAdded_resultIsOffset() {
+		// Given
+		SObjectType type = Account.getSObjectType();
+		Set<sObjectField> fields = new Set<sObjectField> { Account.Name, Account.Phone };
+
+		// When
+		Test.startTest();
+		QueryBuilder builder = new QueryBuilder(type, fields);
+		builder.addOffset(10);
+		Test.stopTest();
+
+		// Then
+		String expectedSOQLQuery = 'SELECT Name, Phone FROM Account OFFSET 10';
 		Assert.areEqual(expectedSOQLQuery, builder.SOQL(), 'Expected SOQL to be formatted by builder');
 	}
 	

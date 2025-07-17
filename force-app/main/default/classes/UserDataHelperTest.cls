@@ -36,4 +36,26 @@ private class UserDataHelperTest {
 		Assert.areEqual(0, usr2DataCard.reachedAchievementsCount, 'Zero reached achievements exist so value is expected to be 0');
 		Assert.areEqual(0, usr2DataCard.totalScore, 'There are no reached achievements for second user, so score should be zero');
 	}
+
+	@IsTest
+	private static void getUserDataFromSeasonStats_validInput_wrapperReturned() {
+		// Given
+		User usr = [SELECT Id, Name, SmallPhotoUrl FROM User WHERE ID = :UserInfo.getUserId() LIMIT 1];
+		Season__c testSeason = TestDataFactory.createSeason(Date.today().addDays(-3), Date.today());
+		SeasonUserStat__c stat = TestDataFactory.initSeasonUserStat(testSeason.Id, usr.Id, 123, 4);
+		Integer allAchievementsCount = 10;
+
+		// When
+		Test.startTest();
+		DataWrappers.UserCardData result = UserDataHelper.getUserDataFromSeasonStats(usr, stat, allAchievementsCount);
+		Test.stopTest();
+
+		// Then
+		Assert.areEqual(usr.Id, result.Id, 'User Id should match');
+		Assert.areEqual(usr.Name, result.name, 'User name should match');
+		Assert.areEqual(usr.SmallPhotoUrl, result.smallPhotoUrl, 'Small photo URL should match');
+		Assert.areEqual(allAchievementsCount, result.totalAchievementsCount, 'Total achievements count should match');
+		Assert.areEqual(123, result.totalScore, 'Total score should match');
+		Assert.areEqual(4, result.reachedAchievementsCount, 'Reached achievements count should match');
+	}
 }

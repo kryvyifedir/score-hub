@@ -44,4 +44,15 @@ public with sharing class DataWrappers {
 		@AuraEnabled
 		public Date startDate { get; set; }
 	}
+
+	public class SeasonData {
+		@AuraEnabled
+		public Date dateFrom { get; set; }
+		@AuraEnabled
+		public Date dateTo { get; set; }	
+		@AuraEnabled
+		public List<UserCardData> topThreeByScore { get; set; }
+		@AuraEnabled
+		public List<UserCardData> topThreeByCount { get; set; }
+	}
 }

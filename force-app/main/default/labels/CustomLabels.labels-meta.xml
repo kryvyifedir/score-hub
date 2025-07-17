@@ -440,4 +440,100 @@
         <shortDescription>Year Cadence Option</shortDescription>
         <value>Year</value>
     </labels>
+    <labels>
+        <fullName>SeasonsAreNotEnabledHeader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Seasons are not enabled</shortDescription>
+        <value>Seasons are not enabled yet</value>
+    </labels>
+    <labels>
+        <fullName>SeasonsAreNotEnabledSubheader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Seasons are not enabled yet explanation</shortDescription>
+        <value>Compete with teammates and climb the leaderboard! Seasons highlight the top 3 performers in your org each round. Want to join the fun? Contact your system administrator to enable it.</value>
+    </labels>
+    <labels>
+        <fullName>SeasonsLeaderboard</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Seasons Leaderboard</shortDescription>
+        <value>Seasons Leaderboard</value>
+    </labels>
+    <labels>
+        <fullName>UnableToRetrieveSeasons</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UnableToRetrieveSeasons</shortDescription>
+        <value>Unable to retrieve information about Seasons</value>
+    </labels>
+    <labels>
+        <fullName>CriticalIssueWhenLoadingSeasons</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CriticalIssueWhenLoadingSeasons</shortDescription>
+        <value>Critical issue occured when loading Seasons component</value>
+    </labels>
+    <labels>
+        <fullName>CurrentSeasonProgress</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CurrentSeasonProgress</shortDescription>
+        <value>We are still gathering statistics for an ongoing season. Leaderboard will be available once the season ends.</value>
+    </labels>
+    <labels>
+        <fullName>CurrentSeasonProgressExtended</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CurrentSeasonProgressExtended</shortDescription>
+        <value>To view leaderboards from previous seasons, click back arrow-button located at the top of the component.</value>
+    </labels>
+    <labels>
+        <fullName>SeasonOngoingHeader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SeasonOngoingHeader</shortDescription>
+        <value>Season: Ongoing</value>
+    </labels>
+    <labels>
+        <fullName>SeasonPreSeasonHeader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SeasonPreSeasonHeader</shortDescription>
+        <value>Season: Pre-season</value>
+    </labels>
+    <labels>
+        <fullName>SeasonsHeader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SeasonsHeader</shortDescription>
+        <value>Seasons</value>
+    </labels>
+    <labels>
+        <fullName>SeasonPastHeader</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SeasonsPastHeader</shortDescription>
+        <value>Season:</value>
+    </labels>
+    <labels>
+        <fullName>TheRaceIsOnTitle</fullName>
+        <categories>ScoreHub LWC</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TheRaceIsOnTitle</shortDescription>
+        <value>The race is on!</value>
+    </labels>
 </CustomLabels>

@@ -119,6 +119,72 @@ private class SeasonsDataHelperTest {
 	}
 
 	@IsTest
+	private static void calculateNextToDate_startOfFebruary_endOfFebruary() {
+		// Given
+		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
+		config.IsActive__c = true;
+		config.Cadence__c = 'month';
+		config.StartDate__c = Date.newInstance(2025, 02, 01);
+		insert config;
+
+		Date startDate = Date.newInstance(2025, 02, 01);
+		Date expectedDate = Date.newInstance(2025, 02, 28);
+
+		// When
+		Test.startTest();
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		Date resultDate = helper.calculateNextToDate(startDate);
+		Test.stopTest();
+
+		// Then
+		Assert.areEqual(expectedDate, resultDate, 'End of February is expected instead of beginning of March');
+	}
+
+	@IsTest
+	private static void calculateNextToDate_startOfFebruaryLeapYear_endOfFebruary29th() {
+		// Given
+		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
+		config.IsActive__c = true;
+		config.Cadence__c = 'month';
+		config.StartDate__c = Date.newInstance(2025, 02, 01);
+		insert config;
+
+		Date startDate = Date.newInstance(2028, 02, 01); // In 2028 there are 29 days
+		Date expectedDate = Date.newInstance(2028, 02, 29);
+
+		// When
+		Test.startTest();
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		Date resultDate = helper.calculateNextToDate(startDate);
+		Test.stopTest();
+
+		// Then
+		Assert.areEqual(expectedDate, resultDate, 'End of February is expected instead of beginning of March');
+	}
+
+	@IsTest
+	private static void calculateNextToDate_startOfMarchBeforeLeapYear_endOfFebruaryNextYear() {
+		// Given
+		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
+		config.IsActive__c = true;
+		config.Cadence__c = 'year';
+		config.StartDate__c = Date.newInstance(2027, 02, 01);
+		insert config;
+
+		Date startDate = Date.newInstance(2027, 03, 01);
+		Date expectedDate = Date.newInstance(2028, 02, 29); // In 2028 there are 29 days
+
+		// When
+		Test.startTest();
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		Date resultDate = helper.calculateNextToDate(startDate);
+		Test.stopTest();
+
+		// Then
+		Assert.areEqual(expectedDate, resultDate, 'End of February is expected instead of beginning of March');
+	}
+
+	@IsTest
 	private static void calculateNextToDate_quarterlyCadence_endOfQuarter() {
 		// Given
 		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
@@ -138,6 +204,31 @@ private class SeasonsDataHelperTest {
 
 		// Then
 		Assert.areEqual(expectedDate, resultDate, 'End of the quarter -1 day is expected');
+	}
+
+	@IsTest
+	private static void calculateNextToDate_fourQuartersPassed_sameResultAsEndOfYear() {
+		// Given
+		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
+		config.IsActive__c = true;
+		config.Cadence__c = 'quarter';
+		config.StartDate__c = Date.today().addDays(7);
+		insert config;
+
+		Date startDate = Date.newInstance(2025, 01, 01);
+		Date expectedDate = Date.newInstance(2025, 12, 31);
+
+		// When
+		Test.startTest();
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		Date quarter1 = helper.calculateNextToDate(startDate);
+		Date quarter2 = helper.calculateNextToDate(quarter1.addDays(1));
+		Date quarter3 = helper.calculateNextToDate(quarter2.addDays(1));
+		Date quarter4 = helper.calculateNextToDate(quarter3.addDays(1));
+		Test.stopTest();
+
+		// Then
+		Assert.areEqual(expectedDate, quarter4, '4 quarters should result in the same end date as yearly cadence');
 	}
 
 	@IsTest

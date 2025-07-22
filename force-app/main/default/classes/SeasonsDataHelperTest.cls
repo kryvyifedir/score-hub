@@ -141,7 +141,29 @@ private class SeasonsDataHelperTest {
 	}
 
 	@IsTest
-	private static void calculateNextToDate_startOfFebruary_endOfFebruaryNextYear() {
+	private static void calculateNextToDate_startOfFebruaryLeapYear_endOfFebruary29th() {
+		// Given
+		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
+		config.IsActive__c = true;
+		config.Cadence__c = 'month';
+		config.StartDate__c = Date.newInstance(2025, 02, 01);
+		insert config;
+
+		Date startDate = Date.newInstance(2028, 02, 01); // In 2028 there are 29 days
+		Date expectedDate = Date.newInstance(2028, 02, 29);
+
+		// When
+		Test.startTest();
+		SeasonsDataHelper helper = new SeasonsDataHelper();
+		Date resultDate = helper.calculateNextToDate(startDate);
+		Test.stopTest();
+
+		// Then
+		Assert.areEqual(expectedDate, resultDate, 'End of February is expected instead of beginning of March');
+	}
+
+	@IsTest
+	private static void calculateNextToDate_startOfMarchBeforeLeapYear_endOfFebruaryNextYear() {
 		// Given
 		SeasonsConfiguration__c config = new SeasonsConfiguration__c();
 		config.IsActive__c = true;

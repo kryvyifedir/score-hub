@@ -14,7 +14,7 @@
   "name": "ScoreHub",
   "namespace": "SidebarApps",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "59.0",
+  "sourceApiVersion": "64.0",
   "packageAliases": {
     "ScoreHub": "0HoWV000000034L0AQ"
   }

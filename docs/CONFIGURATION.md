@@ -117,3 +117,18 @@ EventBus.publish(evt);
 - **'USER ID'**: Is an Id of the user that is taking an action or making a specific change (usually an `OwnerId` from a specific record or `UserInfo.getUserId()` value)
 - **'MEASUREMENT ID'**: Id of a measurement that was created in the Step 3.1. (**NOTE**: You can use Unique Identifier to search for a specific Measurement instead of relying on Id values)
 - SidebarApps__Increment__c value: Number of 'points' that user will accumulate towards the achievement goal. ScoreHub bulkifies multiple events for different users while it is processing `SidebarApps__UserMeasurementIncrement__e` events, so you don't really have to think about bulkification on your end. 
+
+
+## (Optional) Step 4. Activating Seasons Feature
+
+Starting from version 2.0.0.10, ScoreHub includes the Seasons feature, which is disabled by default.
+
+To activate Seasons, ensure the user has the "ScoreHub Administrator" permission set group assigned, then follow these steps:
+
+1. Navigate to ScoreHub > Configuration tab
+2. Click on Cadence
+3. Select a Start Date for the first Season
+4. Click Activate
+
+> Note: All ScoreHub data (leaderboards, scores, etc.) recorded prior to the first Season’s start date will be automatically archived as “Pre-Season.”
+

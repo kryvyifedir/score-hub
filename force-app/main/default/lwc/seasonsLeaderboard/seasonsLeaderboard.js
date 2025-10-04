@@ -61,26 +61,29 @@ export default class SeasonsLeaderboard extends LightningElement {
                 this.errorMsg = this.labels.RetrieveSeasonConfigErrorMsg
             }
 
-            // Handle getSeasonsCount
-            if (!results[1].Error && !results[1].Warning) {
-                this.maxSeasonsCount = results[1].Success
-            } else {
-                this.isError = true
-                console.log(JSON.stringify(results[1].Error))
-                console.log(JSON.stringify(results[1].Warning))
-                this.errorTitle = this.labels.SomethingWentWrongErrorTitle
-                this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel
-            }
+            // Other requests have to be processed only if Seasons feature is enabled
+            if (this.isConfigActive) {
+                // Handle getSeasonsCount
+                if (!results[1].Error && !results[1].Warning) {
+                    this.maxSeasonsCount = results[1].Success
+                } else {
+                    this.isError = true
+                    console.log(JSON.stringify(results[1].Error))
+                    console.log(JSON.stringify(results[1].Warning))
+                    this.errorTitle = this.labels.SomethingWentWrongErrorTitle
+                    this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel
+                }
 
-            // Handle getSeasonData
-            if (results[2] && results[2].Success) {
-                this.seasonData = results[2].Success
-            } else {
-                this.isError = true
-                console.log(JSON.stringify(results[2].Error))
-                console.log(JSON.stringify(results[2].Warning))
-                this.errorTitle = this.labels.SomethingWentWrongErrorTitle
-                this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel
+                // Handle getSeasonData
+                if (results[2] && results[2].Success) {
+                    this.seasonData = results[2].Success
+                } else {
+                    this.isError = true
+                    console.log(JSON.stringify(results[2].Error))
+                    console.log(JSON.stringify(results[2].Warning))
+                    this.errorTitle = this.labels.SomethingWentWrongErrorTitle
+                    this.errorMsg = this.labels.UnableToRetrieveSeasonsLabel
+                }
             }
         })
         .catch(error => {

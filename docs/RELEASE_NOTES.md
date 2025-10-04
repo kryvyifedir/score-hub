@@ -1,6 +1,6 @@
 # ScoreHub Release Notes
 
-## version 2.0.0.11
+## version 2.1.0.1
 - Fixing the issue where scroll is being shown in an empty state UI
 - Fixing the issue where error message was shown instead of "Activate Seasons UI" after a package installation
 

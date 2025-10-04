@@ -5,7 +5,7 @@
       "default": true,
       "package": "ScoreHub",
       "versionName": " ScoreHub v2.0",
-      "versionNumber": "2.0.0.NEXT",  
+      "versionNumber": "2.1.0.NEXT",  
       "ancestorVersion": "HIGHEST",
       "versionDescription": "ScoreHub version 2.0",
       "postInstallScript": "ScoreHubConfig"

@@ -1,6 +1,12 @@
 # ScoreHub Release Notes
 
-## version 2.0.0.WIP
+## version 2.0.0.11
+- Fixing the issue where scroll is being shown in an empty state UI
+- Fixing the issue where error message was shown instead of "Activate Seasons UI" after a package installation
+
+## version 2.0.0.10 (Released)
+- Production release of ScoreHub seasons
+
 ### version 2.0.0.8
 - Adding Seasons Standings component to ScoreHub Leaderboard that shows top three users by Number of Reached Achievements or Score for a given Season
 
@@ -27,7 +33,7 @@
 - Optimizing SOQL queries. 
 - Refactoring Unit tests to migrate from System.Assert to Assert class.
 
-## version 1.0.0.1
+## version 1.0.0.1 (Released)
 First release version of ScoreHub app. Main functionality included in the release:
 - ScoreHub permission sets and permission set groups.
 - ScoreHub custom sObjects to store data about Measurements and Achievements.

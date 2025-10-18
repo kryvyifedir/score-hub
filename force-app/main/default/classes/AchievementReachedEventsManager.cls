@@ -4,6 +4,8 @@ public with sharing class AchievementReachedEventsManager {
 	Map<Id, List<Achievement__c>> achievementByMeasurementIdMap = new Map<Id, List<Achievement__c>>();
 	Map<String, ReachedAchievement__c> existingReachedAchievementsByKey = new Map<String, ReachedAchievement__c>();
 
+	// Just a small change to trigger CICD validations
+
 	public AchievementReachedEventsManager(Map<Id, UserMeasurement__c> userMeasurementsByIdMap) {
 		this.userMeasurementsByIdMap = userMeasurementsByIdMap;
 		this.populateAchievementsByMeasurementIdMap();

@@ -32,6 +32,7 @@ jobs:
       - name: Installing SFDX CLI
         run: |
           npm install @salesforce/cli --global
+          sf plugins install code-analyzer
 
       # Creating new .key for .crt file stored in the Connected App
       - name: Creating .key file
@@ -58,12 +59,10 @@ jobs:
       - name: Run unit tests
         run: sf apex run test --wait 30 --test-level RunAllTestsInOrg --code-coverage
 
-      # Run Salesforce Code Analyzer scans
-      - name: Salesforce Code Analyzer 'Security'
-        run: sf scanner run --category Security --severity-threshold 3
+      # Run Salesforce Code Analyzer scan with severity 1
+      - name: Salesforce Code Analyzer Severity 1
+        run: sf code-analyzer run --rule-selector AppExchange:1 --rule-selector Recommended:Security:1
 
-      - name: Salesforce Code Analyzer DFA 'Security'
-        run: sf scanner dfa run --category Security --severity-threshold 3
-
-      # - name: Salesforce Code Analyzer PMD
-      #   run: sf scanner run --engine pmd-appexchange --severity-threshold 3
+      # Run Salesforce Code Analyzer scan with severity 2
+      - name: Salesforce Code Analyzer Severity 2
+        run: sf code-analyzer run --rule-selector AppExchange:2 --rule-selector Recommended:Security:2

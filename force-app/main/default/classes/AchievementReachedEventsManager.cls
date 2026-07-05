@@ -34,8 +34,6 @@ public with sharing class AchievementReachedEventsManager {
 		return results;
 	}
 
-	// Just some comment to trigger CICD
-
 	private void populateAchievementsByMeasurementIdMap() {
 		Set<Id> measurementIds = new Set<Id>();
 		for(UserMeasurement__c userMeasurement : userMeasurementsByIdMap.values()) {
